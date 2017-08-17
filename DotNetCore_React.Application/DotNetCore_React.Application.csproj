@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+        <TargetFramework>netcoreapp1.0</TargetFramework>
+    <AssemblyName>DotNetCore_React.Application</AssemblyName>
+    <PackageId>DotNetCore_React.Application</PackageId>
+    <NetStandardImplicitPackageVersion>1.6.0</NetStandardImplicitPackageVersion>
+    <PackageTargetFallback>$(PackageTargetFallback);dotnet5.6;portable-net45+win8</PackageTargetFallback>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DotNetCore_React.Utility\DotNetCore_React.Utility.csproj" />
+    <ProjectReference Include="..\DotNetCore_React.EntityFrameworkCore\DotNetCore_React.EntityFrameworkCore.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="5.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="NewsApp\Dtos\" />
+    <Folder Include="News_LanApp\Dtos\" />
+    <Folder Include="Sys_LanguageApp\Dtos\" />
+  </ItemGroup>
+
+
+</Project>

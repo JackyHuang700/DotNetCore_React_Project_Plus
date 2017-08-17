@@ -1,0 +1,24 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using DotNetCore_React.Application.RoleApp;
+using DotNetCore_React.Domain.IRepositories;
+
+namespace DotNetCore_React.Controllers
+{
+    public class HomeController : BaseController
+    {
+
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        public IActionResult Error()
+        {
+            return View();
+        }
+    }
+}
