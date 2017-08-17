@@ -14,6 +14,9 @@ export default class News_View extends Component {
         super(props);
         this.state = {
             NewsList: [],
+            //Table變數
+            selected: [],
+            currPage: 1
         }
         this.buttonFormatter = this.buttonFormatter.bind(this);
         this.GetData = this.GetData.bind(this);
@@ -89,43 +92,59 @@ export default class News_View extends Component {
         return name;
     }
 
+    renderShowsTotal(start, to, total) {
+        return (
+          <p style={ { color: 'blue' } }>
+            顯示第 { start } 至 { to } 項結果, 共 { total } 項
+          </p>
+        );
+    }
+
 
     render() {
         const options = {
-            btnGroup: this.createCustomButtonGroup
+            btnGroup: this.createCustomButtonGroup,
+            sizePerPageList: [ 5, 10, 15, 20 ],
+            sizePerPage: 10,
+            page: this.state.currPage,
+            paginationShowsTotal: this.renderShowsTotal,  // Accept bool or function
+            paginationPosition: 'bottom'  // default is bottom, top and both is all available
         };
 
         const selectRow = {
-            mode: 'checkbox'
+            mode: 'checkbox',
+            clickToSelect: true,
+            selected: this.state.selected
         };
 
         return (
             <Container>
-            <Row>
-                <Col sm="12" md={{ size:7,offset:5}}><h1>最新消息</h1></Col>
-            </Row>
-            <Row>         
-            <BootstrapTable data={this.state.NewsList} 
-                            selectRow={selectRow} 
-                            striped 
-                            hover 
-                            options={options} 
-                            search
-                            exportCSV>
-                <TableHeaderColumn isKey dataField="button" dataFormat={this.buttonFormatter}>Buttons</TableHeaderColumn>
-                {this.props.display_listImage ? <TableHeaderColumn dataField='listImage'>listImage</TableHeaderColumn> : null}
-                {this.props.display_title ? <TableHeaderColumn dataField='title'>title</TableHeaderColumn> : null}
-                {this.props.display_category ? <TableHeaderColumn dataField='category'>category</TableHeaderColumn> : null}
-                {this.props.display_priority ? <TableHeaderColumn dataField='priority'>priority</TableHeaderColumn> : null}
-                {this.props.display_startDate ? <TableHeaderColumn dataField='startDate'>startDate</TableHeaderColumn> : null}
-                {this.props.display_endDate ? <TableHeaderColumn dataField='endDate'>endDate</TableHeaderColumn> : null}
-                {this.props.display_status ? <TableHeaderColumn dataField='status' dataFormat={this.Formatter_Status}>status</TableHeaderColumn> : null}
-                {this.props.display_createDate ? <TableHeaderColumn dataField='createDate'>createDate</TableHeaderColumn> : null}
-                {this.props.display_createUser ? <TableHeaderColumn dataField='createUser'>createUser</TableHeaderColumn> : null}
-                {this.props.display_updateDate ? <TableHeaderColumn dataField='updateDate'>updateDate</TableHeaderColumn> : null}
-                {this.props.display_updateUser ? <TableHeaderColumn dataField='updateUser'>updateUser</TableHeaderColumn> : null}
-            </BootstrapTable>
-            </Row>
+                <div className="card">
+                    <div className="card-header">最新消息</div>
+                    <div className="card-block">    
+                    <BootstrapTable data={this.state.NewsList} 
+                                    selectRow={selectRow} 
+                                    options={options} 
+                                    striped 
+                                    hover 
+                                    pagination                 
+                                    search
+                                    exportCSV>
+                        <TableHeaderColumn isKey dataField="button" dataFormat={this.buttonFormatter}>Buttons</TableHeaderColumn>
+                        {this.props.display_listImage ? <TableHeaderColumn dataField='listImage'>listImage</TableHeaderColumn> : null}
+                        {this.props.display_title ? <TableHeaderColumn dataField='title'>title</TableHeaderColumn> : null}
+                        {this.props.display_category ? <TableHeaderColumn dataField='category'>category</TableHeaderColumn> : null}
+                        {this.props.display_priority ? <TableHeaderColumn dataField='priority'>priority</TableHeaderColumn> : null}
+                        {this.props.display_startDate ? <TableHeaderColumn dataField='startDate'>startDate</TableHeaderColumn> : null}
+                        {this.props.display_endDate ? <TableHeaderColumn dataField='endDate'>endDate</TableHeaderColumn> : null}
+                        {this.props.display_status ? <TableHeaderColumn dataField='status' dataFormat={this.Formatter_Status}>status</TableHeaderColumn> : null}
+                        {this.props.display_createDate ? <TableHeaderColumn dataField='createDate'>createDate</TableHeaderColumn> : null}
+                        {this.props.display_createUser ? <TableHeaderColumn dataField='createUser'>createUser</TableHeaderColumn> : null}
+                        {this.props.display_updateDate ? <TableHeaderColumn dataField='updateDate'>updateDate</TableHeaderColumn> : null}
+                        {this.props.display_updateUser ? <TableHeaderColumn dataField='updateUser'>updateUser</TableHeaderColumn> : null}
+                    </BootstrapTable>
+                    </div>
+                </div>
             </Container>
         );
     }

@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace DotNetCore_React.Domain.IRepositories
 
     }
 
-    //定义泛型仓储接口
+    //定義泛型倉儲接口
     public interface IRepository<TEntity, TPrimaryKey> : IRepository where TEntity : Entity<TPrimaryKey>
     {
         void Delete(TEntity entity);
@@ -34,14 +35,14 @@ namespace DotNetCore_React.Domain.IRepositories
         List<TEntity> UpdateRange(List<TEntity> entityList);
     }
 
-    //默认Guid主键类型仓储
+    //默認Guid主鍵類型倉儲
     public interface IRepository<TEntity> : IRepository<TEntity, Guid> where TEntity : Entity
     {
 
     }
 
 
-    //默认Int主键类型仓储
+    //默認Int主鍵類型倉儲
     public interface IRepository_Int<TEntity> : IRepository<TEntity, int> where TEntity : Entity_Int
     {
     }
