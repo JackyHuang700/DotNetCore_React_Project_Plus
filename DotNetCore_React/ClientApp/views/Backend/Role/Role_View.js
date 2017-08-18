@@ -112,7 +112,7 @@ class Role_View extends Component {
         };
 
         return (
-            <Container>
+            <div className="col-xs-12">
                 <div className="card">
                 <div className="card-header">最新消息</div>
                 <div className="card-block">          
@@ -137,7 +137,7 @@ class Role_View extends Component {
                 </BootstrapTable>
                 </div>
                 </div>
-            </Container>
+                </div>
         );
     }
 }
