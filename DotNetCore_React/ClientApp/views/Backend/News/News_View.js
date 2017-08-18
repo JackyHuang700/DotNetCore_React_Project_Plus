@@ -54,9 +54,9 @@ export default class News_View extends Component {
     buttonFormatter(cell, row) {
         return (
             <ButtonGroup className='' sizeClass='btn-group-md'>
-                {this.props.display_button_edit && <Button color="primary" data-id={row.id} onClick={this.OnClick_Edit}>Edit</Button> }
-                {this.props.display_button_del && <Button color="danger" data-id={row.id} onClick={this.OnClick_Delete}>Delete</Button> }
-                </ButtonGroup>
+                {this.props.display_button_edit && <Button color="warning" data-id={row.id} onClick={this.OnClick_Edit}><i className="fa fa-pencil" aria-hidden="true"></i></Button> }
+                {this.props.display_button_del && <Button color="danger" data-id={row.id} onClick={this.OnClick_Delete}><i className="fa fa-trash" aria-hidden="true"></i></Button> }
+            </ButtonGroup>
         );
     }
 
@@ -130,7 +130,6 @@ export default class News_View extends Component {
                                     pagination                 
                                     search
                                     exportCSV>
-                        <TableHeaderColumn isKey dataField="button" dataFormat={this.buttonFormatter}>Buttons</TableHeaderColumn>
                         {this.props.display_listImage ? <TableHeaderColumn dataField='listImage'>listImage</TableHeaderColumn> : null}
                         {this.props.display_title ? <TableHeaderColumn dataField='title'>title</TableHeaderColumn> : null}
                         {this.props.display_category ? <TableHeaderColumn dataField='category'>category</TableHeaderColumn> : null}
@@ -142,6 +141,7 @@ export default class News_View extends Component {
                         {this.props.display_createUser ? <TableHeaderColumn dataField='createUser'>createUser</TableHeaderColumn> : null}
                         {this.props.display_updateDate ? <TableHeaderColumn dataField='updateDate'>updateDate</TableHeaderColumn> : null}
                         {this.props.display_updateUser ? <TableHeaderColumn dataField='updateUser'>updateUser</TableHeaderColumn> : null}
+                        <TableHeaderColumn isKey dataField="button" dataFormat={this.buttonFormatter}></TableHeaderColumn>
                     </BootstrapTable>
                     </div>
                 </div>

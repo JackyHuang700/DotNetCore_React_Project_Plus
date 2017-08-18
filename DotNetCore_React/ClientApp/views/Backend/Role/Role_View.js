@@ -50,10 +50,10 @@ class Role_View extends Component {
 
     buttonFormatter(cell, row) {
         return (
-           <ButtonGroup className='' sizeClass='btn-group-md'>
-                {this.props.display_button_edit ? <Button color="primary" data-id={row.id} onClick={this.OnClick_Edit}>Edit</Button> : null}
-                {this.props.display_button_del ? <Button color="danger" data-id={row.id} onClick={this.OnClick_Delete}>Delete</Button> : null}
-           </ButtonGroup>
+            <ButtonGroup className='' sizeClass='btn-group-md'>
+                {this.props.display_button_edit && <Button color="warning" data-id={row.id} onClick={this.OnClick_Edit}><i className="fa fa-pencil" aria-hidden="true"></i></Button> }
+                {this.props.display_button_del && <Button color="danger" data-id={row.id} onClick={this.OnClick_Delete}><i className="fa fa-trash" aria-hidden="true"></i></Button> }
+            </ButtonGroup>
         );
     }
 
@@ -124,7 +124,6 @@ class Role_View extends Component {
                                 pagination                 
                                 search
                                 exportCSV>
-                    <TableHeaderColumn isKey dataField="button" dataFormat={this.buttonFormatter}>Buttons</TableHeaderColumn>
                     {/* {this.props.display_Id ? <TableHeaderColumn dataField='id'>id</TableHeaderColumn> : null} */}
                     {this.props.display_SysId ? <TableHeaderColumn dataField='sysId' dataSort={ true }>sysId</TableHeaderColumn> : null}
                     {this.props.display_name ? <TableHeaderColumn dataField='name' dataSort={ true }>name</TableHeaderColumn> : null}
@@ -134,6 +133,7 @@ class Role_View extends Component {
                     {this.props.display_CreateUser ? <TableHeaderColumn dataField='createUser' dataSort={ true }>createUser</TableHeaderColumn> : null}
                     {this.props.display_UpdateDate ? <TableHeaderColumn dataField='updateDate' dataSort={ true }>updateDate</TableHeaderColumn> : null}
                     {this.props.display_UpdateUser ? <TableHeaderColumn dataField='updateUser' dataSort={ true }>updateUser</TableHeaderColumn> : null}
+                    <TableHeaderColumn isKey dataField="button" dataFormat={this.buttonFormatter}></TableHeaderColumn>
                 </BootstrapTable>
                 </div>
                 </div>

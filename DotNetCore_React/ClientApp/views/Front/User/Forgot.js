@@ -81,6 +81,7 @@ class Forgot extends Component {
                         validMessage={{ required: 'userName is reduired.' }}
                         onInput={this.handleInputChange}
                         value={this.state.userName}
+                        is_Table={false}
                         placeholder="userName" />
 
                     <TextInput name="email"
@@ -93,6 +94,7 @@ class Forgot extends Component {
                         validMessage={{ required: 'email is reduired.', pattern: '郵件格式錯誤'  }}
                         onInput={this.handleInputChange}
                         value={this.state.email}
+                        is_Table={false}
                         placeholder="email" />
 
                     <div className="row">

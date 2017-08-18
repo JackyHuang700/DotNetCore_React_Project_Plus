@@ -67,6 +67,9 @@ class changePwd extends Component {
     }
   }
 
+  back(event){
+    history.goBack();
+  }
 
   submit(event) {
     const {
@@ -110,12 +113,17 @@ class changePwd extends Component {
                   <div className="card-block">
                     <h1>Update Password</h1>
                     <p className="text-muted">修改密碼</p>
-                    {!this.display_userName &&
-                        <div className="input-group mb-3">
-                            <span className="input-group-addon"><i className="icon-user"></i></span>
-                            <label>{this.state.userName}</label>
-                        </div>
-                    }
+
+                    <TextInput name="userName"
+                        labelCustom={<span className="input-group-addon"><i className="icon-user"></i></span>}
+                        divClassName="input-group mb-4"
+                        className="form-control"
+                        display={this.props.display_userName}
+                        value={this.state.userName}
+                        is_Table={false}
+                        readOnly={true}
+                        placeholder="userName" />
+
                     <TextInput name="password"
                         labelCustom={<span className="input-group-addon"><i className="icon-key"></i></span>}
                         divClassName="input-group mb-4"
@@ -126,6 +134,7 @@ class changePwd extends Component {
                         validMessage={{ required: 'password is reduired.' }}
                         onInput={this.handleInputChange}
                         value={this.state.password}
+                        is_Table={false}
                         placeholder="password" />
 
                     <TextInput name="repassword"
@@ -138,11 +147,15 @@ class changePwd extends Component {
                         validMessage={{ required: 'repassword is reduired.', confirm: '两次密码不一致' }}
                         onInput={this.handleInputChange}
                         value={this.state.repassword}
+                        is_Table={false}
                         placeholder="repassword" />
 
                     <div className="row">
                       <div className="col-6">
                         <button className="btn btn-primary px-4" disabled={$invalid ? 'disabled' : false}>送出</button>
+                      </div>
+                      <div className="offset-4 col-2">
+                        <button type="button" className="btn btn-warning px-4" onClick={this.back}>返回</button>
                       </div>
                     </div>
                   </div>

@@ -49,8 +49,8 @@ class User_View extends Component {
     buttonFormatter(cell, row) {
         return (
             <ButtonGroup className='' sizeClass='btn-group-md'>
-                {this.props.display_button_edit ? <Button color="primary" data-id={row.id} onClick={this.OnClick_Edit}>Edit</Button> : null}
-                {this.props.display_button_del ? <Button color="danger" data-id={row.id} onClick={this.OnClick_Delete}>Delete</Button> : null}
+                {this.props.display_button_edit && <Button color="warning" data-id={row.id} onClick={this.OnClick_Edit}><i className="fa fa-pencil" aria-hidden="true"></i></Button> }
+                {this.props.display_button_del && <Button color="danger" data-id={row.id} onClick={this.OnClick_Delete}><i className="fa fa-trash" aria-hidden="true"></i></Button> }
             </ButtonGroup>
         );
     }
@@ -132,7 +132,6 @@ class User_View extends Component {
                             hover 
                             search
                             exportCSV>
-                <TableHeaderColumn isKey dataField="button" dataFormat={this.buttonFormatter}>Buttons</TableHeaderColumn>
                 {this.props.display_userName ? <TableHeaderColumn dataField='userName' dataSort={ true }>userName</TableHeaderColumn> : null}
                 {this.props.display_roleId ? <TableHeaderColumn dataField='roleId' dataSort={ true }>roleId</TableHeaderColumn> : null}
                 {this.props.display_email ? <TableHeaderColumn dataField='email' dataSort={ true }>email</TableHeaderColumn> : null}
@@ -145,6 +144,7 @@ class User_View extends Component {
                 {this.props.display_updateDate ? <TableHeaderColumn dataField='updateDate' dataSort={ true }>updateDate</TableHeaderColumn> : null}
                 {this.props.display_updateUser ? <TableHeaderColumn dataField='updateUser' dataSort={ true }>updateUser</TableHeaderColumn> : null}
                 {this.props.display_failedCount ? <TableHeaderColumn dataField='failedCount' dataSort={ true }>failedCount</TableHeaderColumn> : null}
+                <TableHeaderColumn isKey dataField="button" dataFormat={this.buttonFormatter}></TableHeaderColumn>
             </BootstrapTable>
             </div>
             </div>
