@@ -76,6 +76,7 @@ class Login extends Component {
                         validMessage={{ required: 'userName is reduired.' }}
                         onInput={this.handleInputChange}
                         value={this.state.userName}
+                        is_Table={false}
                         placeholder="userName" />
                    
    
@@ -89,6 +90,7 @@ class Login extends Component {
                         validMessage={{ required: 'password is reduired.' }}
                         onInput={this.handleInputChange}
                         value={this.state.password}
+                        is_Table={false}                        
                         placeholder="password" />
                    
                     {this.props.display_rememberMe &&

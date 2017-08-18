@@ -8,6 +8,8 @@ export default class TextInput extends Component {
         super(props);
         this.Td1_Style = this.Td1_Style.bind(this);
         this.Td2_Style = this.Td2_Style.bind(this);
+        this.IsTable = this.IsTable.bind(this);
+        this.UnTable = this.UnTable.bind(this);
     }
 
 
@@ -21,6 +23,33 @@ export default class TextInput extends Component {
         let style = {};
         style.borderRight = "hidden";
         return style;
+    }
+
+
+    IsTable(baseField) {
+        return (
+            <tr>
+                <td className="col-xs-4 text-right" style={this.Td1_Style()}>
+                    {this.props.labelName && <label className="text-right" style={{ color: this.props.required && 'red' }}> {this.props.labelName} {this.props.required && '*'} </label>}
+                    {this.props.labelCustom}
+                </td>
+                <td className="col-xs-8" style={this.Td2_Style()}>
+                    {baseField}
+                </td>
+            </tr>
+        );
+    }
+
+    UnTable(baseField) {
+        return (
+            <FormGroup className={this.props.divClassName}>
+                {this.props.labelName &&
+                    <label style={{ color: this.props.required && 'red' }} > {this.props.labelName} {this.props.required && '*'} </label>
+                }
+                {this.props.labelCustom}
+                {baseField}
+            </FormGroup>
+        );
     }
 
 
@@ -40,17 +69,9 @@ export default class TextInput extends Component {
 
 
         return (
-            <tr>
-                {/* <FormGroup className={this.props.divClassName}> */}
-                <td className="col-xs-4 text-right" style={this.Td1_Style()}>
-                    {this.props.labelName && <label className="text-right" style={{ color: this.props.required && 'red' }}> {this.props.labelName} {this.props.required && '*'} </label>}
-                    {this.props.labelCustom}
-                </td>
-                <td className="col-xs-8" style={this.Td2_Style()}>
-                    {baseField}
-                </td>
-                {/*  </FormGroup>*/}
-            </tr>
+            this.props.is_Table ?
+                this.IsTable(baseField) :
+                this.UnTable(baseField)
         )
     }
 }
@@ -60,6 +81,6 @@ TextInput.defaultProps = {
     type: 'text',
     className: '',
     validMessage: null,
-    tableStriped: false,
+    is_Table: true,
 }
 
