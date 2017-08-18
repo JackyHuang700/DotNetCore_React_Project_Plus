@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /**
  * CoreUI - Open Source Bootstrap Admin Template
  * @version v1.0.0-alpha.6
@@ -1582,7 +1583,7 @@ pre {
     opacity: 1; }
 
 select.form-control:not([size]):not([multiple]) {
-  height: calc(2.6rem + 2px); }
+  height: calc(2.09375rem + 6px); }
 
 select.form-control:focus::-ms-value {
   color: #607d8b;

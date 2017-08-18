@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import { Button, Modal, Container, Row, Col  } from 'reactstrap';
 import { BootstrapTable, TableHeaderColumn,ButtonGroup } from 'react-bootstrap-table';
-
 import axios from 'axios';
 import history from '../../../history'
 import { user_Enum } from '../../../EnumScript/GeneralEnumScript.js';
-
-
 
 class User_View extends Component {
 
@@ -14,12 +11,13 @@ class User_View extends Component {
         super(props);
         this.state = {
             UserList: [],
+            //Table變數
+            selected: [],
+            currPage: 1
         }
         this.buttonFormatter = this.buttonFormatter.bind(this);
         this.GetData = this.GetData.bind(this);
-
     }
-
 
     componentDidMount() {
         this.GetData();
@@ -48,7 +46,6 @@ class User_View extends Component {
         );
     }
 
-
     buttonFormatter(cell, row) {
         return (
             <ButtonGroup className='' sizeClass='btn-group-md'>
@@ -57,7 +54,6 @@ class User_View extends Component {
             </ButtonGroup>
         );
     }
-
 
     OnClick_Edit(event) {
         history.push(`/User/Edit/${event.currentTarget.getAttribute('data-id')}/${true}`);
@@ -99,26 +95,41 @@ class User_View extends Component {
 
     }
 
+    renderShowsTotal(start, to, total) {
+        return (
+          <p style={ { color: 'blue' } }>
+            顯示第 { start } 至 { to } 項結果, 共 { total } 項
+          </p>
+        );
+    }
+
     render() {
         const options = {
-            btnGroup: this.createCustomButtonGroup
+            btnGroup: this.createCustomButtonGroup,
+            sizePerPageList: [ 5, 10, 15, 20 ],
+            sizePerPage: 10,
+            page: this.state.currPage,
+            paginationShowsTotal: this.renderShowsTotal,  // Accept bool or function
+            paginationPosition: 'bottom'  // default is bottom, top and both is all available
         };
 
         const selectRow = {
-            mode: 'checkbox'
+            mode: 'checkbox',
+            clickToSelect: true,
+            selected: this.state.selected
         };
 
         return (
             <Container>
-            <Row>
-                <Col sm="12" md={{ size:7,offset:5}}><h1>帳號管理</h1></Col>
-            </Row>
-            <Row>  
+                <div className="card">
+                <div className="card-header">最新消息</div>
+                <div className="card-block">    
             <BootstrapTable data={this.state.UserList} 
                             selectRow={selectRow} 
+                            options={options}
+                            pagination
                             striped 
                             hover 
-                            options={options} 
                             search
                             exportCSV>
                 <TableHeaderColumn isKey dataField="button" dataFormat={this.buttonFormatter}>Buttons</TableHeaderColumn>
@@ -135,8 +146,9 @@ class User_View extends Component {
                 {this.props.display_updateUser ? <TableHeaderColumn dataField='updateUser' dataSort={ true }>updateUser</TableHeaderColumn> : null}
                 {this.props.display_failedCount ? <TableHeaderColumn dataField='failedCount' dataSort={ true }>failedCount</TableHeaderColumn> : null}
             </BootstrapTable>
-            </Row>
-            </Container>
+            </div>
+            </div>
+        </Container>
         );
     }
 }

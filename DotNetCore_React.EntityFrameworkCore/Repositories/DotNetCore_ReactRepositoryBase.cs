@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using DotNetCore_React.Domain.IRepositories;
 using DotNetCore_React.Domain;
 using Microsoft.EntityFrameworkCore;
@@ -23,7 +24,7 @@ namespace DotNetCore_React.EntityFrameworkCore
             _dbContext = dbContext;
         }
         /// <summary>
-        /// 获取实体集合
+        /// 獲取實體集合
         /// </summary>
         /// <returns></returns>
         public List<TEntity> GetAllList()
@@ -32,9 +33,9 @@ namespace DotNetCore_React.EntityFrameworkCore
         }
 
         /// <summary>
-        /// 根据lambda表达式条件获取实体集合
+        /// 根據lambda表達式條件獲取實體集合
         /// </summary>
-        /// <param name="predicate">lambda表达式条件</param>
+        /// <param name="predicate">lambda表達式條件</param>
         /// <returns></returns>
         public List<TEntity> GetAllList(Expression<Func<TEntity, bool>> predicate)
         {
@@ -42,9 +43,9 @@ namespace DotNetCore_React.EntityFrameworkCore
         }
 
         /// <summary>
-        /// 根据主键获取实体
+        /// 根據主鍵獲取實體
         /// </summary>
-        /// <param name="id">实体主键</param>
+        /// <param name="id">實體主鍵</param>
         /// <returns></returns>
         public TEntity Get(TPrimaryKey id)
         {
@@ -52,9 +53,9 @@ namespace DotNetCore_React.EntityFrameworkCore
         }
 
         /// <summary>
-        /// 根据lambda表达式条件获取单个实体
+        /// 根據lambda表達式條件獲取單個實體
         /// </summary>
-        /// <param name="predicate">lambda表达式条件</param>
+        /// <param name="predicate">lambda表達式條件</param>
         /// <returns></returns>
         public TEntity FirstOrDefault(Expression<Func<TEntity, bool>> predicate)
         {
@@ -62,9 +63,9 @@ namespace DotNetCore_React.EntityFrameworkCore
         }
 
         /// <summary>
-        /// 新增实体
+        /// 新增實體
         /// </summary>
-        /// <param name="entity">实体</param>
+        /// <param name="entity">實體</param>
         /// <returns></returns>
         public TEntity Insert(TEntity entity)
         {
@@ -73,9 +74,9 @@ namespace DotNetCore_React.EntityFrameworkCore
         }
 
         /// <summary>
-        /// 更新实体
+        /// 更新實體
         /// </summary>
-        /// <param name="entity">实体</param>
+        /// <param name="entity">實體</param>
         public TEntity Update(TEntity entity)
         {
             _dbContext.Set<TEntity>().Attach(entity);
@@ -95,9 +96,9 @@ namespace DotNetCore_React.EntityFrameworkCore
 
 
         /// <summary>
-        /// 新增或更新实体
+        /// 新增或更新實體
         /// </summary>
-        /// <param name="entity">实体</param>
+        /// <param name="entity">實體</param>
         public TEntity InsertOrUpdate(TEntity entity)
         {
             if (Get(entity.Id) != null)
@@ -105,16 +106,10 @@ namespace DotNetCore_React.EntityFrameworkCore
             return Insert(entity);
         }
 
-
-        //public abstract void Delete(TEntity entity);
-
-        //public abstract void Delete(TPrimaryKey id);
-
-
         /// <summary>
-        /// 删除实体
+        /// 刪除實體
         /// </summary>
-        /// <param name="entity">要删除的实体</param>
+        /// <param name="entity">要刪除的實體</param>
         public void Delete(TEntity entity)
         {
             //真刪除
@@ -131,9 +126,9 @@ namespace DotNetCore_React.EntityFrameworkCore
         }
 
         /// <summary>
-        /// 删除实体
+        /// 刪除實體
         /// </summary>
-        /// <param name="id">实体主键</param>
+        /// <param name="id">實體主鍵</param>
         public void Delete(TPrimaryKey id)
         {
             var getData = Get(id);
@@ -144,9 +139,9 @@ namespace DotNetCore_React.EntityFrameworkCore
         }
 
         /// <summary>
-        /// 删除实体
+        /// 刪除實體
         /// </summary>
-        /// <param name="id">实体主键</param>
+        /// <param name="id">實體主鍵</param>
         public void DeleteRange(List<TPrimaryKey> id)
         {
             foreach (var i in id)
@@ -157,9 +152,9 @@ namespace DotNetCore_React.EntityFrameworkCore
 
 
         /// <summary>
-        /// 删除实体
+        /// 刪除實體
         /// </summary>
-        /// <param name="id">实体主键</param>
+        /// <param name="id">實體主鍵</param>
         public void DeleteRange(List<TEntity> id)
         {
             foreach (var i in id)
@@ -169,7 +164,7 @@ namespace DotNetCore_React.EntityFrameworkCore
         }
 
         /// <summary>
-        /// 事务性保存
+        /// 事務性保存
         /// </summary>
         public int Save()
         {
@@ -177,9 +172,9 @@ namespace DotNetCore_React.EntityFrameworkCore
         }
 
         /// <summary>
-        /// 根据主键构建判断表达式
+        /// 根據主鍵構建判斷表達式
         /// </summary>
-        /// <param name="id">主键</param>
+        /// <param name="id">主鍵</param>
         /// <returns></returns>
         protected static Expression<Func<TEntity, bool>> CreateEqualityExpressionForId(TPrimaryKey id)
         {

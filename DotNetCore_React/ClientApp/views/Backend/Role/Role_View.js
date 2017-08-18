@@ -15,6 +15,9 @@ class Role_View extends Component {
         super(props);
         this.state = {
             RoleList: [],
+            //Table變數
+            selected: [],
+            currPage: 1
         }
         this.buttonFormatter = this.buttonFormatter.bind(this);
         this.GetData = this.GetData.bind(this);
@@ -84,27 +87,41 @@ class Role_View extends Component {
         return name;
     }
 
+    renderShowsTotal(start, to, total) {
+        return (
+          <p style={ { color: 'blue' } }>
+            顯示第 { start } 至 { to } 項結果, 共 { total } 項
+          </p>
+        );
+    }
 
     render() {
         const options = {
-            btnGroup: this.createCustomButtonGroup
+            btnGroup: this.createCustomButtonGroup,
+            sizePerPageList: [ 5, 10, 15, 20 ],
+            sizePerPage: 10,
+            page: this.state.currPage,
+            paginationShowsTotal: this.renderShowsTotal,  // Accept bool or function
+            paginationPosition: 'bottom'  // default is bottom, top and both is all available
         };
 
         const selectRow = {
-            mode: 'checkbox'
+            mode: 'checkbox',
+            clickToSelect: true,
+            selected: this.state.selected
         };
 
         return (
             <Container>
-                <Row>
-                    <Col sm="12" md={{ size:7,offset:5}}><h1>角色管理</h1></Col>
-                </Row>
-                <Row>         
+                <div className="card">
+                <div className="card-header">最新消息</div>
+                <div className="card-block">          
                 <BootstrapTable data={this.state.RoleList} 
                                 selectRow={selectRow} 
+                                options={options} 
                                 striped 
                                 hover 
-                                options={options} 
+                                pagination                 
                                 search
                                 exportCSV>
                     <TableHeaderColumn isKey dataField="button" dataFormat={this.buttonFormatter}>Buttons</TableHeaderColumn>
@@ -118,7 +135,8 @@ class Role_View extends Component {
                     {this.props.display_UpdateDate ? <TableHeaderColumn dataField='updateDate' dataSort={ true }>updateDate</TableHeaderColumn> : null}
                     {this.props.display_UpdateUser ? <TableHeaderColumn dataField='updateUser' dataSort={ true }>updateUser</TableHeaderColumn> : null}
                 </BootstrapTable>
-                </Row>
+                </div>
+                </div>
             </Container>
         );
     }
