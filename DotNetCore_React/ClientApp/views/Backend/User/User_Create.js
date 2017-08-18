@@ -119,7 +119,10 @@ const self = this;
             <div className="card-block">
               <form className="" onSubmit={this.Submit}>
 
-                <TextInput name="userName"
+              <table className="table table-striped table-bordered">
+                  <tbody>
+
+                  <TextInput name="userName"
                   labelName="帳號"
                   className=""
                   display={this.props.display_userName}
@@ -276,6 +279,9 @@ const self = this;
                   value={this.state.User.failedCount}
                   placeholder="failedCount" /> */}
 
+                  </tbody>
+
+                </table>
 
                 <div className="form-group form-actions">
                   <ButtonToolbar>

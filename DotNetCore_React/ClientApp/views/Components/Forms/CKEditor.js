@@ -13,7 +13,7 @@ export default class CKEditor extends Component {
         const self = this;
         let configuration = {
           toolbar: "Basic",
-          width: 750,
+          width: 536,
           height: 750,
         };
         CKEDITOR.replace(self.props.name, configuration);
@@ -42,10 +42,19 @@ export default class CKEditor extends Component {
             return (<div></div>)
         }
 
-        return ( <FormGroup>
-                <label style = {{ color: this.props.required && 'red' }} > { this.props.labelName } { this.props.required && '*' } </label> 
-                { baseField } 
-        </FormGroup>)
+        return ( 
+       <tr>
+{/* <FormGroup> */}
+ <td className="col-xs-4 text-right">
+<label style = {{ color: this.props.required && 'red' }} > { this.props.labelName } { this.props.required && '*' } </label> 
+
+ </td>
+ <td className="col-xs-8">
+ { baseField } 
+ </td>
+ {/* </FormGroup> */}
+            </tr>
+        )
     }
 }
 

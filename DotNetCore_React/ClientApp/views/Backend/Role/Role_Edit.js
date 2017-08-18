@@ -145,6 +145,10 @@ class Role_Edit_Show extends Component {
             </div>
             <div className="card-block">
             <form className="" onSubmit={this.Submit}>
+
+            <table className="table table-striped table-bordered">
+                  <tbody>
+
                 <input type="hidden" id="id" name="id" value={this.state.Role.id} />
 
                 <TextInput name="sysId"
@@ -222,6 +226,10 @@ class Role_Edit_Show extends Component {
                   value={this.state.Role.createUser}
                   placeholder="createUser"
                   readOnly={true} />
+
+                  </tbody>
+
+                </table>
 
                 <div className="form-group form-actions">
                   <Button color="primary" disabled={$invalid ? 'disabled' : false}>{this.Button_Text()}</Button>

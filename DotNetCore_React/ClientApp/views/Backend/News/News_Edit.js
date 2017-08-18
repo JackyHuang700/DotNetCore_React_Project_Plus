@@ -127,7 +127,7 @@ class News_Edit extends Component {
   Component_Nav() {
 
         return (
-          <div>
+<td colSpan="2">
             <Nav tabs>
               {
                 this.state.Sys_Language_List.map((sys, index) => {
@@ -191,7 +191,7 @@ class News_Edit extends Component {
                 })
               }
             </TabContent>
-          </div>
+          </td>
         );
     
     
@@ -210,7 +210,11 @@ class News_Edit extends Component {
             </div>
             <div className="card-block">
             <form className="" onSubmit={this.Button_Submit}>
-                <input type="hidden" id="id" name="id" value={this.state.News.id} />
+
+
+            <table className="table table-striped table-bordered">
+                  <tbody>
+                  <input type="hidden" id="id" name="id" value={this.state.News.id} />
 
                 <TextInput name="listImage"
                   labelName="列表圖片"
@@ -325,6 +329,9 @@ class News_Edit extends Component {
                   placeholder="updateUser"/>
 
                   {this.Component_Nav()}
+
+                  </tbody>
+                </table>
 
                 <div className="form-group form-actions">
                 <Button color="primary" disabled={$invalid ? 'disabled' : false} >完成</Button>

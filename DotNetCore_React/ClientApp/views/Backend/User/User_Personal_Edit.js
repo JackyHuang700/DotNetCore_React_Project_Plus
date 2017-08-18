@@ -92,7 +92,13 @@ class User_Personal_Edit extends Component {
                         </div>
                         <div className="card-block">
                             <form className="" onSubmit={this.Button_Submit}>
-                                <input type="hidden" id="id" name="id" value={this.state.User.id} />
+
+
+
+                            <table className="table table-striped table-bordered">
+                  <tbody>
+
+                  <input type="hidden" id="id" name="id" value={this.state.User.id} />
 
                                 <TextInput name="userName"
                                     labelName="系統帳號"
@@ -146,6 +152,11 @@ class User_Personal_Edit extends Component {
                                     onInput={this.handleInputChange}
                                     value={this.state.User.lastName}
                                     placeholder="名" />
+
+                  </tbody>
+
+                </table>
+
 
                                 <div className="form-group form-actions">
                                     <Button color="primary" disabled={$invalid ? 'disabled' : false}>編輯完成</Button>

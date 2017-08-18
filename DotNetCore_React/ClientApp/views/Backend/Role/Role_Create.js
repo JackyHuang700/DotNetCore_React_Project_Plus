@@ -27,7 +27,7 @@ class Role_Create extends Component {
   }
 
   Submit(event) {
-const self = this;
+    const self = this;
 
     axios({
       url: '/api/Role/Create',
@@ -42,7 +42,7 @@ const self = this;
       if (result.data.success) {
         if (self.state.next_Button) {
           window.location.reload()
-        }else{
+        } else {
           history.push('/Role');
         }
       }
@@ -64,7 +64,7 @@ const self = this;
   }
 
   //繼續新增下一筆
-  Next_Button(event){
+  Next_Button(event) {
     this.setState({
       next_Button: true,
     });
@@ -88,66 +88,76 @@ const self = this;
             <div className="card-header">
               新增角色
               </div>
+
             <div className="card-block">
               <form className="" onSubmit={this.Submit}>
 
-                <TextInput name="SysId"
-                  labelName="系統識別碼"
-                  className=""
-                  display={this.props.display_SysId}
-                  required={this.props.required_SysId}
-                  pattern={/^[\w]{5,10}$/}
-                  validMessage={{ required: 'SysId is reduired.', pattern: '不能包含字母数字底線以外的字符' }}
-                  onInput={this.handleInputChange}
-                  value={this.state.SysId}
-                  placeholder="sys123" />
 
-                <TextInput name="Name"
-                  labelName="角色名稱"
-                  className=""
-                  display={this.props.display_Name}
-                  required={this.props.required_Name}
-                  validMessage={{ required: 'Name is reduired.' }}
-                  onInput={this.handleInputChange}
-                  value={this.state.Name}
-                  placeholder="糖糖" />
+                <table className="table table-striped table-bordered">
+                  <tbody>
 
-                <TextInput name="Priority"
-                  labelName="權重"
-                  className=""
-                  display={this.props.display_Priority}
-                  required={this.props.required_Priority}
-                  validMessage={{ required: 'Priority is reduired.' }}
-                  onInput={this.handleInputChange}
-                  value={this.state.Priority}
-                  placeholder="1" />
+                    <TextInput name="SysId"
+                      labelName="系統識別碼"
+                      className=""
+                      display={this.props.display_SysId}
+                      required={this.props.required_SysId}
+                      pattern={/^[\w]{5,10}$/}
+                      validMessage={{ required: 'SysId is reduired.', pattern: '不能包含字母数字底線以外的字符' }}
+                      onInput={this.handleInputChange}
+                      value={this.state.SysId}
+                      placeholder="sys123"/>
 
-                 <DropDownList name="Status"
-                  labelName="狀態"
-                  display={this.props.display_Status}
-                  required={this.props.required_Status} 
-                  validMessage={{required: 'Status is reduired.'}} 
-                  onInput={this.handleInputChange} 
-                  value={this.state.Status}
-                  options={
-                    [
-                      {
-                        name:role_Enum.STOP.name,
-                        value:role_Enum.STOP.value
-                      },
-                      {
-                        name:role_Enum.NORMAL.name,
-                        value:role_Enum.NORMAL.value
-                      }
-                    ]}
-                  />
+                    <TextInput name="Name"
+                      labelName="角色名稱"
+                      className=""
+                      display={this.props.display_Name}
+                      required={this.props.required_Name}
+                      validMessage={{ required: 'Name is reduired.' }}
+                      onInput={this.handleInputChange}
+                      value={this.state.Name}
+                      placeholder="糖糖" />
+
+                    <TextInput name="Priority"
+                      labelName="權重"
+                      className=""
+                      display={this.props.display_Priority}
+                      required={this.props.required_Priority}
+                      validMessage={{ required: 'Priority is reduired.' }}
+                      onInput={this.handleInputChange}
+                      value={this.state.Priority}
+                      placeholder="1"/>
+
+                    <DropDownList name="Status"
+                      labelName="狀態"
+                      display={this.props.display_Status}
+                      required={this.props.required_Status}
+                      validMessage={{ required: 'Status is reduired.' }}
+                      onInput={this.handleInputChange}
+                      value={this.state.Status}
+                      options={
+                        [
+                          {
+                            name: role_Enum.STOP.name,
+                            value: role_Enum.STOP.value
+                          },
+                          {
+                            name: role_Enum.NORMAL.name,
+                            value: role_Enum.NORMAL.value
+                          }
+                        ]}
+                    />
+                  </tbody>
+
+                </table>
+
+
                 <div className="form-group form-actions">
 
-                <ButtonToolbar>
-                  <Button color="primary" id="btn" disabled={$invalid ? 'disabled' : false}>確認</Button>
-                  <Button color="primary" onClick={this.Next_Button.bind(this)} disabled={$invalid ? 'disabled' : false}>繼續新增下一筆</Button>
-                </ButtonToolbar>
-                 
+                  <ButtonToolbar>
+                    <Button color="primary" id="btn" disabled={$invalid ? 'disabled' : false}>確認</Button>
+                    <Button color="primary" onClick={this.Next_Button.bind(this)} disabled={$invalid ? 'disabled' : false}>繼續新增下一筆</Button>
+                  </ButtonToolbar>
+
                 </div>
               </form>
             </div>

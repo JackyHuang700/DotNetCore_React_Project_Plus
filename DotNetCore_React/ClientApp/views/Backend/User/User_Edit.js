@@ -169,7 +169,9 @@ class User_Edit_Show extends Component {
             <div className="card-block">
             <form className="" onSubmit={this.Button_Submit}>
 
-                <TextInput name="userName"
+            <table className="table table-striped table-bordered">
+                  <tbody>
+                  <TextInput name="userName"
                   labelName="系統帳號"
                   className=""
                   display={this.props.display_userName}
@@ -293,6 +295,12 @@ class User_Edit_Show extends Component {
                   value={this.state.User.createUser}
                   placeholder="createUser"
                   readOnly={true} />
+
+                  </tbody>
+
+                </table>
+
+             
 
                 <div className="form-group form-actions">
                   <Button color="primary" disabled={$invalid ? 'disabled' : false} >{this.Button_Text()}</Button>

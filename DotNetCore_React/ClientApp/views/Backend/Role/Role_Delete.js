@@ -85,7 +85,11 @@ class Role_Delete extends Component {
             </div>
             <div className="card-block">
               <form action="" method="post">
-                <input type="hidden" id="id" name="id" value={this.state.Role.id} />
+
+
+              <table className="table table-striped table-bordered">
+                  <tbody>
+                  <input type="hidden" id="id" name="id" value={this.state.Role.id} />
 
 
                 <TextInput name="sysId"
@@ -122,9 +126,6 @@ class Role_Delete extends Component {
                   placeholder="priority"
                   readOnly={true} />
 
-
-
-
                 <TextInput name="status"
                   labelName="狀態"
                   className=""
@@ -159,6 +160,9 @@ class Role_Delete extends Component {
                   placeholder="createUser"
                   readOnly={true} />
 
+                  </tbody>
+
+                </table>
 
                 <div className="form-group form-actions">
                   <button type="botton" className="btn btn-sm btn-danger" onClick={this.Button_Submit}>確認刪除</button>

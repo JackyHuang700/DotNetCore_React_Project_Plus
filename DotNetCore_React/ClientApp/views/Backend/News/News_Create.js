@@ -90,8 +90,8 @@ class News_Create extends Component {
   Component_Nav() {
 
     return (
-      <div>
-        <Nav tabs>
+<td colSpan="2">
+<Nav tabs>
           {
             this.state.Sys_Language_List.map((sys, index) => {
               return (
@@ -162,7 +162,7 @@ class News_Create extends Component {
             })
           }
         </TabContent>
-      </div>
+</td>
     );
 
 
@@ -183,8 +183,9 @@ class News_Create extends Component {
             <div className="card-block">
               <form className="" onSubmit={this.Submit}>
 
-
-                <TextInput name="listImage"
+              <table className="table table-striped table-bordered">
+                  <tbody>
+                  <TextInput name="listImage"
                   labelName="列表圖片"
                   className=""
                   display={this.props.display_listImage}
@@ -262,6 +263,8 @@ class News_Create extends Component {
                 />
 
                 {this.Component_Nav()}
+                  </tbody>
+                </table>
 
                 <div className="form-group form-actions">
                   <ButtonToolbar>

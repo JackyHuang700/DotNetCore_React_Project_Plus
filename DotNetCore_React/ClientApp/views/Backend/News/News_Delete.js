@@ -112,7 +112,10 @@ class News_Delete extends Component {
             </div>
             <div className="card-block">
               <form action="" method="post">
-                <input type="hidden" id="id" name="id" value={this.state.News.id} />
+
+              <table className="table table-striped table-bordered">
+                  <tbody>
+                  <input type="hidden" id="id" name="id" value={this.state.News.id} />
 
                   <TextInput name="listImage"
                   labelName="列表圖片"
@@ -232,7 +235,8 @@ class News_Delete extends Component {
                   readOnly={true}
                   placeholder="updateUser"/>
 
-
+                  </tbody>
+                </table>
 
                 <div className="form-group form-actions">
                   <button type="botton" className="btn btn-sm btn-danger" onClick={this.Button_Click}>{this.Button_Text()}</button>
