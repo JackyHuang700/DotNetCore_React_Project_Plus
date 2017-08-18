@@ -120,34 +120,39 @@ export default class News_View extends Component {
         };
 
         return (
-            <div className="col-xs-12">
-                <div className="card">
-                    <div className="card-header">最新消息</div>
-                    <div className="card-block">    
-                    <BootstrapTable data={this.state.NewsList} 
-                                    selectRow={selectRow} 
-                                    options={options} 
-                                    striped 
-                                    hover 
-                                    pagination                 
-                                    search
-                                    exportCSV>
-                        {this.props.display_listImage ? <TableHeaderColumn dataField='listImage'>listImage</TableHeaderColumn> : null}
-                        {this.props.display_title ? <TableHeaderColumn dataField='title'>title</TableHeaderColumn> : null}
-                        {this.props.display_category ? <TableHeaderColumn dataField='category'>category</TableHeaderColumn> : null}
-                        {this.props.display_priority ? <TableHeaderColumn dataField='priority'>priority</TableHeaderColumn> : null}
-                        {this.props.display_startDate ? <TableHeaderColumn dataField='startDate'>startDate</TableHeaderColumn> : null}
-                        {this.props.display_endDate ? <TableHeaderColumn dataField='endDate'>endDate</TableHeaderColumn> : null}
-                        {this.props.display_status ? <TableHeaderColumn dataField='status' dataFormat={this.Formatter_Status}>status</TableHeaderColumn> : null}
-                        {this.props.display_createDate ? <TableHeaderColumn dataField='createDate'>createDate</TableHeaderColumn> : null}
-                        {this.props.display_createUser ? <TableHeaderColumn dataField='createUser'>createUser</TableHeaderColumn> : null}
-                        {this.props.display_updateDate ? <TableHeaderColumn dataField='updateDate'>updateDate</TableHeaderColumn> : null}
-                        {this.props.display_updateUser ? <TableHeaderColumn dataField='updateUser'>updateUser</TableHeaderColumn> : null}
-                        <TableHeaderColumn isKey dataField="button" dataFormat={this.buttonFormatter}></TableHeaderColumn>
-                    </BootstrapTable>
+<div className="col-xs-12">
+
+                <div className="table-users">
+                    <div className="header">最新消息</div>
+
+                    <div className="card">
+                        {/* <div className="card-header">最新消息</div> */}
+                        <div className="card-block">
+                        <BootstrapTable data={this.state.NewsList} 
+                        selectRow={selectRow} 
+                        options={options} 
+                        striped 
+                        hover 
+                        pagination                 
+                        search
+                        exportCSV>
+            {this.props.display_listImage ? <TableHeaderColumn dataField='listImage'>listImage</TableHeaderColumn> : null}
+            {this.props.display_title ? <TableHeaderColumn dataField='title'>title</TableHeaderColumn> : null}
+            {this.props.display_category ? <TableHeaderColumn dataField='category'>category</TableHeaderColumn> : null}
+            {this.props.display_priority ? <TableHeaderColumn dataField='priority'>priority</TableHeaderColumn> : null}
+            {this.props.display_startDate ? <TableHeaderColumn dataField='startDate'>startDate</TableHeaderColumn> : null}
+            {this.props.display_endDate ? <TableHeaderColumn dataField='endDate'>endDate</TableHeaderColumn> : null}
+            {this.props.display_status ? <TableHeaderColumn dataField='status' dataFormat={this.Formatter_Status}>status</TableHeaderColumn> : null}
+            {this.props.display_createDate ? <TableHeaderColumn dataField='createDate'>createDate</TableHeaderColumn> : null}
+            {this.props.display_createUser ? <TableHeaderColumn dataField='createUser'>createUser</TableHeaderColumn> : null}
+            {this.props.display_updateDate ? <TableHeaderColumn dataField='updateDate'>updateDate</TableHeaderColumn> : null}
+            {this.props.display_updateUser ? <TableHeaderColumn dataField='updateUser'>updateUser</TableHeaderColumn> : null}
+            <TableHeaderColumn isKey dataField="button" dataFormat={this.buttonFormatter}></TableHeaderColumn>
+        </BootstrapTable>
+                        </div>
                     </div>
                 </div>
-                </div>
+            </div>
         );
     }
 }

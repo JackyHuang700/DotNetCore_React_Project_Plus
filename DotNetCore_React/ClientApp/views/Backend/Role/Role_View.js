@@ -119,10 +119,7 @@ class Role_View extends Component {
             <div className="col-xs-12">
 
                 <div className="table-users">
-                    <div className="header">
-                    {/* <div className="card-header">最新消息</div> */}
-                    最新消息
-                    </div>
+                    <div className="header">角色管理</div>
 
                     <div className="card">
                         {/* <div className="card-header">最新消息</div> */}

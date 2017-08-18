@@ -4,6 +4,7 @@ import { BootstrapTable, TableHeaderColumn,ButtonGroup } from 'react-bootstrap-t
 import axios from 'axios';
 import history from '../../../history'
 import { user_Enum } from '../../../EnumScript/GeneralEnumScript.js';
+import '../../../css/test.scss';
 
 class User_View extends Component {
 
@@ -122,35 +123,45 @@ class User_View extends Component {
         };
 
         return (
-                <div className="col-xs-12">
-                <div className="card">
-                <div className="card-header">最新消息</div>
-                <div className="card-block">    
-            <BootstrapTable data={this.state.UserList} 
-                            selectRow={selectRow} 
-                            options={options}
-                            pagination
-                            striped 
-                            hover 
-                            search
-                            exportCSV>
-                {this.props.display_userName ? <TableHeaderColumn dataField='userName' dataSort={ true }>userName</TableHeaderColumn> : null}
-                {this.props.display_roleId ? <TableHeaderColumn dataField='roleId' dataSort={ true }>roleId</TableHeaderColumn> : null}
-                {this.props.display_email ? <TableHeaderColumn dataField='email' dataSort={ true }>email</TableHeaderColumn> : null}
-                {this.props.display_emailComfirmed ? <TableHeaderColumn dataField='emailComfirmed' dataSort={ true }>emailComfirmed</TableHeaderColumn> : null}
-                {this.props.display_firstName ? <TableHeaderColumn dataField='firstName' dataSort={ true }>firstName</TableHeaderColumn> : null}
-                {this.props.display_lastName ? <TableHeaderColumn dataField='lastName' dataSort={ true }>lastName</TableHeaderColumn> : null}
-                {this.props.display_status ? <TableHeaderColumn dataField='status' dataSort={ true } dataFormat={this.Formatter_Status}>status</TableHeaderColumn> : null}
-                {this.props.display_createDate ? <TableHeaderColumn dataField='createDate' dataSort={ true }>createDate</TableHeaderColumn> : null}
-                {this.props.display_createUser ? <TableHeaderColumn dataField='createUser' dataSort={ true }>createUser</TableHeaderColumn> : null}
-                {this.props.display_updateDate ? <TableHeaderColumn dataField='updateDate' dataSort={ true }>updateDate</TableHeaderColumn> : null}
-                {this.props.display_updateUser ? <TableHeaderColumn dataField='updateUser' dataSort={ true }>updateUser</TableHeaderColumn> : null}
-                {this.props.display_failedCount ? <TableHeaderColumn dataField='failedCount' dataSort={ true }>failedCount</TableHeaderColumn> : null}
-                <TableHeaderColumn isKey dataField="button" dataFormat={this.buttonFormatter}></TableHeaderColumn>
-            </BootstrapTable>
+
+<div className="col-xs-12">
+
+                <div className="table-users">
+                    <div className="header">帳號管理</div>
+
+                    <div className="card">
+                        {/* <div className="card-header">最新消息</div> */}
+                        <div className="card-block">
+                        <BootstrapTable data={this.state.UserList} 
+                        selectRow={selectRow} 
+                        options={options}
+                        pagination
+                        striped 
+                        hover 
+                        search
+                        exportCSV>
+            {this.props.display_userName ? <TableHeaderColumn dataField='userName' dataSort={ true }>userName</TableHeaderColumn> : null}
+            {this.props.display_roleId ? <TableHeaderColumn dataField='roleId' dataSort={ true }>roleId</TableHeaderColumn> : null}
+            {this.props.display_email ? <TableHeaderColumn dataField='email' dataSort={ true }>email</TableHeaderColumn> : null}
+            {this.props.display_emailComfirmed ? <TableHeaderColumn dataField='emailComfirmed' dataSort={ true }>emailComfirmed</TableHeaderColumn> : null}
+            {this.props.display_firstName ? <TableHeaderColumn dataField='firstName' dataSort={ true }>firstName</TableHeaderColumn> : null}
+            {this.props.display_lastName ? <TableHeaderColumn dataField='lastName' dataSort={ true }>lastName</TableHeaderColumn> : null}
+            {this.props.display_status ? <TableHeaderColumn dataField='status' dataSort={ true } dataFormat={this.Formatter_Status}>status</TableHeaderColumn> : null}
+            {this.props.display_createDate ? <TableHeaderColumn dataField='createDate' dataSort={ true }>createDate</TableHeaderColumn> : null}
+            {this.props.display_createUser ? <TableHeaderColumn dataField='createUser' dataSort={ true }>createUser</TableHeaderColumn> : null}
+            {this.props.display_updateDate ? <TableHeaderColumn dataField='updateDate' dataSort={ true }>updateDate</TableHeaderColumn> : null}
+            {this.props.display_updateUser ? <TableHeaderColumn dataField='updateUser' dataSort={ true }>updateUser</TableHeaderColumn> : null}
+            {this.props.display_failedCount ? <TableHeaderColumn dataField='failedCount' dataSort={ true }>failedCount</TableHeaderColumn> : null}
+            <TableHeaderColumn isKey dataField="button" dataFormat={this.buttonFormatter}></TableHeaderColumn>
+        </BootstrapTable>
+                        </div>
+                    </div>
+                </div>
             </div>
-            </div>
-            </div>
+
+
+
+            
         );
     }
 }
