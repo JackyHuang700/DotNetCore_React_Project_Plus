@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal, Container, Row, Col  } from 'reactstrap';
+import { ButtonToolbar, Button, Modal, Container, Row, Col  } from 'reactstrap';
 import { BootstrapTable, TableHeaderColumn,ButtonGroup } from 'react-bootstrap-table';
 import axios from 'axios';
 import history from '../../../history'
@@ -38,11 +38,12 @@ class User_View extends Component {
      */
     createCustomButtonGroup = props => {
         return (
-            <ButtonGroup className='' sizeClass='btn-group-md'>
+            <ButtonToolbar className='' sizeClass='btn-group-md'>
                 {this.props.dispaly_button_create &&
                 <Button color="primary" onClick={this.OnClick_Create}>建立</Button> }
+                {'\u00A0'}
                 {props.exportCSVBtn}
-            </ButtonGroup>
+            </ButtonToolbar>
         );
     }
 
@@ -50,6 +51,7 @@ class User_View extends Component {
         return (
             <ButtonGroup className='' sizeClass='btn-group-md'>
                 {this.props.display_button_edit && <Button color="warning" data-id={row.id} onClick={this.OnClick_Edit}><i className="fa fa-pencil" aria-hidden="true"></i></Button> }
+                {'\u00A0'}
                 {this.props.display_button_del && <Button color="danger" data-id={row.id} onClick={this.OnClick_Delete}><i className="fa fa-trash" aria-hidden="true"></i></Button> }
             </ButtonGroup>
         );
