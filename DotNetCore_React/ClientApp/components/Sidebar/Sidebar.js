@@ -3,8 +3,17 @@ import { NavLink } from 'react-router-dom'
 
 
 var sidebar_Style = {
-  'background': "rgba(61, 142, 247, 1)",
+  'background': "#F8F8F8",
 };
+
+
+var navTitle_Style = {
+  'color': "black",
+  "background": "#e4e5e6",
+};
+
+
+
 
 class Sidebar extends Component {
 
@@ -36,7 +45,7 @@ class Sidebar extends Component {
         <li key='1' className="nav-item">
           <NavLink to={'/dashboard'} className="nav-link" activeClassName="active" style={sidebar_Style}><i className="icon-speedometer"></i> Dashboard</NavLink>
         </li>,
-        <li key='2' className="nav-title">模組</li>,
+        <li key='2' className="nav-title" style={navTitle_Style}>模組</li>,
         <li key='3' className="nav-item nav-dropdown">
           <a className="nav-link nav-dropdown-toggle" href="#" onClick={this.handleClick.bind(this)}><i className="icon-star"></i> 通用</a>
           <ul className="nav-dropdown-items">
@@ -45,7 +54,7 @@ class Sidebar extends Component {
             </li>
           </ul>
         </li>,
-        <li key='6' className="nav-title">系統</li>,
+        <li key='6' className="nav-title" style={navTitle_Style}>系統</li>,
         <li key='7' className="nav-item nav-dropdown">
           <a className="nav-link nav-dropdown-toggle" href="#" onClick={this.handleClick.bind(this)}><i className="icon-star"></i> 管理</a>
           <ul className="nav-dropdown-items">

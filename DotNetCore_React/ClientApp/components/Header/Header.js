@@ -12,7 +12,7 @@ const dropdownMenu_Style = {
 
 
 const header_Style = {
-  'backgroundColor': "rgba(61, 142, 247, 1)"
+  'backgroundColor': "#438EB9"
 };
 
 class Header extends Component {
@@ -76,7 +76,7 @@ class Header extends Component {
     return (
       <header className="app-header navbar" style={header_Style}>
         <button className="navbar-toggler mobile-sidebar-toggler d-lg-none" type="button" onClick={this.mobileSidebarToggle}>&#9776;</button>
-        <a className="navbar-brand" href="#"></a>
+        <a className="navbar-brand" href="#" style={header_Style}></a>
         <ul className="nav navbar-nav d-md-down-none">
           <li className="nav-item">
             <button className="nav-link navbar-toggler sidebar-toggler" type="button" onClick={this.sidebarToggle}>&#9776;</button>
