@@ -175,15 +175,15 @@ User_View.defaultProps = {
     display_userName: true,
     display_roleId: true,
     display_email: true,
-    display_emailComfirmed: true,
-    display_firstName: true,
-    display_lastName: true,
+    display_emailComfirmed: false,
+    display_firstName: false,
+    display_lastName: false,
     display_status: true,
     display_createDate: true,
-    display_createUser: true,
-    display_updateDate: true,
-    display_updateUser: true,
-    display_failedCount: true,
+    display_createUser: false,
+    display_updateDate: false,
+    display_updateUser: false,
+    display_failedCount: false,
 
 };
 
