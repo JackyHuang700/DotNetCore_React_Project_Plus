@@ -133,14 +133,14 @@ class Role_View extends Component {
                                 search
                                 exportCSV>
                                 {/* {this.props.display_Id ? <TableHeaderColumn dataField='id'>id</TableHeaderColumn> : null} */}
-                                {this.props.display_SysId ? <TableHeaderColumn dataField='sysId' dataSort={true}>sysId</TableHeaderColumn> : null}
-                                {this.props.display_name ? <TableHeaderColumn dataField='name' dataSort={true}>name</TableHeaderColumn> : null}
-                                {this.props.display_Priority ? <TableHeaderColumn dataField='priority' dataSort={true}>priority</TableHeaderColumn> : null}
-                                {this.props.display_Status ? <TableHeaderColumn dataField='status' dataSort={true} dataFormat={this.Formatter_Status}>ststus</TableHeaderColumn> : null}
-                                {this.props.display_CreateDate ? <TableHeaderColumn dataField='createDate' dataSort={true}>createDate</TableHeaderColumn> : null}
-                                {this.props.display_CreateUser ? <TableHeaderColumn dataField='createUser' dataSort={true}>createUser</TableHeaderColumn> : null}
-                                {this.props.display_UpdateDate ? <TableHeaderColumn dataField='updateDate' dataSort={true}>updateDate</TableHeaderColumn> : null}
-                                {this.props.display_UpdateUser ? <TableHeaderColumn dataField='updateUser' dataSort={true}>updateUser</TableHeaderColumn> : null}
+                                {this.props.display_SysId ? <TableHeaderColumn dataField='sysId' dataSort={true}>群組</TableHeaderColumn> : null}
+                                {this.props.display_name ? <TableHeaderColumn dataField='name' dataSort={true}>群組名稱</TableHeaderColumn> : null}
+                                {this.props.display_Priority ? <TableHeaderColumn dataField='priority' dataSort={true}>排序</TableHeaderColumn> : null}
+                                {this.props.display_Status ? <TableHeaderColumn dataField='status' dataSort={true} dataFormat={this.Formatter_Status}>狀態</TableHeaderColumn> : null}
+                                {this.props.display_CreateDate ? <TableHeaderColumn dataField='createDate' dataSort={true}>建立時間</TableHeaderColumn> : null}
+                                {this.props.display_CreateUser ? <TableHeaderColumn dataField='createUser' dataSort={true}>建立者</TableHeaderColumn> : null}
+                                {this.props.display_UpdateDate ? <TableHeaderColumn dataField='updateDate' dataSort={true}>更新時間</TableHeaderColumn> : null}
+                                {this.props.display_UpdateUser ? <TableHeaderColumn dataField='updateUser' dataSort={true}>更新者</TableHeaderColumn> : null}
                                 <TableHeaderColumn isKey dataField="button" dataFormat={this.buttonFormatter}></TableHeaderColumn>
                             </BootstrapTable>
                         </div>
