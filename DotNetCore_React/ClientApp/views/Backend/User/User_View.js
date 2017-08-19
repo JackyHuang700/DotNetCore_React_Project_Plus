@@ -28,6 +28,7 @@ class User_View extends Component {
         const self = this;
 
         axios.get('api/User/User_View').then((result) => {
+            console.log(result)
             this.setState({ UserList: result.data });
         }).catch((error) => {
             console.log(error)
@@ -141,7 +142,7 @@ class User_View extends Component {
                         search
                         exportCSV>
             {this.props.display_userName ? <TableHeaderColumn dataField='userName' dataSort={ true }>系統帳號</TableHeaderColumn> : null}
-            {this.props.display_roleId ? <TableHeaderColumn dataField='roleId' dataSort={ true }>群組名稱</TableHeaderColumn> : null}
+            {this.props.display_roleId_Chinese ? <TableHeaderColumn dataField='roleId_Chinese' dataSort={ true }>群組名稱</TableHeaderColumn> : null}
             {this.props.display_email ? <TableHeaderColumn dataField='email' dataSort={ true }>email</TableHeaderColumn> : null}
             {this.props.display_emailComfirmed ? <TableHeaderColumn dataField='emailComfirmed' dataSort={ true }>Email確認</TableHeaderColumn> : null}
             {this.props.display_firstName ? <TableHeaderColumn dataField='firstName' dataSort={ true }>姓</TableHeaderColumn> : null}
@@ -173,7 +174,7 @@ User_View.defaultProps = {
 
     /**/
     display_userName: true,
-    display_roleId: true,
+    display_roleId_Chinese: true,
     display_email: true,
     display_emailComfirmed: false,
     display_firstName: false,

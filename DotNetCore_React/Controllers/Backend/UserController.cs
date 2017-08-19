@@ -56,6 +56,7 @@ namespace DotNetCore_React.Controllers.Backend
         public ActionResult Create([FromBody] UserDto user)
         {
             user.CreateUser = _currentUser.UserName;
+            user.UpdateUser = _currentUser.UserName;
             var myJson = _service.Create_User(user);
             return Json(myJson);
         }

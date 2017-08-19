@@ -51,6 +51,7 @@ class User_Edit_Show extends Component {
       self.setState({
         User: result.data
       });
+      
     }).catch((error) => {
       console.log(error)
     });
@@ -71,7 +72,12 @@ class User_Edit_Show extends Component {
         });
       });
 
-      this.setState({ RoleList: a });
+      this.setState({ 
+        RoleList: a,
+        User: {
+          roleId: result.data[0].id
+        },
+       });
     }).catch((error) => {
       console.log(error)
     });

@@ -15,12 +15,14 @@ namespace DotNetCore_React.Application.UserApp
     public class UserAppService : IUserAppService
     {
         private readonly IUserRepository _repository_user;
+        private readonly IRoleRepository _repository_role;
         private readonly IComSystemRepository _repository_comSystem;
         private readonly IMailServices _mailServices;
 
-        public UserAppService(IUserRepository repository_usr, IComSystemRepository repository_comSystem,IMailServices mailServices)
+        public UserAppService(IUserRepository repository_usr, IComSystemRepository repository_comSystem, IRoleRepository repository_role, IMailServices mailServices)
         {
             _repository_user = repository_usr;
+            _repository_role = repository_role;
             _repository_comSystem = repository_comSystem;
             _mailServices = mailServices;
         }
@@ -63,7 +65,6 @@ namespace DotNetCore_React.Application.UserApp
                 CreateDate = dateTime,
                 CreateUser = user.CreateUser,
                 UpdateDate = dateTime,
-                UpdateUser = user.RoleId,
                 FailedCount = 0,
                 ChangedPassword = false,
                 PasswordHash = Guid.NewGuid().ToString(),
@@ -97,8 +98,15 @@ namespace DotNetCore_React.Application.UserApp
 
         public List<UserDto> GetAllList()
         {
-            var a = _repository_user.GetAllList();
-            return Mapper.Map<List<UserDto>>(a);
+            var roleList = _repository_role.GetAllList();
+            var userList = _repository_user.GetAllList();
+            var userDtoList = Mapper.Map<List<UserDto>>(userList);
+            foreach (var item in userDtoList)
+            {
+                item.RoleId_Chinese = roleList.Where(c => c.Id.ToString() == item.RoleId).Select(c => c.Name).FirstOrDefault();
+            }
+
+            return userDtoList;
         }
 
         public UserDto GetUser(string id)

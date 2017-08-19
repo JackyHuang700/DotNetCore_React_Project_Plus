@@ -10,6 +10,9 @@ namespace DotNetCore_React.Application.UserApp.Dtos
         public string UserName { get; set; }
 
         public string RoleId { get; set; }
+
+        public string RoleId_Chinese { get; set; }
+
         public string Password { get; set; }
 
         public string FirstName { get; set; }
