@@ -164,16 +164,16 @@ News_View.defaultProps = {
 
     /* */
     display_name: true,
-    display_listImage: true,
+    display_listImage: false,
     display_title: true,
-    display_category: true,
+    display_category: false,
     display_priority: true,
     display_startDate: true,
     display_endDate: true,
     display_status: true,
     display_createDate: true,
-    display_createUser: true,
-    display_updateDate: true,
-    display_updateUser: true,
+    display_createUser: false,
+    display_updateDate: false,
+    display_updateUser: false,
 
 };
