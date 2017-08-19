@@ -164,9 +164,9 @@ Role_View.defaultProps = {
     display_Priority: true,
     display_Status: true,
     display_CreateDate: true,
-    display_CreateUser: true,
-    display_UpdateDate: true,
-    display_UpdateUser: true,
+    display_CreateUser: false,
+    display_UpdateDate: false,
+    display_UpdateUser: false,
 };
 
 
