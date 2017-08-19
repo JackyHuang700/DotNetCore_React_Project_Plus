@@ -9,7 +9,7 @@ import history from '../../../history'
 
 import { role_Enum } from '../../../EnumScript/GeneralEnumScript.js';
 
-import '../../../css/test.scss';
+import '../../../css/View_General.scss';
 
 class Role_View extends Component {
 

@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom'
 
+
+var sidebar_Style = {
+  'background': "rgba(61, 142, 247, 1)",
+};
+
 class Sidebar extends Component {
 
   constructor(props) {
@@ -29,7 +34,7 @@ class Sidebar extends Component {
     if (this.props.isLogin) {
       renderList = renderList.concat([
         <li key='1' className="nav-item">
-          <NavLink to={'/dashboard'} className="nav-link" activeClassName="active"><i className="icon-speedometer"></i> Dashboard</NavLink>
+          <NavLink to={'/dashboard'} className="nav-link" activeClassName="active" style={sidebar_Style}><i className="icon-speedometer"></i> Dashboard</NavLink>
         </li>,
         <li key='2' className="nav-title">模組</li>,
         <li key='3' className="nav-item nav-dropdown">
@@ -60,7 +65,7 @@ class Sidebar extends Component {
 
   render() {
     return (
-      <div className="sidebar">
+      <div className="sidebar" style={sidebar_Style}>
         <nav className="sidebar-nav">
           <ul className="nav">
             {this.SwitchController()}
