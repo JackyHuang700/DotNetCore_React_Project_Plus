@@ -136,17 +136,17 @@ export default class News_View extends Component {
                         pagination                 
                         search
                         exportCSV>
-            {this.props.display_listImage ? <TableHeaderColumn dataField='listImage'>listImage</TableHeaderColumn> : null}
-            {this.props.display_title ? <TableHeaderColumn dataField='title'>title</TableHeaderColumn> : null}
-            {this.props.display_category ? <TableHeaderColumn dataField='category'>category</TableHeaderColumn> : null}
-            {this.props.display_priority ? <TableHeaderColumn dataField='priority'>priority</TableHeaderColumn> : null}
-            {this.props.display_startDate ? <TableHeaderColumn dataField='startDate'>startDate</TableHeaderColumn> : null}
-            {this.props.display_endDate ? <TableHeaderColumn dataField='endDate'>endDate</TableHeaderColumn> : null}
-            {this.props.display_status ? <TableHeaderColumn dataField='status' dataFormat={this.Formatter_Status}>status</TableHeaderColumn> : null}
-            {this.props.display_createDate ? <TableHeaderColumn dataField='createDate'>createDate</TableHeaderColumn> : null}
-            {this.props.display_createUser ? <TableHeaderColumn dataField='createUser'>createUser</TableHeaderColumn> : null}
-            {this.props.display_updateDate ? <TableHeaderColumn dataField='updateDate'>updateDate</TableHeaderColumn> : null}
-            {this.props.display_updateUser ? <TableHeaderColumn dataField='updateUser'>updateUser</TableHeaderColumn> : null}
+            {this.props.display_listImage ? <TableHeaderColumn dataField='listImage'>列表圖片</TableHeaderColumn> : null}
+            {this.props.display_title ? <TableHeaderColumn dataField='title'>標題</TableHeaderColumn> : null}
+            {this.props.display_category ? <TableHeaderColumn dataField='category'>類別</TableHeaderColumn> : null}
+            {this.props.display_priority ? <TableHeaderColumn dataField='priority'>列表排序</TableHeaderColumn> : null}
+            {this.props.display_startDate ? <TableHeaderColumn dataField='startDate'>上架時間</TableHeaderColumn> : null}
+            {this.props.display_endDate ? <TableHeaderColumn dataField='endDate'>下架時間</TableHeaderColumn> : null}
+            {this.props.display_status ? <TableHeaderColumn dataField='status' dataFormat={this.Formatter_Status}>狀態</TableHeaderColumn> : null}
+            {this.props.display_createDate ? <TableHeaderColumn dataField='createDate'>建立時間</TableHeaderColumn> : null}
+            {this.props.display_createUser ? <TableHeaderColumn dataField='createUser'>建立帳號</TableHeaderColumn> : null}
+            {this.props.display_updateDate ? <TableHeaderColumn dataField='updateDate'>更新時間</TableHeaderColumn> : null}
+            {this.props.display_updateUser ? <TableHeaderColumn dataField='updateUser'>更新帳號</TableHeaderColumn> : null}
             <TableHeaderColumn isKey dataField="button" dataFormat={this.buttonFormatter}></TableHeaderColumn>
         </BootstrapTable>
                         </div>
