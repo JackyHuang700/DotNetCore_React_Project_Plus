@@ -44,7 +44,7 @@ class Role_View extends Component {
             <ButtonGroup className='' sizeClass='btn-group-md'>
                 {this.props.dispaly_button_create &&
                     <Button color="primary" onClick={this.OnClick_Create}>建立</Button>}
-                   {'\u00A0'}
+                {'\u00A0'}
                 {props.exportCSVBtn}
             </ButtonGroup>
         );
@@ -127,6 +127,7 @@ class Role_View extends Component {
                             <BootstrapTable data={this.state.RoleList}
                                 selectRow={selectRow}
                                 options={options}
+                                version="4"
                                 striped
                                 hover
                                 pagination

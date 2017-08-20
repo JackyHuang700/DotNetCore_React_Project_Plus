@@ -52,12 +52,12 @@ class User_Create extends Component {
 
 
 
-      this.setState({ 
+      this.setState({
         RoleList: a,
         User: {
           roleId: result.data[0].id
         },
-       });
+      });
     }).catch((error) => {
       console.log(error)
     });
