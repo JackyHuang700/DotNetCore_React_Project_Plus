@@ -334,7 +334,7 @@ User_Edit_Show.defaultProps = {
   display_status     : true,
 
   required_userName: true,
-  required_password: true,
+  required_password: false,
   required_roleId: true,
   required_email: true,
   required_firstName: false,

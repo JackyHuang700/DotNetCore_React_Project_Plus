@@ -155,6 +155,7 @@ class Role_Create extends Component {
 
                   <ButtonToolbar>
                     <Button color="primary" id="btn" disabled={$invalid ? 'disabled' : false}>確認</Button>
+                    {'\u00A0'}
                     <Button color="primary" onClick={this.Next_Button.bind(this)} disabled={$invalid ? 'disabled' : false}>繼續新增下一筆</Button>
                   </ButtonToolbar>
 

@@ -119,6 +119,12 @@ export default class News_View extends Component {
             selected: this.state.selected
         };
 
+        const StatusType = {
+            0 : news_Enum.STOP.name,
+            1 : news_Enum.NORMAL.name
+        };
+
+
         return (
             <div className="col-xs-12">
 
@@ -138,16 +144,16 @@ export default class News_View extends Component {
                                 search
                                 exportCSV>
                                 {this.props.display_listImage ? <TableHeaderColumn dataField='listImage'>列表圖片</TableHeaderColumn> : null}
-                                {this.props.display_title ? <TableHeaderColumn dataField='title'>標題</TableHeaderColumn> : null}
-                                {this.props.display_category ? <TableHeaderColumn dataField='category'>類別</TableHeaderColumn> : null}
-                                {this.props.display_priority ? <TableHeaderColumn dataField='priority'>列表排序</TableHeaderColumn> : null}
-                                {this.props.display_startDate ? <TableHeaderColumn dataField='startDate'>上架時間</TableHeaderColumn> : null}
-                                {this.props.display_endDate ? <TableHeaderColumn dataField='endDate'>下架時間</TableHeaderColumn> : null}
-                                {this.props.display_status ? <TableHeaderColumn dataField='status' dataFormat={this.Formatter_Status}>狀態</TableHeaderColumn> : null}
-                                {this.props.display_createDate ? <TableHeaderColumn dataField='createDate'>建立時間</TableHeaderColumn> : null}
-                                {this.props.display_createUser ? <TableHeaderColumn dataField='createUser'>建立帳號</TableHeaderColumn> : null}
-                                {this.props.display_updateDate ? <TableHeaderColumn dataField='updateDate'>更新時間</TableHeaderColumn> : null}
-                                {this.props.display_updateUser ? <TableHeaderColumn dataField='updateUser'>更新帳號</TableHeaderColumn> : null}
+                                {this.props.display_title ? <TableHeaderColumn dataField='title' dataSort={true} filter={ { type: 'TextFilter', delay: 1000 } }>標題</TableHeaderColumn> : null}
+                                {this.props.display_category ? <TableHeaderColumn dataField='category' dataSort={true} filter={ { type: 'TextFilter', delay: 1000 } }>類別</TableHeaderColumn> : null}
+                                {this.props.display_priority ? <TableHeaderColumn dataField='priority' dataSort={true}>列表排序</TableHeaderColumn> : null}
+                                {this.props.display_startDate ? <TableHeaderColumn dataField='startDate' dataSort={true}>上架時間</TableHeaderColumn> : null}
+                                {this.props.display_endDate ? <TableHeaderColumn dataField='endDate' dataSort={true}>下架時間</TableHeaderColumn> : null}
+                                {this.props.display_status ? <TableHeaderColumn dataField='status' dataSort={true} dataFormat={this.Formatter_Status} filter={ { type: 'SelectFilter', options: StatusType } }>狀態</TableHeaderColumn> : null}
+                                {this.props.display_createDate ? <TableHeaderColumn dataField='createDate' dataSort={true}>建立時間</TableHeaderColumn> : null}
+                                {this.props.display_createUser ? <TableHeaderColumn dataField='createUser' dataSort={true} filter={ { type: 'TextFilter', delay: 1000 } }>建立帳號</TableHeaderColumn> : null}
+                                {this.props.display_updateDate ? <TableHeaderColumn dataField='updateDate' dataSort={true}>更新時間</TableHeaderColumn> : null}
+                                {this.props.display_updateUser ? <TableHeaderColumn dataField='updateUser' dataSort={true} filter={ { type: 'TextFilter', delay: 1000 } }>更新帳號</TableHeaderColumn> : null}
                                 <TableHeaderColumn isKey dataField="button" dataFormat={this.buttonFormatter}></TableHeaderColumn>
                             </BootstrapTable>
                         </div>
