@@ -6,7 +6,6 @@ import { AppContainer } from 'react-hot-loader'
 import history from './history'
 import routes from './routes'
 import '../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
-import './css/General.scss';
 
 // Views
 const renderApp = appRoutes => {

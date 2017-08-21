@@ -1,1 +1,97 @@
 // Here you can add other styles
+// $baseColor: #398B93;
+$baseColor: #2496e2;
+$table_hover_color: rgba(36, 150, 226, .3);
+$borderRadius: 10px;
+$imageBig: 100px;
+$imageSmall: 60px;
+$padding: 10px;
+.header {
+    background-color: $table_hover_color;
+    // background-color: darken($baseColor, 80%);
+    color: white;
+    font-size: 1.5em;
+    padding: 1rem;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.table-users {
+    // border: 1px solid darken($baseColor, 80%);
+    border-radius: $borderRadius;
+    box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
+    max-width: calc(100% - 2em);
+    margin: 1em auto;
+    overflow: hidden;
+    // width: 800px;
+}
+
+@media screen and (max-width: 700px) {}
+
+@media screen and (max-width: 500px) {
+    .header {
+        background-color: transparent;
+        color: lighten($baseColor, 60%);
+        font-size: 2em;
+        font-weight: 700;
+        padding: 0;
+        text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+    }
+    .table-users {
+        border: none;
+        box-shadow: none;
+        overflow: visible;
+    }
+}
+
+//table hover
+.table-hover tbody tr:hover {
+    background-color: $table_hover_color;
+}
+
+body {
+    background-color: #FFF;
+}
+
+.sidebar .nav .nav-item .nav-link.active,
+.sidebar .nav .nav-item .navbar .active.dropdown-toggle,
+.navbar .sidebar .nav .nav-item .active.dropdown-toggle {
+    color: black;
+}
+
+.sidebar .nav .nav-item .nav-link {
+    color: black;
+}
+
+.sidebar .nav .nav-item.nav-dropdown.open .nav-link {
+    color: black;
+}
+
+.sidebar .nav .nav-item .nav-link.active {
+    background-color: rgba(67, 142, 185, .7);
+}
+
+.sidebar .nav .nav-item.nav-dropdown.open {
+    background-color: transparent;
+}
+
+.navbar.navbar {
+    background-color: #438EB9;
+}
+
+.navbar-brand.navbar-brand.navbar-brand {
+    background-color: #438EB9;
+}
+
+.sidebar {
+    background: #F8F8F8,
+}
+
+.nav-link {
+    background: #F8F8F8;
+}
+
+.nav-title.nav-title.nav-title {
+    color: black;
+    background: #e4e5e6;
+}

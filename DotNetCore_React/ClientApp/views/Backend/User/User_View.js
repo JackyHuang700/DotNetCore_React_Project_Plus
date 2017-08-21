@@ -4,7 +4,6 @@ import { BootstrapTable, TableHeaderColumn, ButtonGroup } from 'react-bootstrap-
 import axios from 'axios';
 import history from '../../../history'
 import { user_Enum } from '../../../EnumScript/GeneralEnumScript.js';
-import '../../../css/View_General.scss';
 
 class User_View extends Component {
 
