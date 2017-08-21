@@ -12,6 +12,7 @@ using DotNetCore_React.Application.News_LanApp.Dtos;
 using DotNetCore_React.Application.Sys_LanguageApp.Dtos;
 
 using DotNetCore_React.Domain.Entities;
+using DotNetCore_React.Application.Product_CategoryApp.Dtos;
 
 namespace DotNetCore_React.Application
 {
@@ -39,11 +40,23 @@ namespace DotNetCore_React.Application
                 .ForMember(opt => opt.Id , dest => dest.Ignore())
                 .ForMember(opt => opt.CreateDate , dest => dest.Ignore())
                 .ForMember(opt => opt.CreateUser , dest => dest.Ignore());
-
                 cfg.CreateMap<News_Lan, News_LanDto>();
                 cfg.CreateMap<News_LanDto, News_Lan>()
                 .ForMember(opt => opt.Id, dest => dest.Ignore())
                 .ForMember(opt => opt.NewsId, dest => dest.Ignore());
+
+
+
+                cfg.CreateMap<Product_Category, Product_CategoryDto>();
+                cfg.CreateMap<Product_CategoryDto, Product_Category>()
+                .ForMember(opt => opt.Id, dest => dest.Ignore())
+                .ForMember(opt => opt.CreateDate, dest => dest.Ignore())
+                .ForMember(opt => opt.CreateUser, dest => dest.Ignore());
+                cfg.CreateMap<Product_Category_Lan, Product_Category_LanDto>();
+                cfg.CreateMap<Product_Category_LanDto, Product_Category_Lan>()
+                .ForMember(opt => opt.Id, dest => dest.Ignore())
+                .ForMember(opt => opt.LanguageId, dest => dest.Ignore());
+
 
                 cfg.CreateMap<Sys_Language, Sys_LanguageDto>();
                 cfg.CreateMap<Sys_LanguageDto, Sys_Language>();
