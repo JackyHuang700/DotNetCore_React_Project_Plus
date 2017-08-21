@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using DotNetCore_React.Application.NewsApp.Dtos;
+using Microsoft.AspNetCore.Http;
 
 namespace DotNetCore_React.Application.NewsApp
 {
@@ -19,5 +20,7 @@ namespace DotNetCore_React.Application.NewsApp
         Dictionary<string, object> Create(NewsDto News);
 
         Dictionary<string, object> Delete(string id);
+
+        Dictionary<string, object> Upload_Pic(List<IFormFile> files);
     } 
 }

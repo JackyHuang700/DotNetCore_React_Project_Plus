@@ -7,6 +7,7 @@ using DotNetCore_React.Domain.Entities;
 using DotNetCore_React.Application.News_LanApp;
 using DotNetCore_React.Application.News_LanApp.Dtos;
 using System.Linq;
+using Microsoft.AspNetCore.Http;
 
 namespace DotNetCore_React.Application.NewsApp
 {
@@ -169,6 +170,17 @@ namespace DotNetCore_React.Application.NewsApp
             var success_effect = news_lan_effect && news_effect;
             myJson["success"] = success_effect;
             myJson["message"] = success_effect ? "刪除成功" : "刪除失敗";
+
+            return myJson;
+        }
+
+        public Dictionary<string, object> Upload_Pic(List<IFormFile> files)
+        {
+            var myJson = new Dictionary<string, object>()
+            {
+                {"success",false },
+                {"message",null  }
+            };
 
             return myJson;
         }
