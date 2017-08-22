@@ -28,6 +28,7 @@ using DotNetCore_React.Utility;
 using DotNetCore_React.Application.Product_CategoryApp;
 using DotNetCore_React.Application.ProductApp;
 using DotNetCore_React.Application.LocationApp;
+using DotNetCore_React.Application.ContactUsApp;
 
 namespace DotNetCore_React
 {
@@ -80,10 +81,9 @@ namespace DotNetCore_React
             services.AddScoped<IProduct_ImageRepository, Product_ImageRepository>();
             services.AddScoped<IProductAppService, ProductAppService>();
 
-            services.AddScoped<ILocationRepository, LocationRepository>();
-            services.AddScoped<ILocation_LanRepository, Location_LanRepository>();
-            services.AddScoped<ILocation_ImageRepository, Location_ImageRepository>();
-            services.AddScoped<ILocationAppService, LocationAppService>();
+            services.AddScoped<IContactUsRepository, ContactUsRepository>();
+            services.AddScoped<IAboutUs_CategoryRepository, AboutUs_CategoryRepository>();
+            services.AddScoped<IContactUsAppService, ContactUsAppService>();
 
 
             services.AddScoped<ISys_LanguageRepository, Sys_LanguageRepository>();
