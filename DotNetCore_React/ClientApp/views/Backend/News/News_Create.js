@@ -179,9 +179,15 @@ class News_Create extends Component {
 //
 const options = {
   baseUrl: '/api/News/Upload_Pic',
-  query: {
-    warrior: 'fight'
+  query: (files)=>{
+    const l = files.length;
+    const queryObj = {};
+    for(let i = l-1; i >= 0; --i) {
+      queryObj[i] = files[i].name;
+    }
+    return queryObj;
   }
+ 
 }
 
 
