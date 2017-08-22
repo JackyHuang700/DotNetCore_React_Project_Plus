@@ -8923,7 +8923,7 @@ hr.transparent {
     border-right-color: #4dbd74; }
 
 .header {
-  background-color: rgba(36, 150, 226, 0.3);
+  background-color: #438EB9;
   color: white;
   font-size: 1.5em;
   padding: 1rem;
@@ -8951,7 +8951,7 @@ hr.transparent {
     overflow: visible; } }
 
 .table-hover tbody tr:hover {
-  background-color: rgba(36, 150, 226, 0.3); }
+  background-color: #438EB9; }
 
 body {
   background-color: #FFF; }
@@ -8968,7 +8968,7 @@ body {
   color: black; }
 
 .sidebar .nav .nav-item .nav-link.active, .sidebar .nav .nav-item .navbar .active.dropdown-toggle, .navbar .sidebar .nav .nav-item .active.dropdown-toggle {
-  background-color: rgba(67, 142, 185, 0.7); }
+  background-color: #97d2f5; }
 
 .sidebar .nav .nav-item.nav-dropdown.open {
   background-color: transparent; }
