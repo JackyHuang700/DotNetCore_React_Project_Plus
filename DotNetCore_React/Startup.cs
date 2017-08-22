@@ -29,6 +29,7 @@ using DotNetCore_React.Application.Product_CategoryApp;
 using DotNetCore_React.Application.ProductApp;
 using DotNetCore_React.Application.LocationApp;
 using DotNetCore_React.Application.ContactUsApp;
+using DotNetCore_React.Application.AboutUsApp;
 
 namespace DotNetCore_React
 {
@@ -82,9 +83,14 @@ namespace DotNetCore_React
             services.AddScoped<IProductAppService, ProductAppService>();
 
             services.AddScoped<IContactUsRepository, ContactUsRepository>();
-            services.AddScoped<IAboutUs_CategoryRepository, AboutUs_CategoryRepository>();
+            services.AddScoped<IContactUs_CategoryRepository, ContactUs_CategoryRepository>();
             services.AddScoped<IContactUsAppService, ContactUsAppService>();
 
+
+            services.AddScoped<IAboutUsRepository, AboutUsRepository>();
+            services.AddScoped<IAboutUs_LanRepository, AboutUs_LanRepository>();
+            services.AddScoped<IAboutUs_CategoryRepository, AboutUs_CategoryRepository>();
+            services.AddScoped<IAboutUsAppService, AboutUsAppService>();
 
             services.AddScoped<ISys_LanguageRepository, Sys_LanguageRepository>();
             services.AddScoped<ISys_LanguageAppService, Sys_LanguageAppService>();

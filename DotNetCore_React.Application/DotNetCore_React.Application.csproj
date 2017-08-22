@@ -21,6 +21,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="AboutUsApp\Dto\" />
+    <Folder Include="LocationApp\Dto\" />
     <Folder Include="NewsApp\Dtos\" />
     <Folder Include="News_LanApp\Dtos\" />
     <Folder Include="ProductApp\Dto\" />
