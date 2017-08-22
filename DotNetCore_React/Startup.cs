@@ -25,6 +25,7 @@ using DotNetCore_React.Application.News_LanApp;
 using DotNetCore_React.Application.Sys_LanguageApp;
 using DotNetCore_React.Utility.Services;
 using DotNetCore_React.Utility;
+using DotNetCore_React.Application.Product_CategoryApp;
 
 namespace DotNetCore_React
 {
@@ -67,6 +68,10 @@ namespace DotNetCore_React
             services.AddScoped<INewsAppService, NewsAppService>();
             services.AddScoped<INews_LanRepository, News_LanRepository>();
             services.AddScoped<INews_LanAppService, News_LanAppService>();
+
+            services.AddScoped<IProduct_CategoryRepository, Product_CategoryRepository>();
+            services.AddScoped<IProduct_CategoryService, Product_CategoryService>();
+
             services.AddScoped<ISys_LanguageRepository, Sys_LanguageRepository>();
             services.AddScoped<ISys_LanguageAppService, Sys_LanguageAppService>();
 
@@ -117,14 +122,6 @@ namespace DotNetCore_React
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
-
-
-
-         //       config.Routes.MapHttpRoute(
-         //    name: "DefaultApi",
-         //    routeTemplate: "api/{controller}/{id}",
-         //    defaults: new { id = RouteParameter.Optional }
-         //);
 
                 routes.MapSpaFallbackRoute(
                     name: "spa-fallback",
