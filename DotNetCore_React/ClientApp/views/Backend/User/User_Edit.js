@@ -3,7 +3,7 @@ import { Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } fr
 
 import axios from 'axios';
 import EasyForm, { Field, FieldGroup } from 'react-easyform';
-import {email_pattern} from './User_General';
+import { email_pattern } from './User_General';
 import { user_Enum } from '../../../EnumScript/GeneralEnumScript.js';
 import history from '../../../history'
 
@@ -51,7 +51,7 @@ class User_Edit_Show extends Component {
       self.setState({
         User: result.data
       });
-      
+
     }).catch((error) => {
       console.log(error)
     });
@@ -72,12 +72,12 @@ class User_Edit_Show extends Component {
         });
       });
 
-      this.setState({ 
+      this.setState({
         RoleList: a,
         User: {
           roleId: result.data[0].id
         },
-       });
+      });
     }).catch((error) => {
       console.log(error)
     });
@@ -173,140 +173,143 @@ class User_Edit_Show extends Component {
               {this.Title()}
             </div>
             <div className="card-block">
-            <form className="" onSubmit={this.Button_Submit}>
+              <form className="" onSubmit={this.Button_Submit}>
 
-            <table className="table table-striped table-bordered">
+                <table className="table table-striped table-bordered">
                   <tbody>
-                  <TextInput name="userName"
-                  labelName="系統帳號"
-                  className=""
-                  display={this.props.display_userName}
-                  required={this.props.required_userName}
-                  validMessage={{ required: '系統帳號 is reduired.' }}
-                  onInput={this.Bind_handleInputChange}
-                  value={this.state.User.userName}
-                  placeholder="userName"
-                  readOnly={true} />
+
+                  <input type="hidden" id="id" name="id" value={this.state.User.id} />
+
+                    <TextInput name="userName"
+                      labelName="系統帳號"
+                      className=""
+                      display={this.props.display_userName}
+                      required={this.props.required_userName}
+                      validMessage={{ required: '系統帳號 is reduired.' }}
+                      onInput={this.Bind_handleInputChange}
+                      value={this.state.User.userName}
+                      placeholder="userName"
+                      readOnly={true} />
 
 
-                  <TextInput name="password"
-                  labelName="密碼"
-                  className=""
-                  display={this.props.display_password}
-                  required={this.props.required_password}
-                  validMessage={{ required: '密碼 is reduired.' }}
-                  onInput={this.Bind_handleInputChange}
-                  value={this.state.User.password}
-                  placeholder="如需變更密碼"
-                  readOnly={!this.state.is_Edit} />
+                    <TextInput name="password"
+                      labelName="密碼"
+                      className=""
+                      display={this.props.display_password}
+                      required={this.props.required_password}
+                      validMessage={{ required: '密碼 is reduired.' }}
+                      onInput={this.Bind_handleInputChange}
+                      value={this.state.User.password}
+                      placeholder="如需變更密碼"
+                      readOnly={!this.state.is_Edit} />
 
-                <TextInput name="email"
-                  labelName="email"
-                  className=""
-                  display={this.props.display_email}
-                  pattern={email_pattern}
-                  required={this.props.required_email}
-                  validMessage={{ required: 'email is reduired.', pattern: 'email格式錯誤' }}
-                  onInput={this.Bind_handleInputChange}
-                  value={this.state.User.email}
-                  placeholder="email"
-                  readOnly={!this.state.is_Edit} />
+                    <TextInput name="email"
+                      labelName="email"
+                      className=""
+                      display={this.props.display_email}
+                      pattern={email_pattern}
+                      required={this.props.required_email}
+                      validMessage={{ required: 'email is reduired.', pattern: 'email格式錯誤' }}
+                      onInput={this.Bind_handleInputChange}
+                      value={this.state.User.email}
+                      placeholder="email"
+                      readOnly={!this.state.is_Edit} />
 
 
-                <DropDownList name="roleId"
-                  labelName="群組名稱"
-                  display={this.props.display_roleId}
-                  required={this.props.required_roleId}
-                  validMessage={{ required: '群組名稱 is reduired.' }}
-                  onInput={this.Bind_handleInputChange}
-                  value={this.state.User.roleId}
-                  readOnly={!this.state.is_Edit}
-                  options={this.state.RoleList}
-                />
+                    <DropDownList name="roleId"
+                      labelName="群組名稱"
+                      display={this.props.display_roleId}
+                      required={this.props.required_roleId}
+                      validMessage={{ required: '群組名稱 is reduired.' }}
+                      onInput={this.Bind_handleInputChange}
+                      value={this.state.User.roleId}
+                      readOnly={!this.state.is_Edit}
+                      options={this.state.RoleList}
+                    />
 
-                <TextInput name="firstName"
-                  labelName="姓"
-                  className=""
-                  display={this.props.display_firstName}
-                  required={this.props.required_firstName}
-                  validMessage={{ required: '姓 is reduired.' }}
-                  onInput={this.Bind_handleInputChange}
-                  value={this.state.User.firstName}
-                  placeholder="firstName"
-                  readOnly={!this.state.is_Edit} />
+                    <TextInput name="firstName"
+                      labelName="姓"
+                      className=""
+                      display={this.props.display_firstName}
+                      required={this.props.required_firstName}
+                      validMessage={{ required: '姓 is reduired.' }}
+                      onInput={this.Bind_handleInputChange}
+                      value={this.state.User.firstName}
+                      placeholder="firstName"
+                      readOnly={!this.state.is_Edit} />
 
-                <TextInput name="lastName"
-                  labelName="名"
-                  className=""
-                  display={this.props.display_lastName}
-                  required={this.props.required_lastName}
-                  validMessage={{ required: '名 is reduired.' }}
-                  onInput={this.Bind_handleInputChange}
-                  value={this.state.User.lastName}
-                  placeholder="lastName"
-                  readOnly={!this.state.is_Edit} />
+                    <TextInput name="lastName"
+                      labelName="名"
+                      className=""
+                      display={this.props.display_lastName}
+                      required={this.props.required_lastName}
+                      validMessage={{ required: '名 is reduired.' }}
+                      onInput={this.Bind_handleInputChange}
+                      value={this.state.User.lastName}
+                      placeholder="lastName"
+                      readOnly={!this.state.is_Edit} />
 
-                <DropDownList name="status"
-                  labelName="狀態"
-                  display={this.props.display_status}
-                  required={this.props.required_status}
-                  validMessage={{ required: '狀態 is reduired.' }}
-                  onInput={this.Bind_handleInputChange}
-                  value={this.state.User.status}
-                  readOnly={!this.state.is_Edit}
-                  options={
-                    [
-                      {
-                        name: user_Enum.STOP.name,
-                        value: user_Enum.STOP.value
-                      },
-                      {
-                        name: user_Enum.NORMAL.name,
-                        value: user_Enum.NORMAL.value
-                      },
-                      {
-                        name: user_Enum.EMAIL_NO_VAILD.name,
-                        value: user_Enum.EMAIL_NO_VAILD.value
-                      },
-                      {
-                        name: user_Enum.FIRST_PASSWORD_UNCHANGE.name,
-                        value: user_Enum.FIRST_PASSWORD_UNCHANGE.value
-                      },
-                      {
-                        name: user_Enum.ERROR_COUNT.name,
-                        value: user_Enum.ERROR_COUNT.value
-                      }
-                    ]}
-                />
+                    <DropDownList name="status"
+                      labelName="狀態"
+                      display={this.props.display_status}
+                      required={this.props.required_status}
+                      validMessage={{ required: '狀態 is reduired.' }}
+                      onInput={this.Bind_handleInputChange}
+                      value={this.state.User.status}
+                      readOnly={!this.state.is_Edit}
+                      options={
+                        [
+                          {
+                            name: user_Enum.STOP.name,
+                            value: user_Enum.STOP.value
+                          },
+                          {
+                            name: user_Enum.NORMAL.name,
+                            value: user_Enum.NORMAL.value
+                          },
+                          {
+                            name: user_Enum.EMAIL_NO_VAILD.name,
+                            value: user_Enum.EMAIL_NO_VAILD.value
+                          },
+                          {
+                            name: user_Enum.FIRST_PASSWORD_UNCHANGE.name,
+                            value: user_Enum.FIRST_PASSWORD_UNCHANGE.value
+                          },
+                          {
+                            name: user_Enum.ERROR_COUNT.name,
+                            value: user_Enum.ERROR_COUNT.value
+                          }
+                        ]}
+                    />
 
-                
-                <TextInput name="createDate"
-                  labelName="建立時間"
-                  className=""
-                  display={this.props.display_createDate}
-                  required={this.props.required_createDate}
-                  validMessage={{ required: '建立時間 is reduired.' }}
-                  onInput={this.Bind_handleInputChange}
-                  value={this.state.User.createDate}
-                  placeholder="createDate"
-                  readOnly={true} />
 
-                  <TextInput name="createUser"
-                  labelName="建立帳號"
-                  className=""
-                  display={this.props.display_createUser}
-                  required={this.props.required_createUser}
-                  validMessage={{ required: '建立帳號 is reduired.' }}
-                  onInput={this.Bind_handleInputChange}
-                  value={this.state.User.createUser}
-                  placeholder="createUser"
-                  readOnly={true} />
+                    <TextInput name="createDate"
+                      labelName="建立時間"
+                      className=""
+                      display={this.props.display_createDate}
+                      required={this.props.required_createDate}
+                      validMessage={{ required: '建立時間 is reduired.' }}
+                      onInput={this.Bind_handleInputChange}
+                      value={this.state.User.createDate}
+                      placeholder="createDate"
+                      readOnly={true} />
+
+                    <TextInput name="createUser"
+                      labelName="建立帳號"
+                      className=""
+                      display={this.props.display_createUser}
+                      required={this.props.required_createUser}
+                      validMessage={{ required: '建立帳號 is reduired.' }}
+                      onInput={this.Bind_handleInputChange}
+                      value={this.state.User.createUser}
+                      placeholder="createUser"
+                      readOnly={true} />
 
                   </tbody>
 
                 </table>
 
-             
+
 
                 <div className="form-group form-actions">
                   <Button color="primary" disabled={$invalid ? 'disabled' : false} >{this.Button_Text()}</Button>
@@ -331,7 +334,7 @@ User_Edit_Show.defaultProps = {
   display_email: true,
   display_firstName: false,
   display_lastName: false,
-  display_status     : true,
+  display_status: true,
 
   required_userName: true,
   required_password: true,
@@ -339,5 +342,5 @@ User_Edit_Show.defaultProps = {
   required_email: true,
   required_firstName: false,
   required_lastName: false,
-  required_status     : true,
+  required_status: true,
 }
