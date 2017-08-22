@@ -23,7 +23,7 @@ namespace DotNetCore_React.Controllers
 
         [HttpGet("[action]")]
 
-        public ActionResult Get_News(int id)
+        public ActionResult Get_Product_Category(int id)
         {
             var myJson = _service.GetSingle(id);
             return Json(myJson);
@@ -32,7 +32,7 @@ namespace DotNetCore_React.Controllers
 
         [HttpGet("[action]")]
 
-        public ActionResult News_View()
+        public ActionResult Product_Category_View()
         {
             var myJson = _service.GetAll();
             return Json(myJson);
