@@ -10,7 +10,7 @@ namespace DotNetCore_React.Application.LocationApp.Dtos
     public class Location_LanDto
     {
         public Guid Id { get; set; }
-
+        public Guid LocationId { get; set; }
         public int LanguageId { get; set; }
 
         public string Name { get; set; }

@@ -10,6 +10,8 @@ namespace DotNetCore_React.Application.ProductApp.Dtos
     public class Product_LanDto
     {
         public Guid Id { get; set; }
+        public Guid ProductId { get; set; }
+
         public Guid LanguageId { get; set; }
         public string Title { get; set; }
         public string SubTitle { get; set; }

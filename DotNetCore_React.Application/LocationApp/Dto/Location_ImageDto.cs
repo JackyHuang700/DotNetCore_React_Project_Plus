@@ -10,7 +10,8 @@ namespace DotNetCore_React.Application.LocationApp.Dtos
     public class Location_ImageDto
     {
         public Guid Id { get; set; }
-        public Guid ProductId { get; set; }
+        public Guid LocationId { get; set; }
+
         public string Image { get; set; }
         public string Description { get; set; }
     }
