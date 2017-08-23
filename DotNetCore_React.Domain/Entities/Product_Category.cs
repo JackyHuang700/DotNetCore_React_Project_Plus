@@ -9,7 +9,6 @@ namespace DotNetCore_React.Domain.Entities
     /// </summary>
     public class Product_Category : Entity_Int
     {
-        public int Id { get; set; }
         public int Priority { get; set; }
         public int Status { get; set; }
         public DateTime CreateDate { get; set; }

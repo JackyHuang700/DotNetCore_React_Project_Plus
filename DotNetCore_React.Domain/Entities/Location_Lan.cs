@@ -9,7 +9,6 @@ namespace DotNetCore_React.Domain.Entities
     /// </summary>
     public class Location_Lan : Entity
     {
-        public Guid Id { get; set; }
 
         public int LanguageId { get; set; }
 
