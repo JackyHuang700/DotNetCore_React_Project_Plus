@@ -9,6 +9,7 @@ namespace DotNetCore_React.Domain.Entities
     /// </summary>
     public class Product_Lan : Entity
     {
+        public Guid ProductId { get; set; }
         public Guid LanguageId { get; set; }
         public string Title { get; set; }
         public string SubTitle { get; set; }

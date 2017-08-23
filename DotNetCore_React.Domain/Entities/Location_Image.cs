@@ -9,7 +9,7 @@ namespace DotNetCore_React.Domain.Entities
     /// </summary>
     public class Location_Image : Entity
     {
-        public Guid ProductId { get; set; }
+        public Guid LocationId { get; set; }
         public string Image { get; set; }
         public string Description { get; set; }
         
