@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace DotNetCore_React.Controllers
 {
     /// <summary>
-    /// 角色
+    /// 
     /// </summary>
     [Route("api/[controller]")]
     public class Product_CategoryController : AuthorizedController
