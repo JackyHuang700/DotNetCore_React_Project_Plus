@@ -84,6 +84,14 @@ namespace DotNetCore_React.Application.AboutUsApp
             var a = _repository.GetAllList();
             var newsDtoList = Mapper.Map<List<AboutUsDto>>(a);
 
+            ////要撈子表
+            //foreach (var item in newsDtoList)
+            //{
+            //    //抓取附表
+            //    var new_lans_List = _repository_lan.GetAllList(c => c.AboutUsId == item.Id);
+            //    item.AboutUs_LanList = Mapper.Map<List<AboutUs_LanDto>>(new_lans_List);
+            //}
+
             return newsDtoList;
         }
 
@@ -96,12 +104,50 @@ namespace DotNetCore_React.Application.AboutUsApp
             var a = _repository.Get(guid);
             var newsDto = Mapper.Map<AboutUsDto>(a);
 
+
+            //抓取附表
+            var new_lans_List = _repository_lan.GetAllList(c => c.AboutUsId == newsDto.Id);
+            newsDto.AboutUs_LanList = Mapper.Map<List<AboutUs_LanDto>>(new_lans_List);
+
             return newsDto;
         }
 
         public Dictionary<string, object> Update(AboutUsDto News)
         {
-            throw new NotImplementedException();
+            var myJson = new Dictionary<string, object>()
+            {
+                {"success",false },
+                {"message",null  }
+            };
+
+            //更新主表
+
+
+            var newsDB = _repository.Get(News.Id);
+            newsDB = Mapper.Map<AboutUsDto, AboutUs>(News, newsDB);
+
+            newsDB.UpdateDate = DateTime.Now;
+            _repository.Update(newsDB);
+            var news_effect = _repository.Save() > 0;
+
+            //更新副表
+            foreach (var newsLanDTO in News.AboutUs_LanList)
+            {
+                var getLandata = _repository_lan.FirstOrDefault(o => o.AboutUsId == newsDB.Id
+                //&& o.LanguageId == newsLanDTO.LanguageId
+                );
+                getLandata = Mapper.Map<AboutUs_LanDto, AboutUs_Lan>(newsLanDTO, getLandata, opt => opt.AfterMap((dto, dest) => { dest.AboutUsId = newsDB.Id; }));
+                getLandata.AboutUsId = newsDB.Id;
+                _repository_lan.InsertOrUpdate(getLandata);
+            }
+
+            var news_lan_effect = _repository_lan.Save() == News.AboutUs_LanList.Count;
+
+            var success_effect = news_lan_effect && news_effect;
+            myJson["success"] = success_effect;
+            myJson["message"] = success_effect ? "更新成功" : "更新失敗";
+
+            return myJson;
         }
     }
 }
