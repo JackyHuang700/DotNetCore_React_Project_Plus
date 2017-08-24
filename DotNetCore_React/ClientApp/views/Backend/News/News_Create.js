@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import { ButtonToolbar, FormGroup, Label, Input, Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
 import axios from 'axios';
@@ -6,7 +7,7 @@ import EasyForm, { Field, FieldGroup } from 'react-easyform';
 import TextInput from '../../Components/Forms/TextInput';
 import DropDownList from '../../Components/Forms/DropDownList';
 import CKEditor from '../../Components/Forms/CKEditor';
-import ReactUploadFile from 'react-upload-file';
+import Dropzone from 'react-dropzone';
 
 import { news_Enum } from '../../../EnumScript/GeneralEnumScript';
 import classnames from 'classnames';
@@ -28,8 +29,9 @@ class News_Create extends Component {
         new_LanList: [],
       },
       Sys_Language_List: [],
+      uploadedFile: [],
 
-      //�否繼�繼續�一�
+      //是否繼續為繼續下一筆
       next_Button: false,
       activeTab: '0',
     };
@@ -80,7 +82,7 @@ class News_Create extends Component {
     return false;
   }
 
-  //繼��下��
+  //繼續新增下一筆
   Next_Button(event) {
     this.setState({
       next_Button: true,
@@ -89,7 +91,7 @@ class News_Create extends Component {
     document.getElementById('btn').click();
   }
 
-  //語系�件
+  //語系元件
   Component_Nav() {
 
     return (
@@ -122,34 +124,34 @@ class News_Create extends Component {
                 <TabPane tabId={`${index}`}>
 
                   <TextInput name="title"
-                    labelName="標�"
+                    labelName="標題"
                     className=""
                     data-index={index}
                     display={this.props.display_title}
                     required={this.props.required_title}
-                    validMessage={{ required: '標� is reduired.' }}
+                    validMessage={{ required: '標題 is reduired.' }}
                     onInput={this.HandleInputChange_By_New_LanList}
                     value={this.state.News.new_LanList[`${index}`].title}
                     placeholder="title" />
 
                   <TextInput name="subTitle"
-                    labelName="���
+                    labelName="副標題"
                     className=""
                     data-index={index}
                     display={this.props.display_subTitle}
                     required={this.props.required_subTitle}
-                    validMessage={{ required: '���is reduired.' }}
+                    validMessage={{ required: '副標題 is reduired.' }}
                     onInput={this.HandleInputChange_By_New_LanList}
                     value={this.state.News.new_LanList[`${index}`].subTitle}
                     placeholder="subTitle" />
 
                   <CKEditor name="content"
-                    labelName="�容"
+                    labelName="內容"
                     className=""
                     data-index={index}
                     display={this.props.display_content}
                     required={this.props.required_content}
-                    validMessage={{ required: '�容 is reduired.' }}
+                    validMessage={{ required: '內容 is reduired.' }}
                     onInput={this.HandleInputChange_By_New_LanList_CKEditor}
                     value={this.state.News.new_LanList[`${index}`].content}
                     cols="100"
@@ -171,24 +173,38 @@ class News_Create extends Component {
 
   }
 
+  //上傳圖片
+  onImageDrop(files) {
+    this.setState({
+      uploadedFile: files
+    });
+
+
+    var formData = new FormData();
+    for (var i = 0; i < files.length; i++) {
+      formData.append('files', files[i]) //用迴圈抓出多少筆再append回來
+    }
+
+    axios.post('/api/News/Upload_Pic/', formData).then((response) => {
+
+      if (response.success) {
+        var newNews = Object.assign(this.state.News);
+        newNews.listImage = newNews.listImage;
+        this.setState({
+          News: newNews
+        });
+
+      }
+      console.log(response);
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
+
 
   render() {
     const { params } = this.props.params;
     const { $invalid } = this.props.easyform.$invalid;
-
-//
-const options = {
-  baseUrl: '/api/News/Upload_Pic',
-  query: (files)=>{
-    const l = files.length;
-    const queryObj = {};
-    for(let i = l-1; i >= 0; --i) {
-      queryObj[i] = files[i].name;
-    }
-    return queryObj;
-  }
- 
-}
 
 
     return (
@@ -196,25 +212,39 @@ const options = {
         <div className="col-xs-10">
           <div className="card">
             <div className="card-header">
-              建瀰�
-              </div>
+              建立最新消息
+               </div>
             <div className="card-block">
               <form className="" onSubmit={this.Submit}>
 
                 <table className="table table-striped table-bordered">
                   <tbody>
                     <TextInput name="listImage"
-                      labelName="�表��"
+                      labelName="列表圖片"
                       className=""
                       display={this.props.display_listImage}
                       required={this.props.required_listImage}
-                      validMessage={{ required: '�表�� is reduired.' }}
+                      validMessage={{ required: '列表圖片 is reduired.' }}
                       onInput={this.HandleInputChange}
                       value={this.state.News.listImage}
                       placeholder="listImage" />
-                      <ReactUploadFile options={options} chooseFileButton={<Button color="primary">primary</Button>} uploadFileButton={<Button color="primary">primary</Button>} />
 
 
+
+                    <Dropzone
+                      multiple={false}
+                      accept="image/*"
+                      onDrop={this.onImageDrop.bind(this)}>
+                      <p>Drop an image or click to select a file to upload.</p>
+                    </Dropzone>
+                    {/* <aside>
+                      <h2>Dropped files</h2>
+                      <ul>
+                        {
+                          this.state.uploadedFile.map(f => {<li key={f.name}>{f.name} - {f.size} bytes</li>})
+                        }
+                      </ul>
+                    </aside> */}
 
 
                     <TextInput name="category"
@@ -230,33 +260,33 @@ const options = {
 
 
                     <TextInput name="priority"
-                      labelName="�表��"
+                      labelName="列表排序"
                       className=""
                       display={this.props.display_priority}
                       required={this.props.required_priority}
-                      validMessage={{ required: '�表�� is reduired.' }}
+                      validMessage={{ required: '列表排序 is reduired.' }}
                       onInput={this.HandleInputChange}
                       value={this.state.News.priority}
                       placeholder="priority" />
 
 
                     <TextInput name="startDate"
-                      labelName="上架��"
+                      labelName="上架時間"
                       className=""
                       display={this.props.display_startDate}
                       required={this.props.required_startDate}
-                      validMessage={{ required: '上架�� is reduired.' }}
+                      validMessage={{ required: '上架時間 is reduired.' }}
                       onInput={this.HandleInputChange}
                       value={this.state.News.startDate}
                       placeholder="startDate" />
 
 
                     <TextInput name="endDate"
-                      labelName="下架��"
+                      labelName="下架時間"
                       className=""
                       display={this.props.display_endDate}
                       required={this.props.required_endDate}
-                      validMessage={{ required: '下架�� is reduired.' }}
+                      validMessage={{ required: '下架時間 is reduired.' }}
                       onInput={this.HandleInputChange}
                       value={this.state.News.endDate}
                       placeholder="endDate" />
@@ -288,9 +318,8 @@ const options = {
 
                 <div className="form-group form-actions">
                   <ButtonToolbar>
-                    <Button color="primary" id="btn" disabled={$invalid ? 'disabled' : false}>確�</Button>
-                  {'\u00A0'}
-                    <Button color="primary" onClick={this.Next_Button.bind(this)} disabled={$invalid ? 'disabled' : false}>繼��下��/Button>
+                    <Button color="primary" id="btn" disabled={$invalid ? 'disabled' : false}>確認</Button>
+                    <Button color="primary" onClick={this.Next_Button.bind(this)} disabled={$invalid ? 'disabled' : false}>繼續新增下一筆</Button>
                   </ButtonToolbar>
                 </div>
               </form>

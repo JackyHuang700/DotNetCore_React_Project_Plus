@@ -8,6 +8,10 @@ using DotNetCore_React.Application.News_LanApp;
 using DotNetCore_React.Application.News_LanApp.Dtos;
 using System.Linq;
 using Microsoft.AspNetCore.Http;
+using System.IO;
+using DotNetCore_React.Utility;
+using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Hosting;
 
 namespace DotNetCore_React.Application.NewsApp
 {
@@ -15,12 +19,17 @@ namespace DotNetCore_React.Application.NewsApp
     {
         private readonly INewsRepository _repository;
         private readonly INews_LanRepository _repository_news_lan;
+        private readonly GlobalConfig _config;
 
+        private readonly IHostingEnvironment _hostEnvironment;
 
-        public NewsAppService(INewsRepository repository, INews_LanRepository repository_news_lan)
+        public NewsAppService(INewsRepository repository, INews_LanRepository repository_news_lan, IOptions<GlobalConfig> optionsAccessor, IHostingEnvironment hostEnvironment)
         {
             _repository = repository;
             _repository_news_lan = repository_news_lan;
+            _config = optionsAccessor.Value;
+
+            _hostEnvironment = hostEnvironment;
         }
 
         public List<NewsDto> GetAll()
@@ -181,6 +190,28 @@ namespace DotNetCore_React.Application.NewsApp
                 {"success",false },
                 {"message",null  }
             };
+
+            var filePath = $"{_config.UPLOAD_PATH}NEWS\\";
+            var wwwrootPath =$"{ _hostEnvironment.WebRootPath}{filePath}";
+            Directory.GetParent(wwwrootPath).Create();
+
+
+            foreach (var formFile in files)
+            {
+                if (formFile.Length > 0)
+                {
+                    var random = new Random(Guid.NewGuid().GetHashCode()).Next(0, 1000000);
+                    var fileName = $"{DateTime.Now:yyyyMMddhhmmss}{random}";
+                    var extension = Path.GetExtension(formFile.FileName);
+                    var newFile = $"{fileName}{extension}";
+                    using (var stream = new FileStream($"{wwwrootPath}{newFile}", FileMode.CreateNew))
+                    {
+                        formFile.CopyTo(stream);
+                        myJson["success"] = true;
+                        myJson["listImage"] = newFile;
+                    }
+                }
+            }
 
             return myJson;
         }
