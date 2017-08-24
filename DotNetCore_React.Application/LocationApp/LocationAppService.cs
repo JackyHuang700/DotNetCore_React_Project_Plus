@@ -53,7 +53,6 @@ namespace DotNetCore_React.Application.LocationApp
                 }
 
                 //圖表
-                //語言表
                 var b_DB_List = new List<Location_Image>();
                 foreach (var item in News.Location_ImageList)
                 {
