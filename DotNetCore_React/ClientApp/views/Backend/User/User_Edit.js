@@ -3,7 +3,10 @@ import { Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } fr
 
 import axios from 'axios';
 import EasyForm, { Field, FieldGroup } from 'react-easyform';
-import { email_pattern } from './User_General';
+import {
+  email_pattern,
+  GetRoleList
+} from './User_General';
 import { user_Enum } from '../../../EnumScript/GeneralEnumScript.js';
 import history from '../../../history'
 
@@ -25,6 +28,7 @@ class User_Edit_Show extends Component {
     this.GetData = this.GetData.bind(this);
     this.Button_Click = this.Button_Click.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.GetRoleList = GetRoleList.bind(this);
 
     //
 
@@ -58,29 +62,7 @@ class User_Edit_Show extends Component {
 
 
     //抓取角色權限
-    axios({
-      url: `/api/Role/Role_View`,
-      method: 'GET',
-      data: {
-      }
-    }).then((result) => {
-      var a = [];
-      result.data.map((c) => {
-        a.push({
-          name: c.name,
-          value: c.id
-        });
-      });
-
-      this.setState({
-        RoleList: a,
-        User: {
-          roleId: result.data[0].id
-        },
-      });
-    }).catch((error) => {
-      console.log(error)
-    });
+    this.GetRoleList();
   }
 
   handleInputChange(event) {
@@ -178,7 +160,6 @@ class User_Edit_Show extends Component {
                 <table className="table table-striped table-bordered">
                   <tbody>
 
-                  <input type="hidden" id="id" name="id" value={this.state.User.id} />
 
                     <TextInput name="userName"
                       labelName="系統帳號"

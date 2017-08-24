@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import { ButtonToolbar, Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import axios from 'axios';
 import EasyForm, { Field, FieldGroup } from 'react-easyform';
-import { email_pattern } from './User_General';
+import {
+  email_pattern,
+  GetRoleList
+} from './User_General';
 import { user_Enum } from '../../../EnumScript/GeneralEnumScript.js';
 import TextInput from '../../Components/Forms/TextInput';
 import DropDownList from '../../Components/Forms/DropDownList';
@@ -23,6 +26,9 @@ class User_Create extends Component {
       next_Button: false,
     };
 
+    this.GetRoleList = GetRoleList.bind(this);
+    
+
     this.Submit = this.Submit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.GetData = this.GetData.bind(this);
@@ -36,31 +42,7 @@ class User_Create extends Component {
 
   GetData() {
     //抓取角色權限
-    axios({
-      url: `/api/Role/Role_View`,
-      method: 'GET',
-      data: {
-      }
-    }).then((result) => {
-      var a = [];
-      result.data.map((c) => {
-        a.push({
-          name: c.name,
-          value: c.id
-        });
-      });
-
-
-
-      this.setState({
-        RoleList: a,
-        User: {
-          roleId: result.data[0].id
-        },
-      });
-    }).catch((error) => {
-      console.log(error)
-    });
+    this.GetRoleList();
   }
 
   Submit(event) {

@@ -123,11 +123,11 @@ class User_View extends Component {
         };
 
         const StatusType = {
-            0 : user_Enum.STOP.name,
-            1 : user_Enum.NORMAL.name,
-            2 : user_Enum.EMAIL_NO_VAILD.name,
-            3 : user_Enum.FIRST_PASSWORD_UNCHANGE.name,
-            4 : user_Enum.ERROR_COUNT.name
+            0: user_Enum.STOP.name,
+            1: user_Enum.NORMAL.name,
+            2: user_Enum.EMAIL_NO_VAILD.name,
+            3: user_Enum.FIRST_PASSWORD_UNCHANGE.name,
+            4: user_Enum.ERROR_COUNT.name
         };
 
         return (
@@ -146,18 +146,18 @@ class User_View extends Component {
                                 hover
                                 search
                                 exportCSV>
-                                {this.props.display_userName ? <TableHeaderColumn dataField='userName' dataSort={true} filter={ { type: 'TextFilter', delay: 1000 } }>系統帳號</TableHeaderColumn> : null}
-                                {this.props.display_roleId_Chinese ? <TableHeaderColumn dataField='roleId_Chinese' dataSort={true} filter={ { type: 'TextFilter', delay: 1000 } }>群組名稱</TableHeaderColumn> : null}
-                                {this.props.display_email ? <TableHeaderColumn dataField='email' dataSort={true} filter={ { type: 'TextFilter', delay: 1000 } }>email</TableHeaderColumn> : null}
+                                {this.props.display_userName ? <TableHeaderColumn dataField='userName' dataSort={true} filter={{ type: 'TextFilter', delay: 1000 }}>系統帳號</TableHeaderColumn> : null}
+                                {this.props.display_roleId_Chinese ? <TableHeaderColumn dataField='roleId_Chinese' dataSort={true} filter={{ type: 'TextFilter', delay: 1000 }}>群組名稱</TableHeaderColumn> : null}
+                                {this.props.display_email ? <TableHeaderColumn dataField='email' dataSort={true} filter={{ type: 'TextFilter', delay: 1000 }}>email</TableHeaderColumn> : null}
                                 {this.props.display_emailComfirmed ? <TableHeaderColumn dataField='emailComfirmed' dataSort={true}>Email確認</TableHeaderColumn> : null}
-                                {this.props.display_firstName ? <TableHeaderColumn dataField='firstName' dataSort={true} filter={ { type: 'TextFilter', delay: 1000 } }>姓</TableHeaderColumn> : null}
-                                {this.props.display_lastName ? <TableHeaderColumn dataField='lastName' dataSort={true} filter={ { type: 'TextFilter', delay: 1000 } }>名</TableHeaderColumn> : null}
-                                {this.props.display_status ? <TableHeaderColumn dataField='status' dataSort={true} dataFormat={this.Formatter_Status} filter={ { type: 'SelectFilter', options: StatusType } }>狀態</TableHeaderColumn> : null}
+                                {this.props.display_firstName ? <TableHeaderColumn dataField='firstName' dataSort={true} filter={{ type: 'TextFilter', delay: 1000 }}>姓</TableHeaderColumn> : null}
+                                {this.props.display_lastName ? <TableHeaderColumn dataField='lastName' dataSort={true} filter={{ type: 'TextFilter', delay: 1000 }}>名</TableHeaderColumn> : null}
+                                {this.props.display_status ? <TableHeaderColumn dataField='status' dataSort={true} dataFormat={this.Formatter_Status} filter={{ type: 'SelectFilter', options: StatusType }}>狀態</TableHeaderColumn> : null}
                                 {this.props.display_createDate ? <TableHeaderColumn dataField='createDate' dataSort={true}>建立時間</TableHeaderColumn> : null}
-                                {this.props.display_createUser ? <TableHeaderColumn dataField='createUser' dataSort={true} filter={ { type: 'TextFilter', delay: 1000 } }>建立帳號</TableHeaderColumn> : null}
+                                {this.props.display_createUser ? <TableHeaderColumn dataField='createUser' dataSort={true} filter={{ type: 'TextFilter', delay: 1000 }}>建立帳號</TableHeaderColumn> : null}
                                 {this.props.display_updateDate ? <TableHeaderColumn dataField='updateDate' dataSort={true}>更新時間</TableHeaderColumn> : null}
-                                {this.props.display_updateUser ? <TableHeaderColumn dataField='updateUser' dataSort={true} filter={ { type: 'TextFilter', delay: 1000 } }>更新帳號</TableHeaderColumn> : null}
-                                {this.props.display_failedCount ? <TableHeaderColumn dataField='failedCount' dataSort={true} filter={ { type: 'NumberFilter', delay: 1000, numberComparators: [ '=', '>', '<' ] } }>錯誤次數</TableHeaderColumn> : null}
+                                {this.props.display_updateUser ? <TableHeaderColumn dataField='updateUser' dataSort={true} filter={{ type: 'TextFilter', delay: 1000 }}>更新帳號</TableHeaderColumn> : null}
+                                {this.props.display_failedCount ? <TableHeaderColumn dataField='failedCount' dataSort={true} filter={{ type: 'NumberFilter', delay: 1000, numberComparators: ['=', '>', '<'] }}>錯誤次數</TableHeaderColumn> : null}
                                 <TableHeaderColumn isKey dataField="button" dataFormat={this.buttonFormatter}></TableHeaderColumn>
                             </BootstrapTable>
                         </div>

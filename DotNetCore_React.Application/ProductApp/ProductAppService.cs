@@ -214,4 +214,4 @@ namespace DotNetCore_React.Application.ProductApp
             return myJson;
         }
     }
-}
+};
