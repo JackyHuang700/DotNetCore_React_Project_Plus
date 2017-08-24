@@ -9,7 +9,7 @@ namespace DotNetCore_React.Domain.Entities
     /// </summary>
     public class ContactUs_Category : Entity_Int
     {
-        public int Id { get; set; }
+        public Guid ContactUsId { get; set; }
         public int LanguageId { get; set; }
         public string Name { get; set; }
     }

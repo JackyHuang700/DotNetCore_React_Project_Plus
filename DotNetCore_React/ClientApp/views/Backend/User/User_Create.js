@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import { ButtonToolbar, Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import axios from 'axios';
 import EasyForm, { Field, FieldGroup } from 'react-easyform';
-import { email_pattern } from './User_General';
+import {
+  email_pattern,
+  GetRoleList
+} from './User_General';
 import { user_Enum } from '../../../EnumScript/GeneralEnumScript.js';
 import TextInput from '../../Components/Forms/TextInput';
 import DropDownList from '../../Components/Forms/DropDownList';
@@ -23,6 +26,9 @@ class User_Create extends Component {
       next_Button: false,
     };
 
+    this.GetRoleList = GetRoleList.bind(this);
+    
+
     this.Submit = this.Submit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.GetData = this.GetData.bind(this);
@@ -36,31 +42,7 @@ class User_Create extends Component {
 
   GetData() {
     //抓取角色權限
-    axios({
-      url: `/api/Role/Role_View`,
-      method: 'GET',
-      data: {
-      }
-    }).then((result) => {
-      var a = [];
-      result.data.map((c) => {
-        a.push({
-          name: c.name,
-          value: c.id
-        });
-      });
-
-
-
-      this.setState({
-        RoleList: a,
-        User: {
-          roleId: result.data[0].id
-        },
-      });
-    }).catch((error) => {
-      console.log(error)
-    });
+    this.GetRoleList();
   }
 
   Submit(event) {
@@ -231,64 +213,6 @@ class User_Create extends Component {
                         ]}
                     />
 
-
-
-                    {/* <TextInput name="createDate"
-                  labelName="建立時間"
-                  className=""
-                  display={this.props.createDate}
-                  required={this.props.createDate}
-                  validMessage={{ required: '建立時間 is reduired.' }}
-                  onInput={this.handleInputChange}
-                  value={this.state.User.createDate}
-                  readOnly={true}
-                  placeholder="createDate" />
-
-
-                <TextInput name="createUser"
-                  labelName="建立者"
-                  className=""
-                  display={this.props.createUser}
-                  required={this.props.createUser}
-                  validMessage={{ required: '建立者 is reduired.' }}
-                  onInput={this.handleInputChange}
-                  value={this.state.User.createUser}
-                  readOnly={true}                  
-                  placeholder="createUser" />
-
-
-
-                <TextInput name="updateDate"
-                  labelName="更新時間"
-                  className=""
-                  display={this.props.updateDate}
-                  required={this.props.updateDate}
-                  validMessage={{ required: '更新時間 is reduired.' }}
-                  onInput={this.handleInputChange}
-                  value={this.state.User.updateDate}
-                  placeholder="updateDate" />
-
-
-                <TextInput name="updateUser"
-                  labelName="更新者"
-                  className=""
-                  display={this.props.updateUser}
-                  required={this.props.updateUser}
-                  validMessage={{ required: '更新者 is reduired.' }}
-                  onInput={this.handleInputChange}
-                  value={this.state.User.updateUser}
-                  placeholder="updateUser" />
-
-                <TextInput name="failedCount"
-                  labelName="已錯誤次數"
-                  className=""
-                  display={this.props.failedCount}
-                  required={this.props.failedCount}
-                  validMessage={{ required: '已錯誤次數 is reduired.' }}
-                  onInput={this.handleInputChange}
-                  value={this.state.User.failedCount}
-                  placeholder="failedCount" /> */}
-
                   </tbody>
 
                 </table>
@@ -296,6 +220,7 @@ class User_Create extends Component {
                 <div className="form-group form-actions">
                   <ButtonToolbar>
                     <Button color="primary" id="btn" disabled={$invalid ? 'disabled' : false}>確認</Button>
+                    {'\u00A0'}
                     <Button color="primary" onClick={this.Next_Button.bind(this)} disabled={$invalid ? 'disabled' : false}>繼續新增下一筆</Button>
                   </ButtonToolbar>
                 </div>
@@ -319,16 +244,6 @@ User_Create.defaultProps = {
   display_lastName: true,
   display_status: true,
 
-
-
-  // display_emailComfirmed: true,
-  // display_createDate: true,
-  // display_createUser: true,
-  // display_updateDate: true,
-  // display_updateUser: true,
-  // display_failedCount: true,
-
-
   required_userName: true,
   required_password: true,
   required_email: true,
@@ -337,13 +252,5 @@ User_Create.defaultProps = {
   required_lastName: false,
   required_status: true,
 
-
-
-  // required_emailComfirmed: true,
-  // required_createDate: true,
-  // required_createUser: true,
-  // required_updateDate: true,
-  // required_updateUser: true,
-  // required_failedCount: true,
 }
 

@@ -25,6 +25,11 @@ using DotNetCore_React.Application.News_LanApp;
 using DotNetCore_React.Application.Sys_LanguageApp;
 using DotNetCore_React.Utility.Services;
 using DotNetCore_React.Utility;
+using DotNetCore_React.Application.Product_CategoryApp;
+using DotNetCore_React.Application.ProductApp;
+using DotNetCore_React.Application.LocationApp;
+using DotNetCore_React.Application.ContactUsApp;
+using DotNetCore_React.Application.AboutUsApp;
 
 namespace DotNetCore_React
 {
@@ -67,6 +72,26 @@ namespace DotNetCore_React
             services.AddScoped<INewsAppService, NewsAppService>();
             services.AddScoped<INews_LanRepository, News_LanRepository>();
             services.AddScoped<INews_LanAppService, News_LanAppService>();
+
+            services.AddScoped<IProduct_CategoryRepository, Product_CategoryRepository>();
+            services.AddScoped<IProduct_Category_LanRepository, Product_Category_LanRepository>();
+            services.AddScoped<IProduct_CategoryService, Product_CategoryService>();
+
+            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IProduct_LanRepository, Product_LanRepository>();
+            services.AddScoped<IProduct_ImageRepository, Product_ImageRepository>();
+            services.AddScoped<IProductAppService, ProductAppService>();
+
+            services.AddScoped<IContactUsRepository, ContactUsRepository>();
+            services.AddScoped<IContactUs_CategoryRepository, ContactUs_CategoryRepository>();
+            services.AddScoped<IContactUsAppService, ContactUsAppService>();
+
+
+            services.AddScoped<IAboutUsRepository, AboutUsRepository>();
+            services.AddScoped<IAboutUs_LanRepository, AboutUs_LanRepository>();
+            services.AddScoped<IAboutUs_CategoryRepository, AboutUs_CategoryRepository>();
+            services.AddScoped<IAboutUsAppService, AboutUsAppService>();
+
             services.AddScoped<ISys_LanguageRepository, Sys_LanguageRepository>();
             services.AddScoped<ISys_LanguageAppService, Sys_LanguageAppService>();
 
@@ -117,14 +142,6 @@ namespace DotNetCore_React
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
-
-
-
-         //       config.Routes.MapHttpRoute(
-         //    name: "DefaultApi",
-         //    routeTemplate: "api/{controller}/{id}",
-         //    defaults: new { id = RouteParameter.Optional }
-         //);
 
                 routes.MapSpaFallbackRoute(
                     name: "spa-fallback",

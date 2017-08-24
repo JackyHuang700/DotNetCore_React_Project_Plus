@@ -29,7 +29,7 @@ class News_Create extends Component {
       },
       Sys_Language_List: [],
 
-      //是否繼續為繼續下一筆
+      //�否繼�繼續�一�
       next_Button: false,
       activeTab: '0',
     };
@@ -80,7 +80,7 @@ class News_Create extends Component {
     return false;
   }
 
-  //繼續新增下一筆
+  //繼��下��
   Next_Button(event) {
     this.setState({
       next_Button: true,
@@ -89,7 +89,7 @@ class News_Create extends Component {
     document.getElementById('btn').click();
   }
 
-  //語系元件
+  //語系�件
   Component_Nav() {
 
     return (
@@ -122,34 +122,34 @@ class News_Create extends Component {
                 <TabPane tabId={`${index}`}>
 
                   <TextInput name="title"
-                    labelName="標題"
+                    labelName="標�"
                     className=""
                     data-index={index}
                     display={this.props.display_title}
                     required={this.props.required_title}
-                    validMessage={{ required: '標題 is reduired.' }}
+                    validMessage={{ required: '標� is reduired.' }}
                     onInput={this.HandleInputChange_By_New_LanList}
                     value={this.state.News.new_LanList[`${index}`].title}
                     placeholder="title" />
 
                   <TextInput name="subTitle"
-                    labelName="副標題"
+                    labelName="���
                     className=""
                     data-index={index}
                     display={this.props.display_subTitle}
                     required={this.props.required_subTitle}
-                    validMessage={{ required: '副標題 is reduired.' }}
+                    validMessage={{ required: '���is reduired.' }}
                     onInput={this.HandleInputChange_By_New_LanList}
                     value={this.state.News.new_LanList[`${index}`].subTitle}
                     placeholder="subTitle" />
 
                   <CKEditor name="content"
-                    labelName="內容"
+                    labelName="�容"
                     className=""
                     data-index={index}
                     display={this.props.display_content}
                     required={this.props.required_content}
-                    validMessage={{ required: '內容 is reduired.' }}
+                    validMessage={{ required: '�容 is reduired.' }}
                     onInput={this.HandleInputChange_By_New_LanList_CKEditor}
                     value={this.state.News.new_LanList[`${index}`].content}
                     cols="100"
@@ -196,7 +196,7 @@ const options = {
         <div className="col-xs-10">
           <div className="card">
             <div className="card-header">
-              建立最新消息
+              建瀰�
               </div>
             <div className="card-block">
               <form className="" onSubmit={this.Submit}>
@@ -204,11 +204,11 @@ const options = {
                 <table className="table table-striped table-bordered">
                   <tbody>
                     <TextInput name="listImage"
-                      labelName="列表圖片"
+                      labelName="�表��"
                       className=""
                       display={this.props.display_listImage}
                       required={this.props.required_listImage}
-                      validMessage={{ required: '列表圖片 is reduired.' }}
+                      validMessage={{ required: '�表�� is reduired.' }}
                       onInput={this.HandleInputChange}
                       value={this.state.News.listImage}
                       placeholder="listImage" />
@@ -230,33 +230,33 @@ const options = {
 
 
                     <TextInput name="priority"
-                      labelName="列表排序"
+                      labelName="�表��"
                       className=""
                       display={this.props.display_priority}
                       required={this.props.required_priority}
-                      validMessage={{ required: '列表排序 is reduired.' }}
+                      validMessage={{ required: '�表�� is reduired.' }}
                       onInput={this.HandleInputChange}
                       value={this.state.News.priority}
                       placeholder="priority" />
 
 
                     <TextInput name="startDate"
-                      labelName="上架時間"
+                      labelName="上架��"
                       className=""
                       display={this.props.display_startDate}
                       required={this.props.required_startDate}
-                      validMessage={{ required: '上架時間 is reduired.' }}
+                      validMessage={{ required: '上架�� is reduired.' }}
                       onInput={this.HandleInputChange}
                       value={this.state.News.startDate}
                       placeholder="startDate" />
 
 
                     <TextInput name="endDate"
-                      labelName="下架時間"
+                      labelName="下架��"
                       className=""
                       display={this.props.display_endDate}
                       required={this.props.required_endDate}
-                      validMessage={{ required: '下架時間 is reduired.' }}
+                      validMessage={{ required: '下架�� is reduired.' }}
                       onInput={this.HandleInputChange}
                       value={this.state.News.endDate}
                       placeholder="endDate" />
@@ -288,8 +288,9 @@ const options = {
 
                 <div className="form-group form-actions">
                   <ButtonToolbar>
-                    <Button color="primary" id="btn" disabled={$invalid ? 'disabled' : false}>確認</Button>
-                    <Button color="primary" onClick={this.Next_Button.bind(this)} disabled={$invalid ? 'disabled' : false}>繼續新增下一筆</Button>
+                    <Button color="primary" id="btn" disabled={$invalid ? 'disabled' : false}>確�</Button>
+                  {'\u00A0'}
+                    <Button color="primary" onClick={this.Next_Button.bind(this)} disabled={$invalid ? 'disabled' : false}>繼��下��/Button>
                   </ButtonToolbar>
                 </div>
               </form>

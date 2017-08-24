@@ -20,5 +20,10 @@ namespace DotNetCore_React.Utility
         /// 郵件服務端口
         /// </summary>
         public int SMTP_PORT { get; set; }
+
+        /// <summary>
+        /// 使用者上傳路徑
+        /// </summary>
+        public string UPLOAD_PATH { get; set; }
     }
 }

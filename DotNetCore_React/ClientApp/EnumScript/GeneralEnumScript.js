@@ -47,7 +47,7 @@ var user_Enum = {
 var news_Enum = {
     STOP: {
         "value": "0",
-        "name": "已停",
+        "name": "已停用",
     },
 
     NORMAL: {

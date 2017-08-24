@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { FormGroup, Label, Input, Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 import EasyForm, { Field, FieldGroup } from 'react-easyform';
-import {email_pattern} from './User_General';
+import { email_pattern } from './User_General';
 import TextInput from '../../Components/Forms/TextInput';
 
 import axios from 'axios';
@@ -16,7 +16,7 @@ class User_Personal_Edit extends Component {
             User: {},
         };
 
-        this.GetData = this.GetData.bind(this);        
+        this.GetData = this.GetData.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
         this.Button_Submit = this.Button_Submit.bind(this);
     }
@@ -31,41 +31,41 @@ class User_Personal_Edit extends Component {
         const self = this;
 
         axios({
-          url: `/api/User/Get_User_By_UserName?${this.props.match.params.userName}`,
-          method: 'GET',
-          data: {
-          }
+            url: `/api/User/Get_User_By_UserName?${this.props.match.params.userName}`,
+            method: 'GET',
+            data: {
+            }
         }).then((result) => {
-          self.setState({
-            User: result.data
-          });
+            self.setState({
+                User: result.data
+            });
         }).catch((error) => {
-          console.log(error)
+            console.log(error)
         });
 
     }
 
 
-  //編輯
-  Button_Submit(event) {
-    event.preventDefault();
-    axios({
-      url: '/api/User/Edit_Personal_User',
-      method: 'post',
-      data: this.state.User
-    }).then((result) => {
-      if (result.data.success) {
-        history.push('/User');
-      }
-    }).catch((error) => {
-      console.log(error)
-    });
-    return false;
-  }
+    //編輯
+    Button_Submit(event) {
+        event.preventDefault();
+        axios({
+            url: '/api/User/Edit_Personal_User',
+            method: 'post',
+            data: this.state.User
+        }).then((result) => {
+            if (result.data.success) {
+                history.push('/User');
+            }
+        }).catch((error) => {
+            console.log(error)
+        });
+        return false;
+    }
 
 
     handleInputChange(event) {
-        
+
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
@@ -95,67 +95,67 @@ class User_Personal_Edit extends Component {
 
 
 
-                            <table className="table table-striped table-bordered">
-                  <tbody>
+                                <table className="table table-striped table-bordered">
+                                    <tbody>
 
-                  <input type="hidden" id="id" name="id" value={this.state.User.id} />
+                                        <input type="hidden" id="id" name="id" value={this.state.User.id} />
 
-                                <TextInput name="userName"
-                                    labelName="系統帳號"
-                                    className=""
-                                    display={this.props.display_userName}
-                                    required={this.props.required_userName}
-                                    validMessage={{ required: 'userName is reduired.' }}
-                                    onInput={this.handleInputChange}
-                                    value={this.state.User.userName}
-                                    placeholder="系統帳號"
-                                    readOnly={true} />
+                                        <TextInput name="userName"
+                                            labelName="系統帳號"
+                                            className=""
+                                            display={this.props.display_userName}
+                                            required={this.props.required_userName}
+                                            validMessage={{ required: 'userName is reduired.' }}
+                                            onInput={this.handleInputChange}
+                                            value={this.state.User.userName}
+                                            placeholder="系統帳號"
+                                            readOnly={true} />
 
-                                <TextInput name="password"
-                                    labelName="登入密碼"
-                                    className=""
-                                    display={this.props.display_password}
-                                    required={this.props.required_password}
-                                    validMessage={{ required: 'password is reduired.' }}
-                                    onInput={this.handleInputChange}
-                                    value={this.state.User.password}
-                                    placeholder="登入密碼" />
+                                        <TextInput name="password"
+                                            labelName="登入密碼"
+                                            className=""
+                                            display={this.props.display_password}
+                                            required={this.props.required_password}
+                                            validMessage={{ required: 'password is reduired.' }}
+                                            onInput={this.handleInputChange}
+                                            value={this.state.User.password}
+                                            placeholder="登入密碼" />
 
-                                {/* 判斷Email格式 */}
-                                <TextInput name="email"
-                                    labelName="email"
-                                    className=""
-                                    display={this.props.display_email}
-                                    pattern={email_pattern}
-                                    required={this.props.required_email}
-                                    validMessage={{ required: 'email is reduired.', pattern: 'email格式錯誤' }}
-                                    onInput={this.handleInputChange}
-                                    value={this.state.User.email}
-                                    placeholder="email" />
+                                        {/* 判斷Email格式 */}
+                                        <TextInput name="email"
+                                            labelName="email"
+                                            className=""
+                                            display={this.props.display_email}
+                                            pattern={email_pattern}
+                                            required={this.props.required_email}
+                                            validMessage={{ required: 'email is reduired.', pattern: 'email格式錯誤' }}
+                                            onInput={this.handleInputChange}
+                                            value={this.state.User.email}
+                                            placeholder="email" />
 
-                                <TextInput name="firstName"
-                                    labelName="姓"
-                                    className=""
-                                    display={this.props.display_firstName}
-                                    required={this.props.required_firstName}
-                                    validMessage={{ required: 'firstName is reduired.' }}
-                                    onInput={this.handleInputChange}
-                                    value={this.state.User.firstName}
-                                    placeholder="姓" />
+                                        <TextInput name="firstName"
+                                            labelName="姓"
+                                            className=""
+                                            display={this.props.display_firstName}
+                                            required={this.props.required_firstName}
+                                            validMessage={{ required: 'firstName is reduired.' }}
+                                            onInput={this.handleInputChange}
+                                            value={this.state.User.firstName}
+                                            placeholder="姓" />
 
-                                <TextInput name="lastName"
-                                    labelName="名"
-                                    className=""
-                                    display={this.props.display_lastName}
-                                    required={this.props.required_lastName}
-                                    validMessage={{ required: 'lastName is reduired.' }}
-                                    onInput={this.handleInputChange}
-                                    value={this.state.User.lastName}
-                                    placeholder="名" />
+                                        <TextInput name="lastName"
+                                            labelName="名"
+                                            className=""
+                                            display={this.props.display_lastName}
+                                            required={this.props.required_lastName}
+                                            validMessage={{ required: 'lastName is reduired.' }}
+                                            onInput={this.handleInputChange}
+                                            value={this.state.User.lastName}
+                                            placeholder="名" />
 
-                  </tbody>
+                                    </tbody>
 
-                </table>
+                                </table>
 
 
                                 <div className="form-group form-actions">

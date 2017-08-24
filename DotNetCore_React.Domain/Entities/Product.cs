@@ -9,7 +9,6 @@ namespace DotNetCore_React.Domain.Entities
     /// </summary>
     public class Product : Entity
     {
-        public Guid Id { get; set; }
         public string ListImage { get; set; }
         public int CategoryId { get; set; }
         public int Priority { get; set; }

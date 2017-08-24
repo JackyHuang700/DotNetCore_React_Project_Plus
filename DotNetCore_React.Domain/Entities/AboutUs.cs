@@ -9,7 +9,6 @@ namespace DotNetCore_React.Domain.Entities
     /// </summary>
     public class AboutUs : Entity
     {
-        public Guid Id { get; set; }
         public int CategoryId { get; set; }
         public int Status { get; set; }
         public DateTime CreateDate { get; set; }

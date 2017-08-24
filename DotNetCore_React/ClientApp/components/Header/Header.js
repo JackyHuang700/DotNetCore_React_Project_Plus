@@ -5,15 +5,6 @@ import { Dropdown, DropdownMenu, DropdownItem } from 'reactstrap';
 import {Auth} from '../../helpers/auth'
 import history from '../../history'
 
-  //fix 選單被覆蓋
-const dropdownMenu_Style = {
-  "zIndex":"1050",
-};
-
-
-const header_Style = {
-  'backgroundColor': "#438EB9"
-};
 
 class Header extends Component {
 
@@ -74,9 +65,9 @@ class Header extends Component {
 
   render() {
     return (
-      <header className="app-header navbar" style={header_Style}>
+      <header className="app-header navbar">
         <button className="navbar-toggler mobile-sidebar-toggler d-lg-none" type="button" onClick={this.mobileSidebarToggle}>&#9776;</button>
-        <a className="navbar-brand" href="#" style={header_Style}></a>
+        <a className="navbar-brand" href="#"></a>
         <ul className="nav navbar-nav d-md-down-none">
           <li className="nav-item">
             <button className="nav-link navbar-toggler sidebar-toggler" type="button" onClick={this.sidebarToggle}>&#9776;</button>
@@ -93,7 +84,7 @@ class Header extends Component {
                 <span className="d-md-down-none">{Auth.getNickName()}</span>
               </button>
 
-              <DropdownMenu className="dropdown-menu-right" style={dropdownMenu_Style}>
+              <DropdownMenu className="dropdown-menu-right">
                 <DropdownItem header className="text-center"><strong>Account</strong></DropdownItem>
                 <DropdownItem onClick={this.profile}><i className="fa fa-user"></i> Profile</DropdownItem>
                 <DropdownItem onClick={this.changePwd}><i className="fa fa-shield"></i> Change Password</DropdownItem>
