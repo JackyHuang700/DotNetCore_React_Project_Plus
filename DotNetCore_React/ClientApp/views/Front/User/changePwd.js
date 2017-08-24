@@ -67,10 +67,6 @@ class changePwd extends Component {
     }
   }
 
-  back(event){
-    history.goBack();
-  }
-
   submit(event) {
     const {
       userName,
@@ -155,7 +151,7 @@ class changePwd extends Component {
                         <button className="btn btn-primary px-4" disabled={$invalid ? 'disabled' : false}>送出</button>
                       </div>
                       <div className="offset-4 col-2">
-                        <button type="button" className="btn btn-warning px-4" onClick={this.back}>返回</button>
+                        <button type="button" className="btn btn-warning px-4" onClick={() => history.goBack()}>返回</button>
                       </div>
                     </div>
                   </div>

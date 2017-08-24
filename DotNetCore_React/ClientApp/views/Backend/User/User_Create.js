@@ -91,7 +91,6 @@ class User_Create extends Component {
     document.getElementById('btn').click();
   }
 
-
   render() {
     // 经过EasyForm包装的组件，props里会有一个params属性，包含所有的表单项值
     const { params } = this.props.params;
@@ -222,6 +221,8 @@ class User_Create extends Component {
                     <Button color="primary" id="btn" disabled={$invalid ? 'disabled' : false}>確認</Button>
                     {'\u00A0'}
                     <Button color="primary" onClick={this.Next_Button.bind(this)} disabled={$invalid ? 'disabled' : false}>繼續新增下一筆</Button>
+                    {'\u00A0'}
+                    <Button color="warning" onClick={() => history.goBack()}>返回</Button>
                   </ButtonToolbar>
                 </div>
               </form>

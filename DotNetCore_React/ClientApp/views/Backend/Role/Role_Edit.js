@@ -233,6 +233,8 @@ class Role_Edit_Show extends Component {
 
                 <div className="form-group form-actions">
                   <Button color="primary" disabled={$invalid ? 'disabled' : false}>{this.Button_Text()}</Button>
+                  {'\u00A0'}
+                  <Button color="warning" onClick={() => history.goBack()}>返回</Button>
                 </div>
               </form>
             </div>

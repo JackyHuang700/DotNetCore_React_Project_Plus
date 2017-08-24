@@ -160,6 +160,8 @@ class User_Personal_Edit extends Component {
 
                                 <div className="form-group form-actions">
                                     <Button color="primary" disabled={$invalid ? 'disabled' : false}>編輯完成</Button>
+                                    {'\u00A0'}
+                                    <Button color="warning" onClick={() => history.goBack()}>返回</Button>
                                 </div>
                             </form>
                         </div>

@@ -217,6 +217,8 @@ class User_Delete extends Component {
 
                 <div className="form-group form-actions">
                   <button type="botton" className="btn btn-sm btn-danger" onClick={this.Button_Submit}>確認刪除</button>
+                  {'\u00A0'}
+                  <Button color="warning" onClick={() => history.goBack()}>返回</Button>
                 </div>
               </form>
             </div>
