@@ -157,7 +157,7 @@ class News_Create extends Component {
                     cols="100"
                     rows="6"
                     placeholder="content" />
-
+                    
 
 
                   {/* refer https://stackoverflow.com/questions/36535234/how-can-ckeditor-be-used-with-react-js-in-a-way-that-allows-react-to-recognize-i */}
