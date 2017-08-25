@@ -29,6 +29,7 @@ import News_Delete from './views/Backend/News/News_Delete'
 import News_Edit from './views/Backend/News/News_Edit'
 import News_View from './views/Backend/News/News_View'
 
+import AboutUs_View from './views/Backend/AboutUs/AboutUs_View'
 /**
   * 
   * 已知Breadcrumb�呼�這隻
@@ -54,6 +55,10 @@ export default (
         <BackendRoute path='/News/Create' component={News_Create} />
         <BackendRoute path='/News/Delete/:id/:delete' component={News_Delete} />
         <BackendRoute path='/News/Edit/:id' component={News_Edit} />
+        <BackendRoute path='/AboutUs' exact component={AboutUs_View} />
+        {/* <BackendRoute path='/AboutUs/Create' component={AboutUs_Create} />
+        <BackendRoute path='/AboutUs/Delete/:id/:delete' component={AboutUs_Delete} />
+        <BackendRoute path='/AboutUs/Edit/:id' component={AboutUs_Edit} /> */}
         <Route render={() => <h3>No Match Route</h3>} />
       </Switch>
 )
