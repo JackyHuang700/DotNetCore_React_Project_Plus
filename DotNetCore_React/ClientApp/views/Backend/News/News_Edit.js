@@ -9,10 +9,12 @@ import DropDownList from '../../Components/Forms/DropDownList';
 import { news_Enum } from '../../../EnumScript/GeneralEnumScript.js';
 import CKEditor from '../../Components/Forms/CKEditor';
 import classnames from 'classnames';
-import { Get_Sys_Language,
+import {
+  Get_Sys_Language,
   HandleInputChange,
   HandleInputChange_By_New_LanList,
-  HandleInputChange_By_New_LanList_CKEditor } from './News_General';
+  HandleInputChange_By_New_LanList_CKEditor
+} from './News_General';
 
 class News_Edit extends Component {
 
@@ -20,7 +22,7 @@ class News_Edit extends Component {
     super(props);
     this.state = {
       News: {
-        new_LanList:[],
+        new_LanList: [],
       },
       Sys_Language_List: [],
       activeTab: '0'
@@ -32,12 +34,12 @@ class News_Edit extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
 
     this.toggle = this.toggle.bind(this);
-    
-        //Import
-        this.Get_Sys_Language = Get_Sys_Language.bind(this);
-        this.HandleInputChange_By_New_LanList_CKEditor = HandleInputChange_By_New_LanList_CKEditor.bind(this);
-        this.HandleInputChange_By_New_LanList = HandleInputChange_By_New_LanList.bind(this);
-        this.Component_Nav = this.Component_Nav.bind(this);
+
+    //Import
+    this.Get_Sys_Language = Get_Sys_Language.bind(this);
+    this.HandleInputChange_By_New_LanList_CKEditor = HandleInputChange_By_New_LanList_CKEditor.bind(this);
+    this.HandleInputChange_By_New_LanList = HandleInputChange_By_New_LanList.bind(this);
+    this.Component_Nav = this.Component_Nav.bind(this);
   }
 
 
@@ -73,13 +75,13 @@ class News_Edit extends Component {
       var bb_Length = self.state.Sys_Language_List.length;
       if (aa_Length != bb_Length) {
         var diff = aa_Length > bb_Length ? (aa_Length - bb_Length) : (bb_Length - aa_Length);
-        for (var i=0; i<diff; i++) { 
+        for (var i = 0; i < diff; i++) {
           var aa = Object.assign(this.state.News);
           aa.new_LanList.push({});
         }
-            self.setState({
-              News: aa,
-            });
+        self.setState({
+          News: aa,
+        });
       }
 
     }).catch((error) => {
@@ -103,99 +105,99 @@ class News_Edit extends Component {
   }
 
   Button_Submit(event) {
-    
-        axios({
-    
-          url: '/api/News/Edit',
-          method: 'post',
-          data: this.state.News
-        }).then((result) => {
-    
-          if (result.data.success) {
-            history.push('/News');
-          }
-        }).catch((error) => {
-          console.log(error)
-        });
-    
-    
-        event.preventDefault();
-        return false;
-      }
 
-        //語系元件
+    axios({
+
+      url: '/api/News/Edit',
+      method: 'post',
+      data: this.state.News
+    }).then((result) => {
+
+      if (result.data.success) {
+        history.push('/News');
+      }
+    }).catch((error) => {
+      console.log(error)
+    });
+
+
+    event.preventDefault();
+    return false;
+  }
+
+  //語系元件
   Component_Nav() {
+var self = this;
+    return (
+      <td colSpan="2">
+        <Nav tabs>
+          {
+            this.state.Sys_Language_List.map((sys, index) => {
+              //填入語系ID
+              { self.state.News.new_LanList[index].languageId = sys.id }
+              return (
+                <NavItem>
+                  <NavLink
+                    className={classnames({ active: this.state.activeTab === `${index}` })}
+                    onClick={() => { this.toggle(`${index}`); }}>
+                    <i className="icon-calculator"></i> {sys.name}
+                  </NavLink>
+                </NavItem>
 
-        return (
-<td colSpan="2">
-            <Nav tabs>
-              {
-                this.state.Sys_Language_List.map((sys, index) => {
-                  //填入語系ID
-                  {this.state.News.new_LanList[index].languageId = sys.id}
-                  return (
-                    <NavItem>
-                      <NavLink
-                        className={classnames({ active: this.state.activeTab === `${index}` })}
-                        onClick={() => { this.toggle(`${index}`); }}>
-                        <i className="icon-calculator"></i> {sys.name}
-                      </NavLink>
-                    </NavItem>
-    
-                  );
-                })
-              }
-            </Nav>
-            <TabContent activeTab={this.state.activeTab}>
-              {
-                this.state.News.new_LanList.map((sys, index) => {
-                  return (
-                    <TabPane tabId={`${index}`}>
-                      
-                      <TextInput name="title"
-                      labelName="標題"
-                      className=""
-                      data-index={index}
-                      display={this.props.display_title}
-                      required={this.props.required_title}
-                      validMessage={{ required: '標題 is reduired.' }}
-                      onInput={this.HandleInputChange_By_New_LanList}
-                      value={this.state.News.new_LanList[`${index}`].title}
-                      placeholder="title" />
-    
-                      <TextInput name="subTitle"
-                      labelName="副標題"
-                      className=""
-                      data-index={index}                  
-                      display={this.props.display_subTitle}
-                      required={this.props.required_subTitle}
-                      validMessage={{ required: '副標題 is reduired.' }}
-                      onInput={this.HandleInputChange_By_New_LanList}
-                      value={this.state.News.new_LanList[`${index}`].subTitle}
-                      placeholder="subTitle" />
-    
-                      <CKEditor name="content"
-                      labelName="內容"
-                      className=""
-                      data-index={index}
-                      display={this.props.display_content}
-                      required={this.props.required_content}
-                      validMessage={{ required: '內容 is reduired.' }}
-                      onInput={this.HandleInputChange_By_New_LanList_CKEditor}
-                      value={this.state.News.new_LanList[`${index}`].content}
-                      cols="100" 
-                      rows="6"
-                      placeholder="content" />
-                    </TabPane>
-                  )
-                })
-              }
-            </TabContent>
-          </td>
-        );
-    
-    
-      }
+              );
+            })
+          }
+        </Nav>
+        <TabContent activeTab={this.state.activeTab}>
+          {
+            this.state.News.new_LanList.map((sys, index) => {
+              return (
+                <TabPane tabId={`${index}`}>
+
+                  <TextInput name="title"
+                    labelName="標題"
+                    className=""
+                    data-index={index}
+                    display={this.props.display_title}
+                    required={this.props.required_title}
+                    validMessage={{ required: '標題 is reduired.' }}
+                    onInput={this.HandleInputChange_By_New_LanList}
+                    value={this.state.News.new_LanList[`${index}`].title}
+                    placeholder="title" />
+
+                  <TextInput name="subTitle"
+                    labelName="副標題"
+                    className=""
+                    data-index={index}
+                    display={this.props.display_subTitle}
+                    required={this.props.required_subTitle}
+                    validMessage={{ required: '副標題 is reduired.' }}
+                    onInput={this.HandleInputChange_By_New_LanList}
+                    value={this.state.News.new_LanList[`${index}`].subTitle}
+                    placeholder="subTitle" />
+
+                  <CKEditor name="content"
+                    labelName="內容"
+                    className=""
+                    data-index={index}
+                    display={this.props.display_content}
+                    required={this.props.required_content}
+                    validMessage={{ required: '內容 is reduired.' }}
+                    onInput={this.HandleInputChange_By_New_LanList_CKEditor}
+                    value={this.state.News.new_LanList[`${index}`].content}
+                    cols="100"
+                    rows="6"
+                    placeholder="content" />
+                </TabPane>
+              )
+            })
+          }
+        </TabContent>
+      </td>
+    );
+
+
+  }
 
   render() {
     const { params } = this.props.params;
@@ -206,137 +208,137 @@ class News_Edit extends Component {
         <div className="col-xs-10">
           <div className="card">
             <div className="card-header">
-            編輯消息
+              編輯消息
             </div>
             <div className="card-block">
-            <form className="" onSubmit={this.Button_Submit}>
+              <form className="" onSubmit={this.Button_Submit}>
 
 
-            <table className="table table-striped table-bordered">
+                <table className="table table-striped table-bordered">
                   <tbody>
-                  <input type="hidden" id="id" name="id" value={this.state.News.id} />
+                    <input type="hidden" id="id" name="id" value={this.state.News.id} />
 
-                <TextInput name="listImage"
-                  labelName="列表圖片"
-                  className=""
-                  display={this.props.display_listImage}
-                  required={this.props.required_listImage}
-                  validMessage={{ required: '列表圖片 is reduired.' }}
-                  onInput={this.handleInputChange}
-                  value={this.state.News.listImage}
-                  placeholder="listImage"/>
+                    <TextInput name="listImage"
+                      labelName="列表圖片"
+                      className=""
+                      display={this.props.display_listImage}
+                      required={this.props.required_listImage}
+                      validMessage={{ required: '列表圖片 is reduired.' }}
+                      onInput={this.handleInputChange}
+                      value={this.state.News.listImage}
+                      placeholder="listImage" />
 
-                <TextInput name="category"
-                  labelName="類別"
-                  className=""
-                  display={this.props.display_category}
-                  required={this.props.required_category}
-                  validMessage={{ required: '類別 is reduired.' }}
-                  onInput={this.handleInputChange}
-                  value={this.state.News.category}
-                  placeholder="category"/>
+                    <TextInput name="category"
+                      labelName="類別"
+                      className=""
+                      display={this.props.display_category}
+                      required={this.props.required_category}
+                      validMessage={{ required: '類別 is reduired.' }}
+                      onInput={this.handleInputChange}
+                      value={this.state.News.category}
+                      placeholder="category" />
 
-                <TextInput name="priority"
-                  labelName="列表排序"
-                  className=""
-                  display={this.props.display_priority}
-                  required={this.props.required_priority}
-                  validMessage={{ required: '列表排序 is reduired.' }}
-                  onInput={this.handleInputChange}
-                  value={this.state.News.priority}
-                  placeholder="priority"/>
+                    <TextInput name="priority"
+                      labelName="列表排序"
+                      className=""
+                      display={this.props.display_priority}
+                      required={this.props.required_priority}
+                      validMessage={{ required: '列表排序 is reduired.' }}
+                      onInput={this.handleInputChange}
+                      value={this.state.News.priority}
+                      placeholder="priority" />
 
-                <TextInput name="startDate"
-                  labelName="上架時間"
-                  className=""
-                  display={this.props.display_startDate}
-                  required={this.props.required_startDate}
-                  validMessage={{ required: '上架時間 is reduired.' }}
-                  onInput={this.handleInputChange}
-                  value={this.state.News.startDate}
-                  placeholder="startDate"/>
+                    <TextInput name="startDate"
+                      labelName="上架時間"
+                      className=""
+                      display={this.props.display_startDate}
+                      required={this.props.required_startDate}
+                      validMessage={{ required: '上架時間 is reduired.' }}
+                      onInput={this.handleInputChange}
+                      value={this.state.News.startDate}
+                      placeholder="startDate" />
 
-                <TextInput name="endDate"
-                  labelName="下架時間"
-                  className=""
-                  display={this.props.display_endDate}
-                  required={this.props.required_endDate}
-                  validMessage={{ required: '下架時間 is reduired.' }}
-                  onInput={this.handleInputChange}
-                  value={this.state.News.endDate}
-                  placeholder="endDate"/>
-
-
-                 <DropDownList name="status"
-                  labelName="status"
-                  display={this.props.display_status}
-                  required={this.props.required_status} 
-                  validMessage={{required: 'Status is reduired.'}} 
-                  onInput={this.handleInputChange} 
-                  value={this.state.News.status}
-                  options={
-                    [
-                      {
-                        name:news_Enum.STOP.name,
-                        value:news_Enum.STOP.value
-                      },
-                      {
-                        name:news_Enum.NORMAL.name,
-                        value:news_Enum.NORMAL.value
-                      }
-                    ]}
-                  />
+                    <TextInput name="endDate"
+                      labelName="下架時間"
+                      className=""
+                      display={this.props.display_endDate}
+                      required={this.props.required_endDate}
+                      validMessage={{ required: '下架時間 is reduired.' }}
+                      onInput={this.handleInputChange}
+                      value={this.state.News.endDate}
+                      placeholder="endDate" />
 
 
-                  <TextInput name="createDate"
-                  labelName="建立時間"
-                  className=""
-                  display={this.props.display_createDate}
-                  required={this.props.required_createDate}
-                  validMessage={{ required: '建立時間 is reduired.' }}
-                  value={this.state.News.createDate}
-                  readOnly={true}
-                  placeholder="createDate"/>
+                    <DropDownList name="status"
+                      labelName="status"
+                      display={this.props.display_status}
+                      required={this.props.required_status}
+                      validMessage={{ required: 'Status is reduired.' }}
+                      onInput={this.handleInputChange}
+                      value={this.state.News.status}
+                      options={
+                        [
+                          {
+                            name: news_Enum.STOP.name,
+                            value: news_Enum.STOP.value
+                          },
+                          {
+                            name: news_Enum.NORMAL.name,
+                            value: news_Enum.NORMAL.value
+                          }
+                        ]}
+                    />
 
-                <TextInput name="createUser"
-                  labelName="建立者"
-                  className=""
-                  display={this.props.display_createUser}
-                  required={this.props.required_createUser}
-                  validMessage={{ required: '建立者 is reduired.' }}
-                  value={this.state.News.createUser}
-                  readOnly={true}
-                  placeholder="createUser"/>
 
-                <TextInput name="updateDate"
-                  labelName="更新時間"
-                  className=""
-                  display={this.props.display_updateDate}
-                  required={this.props.required_updateDate}
-                  validMessage={{ required: '更新時間 is reduired.' }}
-                  value={this.state.News.updateDate}
-                  readOnly={true}
-                  placeholder="updateDate"/>
+                    <TextInput name="createDate"
+                      labelName="建立時間"
+                      className=""
+                      display={this.props.display_createDate}
+                      required={this.props.required_createDate}
+                      validMessage={{ required: '建立時間 is reduired.' }}
+                      value={this.state.News.createDate}
+                      readOnly={true}
+                      placeholder="createDate" />
 
-                <TextInput name="updateUser"
-                  labelName="更新者"
-                  className=""
-                  display={this.props.display_updateUser}
-                  required={this.props.required_updateUser}
-                  validMessage={{ required: '更新者 is reduired.' }}
-                  value={this.state.News.updateUser}
-                  readOnly={true}
-                  placeholder="updateUser"/>
+                    <TextInput name="createUser"
+                      labelName="建立者"
+                      className=""
+                      display={this.props.display_createUser}
+                      required={this.props.required_createUser}
+                      validMessage={{ required: '建立者 is reduired.' }}
+                      value={this.state.News.createUser}
+                      readOnly={true}
+                      placeholder="createUser" />
 
-                  {this.Component_Nav()}
+                    <TextInput name="updateDate"
+                      labelName="更新時間"
+                      className=""
+                      display={this.props.display_updateDate}
+                      required={this.props.required_updateDate}
+                      validMessage={{ required: '更新時間 is reduired.' }}
+                      value={this.state.News.updateDate}
+                      readOnly={true}
+                      placeholder="updateDate" />
+
+                    <TextInput name="updateUser"
+                      labelName="更新者"
+                      className=""
+                      display={this.props.display_updateUser}
+                      required={this.props.required_updateUser}
+                      validMessage={{ required: '更新者 is reduired.' }}
+                      value={this.state.News.updateUser}
+                      readOnly={true}
+                      placeholder="updateUser" />
+
+                    {this.Component_Nav()}
 
                   </tbody>
                 </table>
 
                 <div className="form-group form-actions">
-                <Button color="primary" disabled={$invalid ? 'disabled' : false} >完成</Button>
-                {'\u00A0'}
-                    <Button color="warning" onClick={() => history.goBack()}>返回</Button>
+                  <Button color="primary" disabled={$invalid ? 'disabled' : false} >完成</Button>
+                  {'\u00A0'}
+                  <Button color="warning" onClick={() => history.goBack()}>返回</Button>
                 </div>
               </form>
             </div>
@@ -363,15 +365,15 @@ News_Edit.defaultProps = {
   display_updateDate: true,
   display_updateUser: true,
 
-/* */
-  required_listImage:false,
-  required_category:true,
-  required_priority:true,
-  required_startDate:true,
-  required_endDate:false,
-  required_status:true,
-  required_createDate:true,
-  required_createUser:true,
-  required_updateDate:true,
-  required_updateUser:true,
+  /* */
+  required_listImage: false,
+  required_category: true,
+  required_priority: true,
+  required_startDate: true,
+  required_endDate: false,
+  required_status: true,
+  required_createDate: true,
+  required_createUser: true,
+  required_updateDate: true,
+  required_updateUser: true,
 }
