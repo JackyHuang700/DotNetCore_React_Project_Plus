@@ -16,6 +16,9 @@ namespace DotNetCore_React.EntityFrameworkCore.Seeds
             {
 
                 var data1 = new List<AboutUs_Category>() {
+                     new AboutUs_Category{
+                  Name = "企業介紹",
+                },
                 new AboutUs_Category{
                   Name = "AboutUs_0",
                 },
