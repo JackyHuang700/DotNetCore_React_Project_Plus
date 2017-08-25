@@ -44,7 +44,7 @@ namespace DotNetCore_React.Application.ProductApp
             {
                 //語言表
                 var a_DB_List = new List<Product_Lan>();
-                foreach (var item in News.Product_LanList)
+                foreach (var item in News.LanList)
                 {
                     var aa = Mapper.Map<Product_Lan>(item);
                     aa.ProductId = roleDB.Id;
@@ -54,7 +54,7 @@ namespace DotNetCore_React.Application.ProductApp
 
                 //圖表
                 var b_DB_List = new List<Product_Image>();
-                foreach (var item in News.Product_ImageList)
+                foreach (var item in News.ImageList)
                 {
                     var aa = Mapper.Map<Product_Image>(item);
                     aa.ProductId = roleDB.Id;
@@ -62,8 +62,8 @@ namespace DotNetCore_React.Application.ProductApp
                     var aaa = _repository_image.Insert(aa);
                 }
 
-                var bSuccess = _repository_lan.Save() == News.Product_LanList.Count;
-                var cSuccess = _repository_image.Save() == News.Product_ImageList.Count;
+                var bSuccess = _repository_lan.Save() == News.LanList.Count;
+                var cSuccess = _repository_image.Save() == News.ImageList.Count;
 
                 if (bSuccess && cSuccess)
                 {
@@ -142,7 +142,7 @@ namespace DotNetCore_React.Application.ProductApp
             {
                 //抓取附表
                 var new_lans_List = _repository_image.GetAllList(c => c.ProductId == item.Id);
-                item.Product_ImageList = Mapper.Map<List<Product_ImageDto>>(new_lans_List);
+                item.ImageList = Mapper.Map<List<Product_ImageDto>>(new_lans_List);
             }
 
             //語言表
@@ -161,10 +161,10 @@ namespace DotNetCore_React.Application.ProductApp
             //抓取附表
             //語言
             var new_lans_List = _repository_lan.GetAllList(c => c.ProductId == a.Id);
-            newsDto.Product_LanList = Mapper.Map<List<Product_LanDto>>(new_lans_List);
+            newsDto.LanList = Mapper.Map<List<Product_LanDto>>(new_lans_List);
             //圖表
             var new_image_List = _repository_lan.GetAllList(c => c.ProductId == a.Id);
-            newsDto.Product_ImageList = Mapper.Map<List<Product_ImageDto>>(new_image_List);
+            newsDto.ImageList = Mapper.Map<List<Product_ImageDto>>(new_image_List);
             return newsDto;
         }
 
@@ -187,7 +187,7 @@ namespace DotNetCore_React.Application.ProductApp
             //更新副表
 
             //更新語系表
-            foreach (var item in News.Product_LanList)
+            foreach (var item in News.LanList)
             {
                 var getLandata = _repository_lan.FirstOrDefault(o => o.ProductId == newsDB.Id && o.LanguageId == item.LanguageId);
                 getLandata = Mapper.Map<Product_LanDto, Product_Lan>(item, getLandata, opt => opt.AfterMap((dto, dest) => { dest.ProductId = newsDB.Id; }));
@@ -196,7 +196,7 @@ namespace DotNetCore_React.Application.ProductApp
             }
 
             //更新圖表
-            foreach (var item in News.Product_ImageList)
+            foreach (var item in News.ImageList)
             {
                 var getLandata = _repository_image.FirstOrDefault(o => o.ProductId == newsDB.Id);
                 getLandata = Mapper.Map<Product_ImageDto, Product_Image>(item, getLandata, opt => opt.AfterMap((dto, dest) => { dest.ProductId = newsDB.Id; }));
@@ -204,8 +204,8 @@ namespace DotNetCore_React.Application.ProductApp
                 _repository_image.InsertOrUpdate(getLandata);
             }
 
-            var news_lan_effect = _repository_lan.Save() == News.Product_LanList.Count;
-            var news_image_effect = _repository_image.Save() == News.Product_ImageList.Count;
+            var news_lan_effect = _repository_lan.Save() == News.LanList.Count;
+            var news_image_effect = _repository_image.Save() == News.ImageList.Count;
 
             var success_effect = news_lan_effect && news_effect && news_image_effect;
             myJson["success"] = success_effect;

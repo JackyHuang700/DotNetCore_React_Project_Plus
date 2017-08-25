@@ -29,7 +29,7 @@ namespace DotNetCore_React.Application.LocationApp.Dtos
 
 
         ////°Æªí
-        public List<Location_LanDto> Location_LanList { get; set; }
-        public List<Location_ImageDto> Location_ImageList { get; set; }
+        public List<Location_LanDto> LanList { get; set; }
+        public List<Location_ImageDto> ImageList { get; set; }
     }
 }

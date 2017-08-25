@@ -30,6 +30,6 @@ namespace DotNetCore_React.Application.ContactUsApp.Dtos
         public string UpdateUser { get; set; }
 
         ////°Æªí
-        public List<ContactUs_CategoryDto> ContactUs_CategoryList { get; set; }
+        public List<ContactUs_CategoryDto> CategoryList { get; set; }
     }
 }

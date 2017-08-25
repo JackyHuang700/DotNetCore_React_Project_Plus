@@ -44,7 +44,7 @@ namespace DotNetCore_React.Application.LocationApp
             {
                 //語言表
                 var a_DB_List = new List<Location_Lan>();
-                foreach (var item in News.Location_LanList)
+                foreach (var item in News.LanList)
                 {
                     var aa = Mapper.Map<Location_Lan>(item);
                     aa.LocationId = roleDB.Id;
@@ -54,7 +54,7 @@ namespace DotNetCore_React.Application.LocationApp
 
                 //圖表
                 var b_DB_List = new List<Location_Image>();
-                foreach (var item in News.Location_ImageList)
+                foreach (var item in News.ImageList)
                 {
                     var aa = Mapper.Map<Location_Image>(item);
                     aa.LocationId = roleDB.Id;
@@ -62,8 +62,8 @@ namespace DotNetCore_React.Application.LocationApp
                     var aaa = _repository_image.Insert(aa);
                 }
 
-                var bSuccess = _repository_lan.Save() == News.Location_LanList.Count;
-                var cSuccess = _repository_image.Save() == News.Location_ImageList.Count;
+                var bSuccess = _repository_lan.Save() == News.LanList.Count;
+                var cSuccess = _repository_image.Save() == News.ImageList.Count;
 
                 if (bSuccess && cSuccess)
                 {
@@ -157,10 +157,10 @@ namespace DotNetCore_React.Application.LocationApp
             var newsDto = Mapper.Map<LocationDto>(a);
             //抓語言表
             var new_lans_List = _repository_lan.GetAllList(c => c.LocationId == a.Id);
-            newsDto.Location_LanList = Mapper.Map<List<Location_LanDto>>(new_lans_List);
+            newsDto.LanList = Mapper.Map<List<Location_LanDto>>(new_lans_List);
             //抓圖表
             var new_image_List = _repository_image.GetAllList(c => c.LocationId == a.Id);
-            newsDto.Location_ImageList = Mapper.Map<List<Location_ImageDto>>(new_image_List);
+            newsDto.ImageList = Mapper.Map<List<Location_ImageDto>>(new_image_List);
 
             return newsDto;
         }
@@ -184,7 +184,7 @@ namespace DotNetCore_React.Application.LocationApp
             //更新副表
 
             //更新語系表
-            foreach (var item in News.Location_LanList)
+            foreach (var item in News.LanList)
             {
                 var getLandata = _repository_lan.FirstOrDefault(o => o.LocationId == newsDB.Id && o.LanguageId == item.LanguageId);
                 getLandata = Mapper.Map<Location_LanDto, Location_Lan>(item, getLandata, opt => opt.AfterMap((dto, dest) => { dest.LocationId = newsDB.Id; }));
@@ -193,7 +193,7 @@ namespace DotNetCore_React.Application.LocationApp
             }
 
             //更新圖表
-            foreach (var item in News.Location_ImageList)
+            foreach (var item in News.ImageList)
             {
                 var getLandata = _repository_image.FirstOrDefault(o => o.LocationId == newsDB.Id);
                 getLandata = Mapper.Map<Location_ImageDto, Location_Image>(item, getLandata, opt => opt.AfterMap((dto, dest) => { dest.LocationId = newsDB.Id; }));
@@ -201,8 +201,8 @@ namespace DotNetCore_React.Application.LocationApp
                 _repository_image.InsertOrUpdate(getLandata);
             }
 
-            var news_lan_effect = _repository_lan.Save() == News.Location_LanList.Count;
-            var news_image_effect = _repository_image.Save() == News.Location_ImageList.Count;
+            var news_lan_effect = _repository_lan.Save() == News.LanList.Count;
+            var news_image_effect = _repository_image.Save() == News.ImageList.Count;
 
             var success_effect = news_lan_effect && news_effect && news_image_effect;
             myJson["success"] = success_effect;

@@ -18,7 +18,7 @@ namespace DotNetCore_React.Application.AboutUsApp.Dtos
         public string UpdateUser { get; set; }
 
         ////°Æªí
-        public List<AboutUs_LanDto> AboutUs_LanList { get; set; }
-        public List<AboutUs_CategoryDto> AboutUs_CategoryList { get; set; }
+        public List<AboutUs_LanDto> LanList { get; set; }
+        public List<AboutUs_CategoryDto> CategoryList { get; set; }
     }
 }

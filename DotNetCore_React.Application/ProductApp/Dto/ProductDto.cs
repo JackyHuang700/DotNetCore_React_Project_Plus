@@ -21,7 +21,7 @@ namespace DotNetCore_React.Application.ProductApp.Dtos
 
 
         ////°Æªí
-        public List<Product_LanDto> Product_LanList { get; set; }
-        public List<Product_ImageDto> Product_ImageList { get; set; }
+        public List<Product_LanDto> LanList { get; set; }
+        public List<Product_ImageDto> ImageList { get; set; }
     }
 }

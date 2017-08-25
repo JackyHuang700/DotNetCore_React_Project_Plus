@@ -45,14 +45,14 @@ namespace DotNetCore_React.Application.AboutUsApp
             //副表
             if (aSuccess)
             {
-                foreach (var item in News.AboutUs_LanList)
+                foreach (var item in News.LanList)
                 {
                     var aa = Mapper.Map<AboutUs_Lan>(item);
                     aa.AboutUsId = roleDB.Id;
                     var aaa = _repository_lan.Insert(aa);
                 }
 
-                var bSuccess = _repository_lan.Save() == News.AboutUs_LanList.Count;
+                var bSuccess = _repository_lan.Save() == News.LanList.Count;
 
                 if (bSuccess)
                 {
@@ -95,6 +95,13 @@ namespace DotNetCore_React.Application.AboutUsApp
             return newsDtoList;
         }
 
+        public List<AboutUs_CategoryDto> GetAll_Category()
+        {
+            var a = _repository_category.GetAllList();
+            var newsDtoList = Mapper.Map<List<AboutUs_CategoryDto>>(a);
+            return newsDtoList;
+        }
+
         public AboutUsDto GetSingle(string id)
         {
             //轉換Guid
@@ -107,7 +114,7 @@ namespace DotNetCore_React.Application.AboutUsApp
 
             //抓取附表
             var new_lans_List = _repository_lan.GetAllList(c => c.AboutUsId == newsDto.Id);
-            newsDto.AboutUs_LanList = Mapper.Map<List<AboutUs_LanDto>>(new_lans_List);
+            newsDto.LanList = Mapper.Map<List<AboutUs_LanDto>>(new_lans_List);
 
             return newsDto;
         }
@@ -131,7 +138,7 @@ namespace DotNetCore_React.Application.AboutUsApp
             var news_effect = _repository.Save() > 0;
 
             //更新副表
-            foreach (var newsLanDTO in News.AboutUs_LanList)
+            foreach (var newsLanDTO in News.LanList)
             {
                 var getLandata = _repository_lan.FirstOrDefault(o => o.AboutUsId == newsDB.Id
                 //&& o.LanguageId == newsLanDTO.LanguageId
@@ -141,7 +148,7 @@ namespace DotNetCore_React.Application.AboutUsApp
                 _repository_lan.InsertOrUpdate(getLandata);
             }
 
-            var news_lan_effect = _repository_lan.Save() == News.AboutUs_LanList.Count;
+            var news_lan_effect = _repository_lan.Save() == News.LanList.Count;
 
             var success_effect = news_lan_effect && news_effect;
             myJson["success"] = success_effect;
