@@ -94,12 +94,13 @@ class News_Create extends Component {
 
   //語系元件
   Component_Nav() {
-
+    var self = this;
+    
     return (
       <td colSpan="2">
         <Nav tabs>
           {
-            this.state.Sys_Language_List.map((sys, index) => {
+            self.state.Sys_Language_List.map((sys, index) => {
               return (
                 <NavItem>
 
@@ -116,10 +117,10 @@ class News_Create extends Component {
         </Nav>
         <TabContent activeTab={this.state.activeTab}>
           {
-            this.state.Sys_Language_List.map((sys, index) => {
+            self.state.Sys_Language_List.map((sys, index) => {
 
               //填入語系ID
-              { this.state.News.new_LanList[index].languageId = sys.id }
+              { self.state.News.new_LanList[index].languageId = sys.id }
 
               return (
                 <TabPane tabId={`${index}`}>
