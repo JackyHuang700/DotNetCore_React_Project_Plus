@@ -13,6 +13,10 @@ using DotNetCore_React.Application.Sys_LanguageApp.Dtos;
 
 using DotNetCore_React.Domain.Entities;
 using DotNetCore_React.Application.Product_CategoryApp.Dtos;
+using DotNetCore_React.Application.ContactUsApp.Dtos;
+using DotNetCore_React.Application.LocationApp.Dtos;
+using DotNetCore_React.Application.ProductApp.Dtos;
+using DotNetCore_React.Application.AboutUsApp.Dtos;
 
 namespace DotNetCore_React.Application
 {
@@ -56,6 +60,66 @@ namespace DotNetCore_React.Application
                 cfg.CreateMap<Product_Category_LanDto, Product_Category_Lan>()
                 .ForMember(opt => opt.Id, dest => dest.Ignore())
                 .ForMember(opt => opt.LanguageId, dest => dest.Ignore());
+
+
+                cfg.CreateMap<Product, ProductDto>();
+                cfg.CreateMap<ProductDto, Product>()
+                .ForMember(opt => opt.Id, dest => dest.Ignore())
+                .ForMember(opt => opt.CreateDate, dest => dest.Ignore())
+                .ForMember(opt => opt.CreateUser, dest => dest.Ignore());
+                cfg.CreateMap<Product_Lan, Product_LanDto>();
+                cfg.CreateMap<Product_LanDto, Product_Lan>()
+                .ForMember(opt => opt.Id, dest => dest.Ignore())
+                .ForMember(opt => opt.ProductId, dest => dest.Ignore())
+                .ForMember(opt => opt.LanguageId, dest => dest.Ignore());
+                cfg.CreateMap<Product_Image, Product_ImageDto>();
+                cfg.CreateMap<Product_ImageDto, Product_Image>()
+                .ForMember(opt => opt.Id, dest => dest.Ignore())
+                .ForMember(opt => opt.ProductId, dest => dest.Ignore());
+
+
+                cfg.CreateMap<ContactUs, ContactUsDto>();
+                cfg.CreateMap<ContactUsDto, ContactUs>()
+                .ForMember(opt => opt.Id, dest => dest.Ignore())
+                .ForMember(opt => opt.CreateDate, dest => dest.Ignore())
+                .ForMember(opt => opt.CreateUser, dest => dest.Ignore());
+                cfg.CreateMap<ContactUs_Category, ContactUs_CategoryDto>();
+                cfg.CreateMap<ContactUs_CategoryDto, ContactUs_Category>()
+                .ForMember(opt => opt.Id, dest => dest.Ignore())
+                .ForMember(opt => opt.LanguageId, dest => dest.Ignore());
+
+
+                cfg.CreateMap<AboutUs, AboutUsDto>();
+                cfg.CreateMap<AboutUsDto, AboutUs>()
+                .ForMember(opt => opt.Id, dest => dest.Ignore())
+                .ForMember(opt => opt.CreateDate, dest => dest.Ignore())
+                .ForMember(opt => opt.CreateUser, dest => dest.Ignore());
+                cfg.CreateMap<AboutUs_Lan, AboutUs_LanDto>();
+                cfg.CreateMap<AboutUs_LanDto, AboutUs_Lan>()
+                .ForMember(opt => opt.Id, dest => dest.Ignore())
+                .ForMember(opt => opt.AboutUsId, dest => dest.Ignore())
+                .ForMember(opt => opt.LanguageId, dest => dest.Ignore());
+                cfg.CreateMap<AboutUs_Category, AboutUs_CategoryDto>();
+                cfg.CreateMap<AboutUs_CategoryDto, AboutUs_Category>()
+                .ForMember(opt => opt.Id, dest => dest.Ignore());
+
+                cfg.CreateMap<Location, LocationDto>();
+                cfg.CreateMap<LocationDto, Location>()
+                .ForMember(opt => opt.Id, dest => dest.Ignore())
+                .ForMember(opt => opt.CreateDate, dest => dest.Ignore())
+                .ForMember(opt => opt.CreateUser, dest => dest.Ignore());
+                cfg.CreateMap<Location_Lan, Location_LanDto>();
+                cfg.CreateMap<Location_LanDto, Location_Lan>()
+                .ForMember(opt => opt.Id, dest => dest.Ignore())
+                .ForMember(opt => opt.LocationId, dest => dest.Ignore())
+                .ForMember(opt => opt.LanguageId, dest => dest.Ignore());
+                cfg.CreateMap<Location_Image, Location_ImageDto>();
+                cfg.CreateMap<Location_ImageDto, Location_Image>()
+                .ForMember(opt => opt.Id, dest => dest.Ignore())
+                .ForMember(opt => opt.LocationId, dest => dest.Ignore());
+
+
+
 
 
                 cfg.CreateMap<Sys_Language, Sys_LanguageDto>();
