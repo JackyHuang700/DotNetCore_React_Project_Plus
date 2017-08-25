@@ -32,8 +32,13 @@ import News_View from './views/Backend/News/News_View'
 import AboutUs_View from './views/Backend/AboutUs/AboutUs_View'
 import AboutUs_Create from './views/Backend/AboutUs/AboutUs_Create'
 import AboutUs_Delete from './views/Backend/AboutUs/AboutUs_Delete'
-// import AboutUs_Edit from './views/Backend/AboutUs/AboutUs_Edit'
+import AboutUs_Edit from './views/Backend/AboutUs/ABOUTUS_EDIT'
 
+
+import ContactUs_View from './views/Backend/ContactUs/ContactUs_View'
+// import ContactUs_Create from './views/Backend/ContactUs/ContactUs_Create'
+// import ContactUs_Delete from './views/Backend/ContactUs/ContactUs_Delete'
+// import ContactUs_Edit from './views/Backend/ContactUs/ContactUs_EDIT'
 
 /**
   * 
@@ -63,7 +68,11 @@ export default (
     <BackendRoute path='/AboutUs' exact component={AboutUs_View} />
     <BackendRoute path='/AboutUs/Create' component={AboutUs_Create} />
     <BackendRoute path='/AboutUs/Delete/:id/:delete' component={AboutUs_Delete} />
-    {/*<BackendRoute path='/AboutUs/Edit/:id' component={AboutUs_Edit} /> */}
+    <BackendRoute path='/AboutUs/Edit/:id' component={AboutUs_Edit} />
+    <BackendRoute path='/ContactUs' exact component={ContactUs_View} />
+    {/* <BackendRoute path='/ContactUs/Create' component={ContactUs_Create} />
+    <BackendRoute path='/ContactUs/Delete/:id/:delete' component={ContactUs_Delete} />
+    <BackendRoute path='/ContactUs/Edit/:id' component={ContactUs_Edit} /> */}
     <Route render={() => <h3>No Match Route</h3>} />
   </Switch>
 )
