@@ -24,12 +24,60 @@ namespace DotNetCore_React.Application.ContactUsApp
 
         public Dictionary<string, object> Create(ContactUsDto News)
         {
-            throw new NotImplementedException();
+            var myJson_Return = new Dictionary<string, object>()
+            {
+                {"success",false },
+                {"message",null  }
+            };
+
+
+            //主表
+            var date = DateTime.Now;
+            var roleDB = Mapper.Map<ContactUs>(News);
+            roleDB.CreateDate = date;
+            roleDB.UpdateDate = date;
+            _repository.Insert(roleDB);
+            var aSuccess = _repository.Save() > 0;
+
+            myJson_Return["success"] = aSuccess;
+            myJson_Return["message"] = aSuccess ? "成功" : "失敗";
+
+            return myJson_Return;
         }
 
         public Dictionary<string, object> Delete(string id)
         {
-            throw new NotImplementedException();
+            var myJson = new Dictionary<string, object>()
+            {
+                {"success",false },
+                {"message",null  }
+            };
+
+
+            //轉換Guid
+            Guid guid;
+            Guid.TryParse(id, out guid);
+
+            //刪除語言表
+            //var news_LanList = _repository_lan.GetAllList(c => c.LocationId == guid);
+            //_repository_lan.DeleteRange(news_LanList);
+            //var news_lan_effect = _repository_lan.Save() == news_LanList.Count;
+
+
+            //刪除圖表
+            //var news_ImageList = _repository_image.GetAllList(c => c.LocationId == guid);
+            //_repository_image.DeleteRange(news_ImageList);
+            //var news_image_effect = _repository_image.Save() == news_LanList.Count;
+
+            //刪除主表
+            _repository.Delete(guid);
+            var news_effect = _repository.Save() > 0;
+
+            var success_effect = news_effect;
+            myJson["success"] = success_effect;
+            myJson["message"] = success_effect ? "刪除成功" : "刪除失敗";
+
+            return myJson;
         }
 
         public List<ContactUsDto> GetAll()
