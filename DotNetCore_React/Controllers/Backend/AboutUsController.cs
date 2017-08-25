@@ -25,7 +25,7 @@ namespace DotNetCore_React.Controllers.Backend
 
         [HttpGet("[action]")]
 
-        public ActionResult Get_Product(string id)
+        public ActionResult GetAboutUs(string id)
         {
             var myJson = _service.GetSingle(id);
             return Json(myJson);
@@ -34,7 +34,7 @@ namespace DotNetCore_React.Controllers.Backend
 
         [HttpGet("[action]")]
 
-        public ActionResult Product_View()
+        public ActionResult AboutUs_View()
         {
             var myJson = _service.GetAll();
             return Json(myJson);
