@@ -186,10 +186,10 @@ class News_Create extends Component {
     }
 
     axios.post('/api/News/Upload_Pic/', formData).then((response) => {
-
-      if (response.success) {
+      
+      if (response.data.success) {
         var newNews = Object.assign(this.state.News);
-        newNews.listImage = newNews.listImage;
+        newNews.listImage = response.data.listImage;
         this.setState({
           News: newNews
         });

@@ -191,7 +191,7 @@ namespace DotNetCore_React.Application.NewsApp
                 {"message",null  }
             };
 
-            var filePath = $"{_config.UPLOAD_PATH}NEWS\\";
+            var filePath = $"{_config.UPLOAD_PATH}";
             var wwwrootPath =$"{ _hostEnvironment.WebRootPath}{filePath}";
             Directory.GetParent(wwwrootPath).Create();
 
