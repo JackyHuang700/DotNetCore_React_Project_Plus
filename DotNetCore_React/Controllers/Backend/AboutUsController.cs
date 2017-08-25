@@ -40,28 +40,35 @@ namespace DotNetCore_React.Controllers.Backend
             return Json(myJson);
         }
 
+        [HttpGet("[action]")]
 
-        [HttpPost("[action]")]
-
-        public ActionResult Create([FromBody] AboutUsDto news)
+        public ActionResult Category_View()
         {
-            //登記操作者
-            news.CreateUser = _currentUser.UserName;
-            news.UpdateUser = _currentUser.UserName;
-
-            //
-            var myJson = _service.Create(news);
+            var myJson = _service.GetAll_Category();
             return Json(myJson);
         }
 
         [HttpPost("[action]")]
 
-        public ActionResult Edit([FromBody] AboutUsDto news)
+        public ActionResult Create([FromBody] AboutUsDto viewModel)
         {
             //登記操作者
-            news.UpdateUser = _currentUser.UserName;
+            viewModel.CreateUser = _currentUser.UserName;
+            viewModel.UpdateUser = _currentUser.UserName;
 
-            var myJson = _service.Update(news);
+            //
+            var myJson = _service.Create(viewModel);
+            return Json(myJson);
+        }
+
+        [HttpPost("[action]")]
+
+        public ActionResult Edit([FromBody] AboutUsDto viewModel)
+        {
+            //登記操作者
+            viewModel.UpdateUser = _currentUser.UserName;
+
+            var myJson = _service.Update(viewModel);
             return Json(myJson);
         }
 

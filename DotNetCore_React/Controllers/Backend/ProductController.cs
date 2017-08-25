@@ -43,25 +43,25 @@ namespace DotNetCore_React.Controllers.Backend
 
         [HttpPost("[action]")]
 
-        public ActionResult Create([FromBody] ProductDto news)
+        public ActionResult Create([FromBody] ProductDto viewModel)
         {
             //登記操作者
-            news.CreateUser = _currentUser.UserName;
-            news.UpdateUser = _currentUser.UserName;
+            viewModel.CreateUser = _currentUser.UserName;
+            viewModel.UpdateUser = _currentUser.UserName;
 
             //
-            var myJson = _service.Create(news);
+            var myJson = _service.Create(viewModel);
             return Json(myJson);
         }
 
         [HttpPost("[action]")]
 
-        public ActionResult Edit([FromBody] ProductDto news)
+        public ActionResult Edit([FromBody] ProductDto viewModel)
         {
             //登記操作者
-            news.UpdateUser = _currentUser.UserName;
+            viewModel.UpdateUser = _currentUser.UserName;
 
-            var myJson = _service.Update(news);
+            var myJson = _service.Update(viewModel);
             return Json(myJson);
         }
 
