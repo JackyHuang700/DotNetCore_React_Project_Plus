@@ -7,9 +7,8 @@ namespace DotNetCore_React.Domain.Entities
     /// <summary>
     /// 關於我們
     /// </summary>
-    public class AboutUs_Category : Entity
+    public class AboutUs_Category : Entity_Int
     {
-        public Guid AboutUsId { get; set; }
 
         public string Name { get; set; }
     }
