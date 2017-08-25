@@ -10,6 +10,7 @@ namespace DotNetCore_React.Domain.Entities
     public class AboutUs_Lan : Entity
     {
         public Guid AboutUsId { get; set; }
+        public int LanguageId { get; set; }
 
         public string Content { get; set; }
     }
