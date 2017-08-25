@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DotNetCore_React.Domain.IRepositories
 {
-    public interface IAboutUs_CategoryRepository : IRepository<AboutUs_Category>
+    public interface IAboutUs_CategoryRepository : IRepository_Int<AboutUs_Category>
     {
     }
 }
