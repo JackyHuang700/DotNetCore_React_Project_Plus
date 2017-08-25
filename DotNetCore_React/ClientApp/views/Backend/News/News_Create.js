@@ -27,6 +27,7 @@ class News_Create extends Component {
       News: {
         priority: '1',
         new_LanList: [],
+        status: news_Enum.NORMAL.value,
       },
       Sys_Language_List: [],
       uploadedFile: [],
