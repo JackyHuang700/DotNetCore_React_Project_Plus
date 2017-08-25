@@ -38,6 +38,7 @@ namespace DotNetCore_React.EntityFrameworkCore.Seeds
             News_LanSeed();
             NewsSeed();     
             Sys_LanguageSeed();
+            AboutUsSeed();
         }
 
 
