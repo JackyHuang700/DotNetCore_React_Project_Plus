@@ -23,7 +23,7 @@ namespace DotNetCore_React.Controllers
 
         [HttpGet("[action]")]
 
-        public ActionResult Get_Location(string id)
+        public ActionResult Get_ContactUs(string id)
         {
             var myJson = _service.GetSingle(id);
             return Json(myJson);
@@ -32,7 +32,7 @@ namespace DotNetCore_React.Controllers
 
         [HttpGet("[action]")]
 
-        public ActionResult Location_View()
+        public ActionResult ContactUs_View()
         {
             var myJson = _service.GetAll();
             return Json(myJson);
