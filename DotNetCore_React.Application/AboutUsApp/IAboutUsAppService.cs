@@ -9,6 +9,9 @@ namespace DotNetCore_React.Application.AboutUsApp
         //根據帳號獲取權限
         List<AboutUsDto> GetAll();
 
+        List<AboutUs_CategoryDto> GetAll_Category();
+
+
         AboutUsDto GetSingle(string id);
 
 
