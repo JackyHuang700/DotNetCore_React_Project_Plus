@@ -5,12 +5,16 @@
     <IsPackable>false</IsPackable>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="ClientApp\css\**" />
     <Compile Remove="ClientApp\views\Backend\News_Lan\**" />
     <Compile Remove="ClientApp\views\Backend\Sys_Language\**" />
+    <Content Remove="ClientApp\css\**" />
     <Content Remove="ClientApp\views\Backend\News_Lan\**" />
     <Content Remove="ClientApp\views\Backend\Sys_Language\**" />
+    <EmbeddedResource Remove="ClientApp\css\**" />
     <EmbeddedResource Remove="ClientApp\views\Backend\News_Lan\**" />
     <EmbeddedResource Remove="ClientApp\views\Backend\Sys_Language\**" />
+    <None Remove="ClientApp\css\**" />
     <None Remove="ClientApp\views\Backend\News_Lan\**" />
     <None Remove="ClientApp\views\Backend\Sys_Language\**" />
   </ItemGroup>
@@ -32,7 +36,6 @@
     <ProjectReference Include="..\DotNetCore_React.Application\DotNetCore_React.Application.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ClientApp\css\" />
     <Folder Include="ClientApp\views\Backend\News\" />
     <Folder Include="ClientApp\views\Backend\Personal\" />
   </ItemGroup>
