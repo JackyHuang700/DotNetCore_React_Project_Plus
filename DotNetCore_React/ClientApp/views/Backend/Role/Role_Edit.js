@@ -23,10 +23,8 @@ class Role_Edit_Show extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
 
     //
-
     this.Title = this.Title.bind(this);
     this.Bind_handleInputChange = this.Bind_handleInputChange.bind(this);
-    this.Button_Submit = this.Button_Submit.bind(this);
 
   }
 

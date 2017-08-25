@@ -1,5 +1,6 @@
 ﻿using DotNetCore_React.Application.NewsApp;
 using DotNetCore_React.Application.NewsApp.Dtos;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -69,7 +70,15 @@ namespace DotNetCore_React.Controllers
         public ActionResult Delete(string id)
         {
             var myJson = _service.Delete(id);
-            
+
+            return Json(myJson);
+        }
+
+        [HttpPost("[action]")]
+        public ActionResult Upload_Pic(List<IFormFile> files)
+        {
+
+            var myJson = _service.Upload_Pic(files);
             return Json(myJson);
         }
     }
