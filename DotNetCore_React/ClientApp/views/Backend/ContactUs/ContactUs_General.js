@@ -20,7 +20,7 @@ export function GetData() {
     const self = this;
 
     axios({
-        url: `/api/AboutUs/GetAboutUs?id=${this.props.match.params.id}`,
+        url: `/api/ContactUs/GetContactUs?id=${this.props.match.params.id}`,
         method: 'GET',
         data: {
         }

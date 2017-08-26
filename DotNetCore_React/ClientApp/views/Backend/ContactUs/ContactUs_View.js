@@ -66,7 +66,7 @@ export default class ContactUs_View extends Component {
     }
 
     OnClick_Delete(event) {
-        history.push(`/ContactUs/Delete/${event.currentTarget.getAttribute('data-id')}/${true}`);
+        history.push(`/ContactUs/Delete/${event.currentTarget.getAttribute('data-id')}/${false}`);
     }
 
     OnClick_Create(event) {
