@@ -64,8 +64,30 @@ var news_Enum = {
 }
 
 
+//聯絡我們
+var contactUs_Enum = {
+    UNREPLY: {
+        "value": "0",
+        "name": "尚未回覆",
+    },
+
+    REPLY: {
+        "value": "1",
+        "name": "已回覆",
+    },
+
+
+    NOTREPLY: {
+        "value": "2",
+        "name": "無須回覆",
+    },
+    
+}
+
+
 export {
     role_Enum,
     user_Enum,
     news_Enum,
+    contactUs_Enum,
 };
