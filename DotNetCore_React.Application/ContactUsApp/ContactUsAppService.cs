@@ -22,6 +22,7 @@ namespace DotNetCore_React.Application.ContactUsApp
             _repository_category = repository_category;
         }
 
+        //不需要實作
         public Dictionary<string, object> Create(ContactUsDto News)
         {
             var myJson_Return = new Dictionary<string, object>()
@@ -32,19 +33,20 @@ namespace DotNetCore_React.Application.ContactUsApp
 
 
             //主表
-            var date = DateTime.Now;
-            var roleDB = Mapper.Map<ContactUs>(News);
-            roleDB.CreateDate = date;
-            roleDB.UpdateDate = date;
-            _repository.Insert(roleDB);
-            var aSuccess = _repository.Save() > 0;
+            //var date = DateTime.Now;
+            //var roleDB = Mapper.Map<ContactUs>(News);
+            //roleDB.CreateDate = date;
+            //roleDB.UpdateDate = date;
+            //_repository.Insert(roleDB);
+            //var aSuccess = _repository.Save() > 0;
 
-            myJson_Return["success"] = aSuccess;
-            myJson_Return["message"] = aSuccess ? "成功" : "失敗";
+            //myJson_Return["success"] = aSuccess;
+            //myJson_Return["message"] = aSuccess ? "成功" : "失敗";
 
             return myJson_Return;
         }
 
+        //不需要實作
         public Dictionary<string, object> Delete(string id)
         {
             var myJson = new Dictionary<string, object>()
@@ -54,9 +56,9 @@ namespace DotNetCore_React.Application.ContactUsApp
             };
 
 
-            //轉換Guid
-            Guid guid;
-            Guid.TryParse(id, out guid);
+            ////轉換Guid
+            //Guid guid;
+            //Guid.TryParse(id, out guid);
 
             //刪除語言表
             //var news_LanList = _repository_lan.GetAllList(c => c.LocationId == guid);
@@ -70,12 +72,12 @@ namespace DotNetCore_React.Application.ContactUsApp
             //var news_image_effect = _repository_image.Save() == news_LanList.Count;
 
             //刪除主表
-            _repository.Delete(guid);
-            var news_effect = _repository.Save() > 0;
+            //_repository.Delete(guid);
+            //var news_effect = _repository.Save() > 0;
 
-            var success_effect = news_effect;
-            myJson["success"] = success_effect;
-            myJson["message"] = success_effect ? "刪除成功" : "刪除失敗";
+            //var success_effect = news_effect;
+            //myJson["success"] = success_effect;
+            //myJson["message"] = success_effect ? "刪除成功" : "刪除失敗";
 
             return myJson;
         }
