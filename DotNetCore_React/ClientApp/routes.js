@@ -47,6 +47,17 @@ import Location_Delete from './views/Backend/Location/Location_Delete'
 import Location_Edit from './views/Backend/Location/Location_EDIT'
 
 
+
+import Product_Category_View from './views/Backend/Product_Category/Product_Category_View'
+// import Product_Category_Create from './views/Backend/Product_Category/Product_Category_Create'
+// import Product_Category_Delete from './views/Backend/Product_Category/Product_Category_Delete'
+// import Product_Category_Edit from './views/Backend/Product_Category/Product_Category_EDIT'
+
+// import Product_View from './views/Backend/Product/Product_View'
+// import Product_Create from './views/Backend/Product/Product_Create'
+// import Product_Delete from './views/Backend/Product/Product_Delete'
+// import Product_Edit from './views/Backend/Product/Product_EDIT'
+
 /**
   * 
   * 已知Breadcrumb�呼�這隻
@@ -80,11 +91,21 @@ export default (
     {/* <BackendRoute path='/ContactUs/Create' component={ContactUs_Create} /> */}
     <BackendRoute path='/ContactUs/Delete/:id/:delete' component={ContactUs_Delete} />
     <BackendRoute path='/ContactUs/Edit/:id' component={ContactUs_Edit} />
-
     <BackendRoute path='/Location' exact component={Location_View} />
     <BackendRoute path='/Location/Create' component={Location_Create} />
     <BackendRoute path='/Location/Delete/:id/:delete' component={Location_Delete} />
     <BackendRoute path='/Location/Edit/:id' component={Location_Edit} />
+
+
+    <BackendRoute path='/Product_Category' exact component={Product_Category_View} />
+    {/* <BackendRoute path='/Product_Category/Create' component={Product_Category_Create} /> */}
+    {/* <BackendRoute path='/Product_Category/Delete/:id/:delete' component={Product_Category_Delete} /> */}
+    {/* <BackendRoute path='/Product_Category/Edit/:id' component={Product_Category_Edit} /> */}
+   
+    {/* <BackendRoute path='/Product' exact component={Product_View} /> */}
+    {/* <BackendRoute path='/Product/Create' component={Product_Create} /> */}
+    {/* <BackendRoute path='/Product/Delete/:id/:delete' component={Product_Delete} /> */}
+    {/* <BackendRoute path='/Product/Edit/:id' component={Product_Edit} /> */}
     <Route render={() => <h3>No Match Route</h3>} />
   </Switch>
 )
