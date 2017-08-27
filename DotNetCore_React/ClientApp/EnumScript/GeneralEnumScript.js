@@ -60,7 +60,7 @@ var news_Enum = {
         "value": "-1",
         "name": "刪除",
     },
-    
+
 }
 
 
@@ -81,7 +81,26 @@ var contactUs_Enum = {
         "value": "2",
         "name": "無須回覆",
     },
-    
+
+}
+
+
+var location_Area_Enum = {
+    TAIPEI: {
+        "value": "1",
+        "name": "北部",
+    },
+
+    TAICHUNG: {
+        "value": "2",
+        "name": "中部",
+    },
+
+
+    TAINAN: {
+        "value": "3",
+        "name": "南部",
+    },
 }
 
 
@@ -90,4 +109,5 @@ export {
     user_Enum,
     news_Enum,
     contactUs_Enum,
+    location_Area_Enum,
 };
