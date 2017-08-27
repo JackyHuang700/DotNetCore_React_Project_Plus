@@ -1,5 +1,6 @@
 ﻿using DotNetCore_React.Application.LocationApp;
 using DotNetCore_React.Application.LocationApp.Dtos;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -70,6 +71,14 @@ namespace DotNetCore_React.Controllers
         {
             var myJson = _service.Delete(id);
             
+            return Json(myJson);
+        }
+
+        [HttpPost("[action]")]
+        public ActionResult Upload_Pic(List<IFormFile> files)
+        {
+
+            var myJson = _service.Upload_Pic(files);
             return Json(myJson);
         }
     }

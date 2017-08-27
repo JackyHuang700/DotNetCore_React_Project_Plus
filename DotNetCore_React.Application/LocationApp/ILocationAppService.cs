@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using DotNetCore_React.Application.LocationApp.Dtos;
+using Microsoft.AspNetCore.Http;
 
 namespace DotNetCore_React.Application.LocationApp
 {
@@ -19,5 +20,8 @@ namespace DotNetCore_React.Application.LocationApp
         Dictionary<string, object> Create(LocationDto News);
 
         Dictionary<string, object> Delete(string id);
+
+
+        Dictionary<string, object> Upload_Pic(List<IFormFile> files);
     }
 }

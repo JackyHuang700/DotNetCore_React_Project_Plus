@@ -6,7 +6,11 @@ using AutoMapper;
 using DotNetCore_React.Domain.Entities;
 using DotNetCore_React.Application.ProductApp;
 using System.Linq;
-
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
+using DotNetCore_React.Utility;
+using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Http;
 
 namespace DotNetCore_React.Application.LocationApp
 {
@@ -15,12 +19,18 @@ namespace DotNetCore_React.Application.LocationApp
         private readonly ILocationRepository _repository;
         private readonly ILocation_LanRepository _repository_lan;
         private readonly ILocation_ImageRepository _repository_image;
+        private readonly IHostingEnvironment _hostEnvironment;
+        private readonly GlobalConfig _config;
 
-        public LocationAppService(ILocationRepository repository, ILocation_LanRepository repository_lan, ILocation_ImageRepository repository_image)
+        public LocationAppService(ILocationRepository repository, ILocation_LanRepository repository_lan, ILocation_ImageRepository repository_image, IOptions<GlobalConfig> optionsAccessor, IHostingEnvironment hostEnvironment)
         {
             _repository = repository;
             _repository_lan = repository_lan;
             _repository_image = repository_image;
+
+            _config = optionsAccessor.Value;
+
+            _hostEnvironment = hostEnvironment;
         }
 
         public Dictionary<string, object> Create(LocationDto News)
@@ -210,5 +220,40 @@ namespace DotNetCore_React.Application.LocationApp
 
             return myJson;
         }
+
+        public Dictionary<string, object> Upload_Pic(List<IFormFile> files)
+        {
+            var myJson = new Dictionary<string, object>()
+            {
+                {"success",false },
+                {"message",null  }
+            };
+
+            var filePath = $"{_config.UPLOAD_PATH}";
+            var wwwrootPath = $"{ _hostEnvironment.WebRootPath}{filePath}";
+            Directory.GetParent(wwwrootPath).Create();
+
+
+            foreach (var formFile in files)
+            {
+                if (formFile.Length > 0)
+                {
+                    var random = new Random(Guid.NewGuid().GetHashCode()).Next(0, 1000000);
+                    var fileName = $"{DateTime.Now:yyyyMMddhhmmss}{random}";
+                    var extension = Path.GetExtension(formFile.FileName);
+                    var newFile = $"{fileName}{extension}";
+                    using (var stream = new FileStream($"{wwwrootPath}{newFile}", FileMode.CreateNew))
+                    {
+                        formFile.CopyTo(stream);
+                        myJson["success"] = true;
+                        myJson["listImage"] = newFile;
+                    }
+                }
+            }
+
+            return myJson;
+        }
+
+      
     }
 }
