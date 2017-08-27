@@ -104,10 +104,24 @@ var location_Area_Enum = {
 }
 
 
+var product_Category_Status_Enum = {
+    STOP: {
+        "value": "0",
+        "name": "已停用",
+    },
+
+    NORMAL: {
+        "value": "1",
+        "name": "啟用",
+    },
+}
+
+
 export {
     role_Enum,
     user_Enum,
     news_Enum,
     contactUs_Enum,
     location_Area_Enum,
+    product_Category_Status_Enum,
 };
