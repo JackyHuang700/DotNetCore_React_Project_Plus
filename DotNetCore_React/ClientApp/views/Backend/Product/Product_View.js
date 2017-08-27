@@ -6,9 +6,9 @@ import { BootstrapTable, TableHeaderColumn, ButtonGroup } from 'react-bootstrap-
 import axios from 'axios';
 import history from '../../../history'
 
-import { product_Category_Status_Enum } from '../../../EnumScript/GeneralEnumScript.js';
+import { news_Enum } from '../../../EnumScript/GeneralEnumScript.js';
 
-export default class Product_Category_View extends Component {
+export default class Product_View extends Component {
 
     constructor(props) {
         super(props);
@@ -31,14 +31,14 @@ export default class Product_Category_View extends Component {
     GetData() {
         const self = this;
 
-        axios.get('/api/Product_Category/Product_Category_View').then((result) => {
+        axios.get('/api/Product/Product_View').then((result) => {
             this.setState({ viewModel: result.data });
         }).catch((error) => {
             console.log(error)
         });
     }
 
-  
+
     createCustomButtonGroup = props => {
         return (
             <ButtonToolbar className='' sizeClass='btn-group-md'>
@@ -77,11 +77,14 @@ export default class Product_Category_View extends Component {
         let name = "";
 
         switch (`${row.status}`) {
-            case product_Category_Status_Enum.STOP.value:
-                name = product_Category_Status_Enum.STOP.name;
+            case news_Enum.STOP.value:
+                name = news_Enum.STOP.name;
                 break;
-            case product_Category_Status_Enum.NORMAL.value:
-                name = product_Category_Status_Enum.NORMAL.name;
+            case news_Enum.NORMAL.value:
+                name = news_Enum.NORMAL.name;
+                break;
+            case news_Enum.DELETE.value:
+                name = news_Enum.DELETE.name;
                 break;
 
         }
@@ -115,8 +118,8 @@ export default class Product_Category_View extends Component {
         };
 
         const StatusType = {
-            0 : news_Enum.STOP.name,
-            1 : news_Enum.NORMAL.name
+            0: news_Enum.STOP.name,
+            1: news_Enum.NORMAL.name
         };
 
 
@@ -136,17 +139,17 @@ export default class Product_Category_View extends Component {
                                 pagination
                                 search
                                 exportCSV>
-                                {this.props.display_id ? <TableHeaderColumn dataField='id' dataSort={true} filter={ { type: 'TextFilter', delay: 1000 } }>系統流水號</TableHeaderColumn> : null}
-                                {this.props.display_name ? <TableHeaderColumn dataField='name' dataSort={true} filter={ { type: 'TextFilter', delay: 1000 } }>名稱</TableHeaderColumn> : null}
-                                {this.props.display_priority ? <TableHeaderColumn dataField='priority' dataSort={true} filter={ { type: 'TextFilter', delay: 1000 } }>列表排序</TableHeaderColumn> : null}
-                                
-                                
-                                
-                                {this.props.display_status ? <TableHeaderColumn dataField='status' dataSort={true} dataFormat={this.Formatter_Status} filter={ { type: 'SelectFilter', options: StatusType } }>狀態</TableHeaderColumn> : null}
+                                {this.props.display_id ? <TableHeaderColumn dataField='id' dataSort={true} filter={{ type: 'TextFilter', delay: 1000 }}>系統流水號</TableHeaderColumn> : null}
+
+                                {this.props.display_listimage ? <TableHeaderColumn dataField='listimage' dataSort={true} filter={{ type: 'TextFilter', delay: 1000 }}>列表圖片</TableHeaderColumn> : null}
+                                {this.props.display_title ? <TableHeaderColumn dataField='title' dataSort={true} filter={{ type: 'TextFilter', delay: 1000 }}>標題</TableHeaderColumn> : null}
+
+                                {this.props.display_priority ? <TableHeaderColumn dataField='priority' dataSort={true} filter={{ type: 'TextFilter', delay: 1000 }}>列表排序</TableHeaderColumn> : null}
+                                {this.props.display_status ? <TableHeaderColumn dataField='status' dataSort={true} dataFormat={this.Formatter_Status} filter={{ type: 'SelectFilter', options: StatusType }}>狀態</TableHeaderColumn> : null}
                                 {this.props.display_createDate ? <TableHeaderColumn dataField='createDate' dataSort={true}>建立時間</TableHeaderColumn> : null}
-                                {this.props.display_createUser ? <TableHeaderColumn dataField='createUser' dataSort={true} filter={ { type: 'TextFilter', delay: 1000 } }>建立帳號</TableHeaderColumn> : null}
+                                {this.props.display_createUser ? <TableHeaderColumn dataField='createUser' dataSort={true} filter={{ type: 'TextFilter', delay: 1000 }}>建立帳號</TableHeaderColumn> : null}
                                 {this.props.display_updateDate ? <TableHeaderColumn dataField='updateDate' dataSort={true}>更新時間</TableHeaderColumn> : null}
-                                {this.props.display_updateUser ? <TableHeaderColumn dataField='updateUser' dataSort={true} filter={ { type: 'TextFilter', delay: 1000 } }>更新帳號</TableHeaderColumn> : null}
+                                {this.props.display_updateUser ? <TableHeaderColumn dataField='updateUser' dataSort={true} filter={{ type: 'TextFilter', delay: 1000 }}>更新帳號</TableHeaderColumn> : null}
                                 <TableHeaderColumn isKey dataField="button" dataFormat={this.buttonFormatter}></TableHeaderColumn>
                             </BootstrapTable>
                         </div>
@@ -157,14 +160,17 @@ export default class Product_Category_View extends Component {
     }
 }
 
-Product_Category_View.defaultProps = {
+AboutUs_View.defaultProps = {
     dispaly_button_create: true,
     display_button_edit: true,
     display_button_del: true,
 
     /* */
     display_id: false,
-    display_name: true,
+
+    display_listimage: true,
+    display_title: true,
+
     display_priority: true,
     display_status: true,
     display_createDate: true,
@@ -173,4 +179,3 @@ Product_Category_View.defaultProps = {
     display_updateUser: false,
 
 };
-

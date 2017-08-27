@@ -53,7 +53,7 @@ import Product_Category_View from './views/Backend/Product_Category/Product_Cate
 // import Product_Category_Delete from './views/Backend/Product_Category/Product_Category_Delete'
 // import Product_Category_Edit from './views/Backend/Product_Category/Product_Category_EDIT'
 
-// import Product_View from './views/Backend/Product/Product_View'
+import Product_View from './views/Backend/Product/Product_View'
 // import Product_Create from './views/Backend/Product/Product_Create'
 // import Product_Delete from './views/Backend/Product/Product_Delete'
 // import Product_Edit from './views/Backend/Product/Product_EDIT'
@@ -102,7 +102,7 @@ export default (
     {/* <BackendRoute path='/Product_Category/Delete/:id/:delete' component={Product_Category_Delete} /> */}
     {/* <BackendRoute path='/Product_Category/Edit/:id' component={Product_Category_Edit} /> */}
    
-    {/* <BackendRoute path='/Product' exact component={Product_View} /> */}
+    <BackendRoute path='/Product' exact component={Product_View} />
     {/* <BackendRoute path='/Product/Create' component={Product_Create} /> */}
     {/* <BackendRoute path='/Product/Delete/:id/:delete' component={Product_Delete} /> */}
     {/* <BackendRoute path='/Product/Edit/:id' component={Product_Edit} /> */}
