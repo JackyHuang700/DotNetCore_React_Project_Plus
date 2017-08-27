@@ -13,7 +13,7 @@ export default class AboutUs_View extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            AboutUsList: [],
+            viewModel: [],
             //Table變數
             selected: [],
             currPage: 1
@@ -32,7 +32,7 @@ export default class AboutUs_View extends Component {
         const self = this;
 
         axios.get('/api/AboutUs/AboutUs_View').then((result) => {
-            this.setState({ AboutUsList: result.data });
+            this.setState({ viewModel: result.data });
         }).catch((error) => {
             console.log(error)
         });
@@ -130,7 +130,7 @@ export default class AboutUs_View extends Component {
 
                     <div className="card">
                         <div className="card-block">
-                            <BootstrapTable data={this.state.AboutUsList}
+                            <BootstrapTable data={this.state.viewModel}
                                 selectRow={selectRow}
                                 options={options}
                                 striped

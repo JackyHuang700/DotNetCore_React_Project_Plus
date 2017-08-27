@@ -13,7 +13,7 @@ export default class ContactUs_View extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            ContactUsList: [],
+            viewModel: [],
             //Table變數
             selected: [],
             currPage: 1
@@ -32,7 +32,7 @@ export default class ContactUs_View extends Component {
         const self = this;
 
         axios.get('/api/ContactUs/ContactUs_View').then((result) => {
-            this.setState({ ContactUsList: result.data });
+            this.setState({ viewModel: result.data });
         }).catch((error) => {
             console.log(error)
         });
@@ -131,7 +131,7 @@ export default class ContactUs_View extends Component {
 
                     <div className="card">
                         <div className="card-block">
-                            <BootstrapTable data={this.state.ContactUsList}
+                            <BootstrapTable data={this.state.viewModel}
                                 selectRow={selectRow}
                                 options={options}
                                 striped
