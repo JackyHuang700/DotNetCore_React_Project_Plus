@@ -348,7 +348,7 @@ namespace DotNetCore_React.EntityFrameworkCore.Migrations
 
                     b.Property<string>("Content");
 
-                    b.Property<Guid>("LanguageId");
+                    b.Property<int>("LanguageId");
 
                     b.Property<string>("Name");
 

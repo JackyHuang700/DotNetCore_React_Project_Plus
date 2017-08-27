@@ -219,7 +219,7 @@ namespace DotNetCore_React.EntityFrameworkCore.Migrations
                 {
                     Id = table.Column<Guid>(nullable: false),
                     Content = table.Column<string>(nullable: true),
-                    LanguageId = table.Column<Guid>(nullable: false),
+                    LanguageId = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     ProductId = table.Column<Guid>(nullable: false),
                     SubTitle = table.Column<string>(nullable: true),
