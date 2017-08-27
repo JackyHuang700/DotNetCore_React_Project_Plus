@@ -40,6 +40,7 @@ namespace DotNetCore_React.EntityFrameworkCore.Seeds
             Sys_LanguageSeed();
             AboutUsSeed();
             ContactUsSeed();
+            LocationSeed();
         }
 
 

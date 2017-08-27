@@ -37,6 +37,7 @@ class Sidebar extends Component {
           <ul className="nav-dropdown-items">
             <li key='5' className="nav-item">
             <NavLink to={'/News'} className="nav-link" activeClassName="active"><i className="icon-link"></i> 最新消息</NavLink>
+            <NavLink to={'/Location'} className="nav-link" activeClassName="active"><i className="icon-link"></i> 服務據點</NavLink>
             <NavLink to={'/ContactUs'} className="nav-link" activeClassName="active"><i className="icon-link"></i> 聯絡我們</NavLink>
             <NavLink to={'/AboutUs'} className="nav-link" activeClassName="active"><i className="icon-link"></i> 關於我們</NavLink>
             </li>
