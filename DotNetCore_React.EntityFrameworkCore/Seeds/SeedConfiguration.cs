@@ -41,6 +41,8 @@ namespace DotNetCore_React.EntityFrameworkCore.Seeds
             AboutUsSeed();
             ContactUsSeed();
             LocationSeed();
+            Product_Category_Seed();
+            ProductSeed();
         }
 
 
