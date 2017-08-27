@@ -42,9 +42,9 @@ import ContactUs_Edit from './views/Backend/ContactUs/ContactUs_EDIT'
 
 
 import Location_View from './views/Backend/Location/Location_View'
-// import Location_Create from './views/Backend/Location/Location_Create'
-// import Location_Delete from './views/Backend/Location/Location_Delete'
-// import Location_Edit from './views/Backend/Location/Location_EDIT'
+import Location_Create from './views/Backend/Location/Location_Create'
+import Location_Delete from './views/Backend/Location/Location_Delete'
+import Location_Edit from './views/Backend/Location/Location_EDIT'
 
 
 /**
@@ -82,9 +82,9 @@ export default (
     <BackendRoute path='/ContactUs/Edit/:id' component={ContactUs_Edit} />
 
     <BackendRoute path='/Location' exact component={Location_View} />
-    {/* <BackendRoute path='/Location/Create' component={Location_Create} /> */}
-    {/* <BackendRoute path='/Location/Delete/:id/:delete' component={Location_Delete} /> */}
-    {/* <BackendRoute path='/Location/Edit/:id' component={Location_Edit} /> */}
+    <BackendRoute path='/Location/Create' component={Location_Create} />
+    <BackendRoute path='/Location/Delete/:id/:delete' component={Location_Delete} />
+    <BackendRoute path='/Location/Edit/:id' component={Location_Edit} />
     <Route render={() => <h3>No Match Route</h3>} />
   </Switch>
 )

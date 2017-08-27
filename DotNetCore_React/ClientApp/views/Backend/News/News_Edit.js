@@ -133,7 +133,7 @@ class News_Edit extends Component {
         <Nav tabs>
           {
             self.state.Sys_Language_List.map((sys, index) => {
-            
+
               return (
                 <NavItem>
                   <NavLink
@@ -151,8 +151,8 @@ class News_Edit extends Component {
           {
             self.state.News.new_LanList.map((sys, index) => {
 
-  //填入語系ID
-  { self.state.News.new_LanList[index].languageId = sys.id }
+              //填入語系ID
+              { self.state.News.new_LanList[index].languageId = sys.id }
 
               return (
                 <TabPane tabId={`${index}`}>

@@ -65,7 +65,7 @@ export default class Location_View extends Component {
     }
 
     OnClick_Delete(event) {
-        history.push(`/Location/Delete/${event.currentTarget.getAttribute('data-id')}/${false}`);
+        history.push(`/Location/Delete/${event.currentTarget.getAttribute('data-id')}/${true}`);
     }
 
     OnClick_Create(event) {
@@ -172,12 +172,9 @@ Location_View.defaultProps = {
     display_country: false,
     display_area: false,
     display_name: false,
-
     display_priority: true,
     display_status: true,
     display_createDate: true,
-    
-    
     display_createUser: false,
     display_updateDate: false,
     display_updateUser: false,

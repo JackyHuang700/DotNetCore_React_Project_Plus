@@ -82,6 +82,12 @@ namespace DotNetCore_React
             services.AddScoped<IProduct_ImageRepository, Product_ImageRepository>();
             services.AddScoped<IProductAppService, ProductAppService>();
 
+
+            services.AddScoped<ILocationRepository, LocationRepository>();
+            services.AddScoped<ILocation_LanRepository, Location_LanRepository>();
+            services.AddScoped<ILocation_ImageRepository, Location_ImageRepository>();
+            services.AddScoped<ILocationAppService, LocationAppService>();
+
             services.AddScoped<IContactUsRepository, ContactUsRepository>();
             services.AddScoped<IContactUs_CategoryRepository, ContactUs_CategoryRepository>();
             services.AddScoped<IContactUsAppService, ContactUsAppService>();
