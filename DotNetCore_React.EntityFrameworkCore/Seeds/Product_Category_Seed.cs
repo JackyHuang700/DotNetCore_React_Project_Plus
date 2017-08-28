@@ -36,7 +36,28 @@ namespace DotNetCore_React.EntityFrameworkCore.Seeds
                     Name = "產品類別1"
                    },
                 };
+
+                    _context.Set<Product_Category_Lan>().AddRange(data2);
+                    _context.SaveChanges();
                 }
+            }
+            else
+            {
+                if (!_context.Set<Product_Category_Lan>().Any())
+                {
+                    var data1 = _context.Product_Category.Select(c => c.Id).FirstOrDefault();
+                    var a = _context.Sys_Languages.Where(c => c.Name == "繁體中文").FirstOrDefault();
+                    var data2 = new List<Product_Category_Lan>() {
+                       new Product_Category_Lan{
+                        LanguageId = a.Id,
+                        ProductCateId = data1,
+                        Name = "產品類別1"
+                       },
+                    };
+                    _context.Set<Product_Category_Lan>().AddRange(data2);
+                    _context.SaveChanges();
+                }
+
             }
         }
     }
