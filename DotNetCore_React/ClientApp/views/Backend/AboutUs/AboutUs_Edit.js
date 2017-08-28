@@ -52,7 +52,6 @@ class AboutUs_Edit extends Component {
 
     componentDidMount() {
         this.GetData();
-        this.Get_Sys_Language();
         this.Get_AboutUs_Category();
     }
 
@@ -122,8 +121,6 @@ class AboutUs_Edit extends Component {
                     {
                         this.state.Sys_Language_List.map((sys, index) => {
 
-                            //填入語系ID
-                            { this.state.viewModel.lanList[index].languageId = sys.id }
 
                             return (
                                 <TabPane tabId={`${index}`}>
@@ -170,7 +167,7 @@ class AboutUs_Edit extends Component {
                                 <table className="table table-striped table-bordered">
                                     <tbody>
 
-                                        <DropDownList name="categoryId"
+                                         <DropDownList name="categoryId"
                                             labelName="categoryId"
                                             display={this.props.display_categoryId}
                                             required={this.props.required_categoryId}
@@ -178,7 +175,7 @@ class AboutUs_Edit extends Component {
                                             onInput={this.HandleInputChange}
                                             value={this.state.viewModel.categoryId}
                                             options={this.state.viewModel.categoryList}
-                                        />
+                                        /> 
 
 
                                         <DropDownList name="status"

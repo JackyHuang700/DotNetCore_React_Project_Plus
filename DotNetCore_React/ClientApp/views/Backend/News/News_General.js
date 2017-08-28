@@ -5,29 +5,34 @@ export function Get_Sys_Language() {
   const self = this;
 
   axios({
-    url: `/api/Sys_Language/Sys_Language_View`,
-    method: 'GET',
-    data: {
-    }
+      url: `/api/Sys_Language/Sys_Language_View`,
+      method: 'GET',
+      data: {
+      }
   }).then((result) => {
-    // console.log(`Get_Sys_Language)`, result.data);
-    //物件初始化，不然會噴調
-    var aa = Object.assign(this.state.News);
-    result.data.map((data) => {
-      aa.new_LanList.push({});
-    });
+      // console.log(`Get_Sys_Language)`, result.data);
 
+      let aa = Object.assign(self.state.News);
 
-    self.setState({
-      Sys_Language_List: result.data,
-      News: aa,
-    });
+      if (aa.new_LanList.length === 0) {
+          result.data.map((data, index) => {
+              // debugger
+              aa.new_LanList[index] = new Object();
+              aa.new_LanList[index].languageId = data.id;
+          });
+          
+          
+      }
+
+      self.setState({
+          Sys_Language_List: result.data,
+          News: aa,
+      });
   }).catch((error) => {
-    console.log(error)
+      console.log(error)
   });
 
 }
-
 
 
 

@@ -119,9 +119,7 @@ class News_Create extends Component {
           {
             self.state.Sys_Language_List.map((sys, index) => {
 
-              //填入語系ID
-              { self.state.News.new_LanList[index].languageId = sys.id }
-
+            
               return (
                 <TabPane tabId={`${index}`}>
 

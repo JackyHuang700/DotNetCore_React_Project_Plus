@@ -44,7 +44,6 @@ class News_Edit extends Component {
 
 
   componentDidMount() {
-    this.Get_Sys_Language();
     this.GetData();
   }
 
@@ -68,21 +67,11 @@ class News_Edit extends Component {
       // console.log(result.data);
       self.setState({
         News: result.data
+      }, () => {
+        self.Get_Sys_Language();
       });
 
-      //觀察副表長度, 進行補償措施
-      var aa_Length = self.state.News.new_LanList.length;
-      var bb_Length = self.state.Sys_Language_List.length;
-      if (aa_Length != bb_Length) {
-        var diff = aa_Length > bb_Length ? (aa_Length - bb_Length) : (bb_Length - aa_Length);
-        for (var i = 0; i < diff; i++) {
-          var aa = Object.assign(this.state.News);
-          aa.new_LanList.push({});
-        }
-        self.setState({
-          News: aa,
-        });
-      }
+
 
     }).catch((error) => {
       console.log(error)
@@ -150,9 +139,6 @@ class News_Edit extends Component {
         <TabContent activeTab={this.state.activeTab}>
           {
             self.state.News.new_LanList.map((sys, index) => {
-
-              //填入語系ID
-              { self.state.News.new_LanList[index].languageId = sys.id }
 
               return (
                 <TabPane tabId={`${index}`}>

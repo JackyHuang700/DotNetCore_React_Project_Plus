@@ -15,6 +15,6 @@ namespace DotNetCore_React.Application.Product_CategoryApp.Dtos
         public DateTime UpdateDate { get; set; }
         public string UpdateUser { get; set; }
 
-        public List<Product_Category_LanDto> Product_Category_LanList { get; set; }
+        public List<Product_Category_LanDto> LanList { get; set; }
     }
 }

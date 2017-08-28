@@ -121,9 +121,7 @@ class Location_Create extends Component {
                     {
                         this.state.Sys_Language_List.map((sys, index) => {
 
-                            //填入語系ID
-                            { this.state.viewModel.lanList[index].languageId = sys.id }
-
+                           
                             return (
                                 <TabPane tabId={`${index}`}>
 

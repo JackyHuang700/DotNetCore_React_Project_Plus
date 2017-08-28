@@ -12,12 +12,16 @@ export function Get_Sys_Language() {
         }
     }).then((result) => {
         // console.log(`Get_Sys_Language)`, result.data);
-        //物件初始化，不然會噴調
-        var aa = Object.assign(this.state.viewModel);
-        result.data.map((data) => {
-            aa.lanList.push({});
-        });
-
+        let aa = Object.assign(self.state.viewModel);
+        if (aa.lanList.length === 0) {
+            result.data.map((data, index) => {
+                // debugger
+                aa.lanList[index] = new Object();
+                aa.lanList[index].languageId = data.id;
+            });
+            
+            
+        }
 
         self.setState({
             Sys_Language_List: result.data,
@@ -123,8 +127,12 @@ export function GetData() {
         data: {
         }
     }).then((result) => {
+        
+        result.data.categoryList = self.state.viewModel.categoryList;
         self.setState({
             viewModel: result.data
+        }, ()=>{
+            self.Get_Sys_Language();
         });
     }).catch((error) => {
         console.log(error)

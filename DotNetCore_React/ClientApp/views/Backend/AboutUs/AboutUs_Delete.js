@@ -32,7 +32,7 @@ class AboutUs_Delete extends Component {
         this.Button_Submit = this.Button_Submit.bind(this);
 
         //
-        this.toggle = this.toggle.bind(this);        
+        this.toggle = this.toggle.bind(this);
         this.Get_Sys_Language = Get_Sys_Language.bind(this);
         this.Title = this.Title.bind(this);
         this.Button_Text = this.Button_Text.bind(this);
@@ -42,7 +42,6 @@ class AboutUs_Delete extends Component {
 
 
     componentDidMount() {
-        this.Get_Sys_Language();
         this.GetData();
     }
 
@@ -146,7 +145,6 @@ class AboutUs_Delete extends Component {
                 <TabContent activeTab={this.state.activeTab}>
                     {
                         this.state.Sys_Language_List.map((sys, index) => {
-
 
                             return (
                                 <TabPane tabId={`${index}`}>

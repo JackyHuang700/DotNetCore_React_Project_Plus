@@ -18,8 +18,8 @@ namespace DotNetCore_React.Application.Product_CategoryApp
         public Product_CategoryService(IProduct_CategoryRepository repository, IProduct_Category_LanRepository repository_lan, IProductRepository repository_product)
         {
             _repository = repository;
-            repository_lan = _repository_lan;
-            repository_product = _repository_product;
+            _repository_lan = repository_lan;
+            _repository_product = repository_product;
         }
 
         public Dictionary<string, object> Create(Product_CategoryDto Product_CategoryDto)
@@ -42,13 +42,13 @@ namespace DotNetCore_React.Application.Product_CategoryApp
             //副表
             if (aSuccess)
             {
-                foreach (var item in Product_CategoryDto.Product_Category_LanList)
+                foreach (var item in Product_CategoryDto.LanList)
                 {
                     var aa = Mapper.Map<Product_Category_Lan>(item);
                     aa.ProductCateId = roleDB.Id;
                     var aaa = _repository_lan.Insert(aa);
                 }
-                var bSuccess = _repository_lan.Save() == Product_CategoryDto.Product_Category_LanList.Count;
+                var bSuccess = _repository_lan.Save() == Product_CategoryDto.LanList.Count;
 
                 if (bSuccess)
                 {
@@ -119,7 +119,7 @@ namespace DotNetCore_React.Application.Product_CategoryApp
             var newsDto = Mapper.Map<Product_CategoryDto>(a);
             //抓取附表
             var new_lans_List = _repository_lan.GetAllList(c => c.ProductCateId == a.Id);
-            newsDto.Product_Category_LanList = Mapper.Map<List<Product_Category_LanDto>>(new_lans_List);
+            newsDto.LanList = Mapper.Map<List<Product_Category_LanDto>>(new_lans_List);
             return newsDto;
         }
 
@@ -141,7 +141,7 @@ namespace DotNetCore_React.Application.Product_CategoryApp
             var news_effect = _repository.Save() > 0;
 
             //更新副表
-            foreach (var newsLanDTO in Product_CategoryDto.Product_Category_LanList)
+            foreach (var newsLanDTO in Product_CategoryDto.LanList)
             {
                 var getLandata = _repository_lan.FirstOrDefault(o => o.LanguageId == newsDB.Id && o.LanguageId == newsLanDTO.LanguageId);
                 getLandata = Mapper.Map<Product_Category_LanDto, Product_Category_Lan>(newsLanDTO, getLandata, opt => opt.AfterMap((dto, dest) => { dest.LanguageId = newsDB.Id; }));
@@ -149,7 +149,7 @@ namespace DotNetCore_React.Application.Product_CategoryApp
                 _repository_lan.InsertOrUpdate(getLandata);
             }
 
-            var news_lan_effect = _repository_lan.Save() == Product_CategoryDto.Product_Category_LanList.Count;
+            var news_lan_effect = _repository_lan.Save() == Product_CategoryDto.LanList.Count;
             var Product_CategorySuccess = news_lan_effect && news_effect;
 
 

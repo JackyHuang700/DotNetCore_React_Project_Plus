@@ -46,7 +46,6 @@ class Location_Delete extends Component {
 
 
     componentDidMount() {
-        this.Get_Sys_Language();
         this.GetData();
     }
 
@@ -150,7 +149,6 @@ class Location_Delete extends Component {
                 <TabContent activeTab={this.state.activeTab}>
                     {
                         this.state.Sys_Language_List.map((sys, index) => {
-
 
                             return (
                                 <TabPane tabId={`${index}`}>

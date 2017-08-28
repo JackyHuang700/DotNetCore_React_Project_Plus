@@ -55,7 +55,6 @@ class Location_Edit extends Component {
 
     componentDidMount() {
         this.GetData();
-        this.Get_Sys_Language();
     }
 
 
@@ -123,9 +122,6 @@ class Location_Edit extends Component {
                 <TabContent activeTab={this.state.activeTab}>
                     {
                         this.state.Sys_Language_List.map((sys, index) => {
-
-                            //填入語系ID
-                            { this.state.viewModel.lanList[index].languageId = sys.id }
 
                             return (
                                 <TabPane tabId={`${index}`}>
