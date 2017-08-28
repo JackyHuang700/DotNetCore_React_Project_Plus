@@ -163,7 +163,7 @@ namespace DotNetCore_React.Application.ProductApp
             var new_lans_List = _repository_lan.GetAllList(c => c.ProductId == a.Id);
             newsDto.LanList = Mapper.Map<List<Product_LanDto>>(new_lans_List);
             //¹Ïªí
-            var new_image_List = _repository_lan.GetAllList(c => c.ProductId == a.Id);
+            var new_image_List = _repository_image.GetAllList(c => c.ProductId == a.Id);
             newsDto.ImageList = Mapper.Map<List<Product_ImageDto>>(new_image_List);
             return newsDto;
         }
