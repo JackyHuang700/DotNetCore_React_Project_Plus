@@ -14,10 +14,10 @@ import {
     location_Area_Enum
 } from '../../../EnumScript/GeneralEnumScript';
 import classnames from 'classnames';
+import {Get_Sys_Language} from '../Sys_Language/Sys_Language_General.js'; 
 import {
     GetData,
     HandleInputChange,
-    Get_Sys_Language,
     HandleInputChange_By_LanList,
     HandleInputChange_By_LanList_CKEditor,
 } from './Location_General';

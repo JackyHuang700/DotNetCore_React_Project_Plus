@@ -7,9 +7,9 @@ import EasyForm, { Field, FieldGroup } from 'react-easyform';
 import TextInput from '../../Components/Forms/TextInput';
 import { news_Enum } from '../../../EnumScript/GeneralEnumScript.js';
 import classnames from 'classnames';
+import {Get_Sys_Language} from '../Sys_Language/Sys_Language_General.js'; 
 import {
     GetData,
-    Get_Sys_Language,
 } from './AboutUs_General';
 
 

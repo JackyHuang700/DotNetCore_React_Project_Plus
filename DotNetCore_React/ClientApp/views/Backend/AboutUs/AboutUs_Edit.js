@@ -11,10 +11,10 @@ import Dropzone from 'react-dropzone';
 
 import { news_Enum } from '../../../EnumScript/GeneralEnumScript';
 import classnames from 'classnames';
+import {Get_Sys_Language} from '../Sys_Language/Sys_Language_General.js'; 
 import {
     GetData,    
     HandleInputChange,
-    Get_Sys_Language,
     Get_AboutUs_Category,
     HandleInputChange_By_AboutUs_LanList,
 } from './AboutUs_General';
