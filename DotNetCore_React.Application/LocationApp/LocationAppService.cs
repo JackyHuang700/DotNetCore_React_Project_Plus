@@ -45,6 +45,7 @@ namespace DotNetCore_React.Application.LocationApp
             //¥Dªí
             var date = DateTime.Now;
             var roleDB = Mapper.Map<Location>(News);
+            roleDB.CreateUser = News.CreateUser;
             roleDB.CreateDate = date;
             roleDB.UpdateDate = date;
             _repository.Insert(roleDB);

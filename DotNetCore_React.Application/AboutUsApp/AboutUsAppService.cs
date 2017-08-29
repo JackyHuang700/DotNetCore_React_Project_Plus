@@ -36,6 +36,7 @@ namespace DotNetCore_React.Application.AboutUsApp
             var date = DateTime.Now;
             //¥Dªí
             var roleDB = Mapper.Map<AboutUs>(News);
+            roleDB.CreateUser = News.CreateUser;
             roleDB.CreateDate = date;
             roleDB.UpdateDate = date;
             _repository.Insert(roleDB);

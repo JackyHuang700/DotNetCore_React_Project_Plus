@@ -76,6 +76,7 @@ namespace DotNetCore_React.Application.NewsApp
 
             //主表
             var roleDB = Mapper.Map<News>(role);
+            roleDB.CreateUser = role.CreateUser;
             roleDB.CreateDate = date;
             roleDB.UpdateDate = date;
             _repository.Insert(roleDB);

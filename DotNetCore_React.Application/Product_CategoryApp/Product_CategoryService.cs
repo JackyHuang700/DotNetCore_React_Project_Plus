@@ -34,6 +34,7 @@ namespace DotNetCore_React.Application.Product_CategoryApp
 
             //主表
             var roleDB = Mapper.Map<Product_Category>(Product_CategoryDto);
+            roleDB.CreateUser = Product_CategoryDto.CreateUser;
             roleDB.CreateDate = date;
             roleDB.UpdateDate = date;
             _repository.Insert(roleDB);
@@ -45,6 +46,8 @@ namespace DotNetCore_React.Application.Product_CategoryApp
                 foreach (var item in Product_CategoryDto.LanList)
                 {
                     var aa = Mapper.Map<Product_Category_Lan>(item);
+                    aa.ProductCateId = roleDB.Id;
+                    aa.LanguageId = item.LanguageId;
                     aa.ProductCateId = roleDB.Id;
                     var aaa = _repository_lan.Insert(aa);
                 }
