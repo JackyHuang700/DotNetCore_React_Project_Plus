@@ -195,6 +195,7 @@ namespace DotNetCore_React.Application.ProductApp
                 getLandata.ProductId = newsDB.Id;
                 _repository_lan.InsertOrUpdate(getLandata);
             }
+            var news_lan_effect = _repository_lan.Save() == News.LanList.Count;
 
             //更新圖表
             foreach (var item in News.ImageList)
@@ -204,9 +205,8 @@ namespace DotNetCore_React.Application.ProductApp
                 getLandata.ProductId = newsDB.Id;
                 _repository_image.InsertOrUpdate(getLandata);
             }
-
-            var news_lan_effect = _repository_lan.Save() == News.LanList.Count;
             var news_image_effect = _repository_image.Save() == News.ImageList.Count;
+
 
             var success_effect = news_lan_effect && news_effect && news_image_effect;
             myJson["success"] = success_effect;

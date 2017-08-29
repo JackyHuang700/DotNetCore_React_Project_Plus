@@ -62,6 +62,7 @@ namespace DotNetCore_React.Application.LocationApp
                     a_DB_List.Add(aa);
                     var aaa = _repository_lan.Insert(aa);
                 }
+                var bSuccess = _repository_lan.Save() == News.LanList.Count;
 
                 //圖表
                 var b_DB_List = new List<Location_Image>();
@@ -72,9 +73,8 @@ namespace DotNetCore_React.Application.LocationApp
                     b_DB_List.Add(aa);
                     var aaa = _repository_image.Insert(aa);
                 }
-
-                var bSuccess = _repository_lan.Save() == News.LanList.Count;
                 var cSuccess = _repository_image.Save() == News.ImageList.Count;
+
 
                 if (bSuccess && cSuccess)
                 {
@@ -202,6 +202,7 @@ namespace DotNetCore_React.Application.LocationApp
                 getLandata.LocationId = newsDB.Id;
                 _repository_lan.InsertOrUpdate(getLandata);
             }
+            var news_lan_effect = _repository_lan.Save() == News.LanList.Count;
 
             //更新圖表
             foreach (var item in News.ImageList)
@@ -211,9 +212,8 @@ namespace DotNetCore_React.Application.LocationApp
                 getLandata.LocationId = newsDB.Id;
                 _repository_image.InsertOrUpdate(getLandata);
             }
-
-            var news_lan_effect = _repository_lan.Save() == News.LanList.Count;
             var news_image_effect = _repository_image.Save() == News.ImageList.Count;
+
 
             var success_effect = news_lan_effect && news_effect && news_image_effect;
             myJson["success"] = success_effect;
