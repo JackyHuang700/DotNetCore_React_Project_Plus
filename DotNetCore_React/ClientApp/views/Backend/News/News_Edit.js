@@ -10,19 +10,19 @@ import { news_Enum } from '../../../EnumScript/GeneralEnumScript.js';
 import CKEditor from '../../Components/Forms/CKEditor';
 import classnames from 'classnames';
 import {
-  Get_Sys_Language,
   HandleInputChange,
   HandleInputChange_By_New_LanList,
   HandleInputChange_By_New_LanList_CKEditor
 } from './News_General';
+import { Get_Sys_Language } from '../Sys_Language/Sys_Language_General.js';
 
 class News_Edit extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      News: {
-        new_LanList: [],
+      viewModel: {
+        lanList: [],
       },
       Sys_Language_List: [],
       activeTab: '0'
@@ -66,7 +66,7 @@ class News_Edit extends Component {
     }).then((result) => {
       // console.log(result.data);
       self.setState({
-        News: result.data
+        viewModel: result.data
       }, () => {
         self.Get_Sys_Language();
       });
@@ -84,12 +84,12 @@ class News_Edit extends Component {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
-    var new_News = Object.assign(this.state.News);
+    var new_News = Object.assign(this.state.viewModel);
     new_News[name] = value;
 
 
     this.setState({
-      News: new_News,
+      viewModel: new_News,
     });
   }
 
@@ -138,7 +138,7 @@ class News_Edit extends Component {
         </Nav>
         <TabContent activeTab={this.state.activeTab}>
           {
-            self.state.News.new_LanList.map((sys, index) => {
+            self.state.Sys_Language_List.map((sys, index) => {
 
               return (
                 <TabPane tabId={`${index}`}>
@@ -151,7 +151,7 @@ class News_Edit extends Component {
                     required={this.props.required_title}
                     validMessage={{ required: '標題 is reduired.' }}
                     onInput={this.HandleInputChange_By_New_LanList}
-                    value={this.state.News.new_LanList[`${index}`].title}
+                    value={this.state.viewModel.lanList[`${index}`].title}
                     placeholder="title" />
 
                   <TextInput name="subTitle"
@@ -162,7 +162,7 @@ class News_Edit extends Component {
                     required={this.props.required_subTitle}
                     validMessage={{ required: '副標題 is reduired.' }}
                     onInput={this.HandleInputChange_By_New_LanList}
-                    value={this.state.News.new_LanList[`${index}`].subTitle}
+                    value={this.state.viewModel.lanList[`${index}`].subTitle}
                     placeholder="subTitle" />
 
                   <CKEditor name="content"
@@ -173,7 +173,7 @@ class News_Edit extends Component {
                     required={this.props.required_content}
                     validMessage={{ required: '內容 is reduired.' }}
                     onInput={this.HandleInputChange_By_New_LanList_CKEditor}
-                    value={this.state.News.new_LanList[`${index}`].content}
+                    value={this.state.viewModel.lanList[`${index}`].content}
                     cols="100"
                     rows="6"
                     placeholder="content" />
@@ -205,7 +205,7 @@ class News_Edit extends Component {
 
                 <table className="table table-striped table-bordered">
                   <tbody>
-                    <input type="hidden" id="id" name="id" value={this.state.News.id} />
+                    <input type="hidden" id="id" name="id" value={this.state.viewModel.id} />
 
                     <TextInput name="listImage"
                       labelName="列表圖片"
@@ -214,7 +214,7 @@ class News_Edit extends Component {
                       required={this.props.required_listImage}
                       validMessage={{ required: '列表圖片 is reduired.' }}
                       onInput={this.handleInputChange}
-                      value={this.state.News.listImage}
+                      value={this.state.viewModel.listImage}
                       placeholder="listImage" />
 
                     <TextInput name="category"
@@ -224,7 +224,7 @@ class News_Edit extends Component {
                       required={this.props.required_category}
                       validMessage={{ required: '類別 is reduired.' }}
                       onInput={this.handleInputChange}
-                      value={this.state.News.category}
+                      value={this.state.viewModel.category}
                       placeholder="category" />
 
                     <TextInput name="priority"
@@ -234,7 +234,7 @@ class News_Edit extends Component {
                       required={this.props.required_priority}
                       validMessage={{ required: '列表排序 is reduired.' }}
                       onInput={this.handleInputChange}
-                      value={this.state.News.priority}
+                      value={this.state.viewModel.priority}
                       placeholder="priority" />
 
                     <TextInput name="startDate"
@@ -244,7 +244,7 @@ class News_Edit extends Component {
                       required={this.props.required_startDate}
                       validMessage={{ required: '上架時間 is reduired.' }}
                       onInput={this.handleInputChange}
-                      value={this.state.News.startDate}
+                      value={this.state.viewModel.startDate}
                       placeholder="startDate" />
 
                     <TextInput name="endDate"
@@ -254,7 +254,7 @@ class News_Edit extends Component {
                       required={this.props.required_endDate}
                       validMessage={{ required: '下架時間 is reduired.' }}
                       onInput={this.handleInputChange}
-                      value={this.state.News.endDate}
+                      value={this.state.viewModel.endDate}
                       placeholder="endDate" />
 
 
@@ -264,7 +264,7 @@ class News_Edit extends Component {
                       required={this.props.required_status}
                       validMessage={{ required: '狀態 is reduired.' }}
                       onInput={this.handleInputChange}
-                      value={this.state.News.status}
+                      value={this.state.viewModel.status}
                       options={
                         [
                           {
@@ -285,7 +285,7 @@ class News_Edit extends Component {
                       display={this.props.display_createDate}
                       required={this.props.required_createDate}
                       validMessage={{ required: '建立時間 is reduired.' }}
-                      value={this.state.News.createDate}
+                      value={this.state.viewModel.createDate}
                       readOnly={true}
                       placeholder="createDate" />
 
@@ -295,7 +295,7 @@ class News_Edit extends Component {
                       display={this.props.display_createUser}
                       required={this.props.required_createUser}
                       validMessage={{ required: '建立者 is reduired.' }}
-                      value={this.state.News.createUser}
+                      value={this.state.viewModel.createUser}
                       readOnly={true}
                       placeholder="createUser" />
 
@@ -305,7 +305,7 @@ class News_Edit extends Component {
                       display={this.props.display_updateDate}
                       required={this.props.required_updateDate}
                       validMessage={{ required: '更新時間 is reduired.' }}
-                      value={this.state.News.updateDate}
+                      value={this.state.viewModel.updateDate}
                       readOnly={true}
                       placeholder="updateDate" />
 
@@ -315,7 +315,7 @@ class News_Edit extends Component {
                       display={this.props.display_updateUser}
                       required={this.props.required_updateUser}
                       validMessage={{ required: '更新者 is reduired.' }}
-                      value={this.state.News.updateUser}
+                      value={this.state.viewModel.updateUser}
                       readOnly={true}
                       placeholder="updateUser" />
 

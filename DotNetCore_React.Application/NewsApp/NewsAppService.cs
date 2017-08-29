@@ -42,7 +42,7 @@ namespace DotNetCore_React.Application.NewsApp
             {
                 //抓取附表
                 var new_lans_List = _repository_news_lan.GetAllList(c => c.NewsId == item.Id);
-                item.New_LanList = Mapper.Map<List<News_LanDto>>(new_lans_List);
+                item.LanList = Mapper.Map<List<News_LanDto>>(new_lans_List);
             }
 
             return newsDtoList;
@@ -59,7 +59,7 @@ namespace DotNetCore_React.Application.NewsApp
             var newsDto = Mapper.Map<NewsDto>(a);
             //抓取附表
             var new_lans_List = _repository_news_lan.GetAllList(c => c.NewsId == a.Id);
-            newsDto.New_LanList = Mapper.Map<List<News_LanDto>>(new_lans_List);
+            newsDto.LanList = Mapper.Map<List<News_LanDto>>(new_lans_List);
 
             return newsDto;
         }
@@ -85,14 +85,14 @@ namespace DotNetCore_React.Application.NewsApp
             //副表
             if (aSuccess)
             {
-                foreach (var item in role.New_LanList)
+                foreach (var item in role.LanList)
                 {
                     var aa = Mapper.Map<News_Lan>(item);
                     aa.NewsId = roleDB.Id;
                     var aaa = _repository_news_lan.Insert(aa);
                 }
 
-                var bSuccess = _repository_news_lan.Save() == role.New_LanList.Count;
+                var bSuccess = _repository_news_lan.Save() == role.LanList.Count;
 
                 if (bSuccess)
                 {
@@ -138,7 +138,7 @@ namespace DotNetCore_React.Application.NewsApp
             var news_effect = _repository.Save() > 0;
 
             //更新副表
-            foreach(var newsLanDTO in role.New_LanList)
+            foreach(var newsLanDTO in role.LanList)
             {
                 var getLandata = _repository_news_lan.FirstOrDefault(o => o.NewsId == newsDB.Id && o.LanguageId == newsLanDTO.LanguageId);
                 getLandata = Mapper.Map<News_LanDto, News_Lan>(newsLanDTO, getLandata,opt => opt.AfterMap((dto,dest) => { dest.NewsId = newsDB.Id; }));
@@ -146,7 +146,7 @@ namespace DotNetCore_React.Application.NewsApp
                 _repository_news_lan.InsertOrUpdate(getLandata);
             }
 
-            var news_lan_effect = _repository_news_lan.Save() == role.New_LanList.Count;
+            var news_lan_effect = _repository_news_lan.Save() == role.LanList.Count;
 
             var success_effect = news_lan_effect && news_effect;
             myJson["success"] = success_effect;

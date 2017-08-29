@@ -35,6 +35,6 @@ namespace DotNetCore_React.Application.NewsApp.Dtos
 
 
         //副表
-        public List<News_LanApp.Dtos.News_LanDto> New_LanList { get; set; }
+        public List<News_LanApp.Dtos.News_LanDto> LanList { get; set; }
     }
 }

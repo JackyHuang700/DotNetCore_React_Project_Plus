@@ -11,7 +11,7 @@ import Dropzone from 'react-dropzone';
 
 import { news_Enum } from '../../../EnumScript/GeneralEnumScript';
 import classnames from 'classnames';
-import {Get_Sys_Language} from '../Sys_Language/Sys_Language_General.js'; 
+import { Get_Sys_Language } from '../Sys_Language/Sys_Language_General.js';
 import {
     GetData,
     HandleInputChange,
@@ -142,7 +142,7 @@ class Product_Edit extends Component {
                                         display={this.props.display_title}
                                         required={this.props.required_title}
                                         validMessage={{ required: '標題 is reduired.' }}
-                                          onInput={this.HandleInputChange_By_LanList}
+                                        onInput={this.HandleInputChange_By_LanList}
                                         value={this.state.viewModel.lanList[`${index}`].title}
                                         placeholder="title" />
 
@@ -154,7 +154,7 @@ class Product_Edit extends Component {
                                         display={this.props.display_subTitle}
                                         required={this.props.required_subTitle}
                                         validMessage={{ required: '副標題 is reduired.' }}
-                                          onInput={this.HandleInputChange_By_LanList}
+                                        onInput={this.HandleInputChange_By_LanList}
                                         value={this.state.viewModel.lanList[`${index}`].subTitle}
                                         placeholder="subTitle" />
 
@@ -168,7 +168,7 @@ class Product_Edit extends Component {
                                         display={this.props.display_name}
                                         required={this.props.required_name}
                                         validMessage={{ required: '名稱 is reduired.' }}
-                                          onInput={this.HandleInputChange_By_LanList}
+                                        onInput={this.HandleInputChange_By_LanList}
                                         value={this.state.viewModel.lanList[`${index}`].name}
                                         placeholder="name" />
 
@@ -180,7 +180,7 @@ class Product_Edit extends Component {
                                         display={this.props.display_content}
                                         required={this.props.required_content}
                                         validMessage={{ required: '內容 is reduired.' }}
-                                          onInput={this.HandleInputChange_By_LanList}
+                                        onInput={this.HandleInputChange_By_LanList}
                                         value={this.state.viewModel.lanList[`${index}`].content}
                                         placeholder="content" />
 

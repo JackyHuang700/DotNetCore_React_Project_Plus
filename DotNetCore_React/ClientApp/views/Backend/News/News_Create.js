@@ -12,11 +12,11 @@ import Dropzone from 'react-dropzone';
 import { news_Enum } from '../../../EnumScript/GeneralEnumScript';
 import classnames from 'classnames';
 import {
-  Get_Sys_Language,
   HandleInputChange,
   HandleInputChange_By_New_LanList,
   HandleInputChange_By_New_LanList_CKEditor
 } from './News_General';
+import {Get_Sys_Language} from '../Sys_Language/Sys_Language_General.js'; 
 
 
 class News_Create extends Component {
@@ -24,9 +24,9 @@ class News_Create extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      News: {
+      viewModel: {
         priority: '1',
-        new_LanList: [],
+        lanList: [],
         status: news_Enum.NORMAL.value,
       },
       Sys_Language_List: [],
@@ -66,7 +66,7 @@ class News_Create extends Component {
     axios({
       url: '/api/News/Create',
       method: 'post',
-      data: this.state.News
+      data: this.state.viewModel
     }).then((result) => {
       if (result.data.success) {
         if (self.state.next_Button) {
@@ -131,7 +131,7 @@ class News_Create extends Component {
                     required={this.props.required_title}
                     validMessage={{ required: '標題 is reduired.' }}
                     onInput={this.HandleInputChange_By_New_LanList}
-                    value={this.state.News.new_LanList[`${index}`].title}
+                    value={this.state.viewModel.lanList[`${index}`].title}
                     placeholder="title" />
 
                   <TextInput name="subTitle"
@@ -142,7 +142,7 @@ class News_Create extends Component {
                     required={this.props.required_subTitle}
                     validMessage={{ required: '副標題 is reduired.' }}
                     onInput={this.HandleInputChange_By_New_LanList}
-                    value={this.state.News.new_LanList[`${index}`].subTitle}
+                    value={this.state.viewModel.lanList[`${index}`].subTitle}
                     placeholder="subTitle" />
 
                   <CKEditor name="content"
@@ -153,7 +153,7 @@ class News_Create extends Component {
                     required={this.props.required_content}
                     validMessage={{ required: '內容 is reduired.' }}
                     onInput={this.HandleInputChange_By_New_LanList_CKEditor}
-                    value={this.state.News.new_LanList[`${index}`].content}
+                    value={this.state.viewModel.lanList[`${index}`].content}
                     cols="100"
                     rows="6"
                     placeholder="content" />
@@ -188,10 +188,10 @@ class News_Create extends Component {
     axios.post('/api/News/Upload_Pic/', formData).then((response) => {
       
       if (response.data.success) {
-        var newNews = Object.assign(this.state.News);
+        var newNews = Object.assign(this.state.viewModel);
         newNews.listImage = response.data.listImage;
         this.setState({
-          News: newNews
+          viewModel: newNews
         });
 
       }
@@ -226,7 +226,7 @@ class News_Create extends Component {
                       required={this.props.required_listImage}
                       validMessage={{ required: '列表圖片 is reduired.' }}
                       onInput={this.HandleInputChange}
-                      value={this.state.News.listImage}
+                      value={this.state.viewModel.listImage}
                       placeholder="listImage" />
 
 
@@ -254,7 +254,7 @@ class News_Create extends Component {
                       required={this.props.required_category}
                       validMessage={{ required: '類別 is reduired.' }}
                       onInput={this.HandleInputChange}
-                      value={this.state.News.category}
+                      value={this.state.viewModel.category}
                       placeholder="category" />
 
 
@@ -266,7 +266,7 @@ class News_Create extends Component {
                       required={this.props.required_priority}
                       validMessage={{ required: '列表排序 is reduired.' }}
                       onInput={this.HandleInputChange}
-                      value={this.state.News.priority}
+                      value={this.state.viewModel.priority}
                       placeholder="priority" />
 
 
@@ -277,7 +277,7 @@ class News_Create extends Component {
                       required={this.props.required_startDate}
                       validMessage={{ required: '上架時間 is reduired.' }}
                       onInput={this.HandleInputChange}
-                      value={this.state.News.startDate}
+                      value={this.state.viewModel.startDate}
                       placeholder="startDate" />
 
 
@@ -288,7 +288,7 @@ class News_Create extends Component {
                       required={this.props.required_endDate}
                       validMessage={{ required: '下架時間 is reduired.' }}
                       onInput={this.HandleInputChange}
-                      value={this.state.News.endDate}
+                      value={this.state.viewModel.endDate}
                       placeholder="endDate" />
 
 
@@ -298,7 +298,7 @@ class News_Create extends Component {
                       required={this.props.required_status}
                       validMessage={{ required: '狀態 is reduired.' }}
                       onInput={this.HandleInputChange}
-                      value={this.state.News.status}
+                      value={this.state.viewModel.status}
                       options={
                         [
                           {

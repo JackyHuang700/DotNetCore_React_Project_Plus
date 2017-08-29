@@ -16,18 +16,18 @@ class News_Delete extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        is_Delete: this.props.match.params.delete.toLocaleLowerCase() === "true" ? true : false,
+      is_Delete: this.props.match.params.delete.toLocaleLowerCase() === "true" ? true : false,
 
-      News: {},
+      viewModel: {},
     };
 
     this.GetData = this.GetData.bind(this);
     this.Button_Submit = this.Button_Submit.bind(this);
 
-      //
-      this.Title = this.Title.bind(this);
-      this.Button_Text = this.Button_Text.bind(this);
-      this.Button_Click = this.Button_Click.bind(this);
+    //
+    this.Title = this.Title.bind(this);
+    this.Button_Text = this.Button_Text.bind(this);
+    this.Button_Click = this.Button_Click.bind(this);
   }
 
 
@@ -46,7 +46,7 @@ class News_Delete extends Component {
       }
     }).then((result) => {
       self.setState({
-        News: result.data
+        viewModel: result.data
       });
     }).catch((error) => {
       console.log(error)
@@ -84,7 +84,7 @@ class News_Delete extends Component {
 
 
   Button_Submit(event) {
-    axios.post(`/api/News/Delete/${this.state.News.id}`, {
+    axios.post(`/api/News/Delete/${this.state.viewModel.id}`, {
     }).then((result) => {
       if (result.data.success) {
         history.push('/News');
@@ -93,7 +93,7 @@ class News_Delete extends Component {
       console.log(error)
     });
 
-    
+
     event.preventDefault();
     return false;
   }
@@ -113,127 +113,127 @@ class News_Delete extends Component {
             <div className="card-block">
               <form action="" method="post">
 
-              <table className="table table-striped table-bordered">
+                <table className="table table-striped table-bordered">
                   <tbody>
-                  <input type="hidden" id="id" name="id" value={this.state.News.id} />
+                    <input type="hidden" id="id" name="id" value={this.state.viewModel.id} />
 
-                  <TextInput name="listImage"
-                  labelName="列表圖片"
-                  className=""
-                  display={this.props.display_listImage}
-                  required={this.props.required_listImage}
-                  validMessage={{ required: '列表圖片 is reduired.' }}
-                  value={this.state.News.listImage}
-                             readOnly={true}
-                  placeholder="listImage" />
-
-
-
-                <TextInput name="category"
-                  labelName="類別"
-                  className=""
-                  display={this.props.display_category}
-                  required={this.props.required_category}
-                  validMessage={{ required: '類別 is reduired.' }}
-                  value={this.state.News.category}
-                             readOnly={true}
-                  placeholder="category" />
+                    <TextInput name="listImage"
+                      labelName="列表圖片"
+                      className=""
+                      display={this.props.display_listImage}
+                      required={this.props.required_listImage}
+                      validMessage={{ required: '列表圖片 is reduired.' }}
+                      value={this.state.viewModel.listImage}
+                      readOnly={true}
+                      placeholder="listImage" />
 
 
 
-                <TextInput name="priority"
-                  labelName="列表排序"
-                  className=""
-                  display={this.props.display_priority}
-                  required={this.props.required_priority}
-                  validMessage={{ required: '列表排序 is reduired.' }}
-                  value={this.state.News.priority}
-                             readOnly={true}
-                  placeholder="priority" />
+                    <TextInput name="category"
+                      labelName="類別"
+                      className=""
+                      display={this.props.display_category}
+                      required={this.props.required_category}
+                      validMessage={{ required: '類別 is reduired.' }}
+                      value={this.state.viewModel.category}
+                      readOnly={true}
+                      placeholder="category" />
 
 
-                <TextInput name="startDate"
-                  labelName="上架時間"
-                  className=""
-                  display={this.props.display_startDate}
-                  required={this.props.required_startDate}
-                  validMessage={{ required: 'Admin is reduired.' }}
-                  value={this.state.News.startDate}
-                             readOnly={true}
-                  placeholder="startDate" />
+
+                    <TextInput name="priority"
+                      labelName="列表排序"
+                      className=""
+                      display={this.props.display_priority}
+                      required={this.props.required_priority}
+                      validMessage={{ required: '列表排序 is reduired.' }}
+                      value={this.state.viewModel.priority}
+                      readOnly={true}
+                      placeholder="priority" />
 
 
-                <TextInput name="endDate"
-                  labelName="下架時間"
-                  className=""
-                  display={this.props.display_endDate}
-                  required={this.props.required_endDate}
-                  validMessage={{ required: '下架時間 is reduired.' }}
-                  value={this.state.News.endDate}
-                             readOnly={true}
-                  placeholder="endDate" />
+                    <TextInput name="startDate"
+                      labelName="上架時間"
+                      className=""
+                      display={this.props.display_startDate}
+                      required={this.props.required_startDate}
+                      validMessage={{ required: 'Admin is reduired.' }}
+                      value={this.state.viewModel.startDate}
+                      readOnly={true}
+                      placeholder="startDate" />
 
 
-                <DropDownList name="status"
-                  labelName="狀態"
-                  display={this.props.display_status}
-                  required={this.props.required_status}
-                  validMessage={{ required: '狀態 is reduired.' }}
-                  value={this.state.News.status}
-                             readOnly={true}
-                  options={
-                    [
-                      {
-                        name: news_Enum.STOP.name,
-                        value: news_Enum.STOP.value
-                      },
-                      {
-                        name: news_Enum.NORMAL.name,
-                        value: news_Enum.NORMAL.value
-                      }
-                    ]}
-                />
+                    <TextInput name="endDate"
+                      labelName="下架時間"
+                      className=""
+                      display={this.props.display_endDate}
+                      required={this.props.required_endDate}
+                      validMessage={{ required: '下架時間 is reduired.' }}
+                      value={this.state.viewModel.endDate}
+                      readOnly={true}
+                      placeholder="endDate" />
 
 
-                <TextInput name="createDate"
-                  labelName="建立時間"
-                  className=""
-                  display={this.props.display_createDate}
-                  required={this.props.required_createDate}
-                  validMessage={{ required: '建立時間 is reduired.' }}
-                  value={this.state.News.createDate}
-                  readOnly={true}
-                  placeholder="createDate"/>
+                    <DropDownList name="status"
+                      labelName="狀態"
+                      display={this.props.display_status}
+                      required={this.props.required_status}
+                      validMessage={{ required: '狀態 is reduired.' }}
+                      value={this.state.viewModel.status}
+                      readOnly={true}
+                      options={
+                        [
+                          {
+                            name: news_Enum.STOP.name,
+                            value: news_Enum.STOP.value
+                          },
+                          {
+                            name: news_Enum.NORMAL.name,
+                            value: news_Enum.NORMAL.value
+                          }
+                        ]}
+                    />
 
-                <TextInput name="createUser"
-                  labelName="建立者"
-                  className=""
-                  display={this.props.display_createUser}
-                  required={this.props.required_createUser}
-                  validMessage={{ required: '建立者 is reduired.' }}
-                  value={this.state.News.createUser}
-                  readOnly={true}
-                  placeholder="createUser"/>
 
-                <TextInput name="updateDate"
-                  labelName="更新時間"
-                  className=""
-                  display={this.props.display_updateDate}
-                  required={this.props.required_updateDate}
-                  validMessage={{ required: '更新時間 is reduired.' }}
-                  value={this.state.News.updateDate}
-                  readOnly={true}
-                  placeholder="updateDate"/>
+                    <TextInput name="createDate"
+                      labelName="建立時間"
+                      className=""
+                      display={this.props.display_createDate}
+                      required={this.props.required_createDate}
+                      validMessage={{ required: '建立時間 is reduired.' }}
+                      value={this.state.viewModel.createDate}
+                      readOnly={true}
+                      placeholder="createDate" />
 
-                <TextInput name="updateUser"
-                  labelName="更新者"
-                  className=""
-                  display={this.props.display_updateUser}
-                  required={this.props.required_updateUser}
-                  validMessage={{ required: '更新者 is reduired.' }}
-                  value={this.state.News.updateUser}
-                  readOnly={true}
-                  placeholder="updateUser"/>
+                    <TextInput name="createUser"
+                      labelName="建立者"
+                      className=""
+                      display={this.props.display_createUser}
+                      required={this.props.required_createUser}
+                      validMessage={{ required: '建立者 is reduired.' }}
+                      value={this.state.viewModel.createUser}
+                      readOnly={true}
+                      placeholder="createUser" />
+
+                    <TextInput name="updateDate"
+                      labelName="更新時間"
+                      className=""
+                      display={this.props.display_updateDate}
+                      required={this.props.required_updateDate}
+                      validMessage={{ required: '更新時間 is reduired.' }}
+                      value={this.state.viewModel.updateDate}
+                      readOnly={true}
+                      placeholder="updateDate" />
+
+                    <TextInput name="updateUser"
+                      labelName="更新者"
+                      className=""
+                      display={this.props.display_updateUser}
+                      required={this.props.required_updateUser}
+                      validMessage={{ required: '更新者 is reduired.' }}
+                      value={this.state.viewModel.updateUser}
+                      readOnly={true}
+                      placeholder="updateUser" />
 
                   </tbody>
                 </table>
@@ -241,7 +241,7 @@ class News_Delete extends Component {
                 <div className="form-group form-actions">
                   <button type="botton" className="btn btn-sm btn-danger" onClick={this.Button_Click}>{this.Button_Text()}</button>
                   {'\u00A0'}
-                    <Button color="warning" onClick={() => history.goBack()}>返回</Button>
+                  <Button color="warning" onClick={() => history.goBack()}>返回</Button>
                 </div>
               </form>
             </div>
@@ -267,15 +267,15 @@ News_Delete.defaultProps = {
   display_updateDate: true,
   display_updateUser: true,
 
-/* */
-  required_listImage:true,
-  required_category:true,
-  required_priority:true,
-  required_startDate:true,
-  required_endDate:true,
-  required_status:true,
-  required_createDate:true,
-  required_createUser:true,
-  required_updateDate:true,
-  required_updateUser:true,
+  /* */
+  required_listImage: true,
+  required_category: true,
+  required_priority: true,
+  required_startDate: true,
+  required_endDate: true,
+  required_status: true,
+  required_createDate: true,
+  required_createUser: true,
+  required_updateDate: true,
+  required_updateUser: true,
 }
