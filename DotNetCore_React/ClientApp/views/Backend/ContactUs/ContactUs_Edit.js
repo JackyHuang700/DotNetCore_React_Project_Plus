@@ -95,7 +95,7 @@ class ContactUs_Edit extends Component {
 
         return (
             <div className="animated fadeIn row justify-content-center">
-                <div className="col-xs-10">
+                <div className="col-xl-10">
                     <div className="card">
                         <div className="card-header">編輯聯絡我們</div>
                         <div className="card-block">
@@ -106,10 +106,10 @@ class ContactUs_Edit extends Component {
 
 
                                         <TextInput name="id"
-                                            labelName="id"
+                                            labelName="系統流水號"
                                             display={this.props.display_id}
                                             required={this.props.required_id}
-                                            validMessage={{ required: 'id is reduired.' }}
+                                            validMessage={{ required: '系統流水號 is reduired.' }}
                                             onInput={this.HandleInputChange}
                                             value={this.state.viewModel.id}
                                             readOnly={true}
@@ -119,10 +119,10 @@ class ContactUs_Edit extends Component {
 
 
                                         <TextInput name="title"
-                                            labelName="title"
+                                            labelName="標題"
                                             display={this.props.display_title}
                                             required={this.props.required_title}
-                                            validMessage={{ required: 'title is reduired.' }}
+                                            validMessage={{ required: '標題 is reduired.' }}
                                             onInput={this.HandleInputChange}
                                             value={this.state.viewModel.title}
                                             readOnly={true}
@@ -130,10 +130,10 @@ class ContactUs_Edit extends Component {
                                         />
 
                                         <TextInput name="categoryId"
-                                            labelName="categoryId"
+                                            labelName="類別"
                                             display={this.props.display_categoryId}
                                             required={this.props.required_categoryId}
-                                            validMessage={{ required: 'categoryId is reduired.' }}
+                                            validMessage={{ required: '類別 is reduired.' }}
                                             onInput={this.HandleInputChange}
                                             value={this.state.viewModel.categoryId}
                                             readOnly={true}
@@ -141,10 +141,10 @@ class ContactUs_Edit extends Component {
                                         />
 
                                         <TextInput name="customerName"
-                                            labelName="customerName"
+                                            labelName="客戶姓名"
                                             display={this.props.display_customerName}
                                             required={this.props.required_customerName}
-                                            validMessage={{ required: 'customerName is reduired.' }}
+                                            validMessage={{ required: '客戶姓名 is reduired.' }}
                                             onInput={this.HandleInputChange}
                                             value={this.state.viewModel.customerName}
                                             readOnly={true}
@@ -152,10 +152,10 @@ class ContactUs_Edit extends Component {
                                         />
 
                                         <TextInput name="customerEmail"
-                                            labelName="customerEmail"
+                                            labelName="客戶Email"
                                             display={this.props.display_customerEmail}
                                             required={this.props.required_customerEmail}
-                                            validMessage={{ required: 'customerEmail is reduired.' }}
+                                            validMessage={{ required: '客戶Email is reduired.' }}
                                             onInput={this.HandleInputChange}
                                             value={this.state.viewModel.customerEmail}
                                             readOnly={true}
@@ -163,10 +163,10 @@ class ContactUs_Edit extends Component {
                                         />
 
                                         <TextInput name="content"
-                                            labelName="content"
+                                            labelName="內容"
                                             display={this.props.display_content}
                                             required={this.props.required_content}
-                                            validMessage={{ required: 'content is reduired.' }}
+                                            validMessage={{ required: '內容 is reduired.' }}
                                             onInput={this.HandleInputChange}
                                             value={this.state.viewModel.content}
                                             readOnly={true}
@@ -174,10 +174,10 @@ class ContactUs_Edit extends Component {
                                         />
 
                                         <DropDownList name="status"
-                                            labelName="status"
+                                            labelName="狀態"
                                             display={this.props.display_status}
                                             required={this.props.required_status}
-                                            validMessage={{ required: 'status is reduired.' }}
+                                            validMessage={{ required: '狀態 is reduired.' }}
                                             onChange={this.HandleInputChange_Status}
                                             value={this.state.viewModel.status}
                                             options={
@@ -198,10 +198,10 @@ class ContactUs_Edit extends Component {
                                         />
 
                                         <TextInput name="createDate"
-                                            labelName="createDate"
+                                            labelName="建立時間"
                                             display={this.props.display_createDate}
                                             required={this.props.required_createDate}
-                                            validMessage={{ required: 'createDate is reduired.' }}
+                                            validMessage={{ required: '建立時間 is reduired.' }}
                                             onInput={this.HandleInputChange}
                                             value={this.state.viewModel.createDate}
                                             readOnly={true}
@@ -209,10 +209,10 @@ class ContactUs_Edit extends Component {
                                         />
 
                                         <TextInput name="createUser"
-                                            labelName="createUser"
+                                            labelName="建立者"
                                             display={this.props.display_createUser}
                                             required={this.props.required_createUser}
-                                            validMessage={{ required: 'createUser is reduired.' }}
+                                            validMessage={{ required: '建立者 is reduired.' }}
                                             onInput={this.HandleInputChange}
                                             value={this.state.viewModel.createUser}
                                             readOnly={true}
@@ -220,10 +220,10 @@ class ContactUs_Edit extends Component {
                                         />
 
                                         <TextInput name="reply"
-                                            labelName="reply"
+                                            labelName="回覆內容"
                                             display={this.props.display_reply}
                                             required={this.props.required_reply}
-                                            validMessage={{ required: 'reply is reduired.' }}
+                                            validMessage={{ required: '回覆內容 is reduired.' }}
                                             onInput={this.HandleInputChange}
                                             value={this.state.viewModel.reply}
                                             options={this.state.viewModel.reply}
@@ -235,7 +235,8 @@ class ContactUs_Edit extends Component {
                                 <div className="form-group form-actions">
                                     <ButtonToolbar>
                                         <Button color="primary" id="btn" disabled={$invalid ? 'disabled' : false}>確認</Button>
-                                        <Button color="primary" onClick={this.Next_Button.bind(this)} disabled={$invalid ? 'disabled' : false}>繼續新增下一筆</Button>
+                                        {'\u00A0'}
+                                        <Button color="warning" onClick={() => history.goBack()}>返回</Button>
                                     </ButtonToolbar>
                                 </div>
                             </form>

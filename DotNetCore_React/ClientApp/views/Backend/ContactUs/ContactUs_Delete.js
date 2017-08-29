@@ -85,7 +85,7 @@ class ContactUs_Delete extends Component {
     render() {
         return (
             <div className="animated fadeIn row justify-content-center">
-                <div className="col-xs-10">
+                <div className="col-xl-10">
                     <div className="card">
                         <div className="card-header">
                             {this.Title()}
@@ -218,10 +218,10 @@ class ContactUs_Delete extends Component {
 
 
                                         <DropDownList name="status"
-                                            labelName="status"
+                                            labelName="狀態"
                                             display={this.props.display_status}
                                             required={this.props.required_status}
-                                            validMessage={{ required: 'status is reduired.' }}
+                                            validMessage={{ required: '狀態 is reduired.' }}
                                             value={this.state.viewModel.status}
                                             readOnly={true}
                                             options={
@@ -284,6 +284,7 @@ class ContactUs_Delete extends Component {
                                 <div className="form-group form-actions">
                                     <button type="botton" className="btn btn-sm btn-danger" onClick={this.Button_Click}>{this.Button_Text()}</button>
                                     {'\u00A0'}
+                                    <Button color="warning" onClick={() => history.goBack()}>返回</Button>
                                 </div>
                             </form>
                         </div>

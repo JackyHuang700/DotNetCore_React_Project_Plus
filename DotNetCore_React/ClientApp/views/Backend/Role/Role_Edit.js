@@ -83,7 +83,7 @@ class Role_Edit_Show extends Component {
   //按鈕觸發事件
   Button_Text() {
     return this.state.is_Edit ?
-      "編輯完成" :
+      "完成" :
       "返回";
   }
 
@@ -136,7 +136,7 @@ class Role_Edit_Show extends Component {
 
     return (
       <div className="animated fadeIn row justify-content-center">
-        <div className="col-xs-10">
+        <div className="col-xl-10">
           <div className="card">
             <div className="card-header">
               {this.Title()}

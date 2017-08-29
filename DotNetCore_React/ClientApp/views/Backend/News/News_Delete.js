@@ -105,7 +105,7 @@ class News_Delete extends Component {
   render() {
     return (
       <div className="animated fadeIn row justify-content-center">
-        <div className="col-xs-10">
+        <div className="col-xl-10">
           <div className="card">
             <div className="card-header">
               {this.Title()}
@@ -175,10 +175,10 @@ class News_Delete extends Component {
 
 
                 <DropDownList name="status"
-                  labelName="status"
+                  labelName="狀態"
                   display={this.props.display_status}
                   required={this.props.required_status}
-                  validMessage={{ required: 'status is reduired.' }}
+                  validMessage={{ required: '狀態 is reduired.' }}
                   value={this.state.News.status}
                              readOnly={true}
                   options={

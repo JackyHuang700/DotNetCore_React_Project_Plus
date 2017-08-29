@@ -190,7 +190,7 @@ class AboutUs_Delete extends Component {
     render() {
         return (
             <div className="animated fadeIn row justify-content-center">
-                <div className="col-xs-10">
+                <div className="col-xl-10">
                     <div className="card">
                         <div className="card-header">
                             {this.Title()}
@@ -203,20 +203,20 @@ class AboutUs_Delete extends Component {
 
 
                                         <TextInput name="categoryId"
-                                            labelName="categoryId"
+                                            labelName="類別"
                                             display={this.props.display_categoryId}
                                             required={this.props.required_categoryId}
-                                            validMessage={{ required: 'categoryId is reduired.' }}
+                                            validMessage={{ required: '類別 is reduired.' }}
                                             readOnly={true}
                                             value={this.state.viewModel.categoryId}
                                         />
 
 
                                         <TextInput name="status"
-                                            labelName="status"
+                                            labelName="狀態"
                                             display={this.props.display_status}
                                             required={this.props.required_status}
-                                            validMessage={{ required: 'status is reduired.' }}
+                                            validMessage={{ required: '狀態 is reduired.' }}
                                             value={this.state.viewModel.status}
                                             readOnly={true}
                                         />
