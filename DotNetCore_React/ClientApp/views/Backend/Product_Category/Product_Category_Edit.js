@@ -11,7 +11,7 @@ import Dropzone from 'react-dropzone';
 
 import { news_Enum } from '../../../EnumScript/GeneralEnumScript';
 import classnames from 'classnames';
-import {Get_Sys_Language} from '../Sys_Language/Sys_Language_General.js'; 
+import { Get_Sys_Language } from '../Sys_Language/Sys_Language_General.js';
 import {
     GetData,
     HandleInputChange,
@@ -164,11 +164,6 @@ class Product_Category_Edit extends Component {
     }
 
     render() {
-/////
-console.log(this.state.viewModel)
-
-
-
         const { params } = this.props.params;
         const { $invalid } = this.props.easyform.$invalid;
 

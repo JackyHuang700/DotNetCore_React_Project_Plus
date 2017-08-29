@@ -61,15 +61,15 @@ export default class Product_View extends Component {
     }
 
     OnClick_Edit(event) {
-        history.push(`/AboutUs/Edit/${event.currentTarget.getAttribute('data-id')}`);
+        history.push(`/Product/Edit/${event.currentTarget.getAttribute('data-id')}`);
     }
 
     OnClick_Delete(event) {
-        history.push(`/AboutUs/Delete/${event.currentTarget.getAttribute('data-id')}/${true}`);
+        history.push(`/Product/Delete/${event.currentTarget.getAttribute('data-id')}/${true}`);
     }
 
     OnClick_Create(event) {
-        history.push('/AboutUs/Create');
+        history.push('/Product/Create');
     }
 
 
@@ -160,7 +160,7 @@ export default class Product_View extends Component {
     }
 }
 
-AboutUs_View.defaultProps = {
+Product_View.defaultProps = {
     dispaly_button_create: true,
     display_button_edit: true,
     display_button_del: true,
