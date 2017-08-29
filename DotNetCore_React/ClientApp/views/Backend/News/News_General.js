@@ -29,9 +29,9 @@ export function HandleInputChange_By_New_LanList(event) {
 }
 
 
-export function HandleInputChange_By_New_LanList_CKEditor(obj){
+export function HandleInputChange_By_New_LanList_CKEditor(obj) {
   const value = obj.value;
-  const name = obj.name;  
+  const name = obj.name;
   const index = obj.index;
   var new_News = Object.assign(this.state.viewModel);
 
@@ -44,24 +44,24 @@ export function HandleInputChange_By_New_LanList_CKEditor(obj){
 //抓取資料
 export function GetData() {
   const self = this;
-  
-      axios({
-        url: `/api/News/Get_News?id=${this.props.match.params.id}`,
-        method: 'GET',
-        data: {
-        }
-      }).then((result) => {
-        // console.log(result.data);
-        self.setState({
-          viewModel: result.data
-        }, () => {
-          self.Get_Sys_Language();
-        });
-  
-  
-  
-      }).catch((error) => {
-        console.log(error)
-      });
-  
+
+  axios({
+    url: `/api/News/Get_News?id=${this.props.match.params.id}`,
+    method: 'GET',
+    data: {
     }
+  }).then((result) => {
+    // console.log(result.data);
+    self.setState({
+      viewModel: result.data
+    }, () => {
+      self.Get_Sys_Language();
+    });
+
+
+
+  }).catch((error) => {
+    console.log(error)
+  });
+
+}

@@ -128,8 +128,22 @@ module.exports = (env) => {
             //      exclude: ['vendor.js',],
             //       columns: false
             // }),
+            //UglifyJsPlugin setting_1
+            new webpack.optimize.UglifyJsPlugin({
+                unused: true,
+                sourceMap: true,
+                warnings: false,
+            }),
+            //UglifyJsPlugin setting_2
             // new webpack.optimize.UglifyJsPlugin({
+            //     compress: {
+            //         warnings: false,
+            //     },
             //     sourceMap: true,
+            //     unused: true,
+            // }),
+            // new webpack.LoaderOptionsPlugin({
+            //     minimize: true
             // }),
             new webpack.optimize.CommonsChunkPlugin({
                 name: "commons",
