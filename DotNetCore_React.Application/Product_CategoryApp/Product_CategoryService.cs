@@ -143,8 +143,12 @@ namespace DotNetCore_React.Application.Product_CategoryApp
             //更新副表
             foreach (var newsLanDTO in Product_CategoryDto.LanList)
             {
-                var getLandata = _repository_lan.FirstOrDefault(o => o.LanguageId == newsDB.Id && o.LanguageId == newsLanDTO.LanguageId);
-                getLandata = Mapper.Map<Product_Category_LanDto, Product_Category_Lan>(newsLanDTO, getLandata, opt => opt.AfterMap((dto, dest) => { dest.LanguageId = newsDB.Id; }));
+                var getLandata = _repository_lan.FirstOrDefault(o => o.ProductCateId == newsDB.Id && o.LanguageId == newsLanDTO.LanguageId);
+                getLandata = Mapper.Map<Product_Category_LanDto, Product_Category_Lan>(newsLanDTO, getLandata, 
+                    opt => opt.AfterMap((dto, dest) => { dest.ProductCateId = newsDB.Id;
+                                                         dest.LanguageId = dto.LanguageId;
+                                                        })
+                    );
                 getLandata.ProductCateId = newsDB.Id;
                 _repository_lan.InsertOrUpdate(getLandata);
             }
