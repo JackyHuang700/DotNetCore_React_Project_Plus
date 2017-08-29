@@ -50,6 +50,7 @@ class AboutUs_Create extends Component {
     }
 
     componentDidMount() {
+        this.Get_Sys_Language();
         this.Get_AboutUs_Category();
     }
 
