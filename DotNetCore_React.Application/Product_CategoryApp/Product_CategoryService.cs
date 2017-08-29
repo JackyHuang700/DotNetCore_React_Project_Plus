@@ -145,7 +145,7 @@ namespace DotNetCore_React.Application.Product_CategoryApp
             {
                 var getLandata = _repository_lan.FirstOrDefault(o => o.LanguageId == newsDB.Id && o.LanguageId == newsLanDTO.LanguageId);
                 getLandata = Mapper.Map<Product_Category_LanDto, Product_Category_Lan>(newsLanDTO, getLandata, opt => opt.AfterMap((dto, dest) => { dest.LanguageId = newsDB.Id; }));
-                getLandata.LanguageId = newsDB.Id;
+                getLandata.ProductCateId = newsDB.Id;
                 _repository_lan.InsertOrUpdate(getLandata);
             }
 
@@ -173,7 +173,12 @@ namespace DotNetCore_React.Application.Product_CategoryApp
             }
 
 
-            var success_effect = news_lan_effect && news_effect && productSuccess;
+            var success_effect = news_lan_effect && news_effect;
+            //如果主類別更改為停用
+            if (Product_CategoryDto.Status == 0)
+            {
+                success_effect = productSuccess;
+            }
             myJson["success"] = success_effect;
             myJson["message"] = success_effect ? "更新成功" : "更新失敗";
 
