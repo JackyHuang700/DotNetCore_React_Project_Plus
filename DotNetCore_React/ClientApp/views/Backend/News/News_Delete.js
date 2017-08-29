@@ -8,7 +8,9 @@ import TextInput from '../../Components/Forms/TextInput';
 import DropDownList from '../../Components/Forms/DropDownList';
 import { news_Enum } from '../../../EnumScript/GeneralEnumScript.js';
 
-
+import {
+  GetData,
+} from './News_General';
 
 //刪除與檢視共用
 class News_Delete extends Component {
@@ -21,7 +23,7 @@ class News_Delete extends Component {
       viewModel: {},
     };
 
-    this.GetData = this.GetData.bind(this);
+    this.GetData = GetData.bind(this);
     this.Button_Submit = this.Button_Submit.bind(this);
 
     //

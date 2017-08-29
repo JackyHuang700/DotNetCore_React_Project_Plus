@@ -10,6 +10,7 @@ import { news_Enum } from '../../../EnumScript/GeneralEnumScript.js';
 import CKEditor from '../../Components/Forms/CKEditor';
 import classnames from 'classnames';
 import {
+  GetData,
   HandleInputChange,
   HandleInputChange_By_New_LanList,
   HandleInputChange_By_New_LanList_CKEditor
@@ -29,7 +30,7 @@ class News_Edit extends Component {
     };
     // console.log(`this.props.match.params)`, this.props.match.params)
 
-    this.GetData = this.GetData.bind(this);
+    this.GetData = GetData.bind(this);
     this.Button_Submit = this.Button_Submit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
 
@@ -55,29 +56,7 @@ class News_Edit extends Component {
     }
   }
 
-  GetData() {
-    const self = this;
-
-    axios({
-      url: `/api/News/Get_News?id=${this.props.match.params.id}`,
-      method: 'GET',
-      data: {
-      }
-    }).then((result) => {
-      // console.log(result.data);
-      self.setState({
-        viewModel: result.data
-      }, () => {
-        self.Get_Sys_Language();
-      });
-
-
-
-    }).catch((error) => {
-      console.log(error)
-    });
-
-  }
+ 
 
   handleInputChange(event) {
 
