@@ -50,7 +50,6 @@
     "reactstrap": "4.6.2",
     "sass-loader": "^6.0.6",
     "style-loader": "0.17.0",
-    "typescript": "2.3.2",
     "url-loader": "0.5.8",
     "webpack": "^2.7.0",
     "webpack-dev-server": "^2.6.1",
