@@ -61,15 +61,15 @@ export default class Product_Category_View extends Component {
     }
 
     OnClick_Edit(event) {
-        history.push(`/AboutUs/Edit/${event.currentTarget.getAttribute('data-id')}`);
+        history.push(`/Product_Category/Edit/${event.currentTarget.getAttribute('data-id')}`);
     }
 
     OnClick_Delete(event) {
-        history.push(`/AboutUs/Delete/${event.currentTarget.getAttribute('data-id')}/${true}`);
+        history.push(`/Product_Category/Delete/${event.currentTarget.getAttribute('data-id')}/${true}`);
     }
 
     OnClick_Create(event) {
-        history.push('/AboutUs/Create');
+        history.push('/Product_Category/Create');
     }
 
 
@@ -115,8 +115,8 @@ export default class Product_Category_View extends Component {
         };
 
         const StatusType = {
-            0 : news_Enum.STOP.name,
-            1 : news_Enum.NORMAL.name
+            0 : product_Category_Status_Enum.STOP.name,
+            1 : product_Category_Status_Enum.NORMAL.name
         };
 
 
