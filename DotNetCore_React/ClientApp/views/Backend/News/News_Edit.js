@@ -194,7 +194,7 @@ class News_Edit extends Component {
 
     return (
       <div className="animated fadeIn row justify-content-center">
-        <div className="col-xs-10">
+        <div className="col-xl-10">
           <div className="card">
             <div className="card-header">
               編輯消息
@@ -259,10 +259,10 @@ class News_Edit extends Component {
 
 
                     <DropDownList name="status"
-                      labelName="status"
+                      labelName="狀態"
                       display={this.props.display_status}
                       required={this.props.required_status}
-                      validMessage={{ required: 'Status is reduired.' }}
+                      validMessage={{ required: '狀態 is reduired.' }}
                       onInput={this.handleInputChange}
                       value={this.state.News.status}
                       options={

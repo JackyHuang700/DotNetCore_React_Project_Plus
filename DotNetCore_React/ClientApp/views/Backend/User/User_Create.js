@@ -102,7 +102,7 @@ class User_Create extends Component {
 
     return (
       <div className="animated fadeIn row justify-content-center">
-        <div className="col-xs-10">
+        <div className="col-xl-10">
           <div className="card">
             <div className="card-header">
               新增帳號

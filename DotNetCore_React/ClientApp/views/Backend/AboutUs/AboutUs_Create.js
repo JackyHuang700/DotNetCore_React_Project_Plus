@@ -156,7 +156,7 @@ class AboutUs_Create extends Component {
 
         return (
             <div className="animated fadeIn row justify-content-center">
-                <div className="col-xs-10">
+                <div className="col-xl-10">
                     <div className="card">
                         <div className="card-header">建立關於我們</div>
                         <div className="card-block">
@@ -166,10 +166,10 @@ class AboutUs_Create extends Component {
                                     <tbody>
 
                                         <DropDownList name="categoryId"
-                                            labelName="categoryId"
+                                            labelName="類別"
                                             display={this.props.display_categoryId}
                                             required={this.props.required_categoryId}
-                                            validMessage={{ required: 'categoryId is reduired.' }}
+                                            validMessage={{ required: '類別 is reduired.' }}
                                             onInput={this.HandleInputChange}
                                             value={this.state.viewModel.categoryId}
                                             options={this.state.viewModel.categoryList}
@@ -177,10 +177,10 @@ class AboutUs_Create extends Component {
 
 
                                         <DropDownList name="status"
-                                            labelName="status"
+                                            labelName="狀態"
                                             display={this.props.display_status}
                                             required={this.props.required_status}
-                                            validMessage={{ required: 'status is reduired.' }}
+                                            validMessage={{ required: '狀態 is reduired.' }}
                                             onInput={this.HandleInputChange}
                                             value={this.state.viewModel.status}
                                             options={
@@ -203,7 +203,10 @@ class AboutUs_Create extends Component {
                                 <div className="form-group form-actions">
                                     <ButtonToolbar>
                                         <Button color="primary" id="btn" disabled={$invalid ? 'disabled' : false}>確認</Button>
+                                        {'\u00A0'}
                                         <Button color="primary" onClick={this.Next_Button.bind(this)} disabled={$invalid ? 'disabled' : false}>繼續新增下一筆</Button>
+                                        {'\u00A0'}
+                                        <Button color="warning" onClick={() => history.goBack()}>返回</Button>
                                     </ButtonToolbar>
                                 </div>
                             </form>

@@ -170,7 +170,7 @@ class Product_Category_Edit extends Component {
 
         return (
             <div className="animated fadeIn row justify-content-center">
-                <div className="col-xs-10">
+                <div className="col-xl-10">
                     <div className="card">
                         <div className="card-header">編輯產品類別</div>
                         <div className="card-block">
@@ -181,10 +181,10 @@ class Product_Category_Edit extends Component {
 
 
                                         <TextInput name="id"
-                                            labelName="id"
+                                            labelName="系統流水號"
                                             display={this.props.display_id}
                                             required={this.props.required_id}
-                                            validMessage={{ required: 'id is reduired.' }}
+                                            validMessage={{ required: '系統流水號 is reduired.' }}
                                             onInput={this.HandleInputChange}
                                             value={this.state.viewModel.id}
                                             options={this.state.viewModel.id}
@@ -192,20 +192,20 @@ class Product_Category_Edit extends Component {
 
 
                                         <TextInput name="priority"
-                                            labelName="priority"
+                                            labelName="列表排序"
                                             display={this.props.display_priority}
                                             required={this.props.required_priority}
-                                            validMessage={{ required: 'priority is reduired.' }}
+                                            validMessage={{ required: '列表排序 is reduired.' }}
                                             onInput={this.HandleInputChange}
                                             value={this.state.viewModel.priority}
                                             options={this.state.viewModel.priority}
                                         />
 
                                         <DropDownList name="status"
-                                            labelName="status"
+                                            labelName="狀態"
                                             display={this.props.display_status}
                                             required={this.props.required_status}
-                                            validMessage={{ required: 'status is reduired.' }}
+                                            validMessage={{ required: '狀態 is reduired.' }}
                                             onInput={this.HandleInputChange}
                                             value={this.state.viewModel.status}
                                             options={
@@ -224,10 +224,10 @@ class Product_Category_Edit extends Component {
 
 
                                         <TextInput name="createDate"
-                                            labelName="createDate"
+                                            labelName="建立時間"
                                             display={this.props.display_createDate}
                                             required={this.props.required_createDate}
-                                            validMessage={{ required: 'createDate is reduired.' }}
+                                            validMessage={{ required: '建立時間 is reduired.' }}
                                             onInput={this.HandleInputChange}
                                             value={this.state.viewModel.createDate}
                                             readOnly={true}
@@ -237,10 +237,10 @@ class Product_Category_Edit extends Component {
 
 
                                         <TextInput name="createUser"
-                                            labelName="createUser"
+                                            labelName="建立者"
                                             display={this.props.display_createUser}
                                             required={this.props.required_createUser}
-                                            validMessage={{ required: 'createUser is reduired.' }}
+                                            validMessage={{ required: '建立者 is reduired.' }}
                                             onInput={this.HandleInputChange}
                                             value={this.state.viewModel.createUser}
                                             readOnly={true}
@@ -250,10 +250,10 @@ class Product_Category_Edit extends Component {
 
 
                                         <TextInput name="updateDate"
-                                            labelName="updateDate"
+                                            labelName="更新時間"
                                             display={this.props.display_updateDate}
                                             required={this.props.required_updateDate}
-                                            validMessage={{ required: 'updateDate is reduired.' }}
+                                            validMessage={{ required: '更新時間 is reduired.' }}
                                             onInput={this.HandleInputChange}
                                             value={this.state.viewModel.updateDate}
                                             readOnly={true}
@@ -262,10 +262,10 @@ class Product_Category_Edit extends Component {
 
 
                                         <TextInput name="updateUser"
-                                            labelName="updateUser"
+                                            labelName="更新者"
                                             display={this.props.display_updateUser}
                                             required={this.props.required_updateUser}
-                                            validMessage={{ required: 'updateUser is reduired.' }}
+                                            validMessage={{ required: '更新者 is reduired.' }}
                                             onInput={this.HandleInputChange}
                                             value={this.state.viewModel.updateUser}
                                             readOnly={true}
@@ -277,10 +277,11 @@ class Product_Category_Edit extends Component {
                                 </table>
 
                                 <div className="form-group form-actions">
-                                    <ButtonToolbar>
-                                        <Button color="primary" id="btn" disabled={$invalid ? 'disabled' : false}>確認</Button>
-                                        <Button color="primary" onClick={this.Next_Button.bind(this)} disabled={$invalid ? 'disabled' : false}>繼續新增下一筆</Button>
-                                    </ButtonToolbar>
+                                <ButtonToolbar>
+                                    <Button color="primary" disabled={$invalid ? 'disabled' : false} >完成</Button>
+                                    {'\u00A0'}
+                                    <Button color="warning" onClick={() => history.goBack()}>返回</Button>
+                                </ButtonToolbar>
                                 </div>
                             </form>
                         </div>
