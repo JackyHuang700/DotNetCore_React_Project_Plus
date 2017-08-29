@@ -14,7 +14,6 @@ import classnames from 'classnames';
 import {Get_Sys_Language} from '../Sys_Language/Sys_Language_General.js'; 
 import {
     HandleInputChange,
-    ,
     Get_AboutUs_Category,
     HandleInputChange_By_AboutUs_LanList,
 } from './AboutUs_General';
