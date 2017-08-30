@@ -1,13 +1,12 @@
 
 import React, { Component } from 'react';
-import { ButtonToolbar, FormGroup, Label, Input, Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
+import { ButtonToolbar, FormGroup, Label, Input, Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, TabContent, TabPane, Nav, NavItem, NavLink, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import axios from 'axios';
 import history from '../../../history'
 import EasyForm, { Field, FieldGroup } from 'react-easyform';
 import TextInput from '../../Components/Forms/TextInput';
 import DropDownList from '../../Components/Forms/DropDownList';
 import CKEditor from '../../Components/Forms/CKEditor';
-import Dropzone from 'react-dropzone';
 
 import { news_Enum } from '../../../EnumScript/GeneralEnumScript';
 import classnames from 'classnames';
@@ -28,6 +27,13 @@ import moment from 'moment';
 import '../../../../node_modules/react-datepicker/dist/react-datepicker.css';
 
 
+import DropzoneComponent from 'react-dropzone-component';
+
+
+import '../../../../node_modules/react-dropzone-component/styles/filepicker.css';
+import '../../../../node_modules/dropzone/dist/min/dropzone.min.css';
+
+
 class News_Create extends Component {
 
   constructor(props) {
@@ -40,8 +46,8 @@ class News_Create extends Component {
         endDate: null,
         status: news_Enum.NORMAL.value,
       },
+      modal: false,
       Sys_Language_List: [],
-      uploadedFile: [],
 
       //是否繼續為繼續下一筆
       next_Button: false,
@@ -57,7 +63,52 @@ class News_Create extends Component {
     this.HandleInputChange_By_New_LanList_CKEditor = HandleInputChange_By_New_LanList_CKEditor.bind(this);
     this.HandleInputChange_By_New_LanList = HandleInputChange_By_New_LanList.bind(this);
     this.Component_Nav = this.Component_Nav.bind(this);
+
+
+
+    this.djsConfig = {
+      addRemoveLinks: true,
+      acceptedFiles: "image/jpeg,image/png,image/gif",
+      params: {
+        files: "I'm a parameter!"
+      }
+    };
+
+    this.componentConfig = {
+      iconFiletypes: ['.jpg', '.png', '.gif'],
+      showFiletypeIcon: true,
+      postUrl: '/api/News/Upload_Pic/'
+    };
+
+    // If you want to attach multiple callbacks, simply
+    // create an array filled with all your callbacks.
+    this.callbackArray = [() => console.log('Hi!'), () => console.log('Ho!')];
+
+    // Simple callbacks work too, of course
+    this.callback = () => {
+
+
+      console.log('Hello!');
+    }
+
+    this.success = file => {
+      console.log('uploaded', file);
+
+      //預計將上傳成功後，將檔案名稱寫回viewModel['listImage']內
+
+      // var new_News = Object.assign(this.state.viewModel);
+      // new_News["listImage"] = value;
+
+      // this.setState({
+      //   News: new_News,
+      // });
+    }
+
+    this.removedfile = file => console.log('removing...', file);
+
+    this.dropzone = null;
   }
+
 
   componentDidMount() {
     this.Get_Sys_Language();
@@ -70,6 +121,12 @@ class News_Create extends Component {
         activeTab: tab
       });
     }
+  }
+
+  toggleByModal() {
+    this.setState({
+      modal: !this.state.modal
+    });
   }
 
   Submit(event) {
@@ -185,37 +242,50 @@ class News_Create extends Component {
   }
 
   //上傳圖片
-  onImageDrop(files) {
-    this.setState({
-      uploadedFile: files
-    });
+  // onImageDrop(files) {
+  //   this.setState({
+  //     uploadedFile: files
+  //   });
 
 
-    var formData = new FormData();
-    for (var i = 0; i < files.length; i++) {
-      formData.append('files', files[i]) //用迴圈抓出多少筆再append回來
-    }
+  //   var formData = new FormData();
+  //   for (var i = 0; i < files.length; i++) {
+  //     formData.append('files', files[i]) //用迴圈抓出多少筆再append回來
+  //   }
 
-    axios.post('/api/News/Upload_Pic/', formData).then((response) => {
+  //   axios.post('/api/News/Upload_Pic/', formData).then((response) => {
 
-      if (response.data.success) {
-        var newNews = Object.assign(this.state.viewModel);
-        newNews.listImage = response.data.listImage;
-        this.setState({
-          viewModel: newNews
-        });
+  //     if (response.data.success) {
+  //       var newNews = Object.assign(this.state.viewModel);
+  //       newNews.listImage = response.data.listImage;
+  //       this.setState({
+  //         viewModel: newNews
+  //       });
 
-      }
-      console.log(response);
-    }).catch((error) => {
-      console.log(error);
-    });
-  }
+  //     }
+  //     console.log(response);
+  //   }).catch((error) => {
+  //     console.log(error);
+  //   });
+  // }
 
 
   render() {
     const { params } = this.props.params;
     const { $invalid } = this.props.easyform.$invalid;
+
+
+    const config = this.componentConfig;
+    const djsConfig = this.djsConfig;
+
+    // For a list of all possible events (there are many), see README.md!
+    const eventHandlers = {
+      init: dz => this.dropzone = dz,
+      drop: this.callbackArray,
+      addedfile: this.callback,
+      success: this.success,
+      removedfile: this.removedfile
+    }
 
     return (
       <div className="animated fadeIn row justify-content-center">
@@ -240,21 +310,25 @@ class News_Create extends Component {
                       placeholder="listImage" />
 
 
+                    <tr>
+                      <td className="col-xs-4 text-right">
+                        <label className="text-right" style={{ color: this.props.required_listImage && 'red' }}> 上傳圖片 {this.props.required_listImage && '*'} </label>
 
-                    <Dropzone
-                      multiple={false}
-                      accept="image/*"
-                      onDrop={this.onImageDrop.bind(this)}>
-                      <p>Drop an image or click to select a file to upload.</p>
-                    </Dropzone>
-                    {/* <aside>
-                      <h2>Dropped files</h2>
-                      <ul>
-                        {
-                          this.state.uploadedFile.map(f => {<li key={f.name}>{f.name} - {f.size} bytes</li>})
-                        }
-                      </ul>
-                    </aside> */}
+                      </td>
+                      <td className="col-xs-8 ps-re" >
+                        <Button color="danger" onClick={this.toggleByModal.bind(this)}>上傳圖片</Button>
+                        <Modal isOpen={this.state.modal} toggle={this.toggleByModal.bind(this)} className={this.props.className}>
+                          <ModalHeader toggle={this.toggleByModal.bind(this)}>Modal title</ModalHeader>
+                          <ModalBody>
+                            <DropzoneComponent config={config} eventHandlers={eventHandlers} djsConfig={djsConfig} />
+                          </ModalBody>
+                          <ModalFooter>
+                            <Button color="primary" onClick={this.toggleByModal.bind(this)}>Do Something</Button>{' '}
+                            <Button color="secondary" onClick={this.toggleByModal.bind(this)}>Cancel</Button>
+                          </ModalFooter>
+                        </Modal>
+                      </td>
+                    </tr>
 
 
                     <TextInput name="category"

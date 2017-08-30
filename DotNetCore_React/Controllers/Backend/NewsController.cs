@@ -79,6 +79,8 @@ namespace DotNetCore_React.Controllers
         {
 
             var myJson = _service.Upload_Pic(files);
+
+            var myfile = Request.Form.Files;
             return Json(myJson);
         }
     }
