@@ -18,9 +18,8 @@ export function Get_Sys_Language() {
                 aa.lanList[index] = new Object();
                 aa.lanList[index].languageId = data.id;
             });
-            
-            
         }
+
 
         self.setState({
             Sys_Language_List: result.data,

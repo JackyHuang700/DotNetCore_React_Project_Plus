@@ -2,11 +2,12 @@
   "name": "DotNetCore_React",
   "version": "0.0.0",
   "scripts": {
-    "dev": "webpack --config ./webpack.config.js",
+    "compile": "webpack --config ./webpack.config.js",
+    "compile:dll": "webpack --config ./webpack.dll.js",
     "dev-watch": "webpack-dev-server --hot --open --env=dev --config ./webpack.config.js",
     "dotnet-watch": "dotnet watch run",
     "start": "concurrently \"npm run dotnet-watch\" \"npm run dev-watch\" ",
-    "start2": "npm run dev-watch"
+    "start2": "npm run compile:dll & npm run dev-watch"
   },
   "devDependencies": {
     "@types/history": "4.5.1",
