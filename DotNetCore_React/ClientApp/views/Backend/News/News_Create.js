@@ -16,7 +16,16 @@ import {
   HandleInputChange_By_New_LanList,
   HandleInputChange_By_New_LanList_CKEditor
 } from './News_General';
-import {Get_Sys_Language} from '../Sys_Language/Sys_Language_General.js'; 
+import { Get_Sys_Language } from '../Sys_Language/Sys_Language_General.js';
+
+import {
+  formatDate,
+  HandleInputChange_StartDate,
+  HandleInputChange_EndDate,
+} from '../Helper/Helper';
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
+import '../../../../node_modules/react-datepicker/dist/react-datepicker.css';
 
 
 class News_Create extends Component {
@@ -27,6 +36,8 @@ class News_Create extends Component {
       viewModel: {
         priority: '1',
         lanList: [],
+        startDate: moment(),
+        endDate: null,
         status: news_Enum.NORMAL.value,
       },
       Sys_Language_List: [],
@@ -95,7 +106,7 @@ class News_Create extends Component {
   //語系元件
   Component_Nav() {
     var self = this;
-    
+
     return (
       <td colSpan="2">
         <Nav tabs>
@@ -119,7 +130,7 @@ class News_Create extends Component {
           {
             self.state.Sys_Language_List.map((sys, index) => {
 
-            
+
               return (
                 <TabPane tabId={`${index}`}>
 
@@ -157,7 +168,7 @@ class News_Create extends Component {
                     cols="100"
                     rows="6"
                     placeholder="content" />
-                    
+
 
 
                   {/* refer https://stackoverflow.com/questions/36535234/how-can-ckeditor-be-used-with-react-js-in-a-way-that-allows-react-to-recognize-i */}
@@ -186,7 +197,7 @@ class News_Create extends Component {
     }
 
     axios.post('/api/News/Upload_Pic/', formData).then((response) => {
-      
+
       if (response.data.success) {
         var newNews = Object.assign(this.state.viewModel);
         newNews.listImage = response.data.listImage;
@@ -205,7 +216,6 @@ class News_Create extends Component {
   render() {
     const { params } = this.props.params;
     const { $invalid } = this.props.easyform.$invalid;
-
 
     return (
       <div className="animated fadeIn row justify-content-center">
@@ -270,26 +280,38 @@ class News_Create extends Component {
                       placeholder="priority" />
 
 
-                    <TextInput name="startDate"
-                      labelName="上架時間"
-                      className=""
-                      display={this.props.display_startDate}
-                      required={this.props.required_startDate}
-                      validMessage={{ required: '上架時間 is reduired.' }}
-                      onInput={this.HandleInputChange}
-                      value={this.state.viewModel.startDate}
-                      placeholder="startDate" />
+                    <tr>
+                      <td className="col-xs-4 text-right">
+                        <label className="text-right" style={{ color: this.props.required_startDate && 'red' }}> 上架時間 {this.props.required_startDate && '*'} </label>
+
+                      </td>
+                      <td className="col-xs-8 ps-re" >
+                        <DatePicker
+                          dateFormat={formatDate}
+                          selected={this.state.viewModel.startDate}
+                          onChange={HandleInputChange_StartDate.bind(this)} />
+                      </td>
+                    </tr>
 
 
-                    <TextInput name="endDate"
-                      labelName="下架時間"
-                      className=""
-                      display={this.props.display_endDate}
-                      required={this.props.required_endDate}
-                      validMessage={{ required: '下架時間 is reduired.' }}
-                      onInput={this.HandleInputChange}
-                      value={this.state.viewModel.endDate}
-                      placeholder="endDate" />
+
+
+
+                    <tr>
+                      <td className="col-xs-4 text-right">
+                        <label className="text-right" style={{ color: this.props.required_endDate && 'red' }}> 下架時間 {this.props.required_endDate && '*'} </label>
+
+                      </td>
+                      <td className="col-xs-8 ps-re" >
+                        <DatePicker
+                          dateFormat={formatDate}
+                          isClearable={true}
+                          selected={this.state.viewModel.endDate}
+                          onChange={HandleInputChange_EndDate.bind(this)} />
+                      </td>
+                    </tr>
+
+
 
 
                     <DropDownList name="status"
@@ -353,3 +375,26 @@ News_Create.defaultProps = {
   required_endDate: false,
   required_status: true,
 }
+
+
+{/* <TextInput name="startDate"
+                      labelName="上架時間"
+                      className=""
+                      display={this.props.display_startDate}
+                      required={this.props.required_startDate}
+                      validMessage={{ required: '上架時間 is reduired.' }}
+                      onInput={this.HandleInputChange}
+                      value={this.state.viewModel.startDate}
+                      placeholder="startDate" /> */}
+
+
+
+{/* <TextInput name="endDate"
+                      labelName="下架時間"
+                      className=""
+                      display={this.props.display_endDate}
+                      required={this.props.required_endDate}
+                      validMessage={{ required: '下架時間 is reduired.' }}
+                      onInput={this.HandleInputChange}
+                      value={this.state.viewModel.endDate}
+                      placeholder="endDate" /> */}

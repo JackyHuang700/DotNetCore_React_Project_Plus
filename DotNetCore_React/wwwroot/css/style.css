@@ -8988,3 +8988,6 @@ body {
 .nav-title.nav-title.nav-title {
   color: black;
   background: #e4e5e6; }
+
+.ps-re {
+  position: relative; }

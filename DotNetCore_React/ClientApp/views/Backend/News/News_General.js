@@ -1,4 +1,8 @@
 import axios from 'axios';
+import moment from 'moment';
+import {
+  formatDate,
+} from '../Helper/Helper';
 
 
 export function HandleInputChange(event) {
@@ -52,6 +56,10 @@ export function GetData() {
     }
   }).then((result) => {
     // console.log(result.data);
+
+    result.data.startDate = moment(result.data.startDate);
+    result.data.endDate = moment(result.data.endDate);
+
     self.setState({
       viewModel: result.data
     }, () => {

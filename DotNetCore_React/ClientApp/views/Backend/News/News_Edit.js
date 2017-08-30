@@ -17,6 +17,16 @@ import {
 } from './News_General';
 import { Get_Sys_Language } from '../Sys_Language/Sys_Language_General.js';
 
+
+import {
+  formatDate,
+  HandleInputChange_StartDate,
+  HandleInputChange_EndDate,
+} from '../Helper/Helper';
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
+import '../../../../node_modules/react-datepicker/dist/react-datepicker.css';
+
 class News_Edit extends Component {
 
   constructor(props) {
@@ -24,6 +34,8 @@ class News_Edit extends Component {
     this.state = {
       viewModel: {
         lanList: [],
+        startDate: null,
+        endDate: null,
       },
       Sys_Language_List: [],
       activeTab: '0'
@@ -56,7 +68,7 @@ class News_Edit extends Component {
     }
   }
 
- 
+
 
   handleInputChange(event) {
 
@@ -216,25 +228,38 @@ class News_Edit extends Component {
                       value={this.state.viewModel.priority}
                       placeholder="priority" />
 
-                    <TextInput name="startDate"
-                      labelName="上架時間"
-                      className=""
-                      display={this.props.display_startDate}
-                      required={this.props.required_startDate}
-                      validMessage={{ required: '上架時間 is reduired.' }}
-                      onInput={this.handleInputChange}
-                      value={this.state.viewModel.startDate}
-                      placeholder="startDate" />
 
-                    <TextInput name="endDate"
-                      labelName="下架時間"
-                      className=""
-                      display={this.props.display_endDate}
-                      required={this.props.required_endDate}
-                      validMessage={{ required: '下架時間 is reduired.' }}
-                      onInput={this.handleInputChange}
-                      value={this.state.viewModel.endDate}
-                      placeholder="endDate" />
+                    <tr>
+                      <td className="col-xs-4 text-right">
+                        <label className="text-right" style={{ color: this.props.required_startDate && 'red' }}> 上架時間 {this.props.required_startDate && '*'} </label>
+
+                      </td>
+                      <td className="col-xs-8 ps-re" >
+                        <DatePicker
+                          dateFormat={formatDate}
+                          selected={this.state.viewModel.startDate}
+                          onChange={HandleInputChange_StartDate.bind(this)} />
+                      </td>
+                    </tr>
+
+
+
+
+
+                    <tr>
+                      <td className="col-xs-4 text-right">
+                        <label className="text-right" style={{ color: this.props.required_endDate && 'red' }}> 下架時間 {this.props.required_endDate && '*'} </label>
+
+                      </td>
+                      <td className="col-xs-8 ps-re" >
+                        <DatePicker
+                          dateFormat={formatDate}
+                          isClearable={true}
+                          selected={this.state.viewModel.endDate}
+                          onChange={HandleInputChange_EndDate.bind(this)} />
+                      </td>
+                    </tr>
+
 
 
                     <DropDownList name="status"
