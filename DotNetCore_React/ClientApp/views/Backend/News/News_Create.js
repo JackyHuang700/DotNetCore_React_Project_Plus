@@ -7,7 +7,7 @@ import EasyForm, { Field, FieldGroup } from 'react-easyform';
 import TextInput from '../../Components/Forms/TextInput';
 import DropDownList from '../../Components/Forms/DropDownList';
 import CKEditor from '../../Components/Forms/CKEditor';
-import Dropzone from 'react-dropzone';
+import FileUpload from '../../Components/Forms/FileUpload';
 
 import { news_Enum } from '../../../EnumScript/GeneralEnumScript';
 import classnames from 'classnames';
@@ -241,20 +241,9 @@ class News_Create extends Component {
 
 
 
-                    <Dropzone
-                      multiple={false}
-                      accept="image/*"
-                      onDrop={this.onImageDrop.bind(this)}>
-                      <p>Drop an image or click to select a file to upload.</p>
-                    </Dropzone>
-                    {/* <aside>
-                      <h2>Dropped files</h2>
-                      <ul>
-                        {
-                          this.state.uploadedFile.map(f => {<li key={f.name}>{f.name} - {f.size} bytes</li>})
-                        }
-                      </ul>
-                    </aside> */}
+                    <FileUpload 
+                      baseUrl="/api/news/Upload_Pic"
+                    />
 
 
                     <TextInput name="category"

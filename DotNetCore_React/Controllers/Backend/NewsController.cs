@@ -75,9 +75,11 @@ namespace DotNetCore_React.Controllers
         }
 
         [HttpPost("[action]")]
-        public ActionResult Upload_Pic(List<IFormFile> files)
+        public ActionResult Upload_Pic(List<IFormFile> files,string description)
         {
-
+            foreach(var f in Request.Form.Files){
+                files.Add(f);
+            }
             var myJson = _service.Upload_Pic(files);
             return Json(myJson);
         }
