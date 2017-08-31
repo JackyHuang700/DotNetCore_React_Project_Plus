@@ -27,9 +27,10 @@ class Product_Create extends Component {
             viewModel: {
                 lanList: [],
                 imageList: [],
-              
+
                 priority: "1",
                 status: news_Enum.NORMAL.value,
+                listImage: "",
             },
             Sys_Language_List: [],
 
@@ -131,7 +132,7 @@ class Product_Create extends Component {
                                         display={this.props.display_content}
                                         required={this.props.required_content}
                                         validMessage={{ required: '內容 is reduired.' }}
-                                         onInput={this.HandleInputChange_By_LanList}
+                                        onInput={this.HandleInputChange_By_LanList}
                                         value={this.state.viewModel.lanList[`${index}`].languageId}
                                         placeholder="languageId" />
 
@@ -143,7 +144,7 @@ class Product_Create extends Component {
                                         display={this.props.display_title}
                                         required={this.props.required_title}
                                         validMessage={{ required: '標題 is reduired.' }}
-                                         onInput={this.HandleInputChange_By_LanList}
+                                        onInput={this.HandleInputChange_By_LanList}
                                         value={this.state.viewModel.lanList[`${index}`].title}
                                         placeholder="title" />
 
@@ -155,7 +156,7 @@ class Product_Create extends Component {
                                         display={this.props.display_subTitle}
                                         required={this.props.required_subTitle}
                                         validMessage={{ required: '副標題 is reduired.' }}
-                                         onInput={this.HandleInputChange_By_LanList}
+                                        onInput={this.HandleInputChange_By_LanList}
                                         value={this.state.viewModel.lanList[`${index}`].subTitle}
                                         placeholder="subTitle" />
 
@@ -169,7 +170,7 @@ class Product_Create extends Component {
                                         display={this.props.display_name}
                                         required={this.props.required_name}
                                         validMessage={{ required: '名稱 is reduired.' }}
-                                         onInput={this.HandleInputChange_By_LanList}
+                                        onInput={this.HandleInputChange_By_LanList}
                                         value={this.state.viewModel.lanList[`${index}`].name}
                                         placeholder="name" />
 
@@ -181,7 +182,7 @@ class Product_Create extends Component {
                                         display={this.props.display_content}
                                         required={this.props.required_content}
                                         validMessage={{ required: '內容 is reduired.' }}
-                                         onInput={this.HandleInputChange_By_LanList}
+                                        onInput={this.HandleInputChange_By_LanList}
                                         value={this.state.viewModel.lanList[`${index}`].content}
                                         placeholder="content" />
 
@@ -279,7 +280,11 @@ class Product_Create extends Component {
 
                                             </td>
                                             <td className="col-xs-8" >
-                                                <img src={this.state.viewModel.listImage} className="img-preview img-thumbnail" />
+                                                {
+                                                    this.state.viewModel.listImage.split(',').map(c => {
+                                                        return <img src={c} className="img-preview img-thumbnail" />
+                                                    })
+                                                }
                                             </td>
                                         </tr>
 

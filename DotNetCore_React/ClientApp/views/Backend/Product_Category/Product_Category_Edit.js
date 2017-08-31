@@ -277,11 +277,11 @@ class Product_Category_Edit extends Component {
                                 </table>
 
                                 <div className="form-group form-actions">
-                                <ButtonToolbar>
-                                    <Button color="primary" disabled={$invalid ? 'disabled' : false} >完成</Button>
-                                    {'\u00A0'}
-                                    <Button color="warning" onClick={() => history.goBack()}>返回</Button>
-                                </ButtonToolbar>
+                                    <ButtonToolbar>
+                                        <Button color="primary" disabled={$invalid ? 'disabled' : false} >完成</Button>
+                                        {'\u00A0'}
+                                        <Button color="warning" onClick={() => history.goBack()}>返回</Button>
+                                    </ButtonToolbar>
                                 </div>
                             </form>
                         </div>

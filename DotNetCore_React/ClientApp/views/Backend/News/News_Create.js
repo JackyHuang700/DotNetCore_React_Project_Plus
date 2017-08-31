@@ -40,6 +40,7 @@ class News_Create extends Component {
         startDate: moment(),
         endDate: null,
         status: news_Enum.NORMAL.value,
+        listImage: "",
       },
       Sys_Language_List: [],
       uploadedFile: [],
@@ -246,7 +247,11 @@ class News_Create extends Component {
 
                       </td>
                       <td className="col-xs-8" >
-                      <img src={this.state.viewModel.listImage} className="img-preview img-thumbnail" />
+                        {
+                          this.state.viewModel.listImage.split(',').map(c => {
+                            return <img src={c} className="img-preview img-thumbnail" />
+                          })
+                        }
                       </td>
                     </tr>
 
