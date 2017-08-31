@@ -73,13 +73,5 @@ namespace DotNetCore_React.Controllers
             
             return Json(myJson);
         }
-
-        [HttpPost("[action]")]
-        public ActionResult Upload_Pic(List<IFormFile> files)
-        {
-
-            var myJson = _service.Upload_Pic(files);
-            return Json(myJson);
-        }
     }
 }
