@@ -8,7 +8,7 @@ import TextInput from '../../Components/Forms/TextInput';
 import DropDownList from '../../Components/Forms/DropDownList';
 import CKEditor from '../../Components/Forms/CKEditor';
 import Dropzone from 'react-dropzone';
-import FileUpload2 from '../../Components/Forms/FileUpload3';
+import FileUpload from '../../Components/Forms/FileUpload3';
 
 import { news_Enum } from '../../../EnumScript/GeneralEnumScript';
 import classnames from 'classnames';
@@ -281,14 +281,21 @@ class Product_Create extends Component {
                                             </td>
                                             <td className="col-xs-8" >
                                                 {
-                                                    this.state.viewModel.listImage.split(',').map(c => {
-                                                        return <img src={c} className="img-preview img-thumbnail" />
-                                                    })
+                                                    this.state.viewModel.listImage ?
+                                                        this.state.viewModel.listImage.split(',').map(c => {
+                                                            return <img src={c} className="img-preview img-thumbnail" />
+                                                        }) : null
                                                 }
                                             </td>
                                         </tr>
 
-                                        <FileUpload2 HandleInputChange={this.HandleInputChange} Add_ImageList={Add_ImageList.bind(this)} />
+                                        <FileUpload
+                                            HandleInputChange={this.HandleInputChange}
+                                            Add_ImageList={Add_ImageList.bind(this)}
+                                            viewModel={this.state.viewModel}
+                                            acceptedFiles={"image/jpeg,image/png,image/gif"}
+                                            postUrl={"/api/News/Upload_Pic/"}
+                                        />
 
 
                                         {this.Component_Nav()}

@@ -7,8 +7,8 @@ import EasyForm, { Field, FieldGroup } from 'react-easyform';
 import TextInput from '../../Components/Forms/TextInput';
 import DropDownList from '../../Components/Forms/DropDownList';
 import CKEditor from '../../Components/Forms/CKEditor';
-import FileUpload from '../../Components/Forms/FileUpload';
-import FileUpload2 from '../../Components/Forms/FileUpload2';
+// import FileUpload from '../../Components/Forms/FileUpload';
+import FileUpload from '../../Components/Forms/FileUpload2';
 
 import { news_Enum } from '../../../EnumScript/GeneralEnumScript';
 import classnames from 'classnames';
@@ -248,9 +248,11 @@ class News_Create extends Component {
                       </td>
                       <td className="col-xs-8" >
                         {
-                          this.state.viewModel.listImage.split(',').map(c => {
-                            return <img src={c} className="img-preview img-thumbnail" />
-                          })
+
+                          this.state.viewModel.listImage ?
+                            this.state.viewModel.listImage.split(',').map(c => {
+                              return <img src={c} className="img-preview img-thumbnail" />
+                            }) : null
                         }
                       </td>
                     </tr>
@@ -259,7 +261,11 @@ class News_Create extends Component {
                     {/* <FileUpload 
                       baseUrl="/api/news/Upload_Pic"
                     /> */}
-                    <FileUpload2 HandleInputChange={this.HandleInputChange} />
+                    <FileUpload
+                      HandleInputChange={this.HandleInputChange}
+                      acceptedFiles={"image/jpeg,image/png,image/gif"}
+                      postUrl={"/api/News/Upload_Pic/"}
+                    />
 
 
                     <TextInput name="category"

@@ -6,11 +6,13 @@ import '../../../../node_modules/dropzone/dist/min/dropzone.min.css';
 
 
 
-
+//產品 
+//服務據點
 class FileUpload extends Component {
 
     constructor(props) {
         super(props);
+
         this.state = {
             modal: false,
             viewModel: {
@@ -21,14 +23,14 @@ class FileUpload extends Component {
 
         this.djsConfig = {
             addRemoveLinks: true,
-            acceptedFiles: "image/jpeg,image/png,image/gif",
+            acceptedFiles: this.props.acceptedFiles,
             autoProcessQueue: false
         };
 
         this.componentConfig = {
             iconFiletypes: ['.jpg', '.png', '.gif'],
             showFiletypeIcon: true,
-            postUrl: '/api/News/Upload_Pic/'
+            postUrl: this.props.postUrl,
         };
 
         // If you want to attach multiple callbacks, simply
@@ -47,11 +49,17 @@ class FileUpload extends Component {
 
 
             let json = JSON.parse(file.xhr.response);
+            let new_listImage = "";
+            if (this.props.viewModel.listImage === "") {
+                new_listImage = `${json.listImage}`
+            } else {
+                new_listImage = `${this.props.viewModel.listImage},${json.listImage}`
+            }
             if (json.success) {
                 this.props.HandleInputChange({
                     target: {
                         type: "text",
-                        value: json.listImage,
+                        value: new_listImage,
                         name: "listImage",
                     },
                 });
@@ -159,3 +167,8 @@ class FileUpload extends Component {
 
 }
 export default FileUpload;
+
+FileUpload.propTypes = {
+    acceptedFiles: React.PropTypes.object.isRequired,
+    postUrl: React.PropTypes.object.isRequired
+};
