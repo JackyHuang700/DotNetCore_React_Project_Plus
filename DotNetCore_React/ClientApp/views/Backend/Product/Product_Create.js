@@ -237,6 +237,30 @@ class Product_Create extends Component {
                                             placeholder="listImage" />
 
 
+                                        <tr>
+                                            <td className="col-xs-4 text-right">
+                                                <label className="text-right" style={{ color: this.props.required_listImage && 'red' }}> 上傳圖片 {this.props.required_listImage && '*'} </label>
+
+                                            </td>
+                                            <td className="col-xs-8" >
+                                                {
+                                                    this.state.viewModel.listImage ?
+                                                        this.state.viewModel.listImage.split(',').map(c => {
+                                                            return <img src={c} className="img-preview img-thumbnail" />
+                                                        }) : null
+                                                }
+                                            </td>
+                                        </tr>
+
+                                        <FileUpload
+                                            HandleInputChange={this.HandleInputChange}
+                                            Add_ImageList={Add_ImageList.bind(this)}
+                                            viewModel={this.state.viewModel}
+                                            acceptedFiles={"image/jpeg,image/png,image/gif"}
+                                            postUrl={"/api/News/Upload_Pic/"}
+                                            handleInputChangeName={"listImage"}
+                                        />
+
 
                                         <TextInput name="priority"
                                             labelName="列表排序"
@@ -271,32 +295,6 @@ class Product_Create extends Component {
                                                 ]}
                                         />
 
-
-
-
-                                        <tr>
-                                            <td className="col-xs-4 text-right">
-                                                <label className="text-right" style={{ color: this.props.required_listImage && 'red' }}> 上傳圖片 {this.props.required_listImage && '*'} </label>
-
-                                            </td>
-                                            <td className="col-xs-8" >
-                                                {
-                                                    this.state.viewModel.listImage ?
-                                                        this.state.viewModel.listImage.split(',').map(c => {
-                                                            return <img src={c} className="img-preview img-thumbnail" />
-                                                        }) : null
-                                                }
-                                            </td>
-                                        </tr>
-
-                                        <FileUpload
-                                            HandleInputChange={this.HandleInputChange}
-                                            Add_ImageList={Add_ImageList.bind(this)}
-                                            viewModel={this.state.viewModel}
-                                            acceptedFiles={"image/jpeg,image/png,image/gif"}
-                                            postUrl={"/api/News/Upload_Pic/"}
-                                            handleInputChangeName = {"listImage"}
-                                        />
 
 
                                         {this.Component_Nav()}

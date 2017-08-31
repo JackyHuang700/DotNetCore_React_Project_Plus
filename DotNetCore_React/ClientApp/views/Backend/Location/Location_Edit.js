@@ -7,19 +7,20 @@ import EasyForm, { Field, FieldGroup } from 'react-easyform';
 import TextInput from '../../Components/Forms/TextInput';
 import DropDownList from '../../Components/Forms/DropDownList';
 import CKEditor from '../../Components/Forms/CKEditor';
-import Dropzone from 'react-dropzone';
+import FileUpload from '../../Components/Forms/FileUpload3';
 
 import {
     news_Enum,
     location_Area_Enum
 } from '../../../EnumScript/GeneralEnumScript';
 import classnames from 'classnames';
-import {Get_Sys_Language} from '../Sys_Language/Sys_Language_General.js'; 
+import { Get_Sys_Language } from '../Sys_Language/Sys_Language_General.js';
 import {
     GetData,
     HandleInputChange,
     HandleInputChange_By_LanList,
     HandleInputChange_By_LanList_CKEditor,
+    Add_ImageList,
 } from './Location_General';
 
 class Location_Edit extends Component {
@@ -231,6 +232,32 @@ class Location_Edit extends Component {
                                             placeholder="listImage" />
 
 
+
+                                        <tr>
+                                            <td className="col-xs-4 text-right">
+                                                <label className="text-right" style={{ color: this.props.required_listImage && 'red' }}> 上傳圖片 {this.props.required_listImage && '*'} </label>
+
+                                            </td>
+                                            <td className="col-xs-8" >
+                                                {
+                                                    this.state.viewModel.listImage ?
+                                                        this.state.viewModel.listImage.split(',').map(c => {
+                                                            return <img src={c} className="img-preview img-thumbnail" />
+                                                        }) : null
+                                                }
+                                            </td>
+                                        </tr>
+
+                                        <FileUpload
+                                            HandleInputChange={this.HandleInputChange}
+                                            Add_ImageList={Add_ImageList.bind(this)}
+                                            viewModel={this.state.viewModel}
+                                            acceptedFiles={"image/jpeg,image/png,image/gif"}
+                                            postUrl={"/api/News/Upload_Pic/"}
+                                            handleInputChangeName={"listImage"}
+                                        />
+
+
                                         <TextInput name="country"
                                             labelName="國家"
                                             className=""
@@ -389,7 +416,7 @@ class Location_Edit extends Component {
                                         {'\u00A0'}
                                         <Button color="warning" onClick={() => history.goBack()}>返回</Button>
                                     </ButtonToolbar>
-                               </div>
+                                </div>
                             </form>
                         </div>
                     </div>

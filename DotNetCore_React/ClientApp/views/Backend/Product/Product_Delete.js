@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
+import { Col, Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
 
 import axios from 'axios';
 import history from '../../../history'
@@ -7,7 +7,7 @@ import EasyForm, { Field, FieldGroup } from 'react-easyform';
 import TextInput from '../../Components/Forms/TextInput';
 import { news_Enum } from '../../../EnumScript/GeneralEnumScript.js';
 import classnames from 'classnames';
-import {Get_Sys_Language} from '../Sys_Language/Sys_Language_General.js'; 
+import { Get_Sys_Language } from '../Sys_Language/Sys_Language_General.js';
 import {
     GetData,
 } from './Product_General';
@@ -23,6 +23,7 @@ class Product_Delete extends Component {
 
             viewModel: {
                 lanList: [],
+                imageList: [],
             },
             Sys_Language_List: [],
             activeTab: '0',
@@ -246,6 +247,25 @@ class Product_Delete extends Component {
                                             readOnly={true}
                                         />
 
+
+                                        <tr>
+                                            <td className="col-xs-4 text-right">
+                                                <label className="text-right" style={{ color: this.props.required_listImage && 'red' }}> 上傳圖片 {this.props.required_listImage && '*'} </label>
+
+                                            </td>
+                                            <td className="col-xs-8" >
+                                                {
+                                                    this.state.viewModel.imageList.map(c => {
+                                                        return (
+                                                            <Col xs="2 dis-inline-block">
+                                                                <img src={c.image} className="img-preview img-thumbnail" />
+                                                                <p className="dis-inline-block">{c.description || '\u00A0'}</p>
+                                                            </Col>
+                                                        )
+                                                    })
+                                                }
+                                            </td>
+                                        </tr>
 
                                         <TextInput name="priority"
                                             labelName="列表排序"

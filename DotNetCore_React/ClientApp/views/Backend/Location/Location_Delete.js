@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
+import { Col, Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
 
 import axios from 'axios';
 import history from '../../../history'
@@ -27,6 +27,7 @@ class Location_Delete extends Component {
 
             viewModel: {
                 lanList: [],
+                imageList: [],
             },
             Sys_Language_List: [],
             activeTab: '0',
@@ -255,6 +256,26 @@ class Location_Delete extends Component {
                                             value={this.state.viewModel.listImage}
                                             readOnly={true}
                                             placeholder="listImage" />
+
+
+                                            <tr>
+                                            <td className="col-xs-4 text-right">
+                                                <label className="text-right" style={{ color: this.props.required_listImage && 'red' }}> 上傳圖片 {this.props.required_listImage && '*'} </label>
+
+                                            </td>
+                                            <td className="col-xs-8" >
+                                                {
+                                                    this.state.viewModel.imageList.map(c => {
+                                                        return (
+                                                            <Col xs="2 dis-inline-block">
+                                                                <img src={c.image} className="img-preview img-thumbnail" />
+                                                                <p className="dis-inline-block">{c.description || '\u00A0'}</p>
+                                                            </Col>
+                                                        )
+                                                    })
+                                                }
+                                            </td>
+                                        </tr>
 
 
                                         <TextInput name="country"

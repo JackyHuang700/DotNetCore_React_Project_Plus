@@ -65,3 +65,12 @@ export function HandleInputChange_By_LanList_CKEditor(obj) {
         viewModel: new_News,
     });
 }
+
+
+export function Add_ImageList(json) {
+    this.state.viewModel.imageList.push({
+        image: json.image,
+        description: json.description,
+
+    });
+}

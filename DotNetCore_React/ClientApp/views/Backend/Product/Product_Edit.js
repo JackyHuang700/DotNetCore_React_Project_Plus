@@ -7,7 +7,7 @@ import EasyForm, { Field, FieldGroup } from 'react-easyform';
 import TextInput from '../../Components/Forms/TextInput';
 import DropDownList from '../../Components/Forms/DropDownList';
 import CKEditor from '../../Components/Forms/CKEditor';
-import Dropzone from 'react-dropzone';
+import FileUpload from '../../Components/Forms/FileUpload3';
 
 import { news_Enum } from '../../../EnumScript/GeneralEnumScript';
 import classnames from 'classnames';
@@ -16,6 +16,7 @@ import {
     GetData,
     HandleInputChange,
     HandleInputChange_By_LanList,
+    Add_ImageList,
 } from './Product_General';
 
 class Product_Edit extends Component {
@@ -235,6 +236,31 @@ class Product_Edit extends Component {
                                             placeholder="listImage" />
 
 
+                                        <tr>
+                                            <td className="col-xs-4 text-right">
+                                                <label className="text-right" style={{ color: this.props.required_listImage && 'red' }}> 上傳圖片 {this.props.required_listImage && '*'} </label>
+
+                                            </td>
+                                            <td className="col-xs-8" >
+                                                {
+                                                    this.state.viewModel.listImage ?
+                                                        this.state.viewModel.listImage.split(',').map(c => {
+                                                            return <img src={c} className="img-preview img-thumbnail" />
+                                                        }) : null
+                                                }
+                                            </td>
+                                        </tr>
+
+                                        <FileUpload
+                                            HandleInputChange={this.HandleInputChange}
+                                            Add_ImageList={Add_ImageList.bind(this)}
+                                            viewModel={this.state.viewModel}
+                                            acceptedFiles={"image/jpeg,image/png,image/gif"}
+                                            postUrl={"/api/News/Upload_Pic/"}
+                                            handleInputChangeName={"listImage"}
+                                        />
+
+
 
                                         <TextInput name="priority"
                                             labelName="列表排序"
@@ -343,7 +369,7 @@ export default EasyForm(Product_Edit, 2);
 Product_Edit.defaultProps = {
 
     display_id: false,
-    display_listImage: true,
+    display_listImage: false,
     display_priority: true,
     display_status: true,
     display_createDate: true,
