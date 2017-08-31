@@ -52,6 +52,7 @@ namespace DotNetCore_React.Application.ProductApp
                     a_DB_List.Add(aa);
                     var aaa = _repository_lan.Insert(aa);
                 }
+                var bSuccess = _repository_lan.Save() == News.LanList.Count;
 
                 //¹Ïªí
                 var b_DB_List = new List<Product_Image>();
@@ -63,7 +64,6 @@ namespace DotNetCore_React.Application.ProductApp
                     var aaa = _repository_image.Insert(aa);
                 }
 
-                var bSuccess = _repository_lan.Save() == News.LanList.Count;
                 var cSuccess = _repository_image.Save() == News.ImageList.Count;
 
                 if (bSuccess && cSuccess)

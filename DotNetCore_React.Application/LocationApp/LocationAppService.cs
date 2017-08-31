@@ -221,40 +221,5 @@ namespace DotNetCore_React.Application.LocationApp
 
             return myJson;
         }
-
-        public Dictionary<string, object> Upload_Pic(List<IFormFile> files)
-        {
-            var myJson = new Dictionary<string, object>()
-            {
-                {"success",false },
-                {"message",null  }
-            };
-
-            var filePath = $"{_config.UPLOAD_PATH}";
-            var wwwrootPath = $"{ _hostEnvironment.WebRootPath}{filePath}";
-            Directory.GetParent(wwwrootPath).Create();
-
-
-            foreach (var formFile in files)
-            {
-                if (formFile.Length > 0)
-                {
-                    var random = new Random(Guid.NewGuid().GetHashCode()).Next(0, 1000000);
-                    var fileName = $"{DateTime.Now:yyyyMMddhhmmss}{random}";
-                    var extension = Path.GetExtension(formFile.FileName);
-                    var newFile = $"{fileName}{extension}";
-                    using (var stream = new FileStream($"{wwwrootPath}{newFile}", FileMode.CreateNew))
-                    {
-                        formFile.CopyTo(stream);
-                        myJson["success"] = true;
-                        myJson["listImage"] = newFile;
-                    }
-                }
-            }
-
-            return myJson;
-        }
-
-      
     }
 }
