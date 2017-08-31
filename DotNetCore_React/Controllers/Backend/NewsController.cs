@@ -80,7 +80,7 @@ namespace DotNetCore_React.Controllers
             foreach(var f in Request.Form.Files){
                 files.Add(f);
             }
-            var myJson = _service.Upload_Pic(files);
+            var myJson = _service.Upload_Pic(files, description);
             return Json(myJson);
         }
     }

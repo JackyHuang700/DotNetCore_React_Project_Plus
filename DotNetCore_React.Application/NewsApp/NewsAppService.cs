@@ -184,7 +184,7 @@ namespace DotNetCore_React.Application.NewsApp
             return myJson;
         }
 
-        public Dictionary<string, object> Upload_Pic(List<IFormFile> files)
+        public Dictionary<string, object> Upload_Pic(List<IFormFile> files, string description)
         {
             var myJson = new Dictionary<string, object>()
             {
@@ -209,7 +209,8 @@ namespace DotNetCore_React.Application.NewsApp
                     {
                         formFile.CopyTo(stream);
                         myJson["success"] = true;
-                        myJson["listImage"] = newFile;
+                        myJson["listImage"] = $"{filePath}{newFile}";
+                        myJson["description"] = description;
                     }
                 }
             }

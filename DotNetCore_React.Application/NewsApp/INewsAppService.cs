@@ -21,6 +21,6 @@ namespace DotNetCore_React.Application.NewsApp
 
         Dictionary<string, object> Delete(string id);
 
-        Dictionary<string, object> Upload_Pic(List<IFormFile> files);
+        Dictionary<string, object> Upload_Pic(List<IFormFile> files, string description);
     } 
 }

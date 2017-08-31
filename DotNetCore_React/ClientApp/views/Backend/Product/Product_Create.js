@@ -8,13 +8,15 @@ import TextInput from '../../Components/Forms/TextInput';
 import DropDownList from '../../Components/Forms/DropDownList';
 import CKEditor from '../../Components/Forms/CKEditor';
 import Dropzone from 'react-dropzone';
+import FileUpload2 from '../../Components/Forms/FileUpload3';
 
 import { news_Enum } from '../../../EnumScript/GeneralEnumScript';
 import classnames from 'classnames';
-import {Get_Sys_Language} from '../Sys_Language/Sys_Language_General.js'; 
+import { Get_Sys_Language } from '../Sys_Language/Sys_Language_General.js';
 import {
     HandleInputChange,
     HandleInputChange_By_LanList,
+    Add_ImageList,
 } from './Product_General';
 
 class Product_Create extends Component {
@@ -24,11 +26,10 @@ class Product_Create extends Component {
         this.state = {
             viewModel: {
                 lanList: [],
-                categoryList: [],
-                categoryId: "",
+                imageList: [],
+              
                 priority: "1",
                 status: news_Enum.NORMAL.value,
-
             },
             Sys_Language_List: [],
 
@@ -117,7 +118,7 @@ class Product_Create extends Component {
                     {
                         this.state.Sys_Language_List.map((sys, index) => {
 
-                         
+
 
                             return (
                                 <TabPane tabId={`${index}`}>
@@ -130,6 +131,7 @@ class Product_Create extends Component {
                                         display={this.props.display_content}
                                         required={this.props.required_content}
                                         validMessage={{ required: '內容 is reduired.' }}
+                                         onInput={this.HandleInputChange_By_LanList}
                                         value={this.state.viewModel.lanList[`${index}`].languageId}
                                         placeholder="languageId" />
 
@@ -141,6 +143,7 @@ class Product_Create extends Component {
                                         display={this.props.display_title}
                                         required={this.props.required_title}
                                         validMessage={{ required: '標題 is reduired.' }}
+                                         onInput={this.HandleInputChange_By_LanList}
                                         value={this.state.viewModel.lanList[`${index}`].title}
                                         placeholder="title" />
 
@@ -152,6 +155,7 @@ class Product_Create extends Component {
                                         display={this.props.display_subTitle}
                                         required={this.props.required_subTitle}
                                         validMessage={{ required: '副標題 is reduired.' }}
+                                         onInput={this.HandleInputChange_By_LanList}
                                         value={this.state.viewModel.lanList[`${index}`].subTitle}
                                         placeholder="subTitle" />
 
@@ -165,6 +169,7 @@ class Product_Create extends Component {
                                         display={this.props.display_name}
                                         required={this.props.required_name}
                                         validMessage={{ required: '名稱 is reduired.' }}
+                                         onInput={this.HandleInputChange_By_LanList}
                                         value={this.state.viewModel.lanList[`${index}`].name}
                                         placeholder="name" />
 
@@ -176,6 +181,7 @@ class Product_Create extends Component {
                                         display={this.props.display_content}
                                         required={this.props.required_content}
                                         validMessage={{ required: '內容 is reduired.' }}
+                                         onInput={this.HandleInputChange_By_LanList}
                                         value={this.state.viewModel.lanList[`${index}`].content}
                                         placeholder="content" />
 
@@ -200,7 +206,7 @@ class Product_Create extends Component {
             <div className="animated fadeIn row justify-content-center">
                 <div className="col-xl-10">
                     <div className="card">
-                        <div className="card-header">編輯關於我們</div>
+                        <div className="card-header">建立產品</div>
                         <div className="card-block">
                             <form className="" onSubmit={this.Submit}>
 
@@ -267,17 +273,30 @@ class Product_Create extends Component {
 
 
 
+                                        <tr>
+                                            <td className="col-xs-4 text-right">
+                                                <label className="text-right" style={{ color: this.props.required_listImage && 'red' }}> 上傳圖片 {this.props.required_listImage && '*'} </label>
+
+                                            </td>
+                                            <td className="col-xs-8" >
+                                                <img src={this.state.viewModel.listImage} className="img-preview img-thumbnail" />
+                                            </td>
+                                        </tr>
+
+                                        <FileUpload2 HandleInputChange={this.HandleInputChange} Add_ImageList={Add_ImageList.bind(this)} />
+
+
                                         {this.Component_Nav()}
                                     </tbody>
                                 </table>
 
                                 <div className="form-group form-actions">
                                     <ButtonToolbar>
-                                    <Button color="primary" id="btn" disabled={$invalid ? 'disabled' : false}>確認</Button>
-                                    {'\u00A0'}
-                                    <Button color="primary" onClick={this.Next_Button.bind(this)} disabled={$invalid ? 'disabled' : false}>繼續新增下一筆</Button>
-                                    {'\u00A0'}
-                                    <Button color="warning" onClick={() => history.goBack()}>返回</Button>                                    </ButtonToolbar>
+                                        <Button color="primary" id="btn" disabled={$invalid ? 'disabled' : false}>確認</Button>
+                                        {'\u00A0'}
+                                        <Button color="primary" onClick={this.Next_Button.bind(this)} disabled={$invalid ? 'disabled' : false}>繼續新增下一筆</Button>
+                                        {'\u00A0'}
+                                        <Button color="warning" onClick={() => history.goBack()}>返回</Button>                                    </ButtonToolbar>
                                 </div>
                             </form>
                         </div>

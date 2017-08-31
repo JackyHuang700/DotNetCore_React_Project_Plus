@@ -71,6 +71,28 @@ export function HandleInputChange_By_LanList(event) {
     });
 }
 
+// export function HandleInputChange_By_ImageList(event) {
+//     const target = event.target;
+//     const value = target.type === 'checkbox' ? target.checked : target.value;
+//     const name = target.name;
+//     const index = event.currentTarget.getAttribute('data-index');
+//     var new_News = Object.assign(this.state.viewModel);
+
+//     new_News.imageList[index][name] = value;
+//     this.setState({
+//         viewModel: new_News,
+//     });
+// }
+
+
+export function Add_ImageList(json) {
+    this.state.viewModel.imageList.push({
+        image: json.image,
+        description: json.description,
+
+    });
+}
+
 
 export function HandleInputChange_By_LanList_CKEditor(obj) {
     const value = obj.value;
