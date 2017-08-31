@@ -8,13 +8,10 @@ class ImgThumbnail extends Component {
     }
 
     handleDelImage(event){
-        this.props.delImageEvent({
-            target: {
-                type: "text",
-                value: this.props.src,
-                name: this.props.handleDelImageName,
-            },
-        });
+
+        if(this.props.delImageEvent){
+            return this.props.delImageEvent(this.props.src);
+        }
     }
 
     render() {
@@ -27,10 +24,6 @@ class ImgThumbnail extends Component {
             </div>
         )
     }
-}
-
-ImgThumbnail.DefaultProps = {
-    handleDelImageName : ''
 }
 
 export default ImgThumbnail;

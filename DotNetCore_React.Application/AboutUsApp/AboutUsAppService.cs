@@ -171,9 +171,7 @@ namespace DotNetCore_React.Application.AboutUsApp
             //§ó·s°Æªí
             foreach (var newsLanDTO in News.LanList)
             {
-                var getLandata = _repository_lan.FirstOrDefault(o => o.AboutUsId == newsDB.Id
-                //&& o.LanguageId == newsLanDTO.LanguageId
-                );
+                var getLandata = _repository_lan.FirstOrDefault(o => o.Id == newsLanDTO.Id);
                 getLandata = Mapper.Map<AboutUs_LanDto, AboutUs_Lan>(newsLanDTO, getLandata, opt => opt.AfterMap((dto, dest) => { dest.AboutUsId = newsDB.Id; }));
                 getLandata.AboutUsId = newsDB.Id;
                 _repository_lan.InsertOrUpdate(getLandata);

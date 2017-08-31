@@ -190,7 +190,7 @@ namespace DotNetCore_React.Application.ProductApp
             //更新語系表
             foreach (var item in News.LanList)
             {
-                var getLandata = _repository_lan.FirstOrDefault(o => o.ProductId == newsDB.Id && o.LanguageId == item.LanguageId);
+                var getLandata = _repository_lan.FirstOrDefault(o => o.ProductId == newsDB.Id && o.LanguageId == item.LanguageId && o.Id == item.Id);
                 getLandata = Mapper.Map<Product_LanDto, Product_Lan>(item, getLandata, opt => opt.AfterMap((dto, dest) => { dest.ProductId = newsDB.Id; }));
                 getLandata.ProductId = newsDB.Id;
                 _repository_lan.InsertOrUpdate(getLandata);
@@ -200,7 +200,7 @@ namespace DotNetCore_React.Application.ProductApp
             //更新圖表
             foreach (var item in News.ImageList)
             {
-                var getLandata = _repository_image.FirstOrDefault(o => o.ProductId == newsDB.Id);
+                var getLandata = _repository_image.FirstOrDefault(o => o.Id == item.Id);
                 getLandata = Mapper.Map<Product_ImageDto, Product_Image>(item, getLandata, opt => opt.AfterMap((dto, dest) => { dest.ProductId = newsDB.Id; }));
                 getLandata.ProductId = newsDB.Id;
                 _repository_image.InsertOrUpdate(getLandata);

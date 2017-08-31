@@ -7,7 +7,8 @@ import EasyForm, { Field, FieldGroup } from 'react-easyform';
 import TextInput from '../../Components/Forms/TextInput';
 import DropDownList from '../../Components/Forms/DropDownList';
 import CKEditor from '../../Components/Forms/CKEditor';
-import Dropzone from 'react-dropzone';
+import FileUpload from '../../Components/Forms/FileUpload';
+import ImgThumbnail from '../../Components/Forms/ImgThumbnail';
 
 import {
     news_Enum,
@@ -19,6 +20,8 @@ import {
     HandleInputChange,
     HandleInputChange_By_LanList,
     HandleInputChange_By_LanList_CKEditor,
+    Add_ImageList,
+    Del_ImageList,
 } from './Location_General';
 
 class Location_Create extends Component {
@@ -31,10 +34,9 @@ class Location_Create extends Component {
                 lanList: [],
                 categoryList: [],
                 categoryId: "",
-
             },
             Sys_Language_List: [],
-
+            imageList: [],
             //是否繼續為繼續下一筆
             next_Button: false,
             activeTab: '0',
@@ -66,21 +68,29 @@ class Location_Create extends Component {
 
     Submit(event) {
         const self = this;
-        axios({
-            url: '/api/Location/Create',
-            method: 'post',
-            data: this.state.viewModel
-        }).then((result) => {
-            if (result.data.success) {
-                if (self.state.next_Button) {
-                    window.location.reload()
-                } else {
-                    history.push('/Location');
-                }
+
+        //轉換imageList
+        this.setState({
+            viewModel:{
+                listImage : this.state.imageList.join()
             }
-        }).catch((error) => {
-            console.log(error)
-        });
+        },
+            axios({
+                url: '/api/Location/Create',
+                method: 'post',
+                data: this.state.viewModel
+            }).then((result) => {
+                if (result.data.success) {
+                    if (self.state.next_Button) {
+                        window.location.reload()
+                    } else {
+                        history.push('/Location');
+                    }
+                }
+            }).catch((error) => {
+                console.log(error)
+            })
+        )
 
         event.preventDefault();
         return false;
@@ -195,7 +205,6 @@ class Location_Create extends Component {
         const { params } = this.props.params;
         const { $invalid } = this.props.easyform.$invalid;
 
-
         return (
             <div className="animated fadeIn row justify-content-center">
                 <div className="col-xl-10">
@@ -207,19 +216,7 @@ class Location_Create extends Component {
                                 <table className="table table-striped table-bordered">
                                     <tbody>
 
-                                        <TextInput name="id"
-                                            labelName="系統流水號"
-                                            className=""
-                                            display={this.props.display_id}
-                                            required={this.props.required_id}
-                                            validMessage={{ required: '系統流水號 is reduired.' }}
-                                            onInput={this.HandleInputChange}
-                                            value={this.state.viewModel.id}
-                                            placeholder="id" />
-
-
-
-                                        <TextInput name="listImage"
+                                        {/* <TextInput name="listImage"
                                             labelName="列表圖片"
                                             className=""
                                             display={this.props.display_listImage}
@@ -227,7 +224,31 @@ class Location_Create extends Component {
                                             validMessage={{ required: '列表圖片 is reduired.' }}
                                             onInput={this.HandleInputChange}
                                             value={this.state.viewModel.listImage}
-                                            placeholder="listImage" />
+                                            placeholder="listImage" /> */}
+
+                                            <tr>
+                                            <td className="col-xs-4 text-right">
+                                                <label className="text-right" style={{ color: this.props.required_listImage && 'red' }}> 列表圖片 {this.props.required_listImage && '*'} </label>
+
+                                            </td>
+                                            <td className="col-xs-8" >
+                                                {
+                                                    this.state.imageList &&
+                                                    this.state.imageList.map(c => {
+                                                     return(<ImgThumbnail 
+                                                        src={c.image}
+                                                        alt={c.description} 
+                                                        className="img-preview img-thumbnail" 
+                                                        delImageEvent={Del_ImageList.bind(this)} />)
+                                                    })
+                                                }
+                                            </td>
+                                        </tr>
+
+                                        <FileUpload
+                                            Add_ImageList={Add_ImageList.bind(this)}
+                                            postUrl={"/api/News/Upload_Pic/"}
+                                        />
 
 
                                         <TextInput name="country"
@@ -383,7 +404,6 @@ export default EasyForm(Location_Create, 2);
 Location_Create.defaultProps = {
 
 
-    display_id: false,
     display_listImage: false,
     display_country: false,
     display_area: true,
@@ -400,7 +420,6 @@ Location_Create.defaultProps = {
     display_updateUser: true,
 
     /* */
-    required_id: false,
     required_listImage: false,
     required_country: false,
     required_area: true,

@@ -8,14 +8,15 @@ import TextInput from '../../Components/Forms/TextInput';
 import DropDownList from '../../Components/Forms/DropDownList';
 import CKEditor from '../../Components/Forms/CKEditor';
 
-import FileUpload from '../../Components/Forms/FileUpload2';
+import FileUpload from '../../Components/Forms/FileUpload';
 import ImgThumbnail from '../../Components/Forms/ImgThumbnail';
 
 import { news_Enum } from '../../../EnumScript/GeneralEnumScript';
 import classnames from 'classnames';
 import {
   HandleInputChange,
-  handleDelImage,
+  Add_ImageList,
+  Del_ImageList,
   HandleInputChange_By_New_LanList,
   HandleInputChange_By_New_LanList_CKEditor
 } from './News_General';
@@ -45,8 +46,7 @@ class News_Create extends Component {
         listImage: "",
       },
       Sys_Language_List: [],
-      uploadedFile: [],
-
+      imageList: [],
       //是否繼續為繼續下一筆
       next_Button: false,
       activeTab: '0',
@@ -58,7 +58,6 @@ class News_Create extends Component {
     //Import
     this.Get_Sys_Language = Get_Sys_Language.bind(this);
     this.HandleInputChange = HandleInputChange.bind(this);
-    this.handleDelImage = handleDelImage.bind(this);
     this.HandleInputChange_By_New_LanList_CKEditor = HandleInputChange_By_New_LanList_CKEditor.bind(this);
     this.HandleInputChange_By_New_LanList = HandleInputChange_By_New_LanList.bind(this);
     this.Component_Nav = this.Component_Nav.bind(this);
@@ -79,21 +78,28 @@ class News_Create extends Component {
 
   Submit(event) {
     const self = this;
-    axios({
-      url: '/api/News/Create',
-      method: 'post',
-      data: this.state.viewModel
-    }).then((result) => {
-      if (result.data.success) {
-        if (self.state.next_Button) {
-          window.location.reload()
-        } else {
-          history.push('/News');
+      //轉換imageList
+      this.setState({
+        viewModel:{
+          listImage : this.state.imageList.join()
         }
-      }
-    }).catch((error) => {
-      console.log(error)
-    });
+    },
+      axios({
+        url: '/api/News/Create',
+        method: 'post',
+        data: this.state.viewModel
+      }).then((result) => {
+        if (result.data.success) {
+          if (self.state.next_Button) {
+            window.location.reload()
+          } else {
+            history.push('/News');
+          }
+        }
+      }).catch((error) => {
+        console.log(error)
+      })
+    )
 
     event.preventDefault();
     return false;
@@ -222,23 +228,21 @@ class News_Create extends Component {
                       </td>
                       <td className="col-xs-8" >
                         {
-                          this.state.viewModel.listImage &&
-                            this.state.viewModel.listImage.split(',').map(c => {
+                          this.state.imageList &&
+                            this.state.imageList.map(c => {
                              return(<ImgThumbnail 
-                                src={c} 
+                                src={c.image}
+                                alt={c.description} 
                                 className="img-preview img-thumbnail" 
-                                delImageEvent={this.handleDelImage}
-                                handleDelImageName="listImage"/>)
+                                delImageEvent={Del_ImageList.bind(this)} />)
                             })
                         }
                       </td>
                     </tr>
 
                     <FileUpload
-                      HandleInputChange={this.HandleInputChange}
-                      acceptedFiles={"image/jpeg,image/png,image/gif"}
+                      Add_ImageList={Add_ImageList.bind(this)}
                       postUrl={"/api/News/Upload_Pic/"}
-                      handleInputChangeName = {"listImage"}
                     />
 
                     <TextInput name="category"

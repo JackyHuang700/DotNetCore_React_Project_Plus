@@ -86,13 +86,24 @@ export function HandleInputChange_By_LanList(event) {
 
 
 export function Add_ImageList(json) {
-    this.state.viewModel.imageList.push({
+    let currentImageList = this.state.imageList;
+    currentImageList.push({
         image: json.image,
         description: json.description,
+    });
 
+    this.setState({
+        imageList : currentImageList
     });
 }
 
+export function Del_ImageList(fileName) {
+    let currentImageList = this.state.imageList;
+    currentImageList.splice(this.state.imageList.indexOf(fileName));
+    this.setState({
+        imageList : currentImageList
+    });
+}
 
 export function HandleInputChange_By_LanList_CKEditor(obj) {
     const value = obj.value;
@@ -116,8 +127,12 @@ export function GetData() {
         data: {
         }
     }).then((result) => {
+
+        let imageList = result.data.listImage.split(',');
+
         self.setState({
-            viewModel: result.data
+            viewModel: result.data,
+            imageList: imageList
         }, ()=>{
             self.Get_Sys_Language();
         });

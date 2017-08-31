@@ -7,14 +7,15 @@ import EasyForm, { Field, FieldGroup } from 'react-easyform';
 import TextInput from '../../Components/Forms/TextInput';
 import DropDownList from '../../Components/Forms/DropDownList';
 import { news_Enum } from '../../../EnumScript/GeneralEnumScript.js';
-import FileUpload from '../../Components/Forms/FileUpload2';
+import FileUpload from '../../Components/Forms/FileUpload';
 import ImgThumbnail from '../../Components/Forms/ImgThumbnail';
 import CKEditor from '../../Components/Forms/CKEditor';
 import classnames from 'classnames';
 import {
   GetData,
   HandleInputChange,
-  handleDelImage,
+  Add_ImageList,
+  Del_ImageList,
   HandleInputChange_By_New_LanList,
   HandleInputChange_By_New_LanList_CKEditor
 } from './News_General';
@@ -41,6 +42,7 @@ class News_Edit extends Component {
         endDate: null,
       },
       Sys_Language_List: [],
+      imageList: [],
       activeTab: '0'
     };
     // console.log(`this.props.match.params)`, this.props.match.params)
@@ -74,21 +76,25 @@ class News_Edit extends Component {
 
 
   Button_Submit(event) {
+      //轉換imageList
+    this.setState({
+        viewModel:{
+          listImage : this.state.imageList.join()
+        }
+      },
+      axios({
+        url: '/api/News/Edit',
+        method: 'post',
+        data: this.state.News
+      }).then((result) => {
 
-    axios({
-
-      url: '/api/News/Edit',
-      method: 'post',
-      data: this.state.News
-    }).then((result) => {
-
-      if (result.data.success) {
-        history.push('/News');
-      }
-    }).catch((error) => {
-      console.log(error)
-    });
-
+        if (result.data.success) {
+          history.push('/News');
+        }
+      }).catch((error) => {
+        console.log(error)
+      })
+    )
 
     event.preventDefault();
     return false;
@@ -204,29 +210,24 @@ class News_Edit extends Component {
 
                       </td>
                       <td className="col-xs-8" >
-                        {
-                          this.state.viewModel.listImage &&
-                            this.state.viewModel.listImage.split(',').map(c => {
-                              return(<ImgThumbnail 
-                                src={c} 
-                                className="img-preview img-thumbnail" 
-                                delImageEvent={this.handleDelImage}
-                                handleDelImageName="listImage"/>)
-                            })
-                        }
+                      {
+                        this.state.imageList &&
+                          this.state.imageList.map(c => {
+                           return(<ImgThumbnail 
+                              src={c.image}
+                              alt={c.description} 
+                              className="img-preview img-thumbnail" 
+                              delImageEvent={Del_ImageList.bind(this)} />)
+                          })
+                      }
                       </td>
                     </tr>
 
-
                   
                     <FileUpload
-                      HandleInputChange={this.HandleInputChange}
-                      acceptedFiles={"image/jpeg,image/png,image/gif"}
-                      postUrl={"/api/News/Upload_Pic/"}
-                      handleInputChangeName={"listImage"}
+                    Add_ImageList={Add_ImageList.bind(this)}
+                    postUrl={"/api/News/Upload_Pic/"}
                     />
-
-
 
                     <TextInput name="category"
                       labelName="類別"

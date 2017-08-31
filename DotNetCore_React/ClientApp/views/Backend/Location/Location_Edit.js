@@ -7,19 +7,22 @@ import EasyForm, { Field, FieldGroup } from 'react-easyform';
 import TextInput from '../../Components/Forms/TextInput';
 import DropDownList from '../../Components/Forms/DropDownList';
 import CKEditor from '../../Components/Forms/CKEditor';
-import Dropzone from 'react-dropzone';
+import FileUpload from '../../Components/Forms/FileUpload';
+import ImgThumbnail from '../../Components/Forms/ImgThumbnail';
 
 import {
     news_Enum,
     location_Area_Enum
 } from '../../../EnumScript/GeneralEnumScript';
 import classnames from 'classnames';
-import {Get_Sys_Language} from '../Sys_Language/Sys_Language_General.js'; 
+import { Get_Sys_Language } from '../Sys_Language/Sys_Language_General.js';
 import {
     GetData,
     HandleInputChange,
     HandleInputChange_By_LanList,
     HandleInputChange_By_LanList_CKEditor,
+    Add_ImageList,
+    Del_ImageList,
 } from './Location_General';
 
 class Location_Edit extends Component {
@@ -35,7 +38,7 @@ class Location_Edit extends Component {
 
             },
             Sys_Language_List: [],
-
+            imageList: [],
             //是否繼續為繼續下一筆
             next_Button: false,
             activeTab: '0',
@@ -68,6 +71,12 @@ class Location_Edit extends Component {
 
     Submit(event) {
         const self = this;
+          //轉換imageList
+          this.setState({
+            viewModel:{
+                listImage : this.state.imageList.join()
+            }
+        },
         axios({
             url: '/api/Location/Edit',
             method: 'post',
@@ -82,7 +91,7 @@ class Location_Edit extends Component {
             }
         }).catch((error) => {
             console.log(error)
-        });
+        }))
 
         event.preventDefault();
         return false;
@@ -208,19 +217,7 @@ class Location_Edit extends Component {
                                 <table className="table table-striped table-bordered">
                                     <tbody>
 
-                                        <TextInput name="id"
-                                            labelName="系統流水號"
-                                            className=""
-                                            display={this.props.display_id}
-                                            required={this.props.required_id}
-                                            validMessage={{ required: '系統流水號 is reduired.' }}
-                                            onInput={this.HandleInputChange}
-                                            value={this.state.viewModel.id}
-                                            placeholder="id" />
-
-
-
-                                        <TextInput name="listImage"
+                                        {/* <TextInput name="listImage"
                                             labelName="列表圖片"
                                             className=""
                                             display={this.props.display_listImage}
@@ -228,7 +225,33 @@ class Location_Edit extends Component {
                                             validMessage={{ required: '列表圖片 is reduired.' }}
                                             onInput={this.HandleInputChange}
                                             value={this.state.viewModel.listImage}
-                                            placeholder="listImage" />
+                                            placeholder="listImage" /> */}
+
+
+
+                                        <tr>
+                                            <td className="col-xs-4 text-right">
+                                                <label className="text-right" style={{ color: this.props.required_listImage && 'red' }}> 列表圖片 {this.props.required_listImage && '*'} </label>
+
+                                            </td>
+                                            <td className="col-xs-8" >
+                                            {
+                                                this.state.imageList &&
+                                                this.state.imageList.map(c => {
+                                                 return(<ImgThumbnail 
+                                                    src={c.image}
+                                                    alt={c.description} 
+                                                    className="img-preview img-thumbnail" 
+                                                    delImageEvent={Del_ImageList.bind(this)} />)
+                                                })
+                                            }
+                                        </td>
+                                    </tr>
+
+                                    <FileUpload
+                                        Add_ImageList={Add_ImageList.bind(this)}
+                                        postUrl={"/api/News/Upload_Pic/"}
+                                    />
 
 
                                         <TextInput name="country"
@@ -389,7 +412,7 @@ class Location_Edit extends Component {
                                         {'\u00A0'}
                                         <Button color="warning" onClick={() => history.goBack()}>返回</Button>
                                     </ButtonToolbar>
-                               </div>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -402,7 +425,7 @@ class Location_Edit extends Component {
 export default EasyForm(Location_Edit, 2);
 
 Location_Edit.defaultProps = {
-    display_id: false,
+
     display_listImage: false,
     display_country: false,
     display_area: true,
@@ -423,7 +446,6 @@ Location_Edit.defaultProps = {
 
 
     /* */
-    required_id: false,
     required_listImage: false,
     required_country: false,
     required_area: true,

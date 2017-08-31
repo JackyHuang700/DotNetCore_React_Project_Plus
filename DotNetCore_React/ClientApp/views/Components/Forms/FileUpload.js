@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
-import { Input, FormGroup, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import axios from 'axios';
-import Dropzone from 'react-dropzone';
+import { ButtonToolbar, FormGroup, Label, Input, Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, TabContent, TabPane, Nav, NavItem, NavLink, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import DropzoneComponent from 'react-dropzone-component';
+import '../../../../node_modules/react-dropzone-component/styles/filepicker.css';
+import '../../../../node_modules/dropzone/dist/min/dropzone.min.css';
 
+
+
+//產品 
+//服務據點
 class FileUpload extends Component {
 
     constructor(props) {
@@ -10,105 +15,146 @@ class FileUpload extends Component {
 
         this.state = {
             modal: false,
-            uploadedFile: null,
-            description: '',
-            uploadedFileCloudinaryUrl: ''
+            viewModel: {
+                description: ""
+            }
+        };
+
+
+        this.djsConfig = {
+            addRemoveLinks: true,
+            acceptedFiles: this.props.acceptedFiles,
+            autoProcessQueue: false
+        };
+
+        this.componentConfig = {
+            iconFiletypes: ['.jpg', '.png', '.gif'],
+            showFiletypeIcon: true,
+            postUrl: this.props.postUrl,
+        };
+
+        // If you want to attach multiple callbacks, simply
+        // create an array filled with all your callbacks.
+        this.callbackArray = [() => console.log('Hi!'), () => console.log('Ho!')];
+
+        // Simple callbacks work too, of course
+        this.callback = () => {
+
         }
 
-        this.toggle = this.toggle.bind(this);
-        this.submit = this.submit.bind(this);
+        this.success = file => {
+
+            let json = JSON.parse(file.xhr.response);
+
+            if (json.success) {
+
+                //添加ImageList列表
+                this.props.Add_ImageList({
+                    image: json.listImage,
+                    description: json.description,
+                });
+
+                this.toggleByModal();
+            }
+
+
+        }
+
+        this.sending = (file, xhr, formData) => {
+            formData.append("description", this.state.viewModel.description);
+        }
+
+        this.initCallback = dropzone => {
+            dropzone = dropzone;
+        };
+        this.removedfile = file => console.log('removing...', file);
+
+        this.dropzone = null;
     }
 
-    toggle() {
+    HandleInputChange(event) {
+
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+
+        var new_News = Object.assign(this.state.viewModel);
+        new_News[name] = value;
+
+        this.setState({
+            viewModel: new_News,
+        });
+
+    }
+
+    toggleByModal() {
         this.setState({
             modal: !this.state.modal
         });
     }
 
-    onImageDrop(files) {
-        this.setState({
-            uploadedFile: files[0]
-        });
+    handlePost() {
+        this.dropzone.processQueue();
     }
-
-    submit(event) {
-        this.handleImageUpload(this.state.uploadedFile);
-    }
-
-    handleInputChange(event) {
-        const target = event.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
-        const name = target.name;
-
-        this.setState({
-            [name]: value
-        });
-    }
-
-    handleImageUpload(file) {
-
-        const config = {
-            headers: { 'content-type': 'multipart/form-data' },
-            onUploadProgress: ProgressEvent => console.log(ProgressEvent.loaded)
-        }
-
-        let data = new FormData();
-        data.append('image', file, file.name);
-        data.append('description', this.state.description);
-
-        axios.post(this.props.baseUrl, data, config)
-            .then(response => {
-                debugger;
-                if (response.data.success === true) {
-                    this.setState({ uploadedFileCloudinaryUrl: response.data.listImage });
-                }
-                else {
-                    alert(response.data.message);
-                }
-            }).catch(error => {
-                console.log(error);
-            });
-    }
-
 
     render() {
+
+        const config = this.componentConfig;
+        const djsConfig = this.djsConfig;
+
+        // For a list of all possible events (there are many), see README.md!
+        const eventHandlers = {
+            init: dz => this.dropzone = dz,
+            drop: this.callbackArray,
+            addedfile: this.callback,
+            success: this.success.bind(this),
+            removedfile: this.removedfile,
+            initCallback: this.initCallback,
+            sending: this.sending
+        }
         return (
-            <div>
-                <Button color="danger" onClick={this.toggle}>上傳檔案</Button>
-                <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-                    <ModalHeader toggle={this.toggle}>上傳檔案</ModalHeader>
-                    <ModalBody>
-                        <Dropzone
-                            onDrop={this.onImageDrop.bind(this)}
-                            multiple={false}
-                            accept={this.props.accept}>
-                            {this.state.uploadedFile && <div><img src={this.state.uploadedFile.preview} height="200" /></div>}
-                            {!this.state.uploadedFile && <div>Dropping some files here...</div>}
-                        </Dropzone>
+            <tr>
+                <td className="col-xs-4 text-right">
+                    <label className="text-right" style={{ color: this.props.required_listImage && 'red' }}> 上傳圖片 {this.props.required_listImage && '*'} </label>
 
-                        <input name="description" placeholder="Please write description" onChange={this.handleInputChange.bind(this)} />
+                </td>
+                <td className="col-xs-8 ps-re" >
+                    <Button color="danger" onClick={this.toggleByModal.bind(this)}>上傳圖片</Button>
+                    <Modal isOpen={this.state.modal} toggle={this.toggleByModal.bind(this)} className={this.props.className}>
+                        <ModalHeader toggle={this.toggleByModal.bind(this)}>上傳圖片</ModalHeader>
+                        <ModalBody>
+                            <DropzoneComponent config={config} eventHandlers={eventHandlers} djsConfig={djsConfig} />
 
-                        <div>
-                            {this.state.uploadedFileCloudinaryUrl === '' ? null :
-                                <div>
-                                    <p>{this.state.uploadedFile.name}</p>
-                                    <img src={this.state.uploadedFileCloudinaryUrl} />
-                                </div>}
-                        </div>
-                    </ModalBody>
-                    <ModalFooter>
-                        <Button color="primary" onClick={this.submit}>上傳</Button>{' '}
-                        <Button color="secondary" onClick={this.toggle}>取消</Button>
-                    </ModalFooter>
-                </Modal>
-            </div>
-        )
+                            {/* 摘要 */}
+                            <Input
+                                name="description"
+                                placeholder="Please write description"
+                                onChange={this.HandleInputChange.bind(this)}
+                            />
+                        </ModalBody>
+                        <ModalFooter>
+                            <Button color="primary" onClick={this.handlePost.bind(this)}>Upload</Button>{' '}
+                            <Button color="secondary" onClick={this.toggleByModal.bind(this)}>Cancel</Button>
+                        </ModalFooter>
+                    </Modal>
+                </td>
+            </tr>
+        );
     }
+
+
+
 }
+export default FileUpload;
+
+
+FileUpload.propTypes = {
+    acceptedFiles: React.PropTypes.string.isRequired,
+    postUrl: React.PropTypes.string.isRequired
+};
+
 
 FileUpload.DefaultProps = {
-    baseUrl: '',
-    accept: 'image/jpeg, image/png'
+    acceptedFiles: 'image/jpeg, image/png',
+    postUrl: ''
 }
-
-export default FileUpload;

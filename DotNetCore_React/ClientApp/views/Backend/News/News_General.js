@@ -18,16 +18,23 @@ export function HandleInputChange(event) {
   });
 }
 
-export function handleDelImage(event) {
-  const target = event.target;
-  const value = target.type === 'checkbox' ? target.checked : target.value;
-  const name = target.name;
-
-  var new_News = Object.assign(this.state.viewModel);
-  new_News[name] = new_News[name].replace(value,'');
+export function Add_ImageList(json) {
+  let currentImageList = this.state.imageList;
+  currentImageList.push({
+      image: json.image,
+      description: json.description,
+  });
 
   this.setState({
-    News: new_News,
+      imageList : currentImageList
+  });
+}
+
+export function Del_ImageList(fileName) {
+  let currentImageList = this.state.imageList;
+  currentImageList.splice(this.state.imageList.indexOf(fileName));
+  this.setState({
+      imageList : currentImageList
   });
 }
 
@@ -69,17 +76,20 @@ export function GetData() {
     }
   }).then((result) => {
     // console.log(result.data);
-
+    
     result.data.startDate = moment(result.data.startDate);
-    result.data.endDate = moment(result.data.endDate);
+    if (result.data.endDate) {
+      result.data.endDate = moment(result.data.endDate);
+    }
+
+    let imageList = result.data.listImage.split(',');
 
     self.setState({
-      viewModel: result.data
+      viewModel: result.data,
+      imageList: imageList
     }, () => {
       self.Get_Sys_Language();
     });
-
-
 
   }).catch((error) => {
     console.log(error)

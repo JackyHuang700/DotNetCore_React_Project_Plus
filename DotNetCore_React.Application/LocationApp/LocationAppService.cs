@@ -197,7 +197,7 @@ namespace DotNetCore_React.Application.LocationApp
             //更新語系表
             foreach (var item in News.LanList)
             {
-                var getLandata = _repository_lan.FirstOrDefault(o => o.LocationId == newsDB.Id && o.LanguageId == item.LanguageId);
+                var getLandata = _repository_lan.FirstOrDefault(o => o.LocationId == newsDB.Id && o.LanguageId == item.LanguageId && o.Id == item.Id);
                 getLandata = Mapper.Map<Location_LanDto, Location_Lan>(item, getLandata, opt => opt.AfterMap((dto, dest) => { dest.LocationId = newsDB.Id; }));
                 getLandata.LocationId = newsDB.Id;
                 _repository_lan.InsertOrUpdate(getLandata);
@@ -207,7 +207,7 @@ namespace DotNetCore_React.Application.LocationApp
             //更新圖表
             foreach (var item in News.ImageList)
             {
-                var getLandata = _repository_image.FirstOrDefault(o => o.LocationId == newsDB.Id);
+                var getLandata = _repository_image.FirstOrDefault(o => o.Id == item.Id);
                 getLandata = Mapper.Map<Location_ImageDto, Location_Image>(item, getLandata, opt => opt.AfterMap((dto, dest) => { dest.LocationId = newsDB.Id; }));
                 getLandata.LocationId = newsDB.Id;
                 _repository_image.InsertOrUpdate(getLandata);

@@ -11,8 +11,12 @@ export function GetData() {
         data: {
         }
     }).then((result) => {
+
+        let imageList = result.data.listImage.split(',');
+        
         self.setState({
-            viewModel: result.data
+            viewModel: result.data,
+            imageList: imageList
         }, ()=>{
             self.Get_Sys_Language();
         });
@@ -63,5 +67,26 @@ export function HandleInputChange_By_LanList_CKEditor(obj) {
     new_News.lanList[index][name] = value;
     this.setState({
         viewModel: new_News,
+    });
+}
+
+
+export function Add_ImageList(json) {
+    let currentImageList = this.state.imageList;
+    currentImageList.push({
+        image: json.image,
+        description: json.description,
+    });
+
+    this.setState({
+        imageList : currentImageList
+    });
+}
+
+export function Del_ImageList(fileName) {
+    let currentImageList = this.state.imageList;
+    currentImageList.splice(this.state.imageList.indexOf(fileName));
+    this.setState({
+        imageList : currentImageList
     });
 }

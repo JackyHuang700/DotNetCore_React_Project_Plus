@@ -7,7 +7,8 @@ import EasyForm, { Field, FieldGroup } from 'react-easyform';
 import TextInput from '../../Components/Forms/TextInput';
 import DropDownList from '../../Components/Forms/DropDownList';
 import CKEditor from '../../Components/Forms/CKEditor';
-import Dropzone from 'react-dropzone';
+import FileUpload from '../../Components/Forms/FileUpload';
+import ImgThumbnail from '../../Components/Forms/ImgThumbnail';
 
 import { news_Enum } from '../../../EnumScript/GeneralEnumScript';
 import classnames from 'classnames';
@@ -16,6 +17,8 @@ import {
     GetData,
     HandleInputChange,
     HandleInputChange_By_LanList,
+    Add_ImageList,
+    Del_ImageList
 } from './Product_General';
 
 class Product_Edit extends Component {
@@ -31,7 +34,7 @@ class Product_Edit extends Component {
 
             },
             Sys_Language_List: [],
-
+            imageList: [],
             //是否繼續為繼續下一筆
             next_Button: false,
             activeTab: '0',
@@ -63,6 +66,12 @@ class Product_Edit extends Component {
 
     Submit(event) {
         const self = this;
+        //轉換imageList
+        this.setState({
+            viewModel:{
+            listImage : this.state.imageList.join()
+            }
+        },
         axios({
             url: '/api/Product/Edit',
             method: 'post',
@@ -77,7 +86,7 @@ class Product_Edit extends Component {
             }
         }).catch((error) => {
             console.log(error)
-        });
+        }))
 
         event.preventDefault();
         return false;
@@ -211,19 +220,7 @@ class Product_Edit extends Component {
 
                                 <table className="table table-striped table-bordered">
                                     <tbody>
-
-                                        <TextInput name="id"
-                                            labelName="系統流水號"
-                                            className=""
-                                            display={this.props.display_id}
-                                            required={this.props.required_id}
-                                            validMessage={{ required: '系統流水號 is reduired.' }}
-                                            onInput={this.HandleInputChange}
-                                            value={this.state.viewModel.id}
-                                            placeholder="id" />
-
-
-
+{/* 
                                         <TextInput name="listImage"
                                             labelName="列表圖片"
                                             className=""
@@ -232,7 +229,33 @@ class Product_Edit extends Component {
                                             validMessage={{ required: '列表圖片 is reduired.' }}
                                             onInput={this.HandleInputChange}
                                             value={this.state.viewModel.listImage}
-                                            placeholder="listImage" />
+                                            placeholder="listImage" /> */}
+
+
+                                        <tr>
+                                            <td className="col-xs-4 text-right">
+                                                <label className="text-right" style={{ color: this.props.required_listImage && 'red' }}> 列表圖片 {this.props.required_listImage && '*'} </label>
+
+                                            </td>
+                                            <td className="col-xs-8" >
+                                            {
+                                              this.state.imageList &&
+                                                this.state.imageList.map(c => {
+                                                 return(<ImgThumbnail 
+                                                    src={c.image}
+                                                    alt={c.description} 
+                                                    className="img-preview img-thumbnail" 
+                                                    delImageEvent={Del_ImageList.bind(this)} />)
+                                                })
+                                            }
+                                          </td>
+                                        </tr>
+                    
+                                        <FileUpload
+                                          Add_ImageList={Add_ImageList.bind(this)}
+                                          postUrl={"/api/News/Upload_Pic/"}
+                                        />
+                    
 
 
 
@@ -342,8 +365,7 @@ export default EasyForm(Product_Edit, 2);
 
 Product_Edit.defaultProps = {
 
-    display_id: false,
-    display_listImage: true,
+    display_listImage: false,
     display_priority: true,
     display_status: true,
     display_createDate: true,
@@ -353,7 +375,6 @@ Product_Edit.defaultProps = {
 
 
     /* */
-    required_id: false,
     required_listImage: false,
     required_priority: true,
     required_status: true,
