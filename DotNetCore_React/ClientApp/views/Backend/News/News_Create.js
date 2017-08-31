@@ -7,13 +7,15 @@ import EasyForm, { Field, FieldGroup } from 'react-easyform';
 import TextInput from '../../Components/Forms/TextInput';
 import DropDownList from '../../Components/Forms/DropDownList';
 import CKEditor from '../../Components/Forms/CKEditor';
-// import FileUpload from '../../Components/Forms/FileUpload';
+
 import FileUpload from '../../Components/Forms/FileUpload2';
+import ImgThumbnail from '../../Components/Forms/ImgThumbnail';
 
 import { news_Enum } from '../../../EnumScript/GeneralEnumScript';
 import classnames from 'classnames';
 import {
   HandleInputChange,
+  handleDelImage,
   HandleInputChange_By_New_LanList,
   HandleInputChange_By_New_LanList_CKEditor
 } from './News_General';
@@ -56,6 +58,7 @@ class News_Create extends Component {
     //Import
     this.Get_Sys_Language = Get_Sys_Language.bind(this);
     this.HandleInputChange = HandleInputChange.bind(this);
+    this.handleDelImage = handleDelImage.bind(this);
     this.HandleInputChange_By_New_LanList_CKEditor = HandleInputChange_By_New_LanList_CKEditor.bind(this);
     this.HandleInputChange_By_New_LanList = HandleInputChange_By_New_LanList.bind(this);
     this.Component_Nav = this.Component_Nav.bind(this);
@@ -186,35 +189,6 @@ class News_Create extends Component {
 
   }
 
-  //上傳圖片
-  onImageDrop(files) {
-    this.setState({
-      uploadedFile: files
-    });
-
-
-    var formData = new FormData();
-    for (var i = 0; i < files.length; i++) {
-      formData.append('files', files[i]) //用迴圈抓出多少筆再append回來
-    }
-
-    axios.post('/api/News/Upload_Pic/', formData).then((response) => {
-
-      if (response.data.success) {
-        var newNews = Object.assign(this.state.viewModel);
-        newNews.listImage = response.data.listImage;
-        this.setState({
-          viewModel: newNews
-        });
-
-      }
-      console.log(response);
-    }).catch((error) => {
-      console.log(error);
-    });
-  }
-
-
   render() {
     const { params } = this.props.params;
     const { $invalid } = this.props.easyform.$invalid;
@@ -231,7 +205,7 @@ class News_Create extends Component {
 
                 <table className="table table-striped table-bordered">
                   <tbody>
-                    <TextInput name="listImage"
+                    {/* <TextInput name="listImage"
                       labelName="列表圖片"
                       className=""
                       display={this.props.display_listImage}
@@ -239,35 +213,33 @@ class News_Create extends Component {
                       validMessage={{ required: '列表圖片 is reduired.' }}
                       onInput={this.HandleInputChange}
                       value={this.state.viewModel.listImage}
-                      placeholder="listImage" />
+                      placeholder="listImage" /> */}
 
                     <tr>
                       <td className="col-xs-4 text-right">
-                        <label className="text-right" style={{ color: this.props.required_listImage && 'red' }}> 上傳圖片 {this.props.required_listImage && '*'} </label>
+                        <label className="text-right" style={{ color: this.props.required_listImage && 'red' }}> 列表圖片 {this.props.required_listImage && '*'} </label>
 
                       </td>
                       <td className="col-xs-8" >
                         {
-
-                          this.state.viewModel.listImage ?
+                          this.state.viewModel.listImage &&
                             this.state.viewModel.listImage.split(',').map(c => {
-                              return <img src={c} className="img-preview img-thumbnail" />
-                            }) : null
+                             return(<ImgThumbnail 
+                                src={c} 
+                                className="img-preview img-thumbnail" 
+                                delImageEvent={this.handleDelImage}
+                                handleDelImageName="listImage"/>)
+                            })
                         }
                       </td>
                     </tr>
 
-
-                    {/* <FileUpload 
-                      baseUrl="/api/news/Upload_Pic"
-                    /> */}
                     <FileUpload
                       HandleInputChange={this.HandleInputChange}
                       acceptedFiles={"image/jpeg,image/png,image/gif"}
                       postUrl={"/api/News/Upload_Pic/"}
                       handleInputChangeName = {"listImage"}
                     />
-
 
                     <TextInput name="category"
                       labelName="類別"
@@ -278,8 +250,6 @@ class News_Create extends Component {
                       onInput={this.HandleInputChange}
                       value={this.state.viewModel.category}
                       placeholder="category" />
-
-
 
                     <TextInput name="priority"
                       labelName="列表排序"
@@ -305,10 +275,6 @@ class News_Create extends Component {
                       </td>
                     </tr>
 
-
-
-
-
                     <tr>
                       <td className="col-xs-4 text-right">
                         <label className="text-right" style={{ color: this.props.required_endDate && 'red' }}> 下架時間 {this.props.required_endDate && '*'} </label>
@@ -322,9 +288,6 @@ class News_Create extends Component {
                           onChange={HandleInputChange_EndDate.bind(this)} />
                       </td>
                     </tr>
-
-
-
 
                     <DropDownList name="status"
                       labelName="狀態"
@@ -387,26 +350,3 @@ News_Create.defaultProps = {
   required_endDate: false,
   required_status: true,
 }
-
-
-{/* <TextInput name="startDate"
-                      labelName="上架時間"
-                      className=""
-                      display={this.props.display_startDate}
-                      required={this.props.required_startDate}
-                      validMessage={{ required: '上架時間 is reduired.' }}
-                      onInput={this.HandleInputChange}
-                      value={this.state.viewModel.startDate}
-                      placeholder="startDate" /> */}
-
-
-
-{/* <TextInput name="endDate"
-                      labelName="下架時間"
-                      className=""
-                      display={this.props.display_endDate}
-                      required={this.props.required_endDate}
-                      validMessage={{ required: '下架時間 is reduired.' }}
-                      onInput={this.HandleInputChange}
-                      value={this.state.viewModel.endDate}
-                      placeholder="endDate" /> */}

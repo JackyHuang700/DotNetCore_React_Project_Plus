@@ -18,6 +18,19 @@ export function HandleInputChange(event) {
   });
 }
 
+export function handleDelImage(event) {
+  const target = event.target;
+  const value = target.type === 'checkbox' ? target.checked : target.value;
+  const name = target.name;
+
+  var new_News = Object.assign(this.state.viewModel);
+  new_News[name] = new_News[name].replace(value,'');
+
+  this.setState({
+    News: new_News,
+  });
+}
+
 //News_lan
 export function HandleInputChange_By_New_LanList(event) {
   const target = event.target;

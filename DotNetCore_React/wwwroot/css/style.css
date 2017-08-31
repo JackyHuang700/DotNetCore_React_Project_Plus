@@ -209,10 +209,6 @@ template {
  * Copyright 2011-2017 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
-.img-preview {
-  height: 100px;
-  width: 100px; }
-
 @media print {
   *,
   *::before,
@@ -8997,5 +8993,29 @@ body {
   position: relative; }
 
 .img-preview {
-  height: 100px;
-  width: 100px; }
+  height: 150px; }
+
+.imgthumb {
+  height: 100px; }
+
+.imgthumb > a {
+  float: left;
+  position: relative;
+  cursor: pointer; }
+
+.imgthumb > a img {
+  display: block; }
+
+.imgthumb > a span {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.6);
+  color: #ddd;
+  padding: 60px 100px; }
+
+.imgthumb > a:hover span {
+  display: block; }

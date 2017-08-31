@@ -38,14 +38,9 @@ class FileUpload extends Component {
         // Simple callbacks work too, of course
         this.callback = () => {
 
-
-            console.log('Hello!');
         }
 
         this.success = file => {
-            console.log('uploaded', file);
-
-
             let json = JSON.parse(file.xhr.response);
             if (json.success) {
                 this.props.HandleInputChange({
@@ -57,16 +52,10 @@ class FileUpload extends Component {
                 });
                 this.toggleByModal();
             }
-
-
         }
 
         this.sending = (file, xhr, formData) => {
-            // console.log(`data`)
-            // const myparams = this.state.viewModel.description;
-            // console.log(myparams);
             formData.append("description", this.state.viewModel.description);
-
         }
 
         this.initCallback = dropzone => {

@@ -8,11 +8,13 @@ import TextInput from '../../Components/Forms/TextInput';
 import DropDownList from '../../Components/Forms/DropDownList';
 import { news_Enum } from '../../../EnumScript/GeneralEnumScript.js';
 import FileUpload from '../../Components/Forms/FileUpload2';
+import ImgThumbnail from '../../Components/Forms/ImgThumbnail';
 import CKEditor from '../../Components/Forms/CKEditor';
 import classnames from 'classnames';
 import {
   GetData,
   HandleInputChange,
+  handleDelImage,
   HandleInputChange_By_New_LanList,
   HandleInputChange_By_New_LanList_CKEditor
 } from './News_General';
@@ -185,7 +187,7 @@ class News_Edit extends Component {
                   <tbody>
                     <input type="hidden" id="id" name="id" value={this.state.viewModel.id} />
 
-                    <TextInput name="listImage"
+                    {/* <TextInput name="listImage"
                       labelName="列表圖片"
                       className=""
                       display={this.props.display_listImage}
@@ -193,21 +195,24 @@ class News_Edit extends Component {
                       validMessage={{ required: '列表圖片 is reduired.' }}
                       onInput={this.HandleInputChange}
                       value={this.state.viewModel.listImage}
-                      placeholder="listImage" />
+                      placeholder="listImage" /> */}
 
 
                     <tr>
                       <td className="col-xs-4 text-right">
-                        <label className="text-right" style={{ color: this.props.required_listImage && 'red' }}> 上傳圖片 {this.props.required_listImage && '*'} </label>
+                        <label className="text-right" style={{ color: this.props.required_listImage && 'red' }}> 列表圖片 {this.props.required_listImage && '*'} </label>
 
                       </td>
                       <td className="col-xs-8" >
                         {
-
-                          this.state.viewModel.listImage ?
+                          this.state.viewModel.listImage &&
                             this.state.viewModel.listImage.split(',').map(c => {
-                              return <img src={c} className="img-preview img-thumbnail" />
-                            }) : null
+                              return(<ImgThumbnail 
+                                src={c} 
+                                className="img-preview img-thumbnail" 
+                                delImageEvent={this.handleDelImage}
+                                handleDelImageName="listImage"/>)
+                            })
                         }
                       </td>
                     </tr>

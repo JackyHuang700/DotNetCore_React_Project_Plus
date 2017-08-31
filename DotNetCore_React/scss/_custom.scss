@@ -104,3 +104,33 @@ body {
     height: 150px;
     // width: 100px;
 }
+
+.imgthumb {
+    height: 100px;
+}
+
+.imgthumb > a {
+    float: left;
+    position: relative;
+    cursor: pointer;
+}
+
+.imgthumb > a img {
+    display: block;
+}
+
+.imgthumb > a span {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(0,0,0,0.6);
+    color: #ddd;
+    padding: 60px 100px;
+}
+
+.imgthumb > a:hover span {
+    display: block;
+}
