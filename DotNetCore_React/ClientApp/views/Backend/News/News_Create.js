@@ -8,6 +8,7 @@ import TextInput from '../../Components/Forms/TextInput';
 import DropDownList from '../../Components/Forms/DropDownList';
 import CKEditor from '../../Components/Forms/CKEditor';
 import FileUpload from '../../Components/Forms/FileUpload';
+import FileUpload2 from '../../Components/Forms/FileUpload2';
 
 import { news_Enum } from '../../../EnumScript/GeneralEnumScript';
 import classnames from 'classnames';
@@ -239,11 +240,21 @@ class News_Create extends Component {
                       value={this.state.viewModel.listImage}
                       placeholder="listImage" />
 
+                    <tr>
+                      <td className="col-xs-4 text-right">
+                        <label className="text-right" style={{ color: this.props.required_listImage && 'red' }}> 上傳圖片 {this.props.required_listImage && '*'} </label>
+
+                      </td>
+                      <td className="col-xs-8" >
+                      <img src={this.state.viewModel.listImage} className="img-preview img-thumbnail" />
+                      </td>
+                    </tr>
 
 
-                    <FileUpload 
+                    {/* <FileUpload 
                       baseUrl="/api/news/Upload_Pic"
-                    />
+                    /> */}
+                    <FileUpload2 HandleInputChange={this.HandleInputChange} />
 
 
                     <TextInput name="category"
@@ -340,7 +351,7 @@ class News_Create extends Component {
             </div>
           </div>
         </div>
-      </div>
+      </div >
     )
   }
 }

@@ -209,6 +209,10 @@ template {
  * Copyright 2011-2017 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
+.img-preview {
+  height: 100px;
+  width: 100px; }
+
 @media print {
   *,
   *::before,
@@ -8991,3 +8995,7 @@ body {
 
 .ps-re {
   position: relative; }
+
+.img-preview {
+  height: 100px;
+  width: 100px; }

@@ -7,6 +7,7 @@ import EasyForm, { Field, FieldGroup } from 'react-easyform';
 import TextInput from '../../Components/Forms/TextInput';
 import DropDownList from '../../Components/Forms/DropDownList';
 import { news_Enum } from '../../../EnumScript/GeneralEnumScript.js';
+// import FileUpload2 from '../../Components/Forms/FileUpload2';
 import CKEditor from '../../Components/Forms/CKEditor';
 import classnames from 'classnames';
 import {
@@ -44,7 +45,7 @@ class News_Edit extends Component {
 
     this.GetData = GetData.bind(this);
     this.Button_Submit = this.Button_Submit.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
+    this.HandleInputChange = HandleInputChange.bind(this);
 
     this.toggle = this.toggle.bind(this);
 
@@ -69,20 +70,6 @@ class News_Edit extends Component {
   }
 
 
-
-  handleInputChange(event) {
-
-    const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
-    var new_News = Object.assign(this.state.viewModel);
-    new_News[name] = value;
-
-
-    this.setState({
-      viewModel: new_News,
-    });
-  }
 
   Button_Submit(event) {
 
@@ -204,9 +191,11 @@ class News_Edit extends Component {
                       display={this.props.display_listImage}
                       required={this.props.required_listImage}
                       validMessage={{ required: '列表圖片 is reduired.' }}
-                      onInput={this.handleInputChange}
+                      onInput={this.HandleInputChange}
                       value={this.state.viewModel.listImage}
                       placeholder="listImage" />
+
+             
 
                     <TextInput name="category"
                       labelName="類別"
@@ -214,7 +203,7 @@ class News_Edit extends Component {
                       display={this.props.display_category}
                       required={this.props.required_category}
                       validMessage={{ required: '類別 is reduired.' }}
-                      onInput={this.handleInputChange}
+                      onInput={this.HandleInputChange}
                       value={this.state.viewModel.category}
                       placeholder="category" />
 
@@ -224,7 +213,7 @@ class News_Edit extends Component {
                       display={this.props.display_priority}
                       required={this.props.required_priority}
                       validMessage={{ required: '列表排序 is reduired.' }}
-                      onInput={this.handleInputChange}
+                      onInput={this.HandleInputChange}
                       value={this.state.viewModel.priority}
                       placeholder="priority" />
 
@@ -267,7 +256,7 @@ class News_Edit extends Component {
                       display={this.props.display_status}
                       required={this.props.required_status}
                       validMessage={{ required: '狀態 is reduired.' }}
-                      onInput={this.handleInputChange}
+                      onInput={this.HandleInputChange}
                       value={this.state.viewModel.status}
                       options={
                         [
