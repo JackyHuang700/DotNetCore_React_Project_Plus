@@ -209,7 +209,7 @@ namespace DotNetCore_React.Application.NewsApp
                     {
                         formFile.CopyTo(stream);
                         myJson["success"] = true;
-                        myJson["listImage"] = newFile;
+                        myJson["listImage"] = $"{filePath}{newFile}";
                     }
                 }
             }

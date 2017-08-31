@@ -14,7 +14,7 @@ export function HandleInputChange(event) {
   new_News[name] = value;
 
   this.setState({
-    News: new_News,
+    viewModel: new_News,
   });
 }
 

@@ -63,9 +63,8 @@
     "query-string": "^5.0.0",
     "react-bootstrap-table": "^4.0.0",
     "react-datepicker": "^0.53.0",
-    "react-dropzone": "^4.1.0",
     "react-dropzone-component": "^2.0.0",
     "react-easyform": "^0.2.0",
-    "react-tap-event-plugin": "^2.0.1"
+    "react-tap-event-plugin": "^2.0.1",
   }
 }

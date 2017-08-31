@@ -7,6 +7,7 @@ import EasyForm, { Field, FieldGroup } from 'react-easyform';
 import TextInput from '../../Components/Forms/TextInput';
 import DropDownList from '../../Components/Forms/DropDownList';
 import CKEditor from '../../Components/Forms/CKEditor';
+import FileUpload from '../../Components/Forms/FileUpload';
 
 import { news_Enum } from '../../../EnumScript/GeneralEnumScript';
 import classnames from 'classnames';
@@ -66,47 +67,6 @@ class News_Create extends Component {
 
 
 
-    this.djsConfig = {
-      addRemoveLinks: true,
-      acceptedFiles: "image/jpeg,image/png,image/gif",
-      params: {
-        files: "I'm a parameter!"
-      }
-    };
-
-    this.componentConfig = {
-      iconFiletypes: ['.jpg', '.png', '.gif'],
-      showFiletypeIcon: true,
-      postUrl: '/api/News/Upload_Pic/'
-    };
-
-    // If you want to attach multiple callbacks, simply
-    // create an array filled with all your callbacks.
-    this.callbackArray = [() => console.log('Hi!'), () => console.log('Ho!')];
-
-    // Simple callbacks work too, of course
-    this.callback = () => {
-
-
-      console.log('Hello!');
-    }
-
-    this.success = file => {
-      console.log('uploaded', file);
-
-      //預計將上傳成功後，將檔案名稱寫回viewModel['listImage']內
-
-      // var new_News = Object.assign(this.state.viewModel);
-      // new_News["listImage"] = value;
-
-      // this.setState({
-      //   News: new_News,
-      // });
-    }
-
-    this.removedfile = file => console.log('removing...', file);
-
-    this.dropzone = null;
   }
 
 
@@ -241,33 +201,7 @@ class News_Create extends Component {
 
   }
 
-  //上傳圖片
-  // onImageDrop(files) {
-  //   this.setState({
-  //     uploadedFile: files
-  //   });
 
-
-  //   var formData = new FormData();
-  //   for (var i = 0; i < files.length; i++) {
-  //     formData.append('files', files[i]) //用迴圈抓出多少筆再append回來
-  //   }
-
-  //   axios.post('/api/News/Upload_Pic/', formData).then((response) => {
-
-  //     if (response.data.success) {
-  //       var newNews = Object.assign(this.state.viewModel);
-  //       newNews.listImage = response.data.listImage;
-  //       this.setState({
-  //         viewModel: newNews
-  //       });
-
-  //     }
-  //     console.log(response);
-  //   }).catch((error) => {
-  //     console.log(error);
-  //   });
-  // }
 
 
   render() {
@@ -310,25 +244,10 @@ class News_Create extends Component {
                       placeholder="listImage" />
 
 
-                    <tr>
-                      <td className="col-xs-4 text-right">
-                        <label className="text-right" style={{ color: this.props.required_listImage && 'red' }}> 上傳圖片 {this.props.required_listImage && '*'} </label>
+                      {/* <FileUpload2 baseUrl="/api/News/Upload_Pic/" /> */}
 
-                      </td>
-                      <td className="col-xs-8 ps-re" >
-                        <Button color="danger" onClick={this.toggleByModal.bind(this)}>上傳圖片</Button>
-                        <Modal isOpen={this.state.modal} toggle={this.toggleByModal.bind(this)} className={this.props.className}>
-                          <ModalHeader toggle={this.toggleByModal.bind(this)}>Modal title</ModalHeader>
-                          <ModalBody>
-                            <DropzoneComponent config={config} eventHandlers={eventHandlers} djsConfig={djsConfig} />
-                          </ModalBody>
-                          <ModalFooter>
-                            <Button color="primary" onClick={this.toggleByModal.bind(this)}>Do Something</Button>{' '}
-                            <Button color="secondary" onClick={this.toggleByModal.bind(this)}>Cancel</Button>
-                          </ModalFooter>
-                        </Modal>
-                      </td>
-                    </tr>
+<FileUpload HandleInputChange={this.HandleInputChange}/>
+                 
 
 
                     <TextInput name="category"
