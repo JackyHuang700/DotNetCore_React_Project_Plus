@@ -58,6 +58,8 @@ export default class TextInput extends Component {
         delete myProps.labelName;
         delete myProps.labelCustom;
         delete myProps.divClassName;
+        delete myProps.is_Table;
+
         let baseField = <Field {...myProps} />
         baseField = React.cloneElement(baseField, {
             id: this.props.name
