@@ -56,9 +56,11 @@ export function GetData() {
     }
   }).then((result) => {
     // console.log(result.data);
-
+    
     result.data.startDate = moment(result.data.startDate);
-    result.data.endDate = moment(result.data.endDate);
+    if (result.data.endDate) {
+      result.data.endDate = moment(result.data.endDate);
+    }
 
     self.setState({
       viewModel: result.data
