@@ -295,6 +295,7 @@ class Product_Create extends Component {
                                             viewModel={this.state.viewModel}
                                             acceptedFiles={"image/jpeg,image/png,image/gif"}
                                             postUrl={"/api/News/Upload_Pic/"}
+                                            handleInputChangeName = {"listImage"}
                                         />
 
 

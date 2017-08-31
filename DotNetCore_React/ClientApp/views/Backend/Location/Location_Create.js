@@ -200,7 +200,7 @@ class Location_Create extends Component {
             <div className="animated fadeIn row justify-content-center">
                 <div className="col-xl-10">
                     <div className="card">
-                        <div className="card-header">編輯關於我們</div>
+                        <div className="card-header">建立服務據點</div>
                         <div className="card-block">
                             <form className="" onSubmit={this.Submit}>
 

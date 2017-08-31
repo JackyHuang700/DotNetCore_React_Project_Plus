@@ -38,8 +38,8 @@ class ContactUs_Delete extends Component {
 
     Title() {
         return this.state.is_Delete ?
-            "刪除最新消息" :
-            "檢視最新消息";
+            "刪除聯絡我們" :
+            "檢視聯絡我們";
     }
 
 

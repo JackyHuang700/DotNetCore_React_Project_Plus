@@ -265,6 +265,7 @@ class News_Create extends Component {
                       HandleInputChange={this.HandleInputChange}
                       acceptedFiles={"image/jpeg,image/png,image/gif"}
                       postUrl={"/api/News/Upload_Pic/"}
+                      handleInputChangeName = {"listImage"}
                     />
 
 

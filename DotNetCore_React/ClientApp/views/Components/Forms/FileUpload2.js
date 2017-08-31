@@ -52,7 +52,7 @@ class FileUpload extends Component {
                     target: {
                         type: "text",
                         value: json.listImage,
-                        name: "listImage",
+                        name: this.props.handleInputChangeName,
                     },
                 });
                 this.toggleByModal();
@@ -154,6 +154,14 @@ export default FileUpload;
 
 
 FileUpload.propTypes = {
-    acceptedFiles: React.PropTypes.object.isRequired,
-    postUrl: React.PropTypes.object.isRequired
-  };
+    acceptedFiles: React.PropTypes.string.isRequired,
+    postUrl: React.PropTypes.string.isRequired,
+    handleInputChangeName: React.PropTypes.string.isRequired,
+};
+
+
+FileUpload.DefaultProps = {
+    acceptedFiles: 'image/jpeg, image/png',
+    postUrl: '',
+    handleInputChangeName: "listImage",
+}
