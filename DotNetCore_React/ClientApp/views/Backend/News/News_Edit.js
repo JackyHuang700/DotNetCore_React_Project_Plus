@@ -76,12 +76,12 @@ class News_Edit extends Component {
 
 
   Button_Submit(event) {
-      //轉換imageList
+    //轉換imageList
     this.setState({
-        viewModel:{
-          listImage : this.state.imageList.join()
-        }
-      },
+      viewModel: {
+        listImage: this.state.imageList.join()
+      }
+    },
       axios({
         url: '/api/News/Edit',
         method: 'post',
@@ -210,23 +210,23 @@ class News_Edit extends Component {
 
                       </td>
                       <td className="col-xs-8" >
-                      {
-                        this.state.imageList &&
+                        {
+                          this.state.imageList &&
                           this.state.imageList.map(c => {
-                           return(<ImgThumbnail 
+                            return (<ImgThumbnail
                               src={c.image}
-                              alt={c.description} 
-                              className="img-preview img-thumbnail" 
+                              alt={c.description}
+                              className="img-preview img-thumbnail"
                               delImageEvent={Del_ImageList.bind(this)} />)
                           })
-                      }
+                        }
                       </td>
                     </tr>
 
-                  
+
                     <FileUpload
-                    Add_ImageList={Add_ImageList.bind(this)}
-                    postUrl={"/api/News/Upload_Pic/"}
+                      Add_ImageList={Add_ImageList.bind(this)}
+                      postUrl={"/api/News/Upload_Pic/"}
                     />
 
                     <TextInput name="category"

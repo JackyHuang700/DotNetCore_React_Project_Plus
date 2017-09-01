@@ -22,6 +22,11 @@ module.exports = (env) => {
                 // "aspnet-webpack",
                 // "aspnet-webpack-react",
                 "./node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css",
+
+                //datepicker package
+                'react-datepicker',
+                "moment",
+                "./node_modules/react-datepicker/dist/react-datepicker.css",
             ],
         },
         resolve: {
@@ -47,11 +52,14 @@ module.exports = (env) => {
         },
         context: __dirname,
         plugins: [
-            new webpack.optimize.UglifyJsPlugin({
-                unused: true,
-                sourceMap: true,
-                warnings: false,
-            }),
+            new webpack.optimize.ModuleConcatenationPlugin(),
+
+            // new webpack.optimize.UglifyJsPlugin({
+            //     unused: true,
+            //     sourceMap: true,
+            //     warnings: false,
+            // }),
+            
             new webpack.DllPlugin({
                 path: path.join(__dirname, bundleOutputDir)+'/[name]-manifest.json',
                 name: "[name]_[hash]",
