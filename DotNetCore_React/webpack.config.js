@@ -83,12 +83,16 @@ module.exports = (env) => {
             //      exclude: ['vendor.js',],
             //       columns: false
             // }),
+
+
+            //****************** */
             //UglifyJsPlugin setting_1
-            new webpack.optimize.UglifyJsPlugin({
-                unused: true,
-                sourceMap: true,
-                warnings: false,
-            }),
+            // new webpack.optimize.UglifyJsPlugin({
+                //     unused: true,
+                //     sourceMap: true,
+                //     warnings: false,
+                // }),
+                
             //UglifyJsPlugin setting_2
             // new webpack.optimize.UglifyJsPlugin({
             //     compress: {
@@ -100,6 +104,8 @@ module.exports = (env) => {
             // new webpack.LoaderOptionsPlugin({
             //     minimize: true
             // }),
+            //****************** */
+
             // new webpack.optimize.CommonsChunkPlugin({
             //     name: "commons",
             //     // (the commons chunk name)
@@ -114,6 +120,7 @@ module.exports = (env) => {
             //     // (Only use these entries)
             //     minChunks: Infinity,
             // }),
+            new webpack.optimize.ModuleConcatenationPlugin(),
             new webpack.DllReferencePlugin({
                 context: __dirname,
                 manifest: require(`${path.join(__dirname, bundleOutputDir)}/commons-manifest.json`),
