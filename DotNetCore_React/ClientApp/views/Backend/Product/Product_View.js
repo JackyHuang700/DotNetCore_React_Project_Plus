@@ -126,7 +126,7 @@ export default class Product_View extends Component {
         return (
             <div className="col-xs-12">
                 <div className="table-users">
-                    <div className="header">關於我們</div>
+                    <div className="header">產品</div>
 
                     <div className="card">
                         <div className="card-block">

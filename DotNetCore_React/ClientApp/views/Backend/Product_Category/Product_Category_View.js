@@ -123,7 +123,7 @@ export default class Product_Category_View extends Component {
         return (
             <div className="col-xs-12">
                 <div className="table-users">
-                    <div className="header">關於我們</div>
+                    <div className="header">產品類別</div>
 
                     <div className="card">
                         <div className="card-block">
@@ -137,7 +137,7 @@ export default class Product_Category_View extends Component {
                                 search
                                 exportCSV>
                                 {this.props.display_id ? <TableHeaderColumn dataField='id' dataSort={true} filter={ { type: 'TextFilter', delay: 1000 } }>系統流水號</TableHeaderColumn> : null}
-                                {this.props.display_name ? <TableHeaderColumn dataField='name' dataSort={true} filter={ { type: 'TextFilter', delay: 1000 } }>名稱</TableHeaderColumn> : null}
+                                {this.props.display_name ? <TableHeaderColumn dataField='title' dataSort={true} filter={ { type: 'TextFilter', delay: 1000 } }>名稱</TableHeaderColumn> : null}
                                 {this.props.display_priority ? <TableHeaderColumn dataField='priority' dataSort={true} filter={ { type: 'TextFilter', delay: 1000 } }>列表排序</TableHeaderColumn> : null}
                                 
                                 

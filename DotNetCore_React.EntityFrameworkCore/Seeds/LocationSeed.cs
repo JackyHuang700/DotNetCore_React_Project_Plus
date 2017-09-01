@@ -15,7 +15,6 @@ namespace DotNetCore_React.EntityFrameworkCore.Seeds
             {
                 var data1 = new List<Location>() {
                     new Location{
-                        ListImage = "aa.jpg",
                         Country = "taiwan",
                         Area = 10,
                         Phone = "0423333333",

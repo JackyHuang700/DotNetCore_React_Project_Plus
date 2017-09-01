@@ -31,6 +31,7 @@ import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import '../../../../node_modules/react-datepicker/dist/react-datepicker.css';
 
+
 class News_Edit extends Component {
 
   constructor(props) {
@@ -73,19 +74,15 @@ class News_Edit extends Component {
     }
   }
 
-
-
   Button_Submit(event) {
-    //轉換imageList
-    this.setState({
-      viewModel: {
-        listImage: this.state.imageList.join()
-      }
-    },
+      //轉換imageList
+      let data = this.state.viewModel;
+      data.listImage = this.state.imageList;
+
       axios({
         url: '/api/News/Edit',
         method: 'post',
-        data: this.state.News
+        data: data
       }).then((result) => {
 
         if (result.data.success) {
@@ -93,8 +90,7 @@ class News_Edit extends Component {
         }
       }).catch((error) => {
         console.log(error)
-      })
-    )
+      });
 
     event.preventDefault();
     return false;
@@ -210,23 +206,23 @@ class News_Edit extends Component {
 
                       </td>
                       <td className="col-xs-8" >
-                        {
-                          this.state.imageList &&
+                      {
+                        this.state.imageList &&
                           this.state.imageList.map(c => {
-                            return (<ImgThumbnail
+                           return(<ImgThumbnail 
                               src={c.image}
-                              alt={c.description}
-                              className="img-preview img-thumbnail"
+                              alt={c.description} 
+                              className="img-preview img-thumbnail" 
                               delImageEvent={Del_ImageList.bind(this)} />)
                           })
-                        }
+                      }
                       </td>
                     </tr>
 
-
+                  
                     <FileUpload
-                      Add_ImageList={Add_ImageList.bind(this)}
-                      postUrl={"/api/News/Upload_Pic/"}
+                    Add_ImageList={Add_ImageList.bind(this)}
+                    postUrl={"/api/News/Upload_Pic/"}
                     />
 
                     <TextInput name="category"

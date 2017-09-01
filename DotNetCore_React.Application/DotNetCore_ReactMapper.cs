@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 
 /// 
+using System.Linq;
 using AutoMapper;
 using DotNetCore_React.Application.RoleApp.Dtos;
 using DotNetCore_React.Application.ComSystemApp.Dtos;
@@ -39,11 +40,13 @@ namespace DotNetCore_React.Application
                 cfg.CreateMap<ComSystem, ComSystemDto>();
                 cfg.CreateMap<ComSystemDto, ComSystem>();
 
-                cfg.CreateMap<News, NewsDto>();
+                cfg.CreateMap<News, NewsDto>()
+                .ForMember(opt => opt.listImage, dest => dest.MapFrom(o => o.ListImage.Split(',').Where(s => !string.IsNullOrWhiteSpace(s)).Select(i => new GeneralDtos.ImageDto { image = i })));
                 cfg.CreateMap<NewsDto, News>()
-                .ForMember(opt => opt.Id , dest => dest.Ignore())
-                .ForMember(opt => opt.CreateDate , dest => dest.Ignore())
-                .ForMember(opt => opt.CreateUser , dest => dest.Ignore());
+                .ForMember(opt => opt.Id, dest => dest.Ignore())
+                .ForMember(opt => opt.CreateDate, dest => dest.Ignore())
+                .ForMember(opt => opt.CreateUser, dest => dest.Ignore())
+                .ForMember(opt => opt.ListImage, dest => dest.MapFrom(o => string.Join(",",o.listImage.Select(i => i.image).ToList())));
                 cfg.CreateMap<News_Lan, News_LanDto>();
                 cfg.CreateMap<News_LanDto, News_Lan>()
                 .ForMember(opt => opt.Id, dest => dest.Ignore())
@@ -62,7 +65,8 @@ namespace DotNetCore_React.Application
                 .ForMember(opt => opt.LanguageId, dest => dest.Ignore());
 
 
-                cfg.CreateMap<Product, ProductDto>();
+                cfg.CreateMap<Product, ProductDto>()
+                .ForMember(opt => opt.listImage, dest => dest.Ignore()); //這欄位應該要移除
                 cfg.CreateMap<ProductDto, Product>()
                 .ForMember(opt => opt.Id, dest => dest.Ignore())
                 .ForMember(opt => opt.CreateDate, dest => dest.Ignore())
@@ -103,7 +107,8 @@ namespace DotNetCore_React.Application
                 cfg.CreateMap<AboutUs_CategoryDto, AboutUs_Category>()
                 .ForMember(opt => opt.Id, dest => dest.Ignore());
 
-                cfg.CreateMap<Location, LocationDto>();
+                cfg.CreateMap<Location, LocationDto>()
+                .ForMember(opt => opt.listImage, dest => dest.Ignore()); //這欄位應該要移除
                 cfg.CreateMap<LocationDto, Location>()
                 .ForMember(opt => opt.Id, dest => dest.Ignore())
                 .ForMember(opt => opt.CreateDate, dest => dest.Ignore())

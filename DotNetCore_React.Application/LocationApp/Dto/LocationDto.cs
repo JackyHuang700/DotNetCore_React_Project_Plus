@@ -5,12 +5,11 @@ using System.Text;
 namespace DotNetCore_React.Application.LocationApp.Dtos
 {
     /// <summary>
-    /// ªA°È¾ÚÂI
+    /// ï¿½Aï¿½È¾ï¿½ï¿½I
     /// </summary>
     public class LocationDto
     {
         public Guid Id { get; set; }
-        public string ListImage { get; set; }
         public string Country { get; set; }
         public int Area { get; set; }
         public string Phone { get; set; }
@@ -26,10 +25,8 @@ namespace DotNetCore_React.Application.LocationApp.Dtos
         public DateTime UpdateDate { get; set; }
         public string UpdateUser { get; set; }
 
-
-
-        ////°Æªí
+        ////ï¿½Æªï¿½
         public List<Location_LanDto> LanList { get; set; }
-        public List<Location_ImageDto> ImageList { get; set; }
+        public List<Location_ImageDto> listImage { get; set; }
     }
 }

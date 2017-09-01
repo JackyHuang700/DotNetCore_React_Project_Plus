@@ -130,7 +130,6 @@ export default class News_View extends Component {
 
                 <div className="table-users">
                     <div className="header">最新消息</div>
-
                     <div className="card">
                         {/* <div className="card-header">最新消息</div> */}
                         <div className="card-block">

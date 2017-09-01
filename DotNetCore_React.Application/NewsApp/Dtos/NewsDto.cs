@@ -11,8 +11,6 @@ namespace DotNetCore_React.Application.NewsApp.Dtos
     {
         public Guid Id { get; set; }
 
-        public string ListImage { get; set; }
-
         public string Title { get; set; }
 
         public int Category { get; set; }
@@ -33,8 +31,9 @@ namespace DotNetCore_React.Application.NewsApp.Dtos
 
         public string UpdateUser { get; set; }
 
-
         //副表
         public List<News_LanApp.Dtos.News_LanDto> LanList { get; set; }
+
+        public List<GeneralDtos.ImageDto> listImage {get;set;}
     }
 }

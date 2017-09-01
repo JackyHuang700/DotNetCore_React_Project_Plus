@@ -42,8 +42,13 @@ namespace DotNetCore_React.Application.NewsApp
             {
                 //抓取附表
                 var new_lans_List = _repository_news_lan.GetAllList(c => c.NewsId == item.Id);
-                item.LanList = Mapper.Map<List<News_LanDto>>(new_lans_List);
-            }
+               // item.LanList = Mapper.Map<List<News_LanDto>>(new_lans_List);
+
+                //補title
+                if(new_lans_List != null && new_lans_List.Count > 0){
+                item.Title = new_lans_List.Select(o => o.Title).FirstOrDefault();
+                }
+            }       
 
             return newsDtoList;
         }
@@ -75,7 +80,7 @@ namespace DotNetCore_React.Application.NewsApp
             var date = DateTime.Now;
 
             //主表
-            var roleDB = Mapper.Map<News>(role);
+            var roleDB = Mapper.Map<Domain.Entities.News>(role);
             roleDB.CreateUser = role.CreateUser;
             roleDB.CreateDate = date;
             roleDB.UpdateDate = date;
@@ -131,7 +136,7 @@ namespace DotNetCore_React.Application.NewsApp
 
             
             var newsDB = _repository.Get(role.Id);
-            newsDB = Mapper.Map<NewsDto, News>(role, newsDB);
+            newsDB = Mapper.Map<NewsDto,Domain.Entities.News>(role, newsDB);
 
             newsDB.UpdateDate = DateTime.Now;
             _repository.Update(newsDB);
