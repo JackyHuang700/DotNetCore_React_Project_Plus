@@ -132,9 +132,13 @@ body {
     right: 0;
     background: rgba(0,0,0,0.6);
     color: #ddd;
-    padding: 60px 100px;
+    padding: 60px 39%;
 }
 
 .imgthumb > a:hover span {
     display: block;
+}
+
+.img-thumbnail{
+    padding: 0px;
 }
