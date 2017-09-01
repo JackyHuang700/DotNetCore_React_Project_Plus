@@ -112,17 +112,28 @@ namespace DotNetCore_React.EntityFrameworkCore
         /// <param name="entity">要刪除的實體</param>
         public void Delete(TEntity entity)
         {
-            //真刪除
-            TrySetProperty(entity, "Status", -1);
-
-            _dbContext.Set<TEntity>().Update(entity);
+            //軟刪除
+            var mapper = TrySetProperty(entity, "Status", -1);
+            if (mapper)
+            {
+                _dbContext.Set<TEntity>().Update(entity);
+            }
+            //若無法軟刪除，實行真刪除
+            else
+            {
+                _dbContext.Set<TEntity>().Remove(entity);
+            }
         }
 
-        private void TrySetProperty(object obj, string property, object value)
+        private bool TrySetProperty(object obj, string property, object value)
         {
             var prop = obj.GetType().GetProperty(property, BindingFlags.Public | BindingFlags.Instance);
             if (prop != null && prop.CanWrite)
+            {
                 prop.SetValue(obj, value, null);
+                return true;
+            }
+            return false;
         }
 
         /// <summary>

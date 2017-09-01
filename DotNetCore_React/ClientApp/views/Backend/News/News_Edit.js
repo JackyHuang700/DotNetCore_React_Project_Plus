@@ -73,19 +73,15 @@ class News_Edit extends Component {
     }
   }
 
-
-
   Button_Submit(event) {
       //轉換imageList
-    this.setState({
-        viewModel:{
-          listImage : this.state.imageList.join()
-        }
-      },
+      let data = this.state.viewModel;
+      data.listImage = this.state.imageList;
+
       axios({
         url: '/api/News/Edit',
         method: 'post',
-        data: this.state.News
+        data: data
       }).then((result) => {
 
         if (result.data.success) {
@@ -93,8 +89,7 @@ class News_Edit extends Component {
         }
       }).catch((error) => {
         console.log(error)
-      })
-    )
+      });
 
     event.preventDefault();
     return false;

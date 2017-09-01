@@ -69,28 +69,24 @@ class Location_Create extends Component {
     Submit(event) {
         const self = this;
 
-        //轉換imageList
-        this.setState({
-            viewModel:{
-                listImage : this.state.imageList.join()
-            }
-        },
-            axios({
-                url: '/api/Location/Create',
-                method: 'post',
-                data: this.state.viewModel
-            }).then((result) => {
-                if (result.data.success) {
-                    if (self.state.next_Button) {
-                        window.location.reload()
-                    } else {
-                        history.push('/Location');
-                    }
+      //轉換imageList
+      let data = this.state.viewModel;
+      data.listImage = this.state.imageList;
+        axios({
+            url: '/api/Location/Create',
+            method: 'post',
+            data: data
+        }).then((result) => {
+            if (result.data.success) {
+                if (self.state.next_Button) {
+                    window.location.reload()
+                } else {
+                    history.push('/Location');
                 }
-            }).catch((error) => {
-                console.log(error)
-            })
-        )
+            }
+        }).catch((error) => {
+            console.log(error)
+        });
 
         event.preventDefault();
         return false;

@@ -66,16 +66,13 @@ class Product_Edit extends Component {
 
     Submit(event) {
         const self = this;
-        //轉換imageList
-        this.setState({
-            viewModel:{
-            listImage : this.state.imageList.join()
-            }
-        },
+      //轉換imageList
+      let data = this.state.viewModel;
+      data.listImage = this.state.imageList;
         axios({
             url: '/api/Product/Edit',
             method: 'post',
-            data: this.state.viewModel
+            data: data
         }).then((result) => {
             if (result.data.success) {
                 if (self.state.next_Button) {
@@ -86,7 +83,7 @@ class Product_Edit extends Component {
             }
         }).catch((error) => {
             console.log(error)
-        }))
+        });
 
         event.preventDefault();
         return false;
@@ -130,19 +127,6 @@ class Product_Edit extends Component {
 
                             return (
                                 <TabPane tabId={`${index}`}>
-
-
-                                    <TextInput name="languageId"
-                                        labelName="內容"
-                                        className=""
-                                        data-index={index}
-                                        display={this.props.display_content}
-                                        required={this.props.required_content}
-                                        validMessage={{ required: '內容 is reduired.' }}
-                                        onInput={this.HandleInputChange_By_LanList}
-                                        value={this.state.viewModel.lanList[`${index}`].languageId}
-                                        placeholder="languageId" />
-
 
                                     <TextInput name="title"
                                         labelName="標題"

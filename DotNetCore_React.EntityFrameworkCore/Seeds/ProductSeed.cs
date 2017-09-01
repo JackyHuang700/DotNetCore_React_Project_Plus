@@ -16,7 +16,6 @@ namespace DotNetCore_React.EntityFrameworkCore.Seeds
                 var product_Category = _context.Product_Category.Select(c => c.Id).FirstOrDefault();
                 var data1 = new List<Product>() {
                    new Product{
-                   ListImage = "aa.jpg",
                    CategoryId = product_Category,
                    Priority = 1,
                    Status = 1,

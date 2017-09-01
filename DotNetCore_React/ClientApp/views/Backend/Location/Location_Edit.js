@@ -71,16 +71,13 @@ class Location_Edit extends Component {
 
     Submit(event) {
         const self = this;
-          //轉換imageList
-          this.setState({
-            viewModel:{
-                listImage : this.state.imageList.join()
-            }
-        },
+      //轉換imageList
+      let data = this.state.viewModel;
+      data.listImage = this.state.imageList;
         axios({
             url: '/api/Location/Edit',
             method: 'post',
-            data: this.state.viewModel
+            data: data
         }).then((result) => {
             if (result.data.success) {
                 if (self.state.next_Button) {
@@ -91,7 +88,7 @@ class Location_Edit extends Component {
             }
         }).catch((error) => {
             console.log(error)
-        }))
+        });
 
         event.preventDefault();
         return false;

@@ -82,11 +82,9 @@ export function GetData() {
       result.data.endDate = moment(result.data.endDate);
     }
 
-    let imageList = result.data.listImage.split(',');
-
     self.setState({
       viewModel: result.data,
-      imageList: imageList
+      imageList: result.data.listImage
     }, () => {
       self.Get_Sys_Language();
     });

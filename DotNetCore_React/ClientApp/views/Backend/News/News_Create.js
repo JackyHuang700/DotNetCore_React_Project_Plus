@@ -79,15 +79,13 @@ class News_Create extends Component {
   Submit(event) {
     const self = this;
       //轉換imageList
-      this.setState({
-        viewModel:{
-          listImage : this.state.imageList.join()
-        }
-    },
+      let data = this.state.viewModel;
+      data.listImage = this.state.imageList;
+
       axios({
         url: '/api/News/Create',
         method: 'post',
-        data: this.state.viewModel
+        data: data
       }).then((result) => {
         if (result.data.success) {
           if (self.state.next_Button) {
@@ -98,8 +96,7 @@ class News_Create extends Component {
         }
       }).catch((error) => {
         console.log(error)
-      })
-    )
+      });
 
     event.preventDefault();
     return false;

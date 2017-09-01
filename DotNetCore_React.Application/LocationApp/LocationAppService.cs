@@ -66,14 +66,14 @@ namespace DotNetCore_React.Application.LocationApp
 
                 //圖表
                 var b_DB_List = new List<Location_Image>();
-                foreach (var item in News.ImageList)
+                foreach (var item in News.listImage)
                 {
                     var aa = Mapper.Map<Location_Image>(item);
                     aa.LocationId = roleDB.Id;
                     b_DB_List.Add(aa);
                     var aaa = _repository_image.Insert(aa);
                 }
-                var cSuccess = _repository_image.Save() == News.ImageList.Count;
+                var cSuccess = _repository_image.Save() == News.listImage.Count;
 
 
                 if (bSuccess && cSuccess)
@@ -171,7 +171,7 @@ namespace DotNetCore_React.Application.LocationApp
             newsDto.LanList = Mapper.Map<List<Location_LanDto>>(new_lans_List);
             //抓圖表
             var new_image_List = _repository_image.GetAllList(c => c.LocationId == a.Id);
-            newsDto.ImageList = Mapper.Map<List<Location_ImageDto>>(new_image_List);
+            newsDto.listImage = Mapper.Map<List<Location_ImageDto>>(new_image_List);
 
             return newsDto;
         }
@@ -205,14 +205,19 @@ namespace DotNetCore_React.Application.LocationApp
             var news_lan_effect = _repository_lan.Save() == News.LanList.Count;
 
             //更新圖表
-            foreach (var item in News.ImageList)
+
+            //移除全部重寫
+            var new_image_List = _repository_image.GetAllList(c => c.LocationId == newsDB.Id);
+            _repository_image.DeleteRange(new_image_List);
+            _repository_image.Save();
+
+            foreach (var item in News.listImage)
             {
-                var getLandata = _repository_image.FirstOrDefault(o => o.Id == item.Id);
-                getLandata = Mapper.Map<Location_ImageDto, Location_Image>(item, getLandata, opt => opt.AfterMap((dto, dest) => { dest.LocationId = newsDB.Id; }));
-                getLandata.LocationId = newsDB.Id;
-                _repository_image.InsertOrUpdate(getLandata);
+                var aa = Mapper.Map<Location_Image>(item);
+                aa.LocationId = newsDB.Id;
+                _repository_image.InsertOrUpdate(aa);
             }
-            var news_image_effect = _repository_image.Save() == News.ImageList.Count;
+            var news_image_effect = _repository_image.Save() == News.listImage.Count;
 
 
             var success_effect = news_lan_effect && news_effect && news_image_effect;

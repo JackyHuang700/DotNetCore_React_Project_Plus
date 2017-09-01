@@ -5,6 +5,7 @@ using DotNetCore_React.Application.Product_CategoryApp.Dtos;
 using DotNetCore_React.Domain.IRepositories;
 using AutoMapper;
 using DotNetCore_React.Domain.Entities;
+using System.Linq;
 
 namespace DotNetCore_React.Application.Product_CategoryApp
 {
@@ -103,13 +104,20 @@ namespace DotNetCore_React.Application.Product_CategoryApp
         {
             var a = _repository.GetAllList();
             var product_CategoryList = Mapper.Map<List<Product_CategoryDto>>(a);
+
             //要撈子表
-            //foreach (var item in product_CategoryList)
-            //{
-            //    //抓取附表
-            //    var product_Category_LanList = _repository_lan.GetAllList(c => c.LanguageId == item.Id);
-            //    item.Product_Category_LanList = Mapper.Map<List<Product_Category_LanDto>>(product_Category_LanList);
-            //}
+            foreach (var item in product_CategoryList)
+            {
+                //抓取附表
+                var new_lans_List = _repository_lan.GetAllList(c => c.ProductCateId == item.Id);
+                // item.LanList = Mapper.Map<List<News_LanDto>>(new_lans_List);
+
+                //補title
+                if (new_lans_List != null && new_lans_List.Count > 0)
+                {
+                    item.Title = new_lans_List.Select(o => o.Name).FirstOrDefault();
+                }
+            }
 
 
             return product_CategoryList;

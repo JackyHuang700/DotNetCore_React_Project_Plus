@@ -56,7 +56,7 @@ namespace DotNetCore_React.Application.ProductApp
 
                 //圖表
                 var b_DB_List = new List<Product_Image>();
-                foreach (var item in News.ImageList)
+                foreach (var item in News.listImage)
                 {
                     var aa = Mapper.Map<Product_Image>(item);
                     aa.ProductId = roleDB.Id;
@@ -64,7 +64,7 @@ namespace DotNetCore_React.Application.ProductApp
                     var aaa = _repository_image.Insert(aa);
                 }
 
-                var cSuccess = _repository_image.Save() == News.ImageList.Count;
+                var cSuccess = _repository_image.Save() == News.listImage.Count;
 
                 if (bSuccess && cSuccess)
                 {
@@ -142,8 +142,17 @@ namespace DotNetCore_React.Application.ProductApp
             foreach (var item in newsDtoList)
             {
                 //抓取附表
-                var new_lans_List = _repository_image.GetAllList(c => c.ProductId == item.Id);
-                item.ImageList = Mapper.Map<List<Product_ImageDto>>(new_lans_List);
+                var new_img_List = _repository_image.GetAllList(c => c.ProductId == item.Id);
+                item.listImage = Mapper.Map<List<Product_ImageDto>>(new_img_List);
+
+                //抓取附表
+                var new_lans_List = _repository_lan.GetAllList(c => c.ProductId == item.Id);
+                //補title
+                if (new_lans_List != null && new_lans_List.Count > 0)
+                {
+                    item.Title = new_lans_List.Select(o => o.Title).FirstOrDefault();
+                }
+
             }
 
             //語言表
@@ -165,7 +174,7 @@ namespace DotNetCore_React.Application.ProductApp
             newsDto.LanList = Mapper.Map<List<Product_LanDto>>(new_lans_List);
             //圖表
             var new_image_List = _repository_image.GetAllList(c => c.ProductId == a.Id);
-            newsDto.ImageList = Mapper.Map<List<Product_ImageDto>>(new_image_List);
+            newsDto.listImage = Mapper.Map<List<Product_ImageDto>>(new_image_List);
             return newsDto;
         }
 
@@ -198,14 +207,19 @@ namespace DotNetCore_React.Application.ProductApp
             var news_lan_effect = _repository_lan.Save() == News.LanList.Count;
 
             //更新圖表
-            foreach (var item in News.ImageList)
+            //移除全部重寫
+            var new_image_List = _repository_image.GetAllList(c => c.ProductId == newsDB.Id);
+            _repository_image.DeleteRange(new_image_List);
+            _repository_image.Save();
+
+            foreach (var item in News.listImage)
             {
-                var getLandata = _repository_image.FirstOrDefault(o => o.Id == item.Id);
-                getLandata = Mapper.Map<Product_ImageDto, Product_Image>(item, getLandata, opt => opt.AfterMap((dto, dest) => { dest.ProductId = newsDB.Id; }));
-                getLandata.ProductId = newsDB.Id;
-                _repository_image.InsertOrUpdate(getLandata);
+                var aa = Mapper.Map<Product_Image>(item);
+                aa.ProductId = newsDB.Id;
+                _repository_image.InsertOrUpdate(aa);
             }
-            var news_image_effect = _repository_image.Save() == News.ImageList.Count;
+
+            var news_image_effect = _repository_image.Save() == News.listImage.Count;
 
 
             var success_effect = news_lan_effect && news_effect && news_image_effect;
