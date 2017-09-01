@@ -8995,8 +8995,11 @@ body {
 .img-preview {
   height: 150px; }
 
+.dis-inline-block {
+  display: inline-block; }
+
 .imgthumb {
-  height: 100px; }
+  height: inherit; }
 
 .imgthumb > a {
   float: left;
