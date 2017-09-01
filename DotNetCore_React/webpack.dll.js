@@ -30,7 +30,7 @@ module.exports = (env) => {
             ],
         },
         resolve: {
-            extensions: [ '.js' ]
+            extensions: ['.js']
         },
         module: {
             rules: [{
@@ -54,17 +54,20 @@ module.exports = (env) => {
         plugins: [
             new webpack.optimize.ModuleConcatenationPlugin(),
 
-            // new webpack.optimize.UglifyJsPlugin({
-            //     unused: true,
-            //     sourceMap: true,
-            //     warnings: false,
-            // }),
-            
+
+
             new webpack.DllPlugin({
-                path: path.join(__dirname, bundleOutputDir)+'/[name]-manifest.json',
+                path: path.join(__dirname, bundleOutputDir) + '/[name]-manifest.json',
                 name: "[name]_[hash]",
                 context: __dirname,
-              }),
-        ]
+            }),
+        ].concat((env) === "product" ? [
+            //產品
+            new webpack.optimize.UglifyJsPlugin({
+                unused: true,
+                sourceMap: true,
+                warnings: false,
+            }),
+        ] : [])
     }];
 };

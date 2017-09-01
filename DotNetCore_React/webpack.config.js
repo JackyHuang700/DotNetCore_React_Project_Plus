@@ -18,28 +18,8 @@ module.exports = (env) => {
         // devtool: 'cheap-eval-source-map',
         entry: {
             'Main': [
-                // 'babel-polyfill',
-                // 'react-hot-loader/patch',
                 `./ClientApp/Main.js`
             ],
-            // "commons": [
-            //     'react',
-            //     'react-dom',
-            //     'react-router-dom',
-            //     'babel-polyfill',
-            //     'react-hot-loader/patch',
-            //     "react-hot-loader",
-            //     "axios",
-            //     "react-easyform",
-            //     "history",
-            //     "reactstrap", //0.74MB
-            //     "bootstrap",
-            //     "event-source-polyfill",
-            //     // "react-scripts",
-            //     // "aspnet-webpack",
-            //     // "aspnet-webpack-react",
-            //     "./node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css",
-            // ],
         },
         output: {
             path: path.join(__dirname, bundleOutputDir),
@@ -85,14 +65,24 @@ module.exports = (env) => {
             // }),
 
 
+            new webpack.optimize.ModuleConcatenationPlugin(),
+            new webpack.DllReferencePlugin({
+                context: __dirname,
+                manifest: require(`${path.join(__dirname, bundleOutputDir)}/commons-manifest.json`),
+            }),
+        ].concat((env) === "dev" ? [
+            //開發
+            new webpack.HotModuleReplacementPlugin(),
+        ] : []).concat((env) === "product" ? [
+            //產品
             //****************** */
             //UglifyJsPlugin setting_1
-            // new webpack.optimize.UglifyJsPlugin({
-                //     unused: true,
-                //     sourceMap: true,
-                //     warnings: false,
-                // }),
-                
+            new webpack.optimize.UglifyJsPlugin({
+                unused: true,
+                sourceMap: true,
+                warnings: false,
+            }),
+
             //UglifyJsPlugin setting_2
             // new webpack.optimize.UglifyJsPlugin({
             //     compress: {
@@ -106,27 +96,20 @@ module.exports = (env) => {
             // }),
             //****************** */
 
-            // new webpack.optimize.CommonsChunkPlugin({
-            //     name: "commons",
-            //     // (the commons chunk name)
+            new webpack.optimize.CommonsChunkPlugin({
+                name: "commons",
+                // (the commons chunk name)
 
-            //     filename: "commons.js",
-            //     // (the filename of the commons chunk)
+                filename: "commons.js",
+                // (the filename of the commons chunk)
 
-            //     // minChunks: 3,
-            //     // (Modules must be shared between 3 entries)
+                // minChunks: 3,.
+                // (Modules must be shared between 3 entries)
 
-            //     // chunks: ["pageA", "pageB"],
-            //     // (Only use these entries)
-            //     minChunks: Infinity,
-            // }),
-            new webpack.optimize.ModuleConcatenationPlugin(),
-            new webpack.DllReferencePlugin({
-                context: __dirname,
-                manifest: require(`${path.join(__dirname, bundleOutputDir)}/commons-manifest.json`),
+                // chunks: ["pageA", "pageB"],
+                // (Only use these entries)
+                minChunks: Infinity,
             }),
-        ].concat((env) === "dev" ? [
-            new webpack.HotModuleReplacementPlugin(),
         ] : [])
     }];
 };
