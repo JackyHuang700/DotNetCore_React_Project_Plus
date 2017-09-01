@@ -25,7 +25,6 @@ namespace DotNetCore_React.Application.LocationApp.Dtos
         public DateTime UpdateDate { get; set; }
         public string UpdateUser { get; set; }
 
-        ////�ƪ�
         public List<Location_LanDto> LanList { get; set; }
         public List<Location_ImageDto> listImage { get; set; }
     }
