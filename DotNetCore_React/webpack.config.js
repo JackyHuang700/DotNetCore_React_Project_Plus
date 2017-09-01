@@ -1,12 +1,12 @@
 
-
-
-
 const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const bundleOutputDir = './wwwroot/dist';
 const sourcePath = path.resolve(__dirname, '../wwwroot');
+
+//共用設定loader檔
+const loaders = require('./webpack.loaders.js');
 
 //https://doc.webpack-china.org/guides/production/
 module.exports = (env) => {
@@ -41,18 +41,7 @@ module.exports = (env) => {
             // devtool: "eval",
             port: 8080,
         },
-        module: {
-            rules: [{
-                test: /\.js$/,
-                use: [{ loader: 'babel-loader' }],
-                exclude: /node_modules/
-            },
-            { test: /\.css$/, use: ['style-loader', 'css-loader'] },
-            { test: /\.scss$/, use: ['style-loader', 'css-loader', 'sass-loader'] },
-            { test: /\.(png|jpg|jpeg|gif|svg)$/, use: 'url-loader?limit=25000' },
-            { test: /.(png|woff|woff2|eot|ttf|svg)$/, loader: 'url-loader?limit=100000' },
-            ]
-        },
+        module: loaders,
         plugins: [
 
             // new webpack.DefinePlugin({

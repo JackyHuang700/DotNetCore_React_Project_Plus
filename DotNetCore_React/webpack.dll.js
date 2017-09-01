@@ -2,6 +2,10 @@ const webpack = require('webpack');
 const bundleOutputDir = './wwwroot/dist';
 const path = require('path');
 
+
+//共用設定loader檔
+const loaders = require('./webpack.loaders.js');
+
 module.exports = (env) => {
     return [{
         entry: {
@@ -32,18 +36,7 @@ module.exports = (env) => {
         resolve: {
             extensions: ['.js']
         },
-        module: {
-            rules: [{
-                test: /\.js$/,
-                use: [{ loader: 'babel-loader' }],
-                exclude: /node_modules/
-            },
-            { test: /\.css$/, use: ['style-loader', 'css-loader'] },
-            { test: /\.scss$/, use: ['style-loader', 'css-loader', 'sass-loader'] },
-            { test: /\.(png|jpg|jpeg|gif|svg)$/, use: 'url-loader?limit=25000' },
-            { test: /.(png|woff|woff2|eot|ttf|svg)$/, loader: 'url-loader?limit=100000' },
-            ]
-        },
+        module: loaders,
         output: {
             path: path.join(__dirname, bundleOutputDir),
             filename: '[name].js',
@@ -53,9 +46,6 @@ module.exports = (env) => {
         context: __dirname,
         plugins: [
             new webpack.optimize.ModuleConcatenationPlugin(),
-
-
-
             new webpack.DllPlugin({
                 path: path.join(__dirname, bundleOutputDir) + '/[name]-manifest.json',
                 name: "[name]_[hash]",
