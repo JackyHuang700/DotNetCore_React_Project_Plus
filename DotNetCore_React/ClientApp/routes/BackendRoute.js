@@ -3,11 +3,11 @@ import { Route, BrowserRouter, Link, Redirect, Switch } from 'react-router-dom'
 import Header from '../components/Header/';
 import Sidebar from '../components/Sidebar/';
 import Breadcrumb from '../components/Breadcrumb/';
-import Aside from '../components/Aside/';
+// import Aside from '../components/Aside/';
 import Footer from '../components/Footer/';
 import {Auth} from '../helpers/auth'
 
-import Dashboard from '../views/Backend/Dashboard/Dashboard'
+// import Dashboard from '../views/Backend/Dashboard/Dashboard'
 
 export function BackendRoute({ component: Component, ...rest }) {
   return (
