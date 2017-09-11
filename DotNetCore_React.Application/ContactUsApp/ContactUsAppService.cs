@@ -22,7 +22,7 @@ namespace DotNetCore_React.Application.ContactUsApp
             _repository_category = repository_category;
         }
 
-        //¤£»İ­n¹ê§@
+        //ä¸éœ€è¦å¯¦ä½œ
         public Dictionary<string, object> Create(ContactUsDto News)
         {
             var myJson_Return = new Dictionary<string, object>()
@@ -32,7 +32,7 @@ namespace DotNetCore_React.Application.ContactUsApp
             };
 
 
-            //¥Dªí
+            //ä¸»è¡¨
             //var date = DateTime.Now;
             //var roleDB = Mapper.Map<ContactUs>(News);
             //roleDB.CreateDate = date;
@@ -41,12 +41,12 @@ namespace DotNetCore_React.Application.ContactUsApp
             //var aSuccess = _repository.Save() > 0;
 
             //myJson_Return["success"] = aSuccess;
-            //myJson_Return["message"] = aSuccess ? "¦¨¥\" : "¥¢±Ñ";
+            //myJson_Return["message"] = aSuccess ? "æˆåŠŸ" : "å¤±æ•—";
 
             return myJson_Return;
         }
 
-        //¤£»İ­n¹ê§@
+        //ä¸éœ€è¦å¯¦ä½œ
         public Dictionary<string, object> Delete(string id)
         {
             var myJson = new Dictionary<string, object>()
@@ -56,28 +56,28 @@ namespace DotNetCore_React.Application.ContactUsApp
             };
 
 
-            ////Âà´«Guid
+            ////è½‰æ›Guid
             //Guid guid;
             //Guid.TryParse(id, out guid);
 
-            //§R°£»y¨¥ªí
+            //åˆªé™¤èªè¨€è¡¨
             //var news_LanList = _repository_lan.GetAllList(c => c.LocationId == guid);
             //_repository_lan.DeleteRange(news_LanList);
             //var news_lan_effect = _repository_lan.Save() == news_LanList.Count;
 
 
-            //§R°£¹Ïªí
+            //åˆªé™¤åœ–è¡¨
             //var news_ImageList = _repository_image.GetAllList(c => c.LocationId == guid);
             //_repository_image.DeleteRange(news_ImageList);
             //var news_image_effect = _repository_image.Save() == news_LanList.Count;
 
-            //§R°£¥Dªí
+            //åˆªé™¤ä¸»è¡¨
             //_repository.Delete(guid);
             //var news_effect = _repository.Save() > 0;
 
             //var success_effect = news_effect;
             //myJson["success"] = success_effect;
-            //myJson["message"] = success_effect ? "§R°£¦¨¥\" : "§R°£¥¢±Ñ";
+            //myJson["message"] = success_effect ? "åˆªé™¤æˆåŠŸ" : "åˆªé™¤å¤±æ•—";
 
             return myJson;
         }
@@ -92,10 +92,10 @@ namespace DotNetCore_React.Application.ContactUsApp
 
         public ContactUsDto GetSingle(string id)
         {
-            //Âà´«Guid
+            //è½‰æ›Guid
             Guid guid;
             Guid.TryParse(id, out guid);
-            //§ì¨ú¥Dªí
+            //æŠ“å–ä¸»è¡¨
             var a = _repository.Get(guid);
             var newsDto = Mapper.Map<ContactUsDto>(a);
 
@@ -104,14 +104,14 @@ namespace DotNetCore_React.Application.ContactUsApp
 
         public Dictionary<string, object> Update(ContactUsDto News)
         {
-            //11.6.1	ª¬ºA¥u¯à­×§ï¬°µL¶·¦^ÂĞ(2)¡A¤w¦^ÂĞ¸ò¥¼¦^ÂĞ³£¬O¨t²Î§PÂ_
+            //11.6.1	ç‹€æ…‹åªèƒ½ä¿®æ”¹ç‚ºç„¡é ˆå›è¦†(2)ï¼Œå·²å›è¦†è·Ÿæœªå›è¦†éƒ½æ˜¯ç³»çµ±åˆ¤æ–·
             var myJson = new Dictionary<string, object>()
             {
                 {"success",false },
                 {"message",null  }
             };
 
-            //§ó·s¥Dªí
+            //æ›´æ–°ä¸»è¡¨
             var newsDB = _repository.Get(News.Id);
             newsDB = Mapper.Map<ContactUsDto, ContactUs>(News, newsDB);
 
@@ -121,7 +121,7 @@ namespace DotNetCore_React.Application.ContactUsApp
 
             var success_effect = news_effect;
             myJson["success"] = success_effect;
-            myJson["message"] = success_effect ? "§ó·s¦¨¥\" : "§ó·s¥¢±Ñ";
+            myJson["message"] = success_effect ? "æ›´æ–°æˆåŠŸ" : "æ›´æ–°å¤±æ•—";
 
             return myJson;
         }

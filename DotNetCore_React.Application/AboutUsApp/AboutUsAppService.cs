@@ -25,7 +25,7 @@ namespace DotNetCore_React.Application.AboutUsApp
 
         public Dictionary<string, object> Create(AboutUsDto News)
         {
-            //12.6.1	§PÂ_[AboutUs.Category]¡A¤@µ§¥u·|¦³¤@­Ó[AboutUs]?
+            //12.6.1	åˆ¤æ–·[AboutUs.Category]ï¼Œä¸€ç­†åªæœƒæœ‰ä¸€å€‹[AboutUs]?
 
             var myJson_Return = new Dictionary<string, object>()
             {
@@ -34,7 +34,7 @@ namespace DotNetCore_React.Application.AboutUsApp
             };
 
             var date = DateTime.Now;
-            //¥Dªí
+            //ä¸»è¡¨
             var roleDB = Mapper.Map<AboutUs>(News);
             roleDB.CreateUser = News.CreateUser;
             roleDB.CreateDate = date;
@@ -43,7 +43,7 @@ namespace DotNetCore_React.Application.AboutUsApp
             var aSuccess = _repository.Save() > 0;
 
 
-            //°Æªí
+            //å‰¯è¡¨
             if (aSuccess)
             {
                 foreach (var item in News.LanList)
@@ -62,13 +62,13 @@ namespace DotNetCore_React.Application.AboutUsApp
                 }
                 else
                 {
-                    //¦³¥¢±Ñ´N¥ş³¡§R°£
-                    //§R°£¥Dªí
+                    //æœ‰å¤±æ•—å°±å…¨éƒ¨åˆªé™¤
+                    //åˆªé™¤ä¸»è¡¨
                     _repository.Delete(roleDB);
                     _repository.Save();
 
                     myJson_Return["success"] = false;
-                    myJson_Return["message"] = "¥¢±Ñ";
+                    myJson_Return["message"] = "å¤±æ•—";
                 }
             }
 
@@ -84,28 +84,28 @@ namespace DotNetCore_React.Application.AboutUsApp
             };
 
 
-            //Âà´«Guid
+            //è½‰æ›Guid
             Guid guid;
             Guid.TryParse(id, out guid);
 
-            //§R°£»y¨¥ªí
+            //åˆªé™¤èªè¨€è¡¨
             //var news_LanList = _repository_lan.GetAllList(c => c.LocationId == guid);
             //_repository_lan.DeleteRange(news_LanList);
             //var news_lan_effect = _repository_lan.Save() == news_LanList.Count;
 
 
-            //§R°£¹Ïªí
+            //åˆªé™¤åœ–è¡¨
             //var news_ImageList = _repository_image.GetAllList(c => c.LocationId == guid);
             //_repository_image.DeleteRange(news_ImageList);
             //var news_image_effect = _repository_image.Save() == news_LanList.Count;
 
-            //§R°£¥Dªí
+            //åˆªé™¤ä¸»è¡¨
             _repository.Delete(guid);
             var news_effect = _repository.Save() > 0;
 
             var success_effect = news_effect;
             myJson["success"] = success_effect;
-            myJson["message"] = success_effect ? "§R°£¦¨¥\" : "§R°£¥¢±Ñ";
+            myJson["message"] = success_effect ? "åˆªé™¤æˆåŠŸ" : "åˆªé™¤å¤±æ•—";
 
             return myJson;
         }
@@ -115,10 +115,10 @@ namespace DotNetCore_React.Application.AboutUsApp
             var a = _repository.GetAllList();
             var newsDtoList = Mapper.Map<List<AboutUsDto>>(a);
 
-            ////­n¼´¤lªí
+            ////è¦æ’ˆå­è¡¨
             foreach (var item in newsDtoList)
             {
-                //§ì¨úªşªí
+                //æŠ“å–é™„è¡¨
                 var new_lans_List = _repository_lan.GetAllList(c => c.AboutUsId == item.Id);
                 item.LanList = Mapper.Map<List<AboutUs_LanDto>>(new_lans_List);
             }
@@ -135,15 +135,15 @@ namespace DotNetCore_React.Application.AboutUsApp
 
         public AboutUsDto GetSingle(string id)
         {
-            //Âà´«Guid
+            //è½‰æ›Guid
             Guid guid;
             Guid.TryParse(id, out guid);
-            //§ì¨ú¥Dªí
+            //æŠ“å–ä¸»è¡¨
             var a = _repository.Get(guid);
             var newsDto = Mapper.Map<AboutUsDto>(a);
 
 
-            //§ì¨úªşªí
+            //æŠ“å–é™„è¡¨
             var new_lans_List = _repository_lan.GetAllList(c => c.AboutUsId == newsDto.Id);
             newsDto.LanList = Mapper.Map<List<AboutUs_LanDto>>(new_lans_List);
 
@@ -158,7 +158,7 @@ namespace DotNetCore_React.Application.AboutUsApp
                 {"message",null  }
             };
 
-            //§ó·s¥Dªí
+            //æ›´æ–°ä¸»è¡¨
 
 
             var newsDB = _repository.Get(News.Id);
@@ -168,7 +168,7 @@ namespace DotNetCore_React.Application.AboutUsApp
             _repository.Update(newsDB);
             var news_effect = _repository.Save() > 0;
 
-            //§ó·s°Æªí
+            //æ›´æ–°å‰¯è¡¨
             foreach (var newsLanDTO in News.LanList)
             {
                 var getLandata = _repository_lan.FirstOrDefault(o => o.Id == newsLanDTO.Id);
@@ -181,7 +181,7 @@ namespace DotNetCore_React.Application.AboutUsApp
 
             var success_effect = news_lan_effect && news_effect;
             myJson["success"] = success_effect;
-            myJson["message"] = success_effect ? "§ó·s¦¨¥\" : "§ó·s¥¢±Ñ";
+            myJson["message"] = success_effect ? "æ›´æ–°æˆåŠŸ" : "æ›´æ–°å¤±æ•—";
 
             return myJson;
         }

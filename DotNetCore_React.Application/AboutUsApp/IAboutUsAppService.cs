@@ -6,7 +6,7 @@ namespace DotNetCore_React.Application.AboutUsApp
 {
     public interface IAboutUsAppService
     {
-        //®Ú¾Ú±b¸¹Àò¨úÅv­­
+        //æ ¹æ“šå¸³è™Ÿç²å–æ¬Šé™
         List<AboutUsDto> GetAll();
 
         List<AboutUs_CategoryDto> GetAll_Category();
@@ -15,7 +15,7 @@ namespace DotNetCore_React.Application.AboutUsApp
         AboutUsDto GetSingle(string id);
 
 
-        //§ó·s¨Ï¥ÎªÌ¸ê®Æ
+        //æ›´æ–°ä½¿ç”¨è€…è³‡æ–™
         Dictionary<string, object> Update(AboutUsDto News);
 
 

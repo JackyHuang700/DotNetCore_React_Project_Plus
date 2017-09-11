@@ -40,7 +40,7 @@ namespace DotNetCore_React.Application.Sys_LanguageApp
                 UpdateDate = dateTime,
             };
 
-            //Àx¦s¸ê®Æ
+            //å„²å­˜è³‡æ–™
 
             myJson.Add("success", true);
             myJson.Add("message", "");
@@ -50,7 +50,7 @@ namespace DotNetCore_React.Application.Sys_LanguageApp
         public Dictionary<string, object> Update(Sys_LanguageDto role)
         {
             var myJson = new Dictionary<string, object>();
-            //Àx¦s¸ê®Æ
+            //å„²å­˜è³‡æ–™
             myJson.Add("success", true);
             myJson.Add("message", "");
             return myJson;
@@ -60,11 +60,11 @@ namespace DotNetCore_React.Application.Sys_LanguageApp
         {
             var myJson = new Dictionary<string, object>();
 
-            //Âà´«Guid
+            //è½‰æ›Guid
 
-            //§R°£¸ê®Æ
+            //åˆªé™¤è³‡æ–™
             //var a = _repository
-            //³B²znullª¬ªp
+            //è™•ç†nullç‹€æ³
             
             myJson.Add("success", true);
             myJson.Add("message", "");

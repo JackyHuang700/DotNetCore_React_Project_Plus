@@ -20,7 +20,7 @@ namespace DotNetCore_React.Application.ProductApp.Dtos
         public string Title { get; set; }
 
 
-        ////°Æªí
+        ////å‰¯è¡¨
         public List<Product_LanDto> LanList { get; set; }
         public List<Product_ImageDto> listImage { get; set; }
     }
