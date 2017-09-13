@@ -139,7 +139,7 @@ class User_Edit_Show extends Component {
   * 返回
   */
   Button_BackUp(event) {
-    history.push('/User');
+    history.goBack();
   }
 
   render() {
