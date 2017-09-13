@@ -303,10 +303,10 @@ namespace DotNetCore_React.Application.UserApp
 
             //寄信API
             _mailServices.AddTo(getUser.UserName, getUser.Email);
-            _mailServices.Sent("密碼重置", $"請點選 <a href='$Domain$/forgot?userName={getUser.UserName}&passwordhash={newPasswdHash}'>重置密碼</a> 進行重置密碼。");
+            _mailServices.Sent("密碼重置", $"請點選 <a href='$Domain$/ChangePwd?userName={getUser.UserName}&passwordhash={newPasswdHash}'>重置密碼</a> 進行重置密碼。");
 
-            myJson.Add("success", effect > 0);
-            myJson.Add("message", effect > 0 ? "已傳送密碼重置至您的信箱" : "操作失敗");
+            myJson["success"] = effect > 0;
+            myJson["message"] = effect > 0 ? "已傳送密碼重置至您的信箱" : "操作失敗";
             return myJson;
         }
 
@@ -349,8 +349,8 @@ namespace DotNetCore_React.Application.UserApp
                 return myJson;
             }
 
-            myJson.Add("success", true);
-            myJson.Add("message", "請修改密碼。");
+            myJson["success"]= true;
+            myJson["message"]="請修改密碼。";
             return myJson;
         }
 

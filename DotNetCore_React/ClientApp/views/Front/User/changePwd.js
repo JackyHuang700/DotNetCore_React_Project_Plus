@@ -40,9 +40,7 @@ class changePwd extends Component {
         userName : parsed.userName,
         passwordhash: parsed.passwordhash
     },() =>{
-        if(this.state.userName !== Auth.getUserName()){
-          history.push('/Login');
-        }
+      debugger;
         this.checkhash();
     });
   }
@@ -51,9 +49,9 @@ class changePwd extends Component {
     if(this.state.passwordhash){
         axios({
             url:'/api/WebApi/forgotConfirm',
-            method:'get',
+            method:'POST',
             data:{
-                username:this.state.password,
+                username:this.state.userName,
                 passwordhash:this.state.passwordhash
             }
         }).then((result)=>{
@@ -64,6 +62,11 @@ class changePwd extends Component {
         }).catch((error) => {
             console.log(error)
         });
+    }
+    else {
+        if(this.state.userName !== Auth.getUserName()){
+          history.push('/Login');
+        }
     }
   }
 
@@ -121,6 +124,7 @@ class changePwd extends Component {
                         placeholder="userName" />
 
                     <TextInput name="password"
+                        type="password"
                         labelCustom={<span className="input-group-addon"><i className="icon-key"></i></span>}
                         divClassName="input-group mb-4"
                         className="form-control"
@@ -134,6 +138,7 @@ class changePwd extends Component {
                         placeholder="password" />
 
                     <TextInput name="repassword"
+                        type="password"
                         labelCustom={<span className="input-group-addon"><i className="icon-key"></i></span>}
                         divClassName="input-group mb-4"
                         className="form-control"

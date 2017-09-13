@@ -60,12 +60,13 @@ import Product_Edit from './views/Backend/Product/Product_EDIT'
 
 /**
   * 
-  * 已知Breadcrumb�呼�這隻
+  * 相關路由設置
   */
 export default (
   <Switch>
-    <FrontRoute path='/' exact component={Home} />
-    <FrontRoute path='/Index' exact component={Home} />
+    {/* <FrontRoute path='/' exact component={Home} /> */}
+    {/* <FrontRoute path='/Index' exact component={Home} /> */}
+    <LoginRoute path='/' exact component={Login} />
     <LoginRoute path='/login' component={Login} />
     <LoginRoute path='/forgot' component={Forgot} />
     <EmptyRoute path='/changePwd' component={changePwd} />
