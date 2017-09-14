@@ -17,7 +17,7 @@ namespace DotNetCore_React.Application.AboutUsApp.Dtos
         public DateTime UpdateDate { get; set; }
         public string UpdateUser { get; set; }
 
-        ////°Æªí
+        ////å‰¯è¡¨
         public List<AboutUs_LanDto> LanList { get; set; }
         public List<AboutUs_CategoryDto> CategoryList { get; set; }
     }

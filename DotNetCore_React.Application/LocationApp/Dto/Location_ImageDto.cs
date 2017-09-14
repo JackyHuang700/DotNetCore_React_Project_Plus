@@ -5,7 +5,7 @@ using System.Text;
 namespace DotNetCore_React.Application.LocationApp.Dtos
 {
     /// <summary>
-    /// ╙A╟х╬збI
+    /// Ф°█Е▀≥Ф⌠ И╩·
     /// </summary>
     public class Location_ImageDto
     {

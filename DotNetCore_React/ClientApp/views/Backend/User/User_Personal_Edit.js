@@ -177,7 +177,7 @@ export default EasyForm(User_Personal_Edit, 2);
 
 User_Personal_Edit.defaultProps = {
     display_userName: true,
-    display_password: true,
+    display_password: false,
     display_email: true,
     display_firstName: false,
     display_lastName: false,
@@ -185,7 +185,7 @@ User_Personal_Edit.defaultProps = {
 
     //..
     required_userName: true,
-    required_password: true,
+    required_password: false,
     required_email: true,
     required_firstName: false,
     required_lastName: false,

@@ -40,7 +40,7 @@ namespace DotNetCore_React.Application.News_LanApp
                 UpdateDate = dateTime,
             };
 
-            //Àx¦s¸ê®Æ
+            //å„²å­˜è³‡æ–™
 
             myJson.Add("success", true);
             myJson.Add("message", "");
@@ -50,7 +50,7 @@ namespace DotNetCore_React.Application.News_LanApp
         public Dictionary<string, object> Update(News_LanDto role)
         {
             var myJson = new Dictionary<string, object>();
-            //Àx¦s¸ê®Æ
+            //å„²å­˜è³‡æ–™
 
             myJson.Add("success", true);
             myJson.Add("message", "");
@@ -61,11 +61,11 @@ namespace DotNetCore_React.Application.News_LanApp
         {
             var myJson = new Dictionary<string, object>();
 
-            //Âà´«Guid
+            //è½‰æ›Guid
 
-            //§R°£¸ê®Æ
+            //åˆªé™¤è³‡æ–™
             //var a = _repository
-            //³B²znullª¬ªp
+            //è™•ç†nullç‹€æ³
             Guid guid;
             Guid.TryParse(id, out guid);
             myJson.Add("success", true);

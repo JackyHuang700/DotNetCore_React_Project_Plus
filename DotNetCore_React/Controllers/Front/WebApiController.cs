@@ -106,7 +106,7 @@ namespace DotNetCore_React.Controllers
             {
                 user = ByteConvertHelper.Bytes2Object<UserSimpleDto>(userObject);
             }
-            return Json(_service.changePassword(user, (string)data["username"], (string)data["newPassword"], (string)data["passwordhash"]));
+            return Json(_service.changePassword(user, (string)data["userName"], (string)data["password"], (string)data["passwordhash"]));
         }
     }
 }

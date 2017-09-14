@@ -74,8 +74,8 @@ namespace DotNetCore_React.Application.UserApp
             _repository_user.Insert(roleDB);
             var effect = _repository_user.Save();
 
-            myJson["success"]= effect > 0;
-            myJson["message"]= effect > 0 ? "操作完成" : "操作失敗";
+            myJson["success"] = effect > 0;
+            myJson["message"] = effect > 0 ? "操作完成" : "操作失敗";
             return myJson;
         }
 
@@ -206,7 +206,8 @@ namespace DotNetCore_React.Application.UserApp
             var userDB = Mapper.Map<User>(user);
 
             //更新密碼
-            if(!string.IsNullOrWhiteSpace(user.Password)){
+            if (!string.IsNullOrWhiteSpace(user.Password))
+            {
                 userDB.Password = HashHelper.CreateSHA256(user.Password);
                 userDB.ChangedPassword = true;
             }
@@ -245,36 +246,43 @@ namespace DotNetCore_React.Application.UserApp
             //比對email是否有更改
             var is_Change_Email = user.Email.Trim() == user.Email.Trim();
             //比對email是否有重複
-            var is_Repeat_Email = emailList.Contains(user.Email) == false;
+            var is_Repeat_Email = emailList.Contains(user.Email);
+
+            //修改資料
+            if (!string.IsNullOrWhiteSpace(user.Password))
+            {
+                userDB.Password = HashHelper.CreateSHA256(user.Password);
+            }
+            userDB.Email = user.Email;
+            userDB.FirstName = user.FirstName;
+            userDB.LastName = user.LastName;
 
             //更新
             if (is_Change_Email)
             {
                 if (is_Repeat_Email)
                 {
-                    //修改資料
-                    userDB.Password = HashHelper.CreateSHA256(user.Password);
-                    userDB.Email = user.Email;
-                    userDB.FirstName = user.FirstName;
-                    userDB.LastName = user.LastName;
-                    //有修改email
-                    userDB.EmailConfirmed = false;
-                    userDB.Status = (byte)User_Status.EMAIL_NO_VAILD;
-                    _repository_user.Update(userDB);
-                    var effect = _repository_user.Save();
 
-                    //寄信
-                    _mailServices.AddTo(userDB.UserName, userDB.Email);
-                    _mailServices.Sent("啟用帳號", $"請點選 <a href='$Domain$/EmailConfirm?userName={userDB.UserName}&passwordhash={userDB.PasswordHash}'>啟用</a> 進行啟用帳號。");
-
-
-                    if (effect > 0)
-                    {
-                        myJson["success"] = true;
-                        myJson["message"] = "修改成功";
-                        return myJson;
-                    }
+                    myJson["message"] = "Email重複";
+                    return myJson;
                 }
+                
+                //有修改email
+                userDB.EmailConfirmed = false;
+                userDB.Status = (byte)User_Status.EMAIL_NO_VAILD;
+
+                //寄信
+                _mailServices.AddTo(userDB.UserName, userDB.Email);
+                _mailServices.Sent("啟用帳號", $"請點選 <a href='$Domain$/EmailConfirm?userName={userDB.UserName}&passwordhash={userDB.PasswordHash}'>啟用</a> 進行啟用帳號。");
+            }
+
+            _repository_user.Update(userDB);
+            var effect = _repository_user.Save();
+
+            if (effect > 0)
+            {
+                myJson["success"] = true;
+                myJson["message"] = "修改成功";
             }
 
             return myJson;
@@ -303,10 +311,10 @@ namespace DotNetCore_React.Application.UserApp
 
             //寄信API
             _mailServices.AddTo(getUser.UserName, getUser.Email);
-            _mailServices.Sent("密碼重置", $"請點選 <a href='$Domain$/forgot?userName={getUser.UserName}&passwordhash={newPasswdHash}'>重置密碼</a> 進行重置密碼。");
+            _mailServices.Sent("密碼重置", $"請點選 <a href='$Domain$/ChangePwd?userName={getUser.UserName}&passwordhash={newPasswdHash}'>重置密碼</a> 進行重置密碼。");
 
-            myJson.Add("success", effect > 0);
-            myJson.Add("message", effect > 0 ? "已傳送密碼重置至您的信箱" : "操作失敗");
+            myJson["success"] = effect > 0;
+            myJson["message"] = effect > 0 ? "已傳送密碼重置至您的信箱" : "操作失敗";
             return myJson;
         }
 
@@ -349,8 +357,8 @@ namespace DotNetCore_React.Application.UserApp
                 return myJson;
             }
 
-            myJson.Add("success", true);
-            myJson.Add("message", "請修改密碼。");
+            myJson["success"] = true;
+            myJson["message"] = "請修改密碼。";
             return myJson;
         }
 
@@ -408,7 +416,7 @@ namespace DotNetCore_React.Application.UserApp
             return _repository_user.Save();
         }
 
-       
+
     }
 
     public enum User_Status : byte

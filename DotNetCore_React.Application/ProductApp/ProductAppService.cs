@@ -32,7 +32,7 @@ namespace DotNetCore_React.Application.ProductApp
             };
 
 
-            //¥Dªí
+            //ä¸»è¡¨
             var date = DateTime.Now;
             var roleDB = Mapper.Map<Product>(News);
             roleDB.CreateUser = News.CreateUser;
@@ -40,10 +40,10 @@ namespace DotNetCore_React.Application.ProductApp
             roleDB.UpdateDate = date;
             _repository.Insert(roleDB);
             var aSuccess = _repository.Save() > 0;
-            //°Æªí
+            //å‰¯è¡¨
             if (aSuccess)
             {
-                //»y¨¥ªí
+                //èªè¨€è¡¨
                 var a_DB_List = new List<Product_Lan>();
                 foreach (var item in News.LanList)
                 {
@@ -54,7 +54,7 @@ namespace DotNetCore_React.Application.ProductApp
                 }
                 var bSuccess = _repository_lan.Save() == News.LanList.Count;
 
-                //¹Ïªí
+                //åœ–è¡¨
                 var b_DB_List = new List<Product_Image>();
                 foreach (var item in News.listImage)
                 {
@@ -73,23 +73,23 @@ namespace DotNetCore_React.Application.ProductApp
                 }
                 else
                 {
-                    //¦³¥¢±Ñ´N¥ş³¡§R°£
-                    //§R°£¥Dªí
+                    //æœ‰å¤±æ•—å°±å…¨éƒ¨åˆªé™¤
+                    //åˆªé™¤ä¸»è¡¨
                     _repository.Delete(roleDB);
                     _repository.Save();
 
-                    //§R°£°Æªí
-                    //§R°£»y¨¥ªí
+                    //åˆªé™¤å‰¯è¡¨
+                    //åˆªé™¤èªè¨€è¡¨
                     _repository_lan.DeleteRange(a_DB_List);
                     _repository_lan.Save();
 
 
-                    //§R°£¹Ïªí
+                    //åˆªé™¤åœ–è¡¨
                     _repository_image.DeleteRange(b_DB_List);
                     _repository_image.Save();
 
                     myJson_Return["success"] = false;
-                    myJson_Return["message"] = "¥¢±Ñ";
+                    myJson_Return["message"] = "å¤±æ•—";
                 }
 
             }
@@ -106,28 +106,28 @@ namespace DotNetCore_React.Application.ProductApp
             };
 
 
-            //Âà´«Guid
+            //è½‰æ›Guid
             Guid guid;
             Guid.TryParse(id, out guid);
 
-            //§R°£»y¨¥ªí
+            //åˆªé™¤èªè¨€è¡¨
             //var news_LanList = _repository_lan.GetAllList(c => c.LocationId == guid);
             //_repository_lan.DeleteRange(news_LanList);
             //var news_lan_effect = _repository_lan.Save() == news_LanList.Count;
 
 
-            //§R°£¹Ïªí
+            //åˆªé™¤åœ–è¡¨
             //var news_ImageList = _repository_image.GetAllList(c => c.LocationId == guid);
             //_repository_image.DeleteRange(news_ImageList);
             //var news_image_effect = _repository_image.Save() == news_LanList.Count;
 
-            //§R°£¥Dªí
+            //åˆªé™¤ä¸»è¡¨
             _repository.Delete(guid);
             var news_effect = _repository.Save() > 0;
 
             var success_effect = news_effect;
             myJson["success"] = success_effect;
-            myJson["message"] = success_effect ? "§R°£¦¨¥\" : "§R°£¥¢±Ñ";
+            myJson["message"] = success_effect ? "åˆªé™¤æˆåŠŸ" : "åˆªé™¤å¤±æ•—";
 
             return myJson;
         }
@@ -137,17 +137,17 @@ namespace DotNetCore_React.Application.ProductApp
             var a = _repository.GetAllList();
             var newsDtoList = Mapper.Map<List<ProductDto>>(a);
 
-            //¼´¤lªí
-            //¹Ïªí
+            //æ’ˆå­è¡¨
+            //åœ–è¡¨
             foreach (var item in newsDtoList)
             {
-                //§ì¨úªşªí
+                //æŠ“å–é™„è¡¨
                 var new_img_List = _repository_image.GetAllList(c => c.ProductId == item.Id);
                 item.listImage = Mapper.Map<List<Product_ImageDto>>(new_img_List);
 
-                //§ì¨úªşªí
+                //æŠ“å–é™„è¡¨
                 var new_lans_List = _repository_lan.GetAllList(c => c.ProductId == item.Id);
-                //¸Étitle
+                //è£œtitle
                 if (new_lans_List != null && new_lans_List.Count > 0)
                 {
                     item.Title = new_lans_List.Select(o => o.Title).FirstOrDefault();
@@ -155,24 +155,24 @@ namespace DotNetCore_React.Application.ProductApp
 
             }
 
-            //»y¨¥ªí
+            //èªè¨€è¡¨
 
             return newsDtoList;
         }
 
         public ProductDto GetSingle(string id)
         {
-            //Âà´«Guid
+            //è½‰æ›Guid
             Guid guid;
             Guid.TryParse(id, out guid);
-            //§ì¨ú¥Dªí
+            //æŠ“å–ä¸»è¡¨
             var a = _repository.Get(guid);
             var newsDto = Mapper.Map<ProductDto>(a);
-            //§ì¨úªşªí
-            //»y¨¥
+            //æŠ“å–é™„è¡¨
+            //èªè¨€
             var new_lans_List = _repository_lan.GetAllList(c => c.ProductId == a.Id);
             newsDto.LanList = Mapper.Map<List<Product_LanDto>>(new_lans_List);
-            //¹Ïªí
+            //åœ–è¡¨
             var new_image_List = _repository_image.GetAllList(c => c.ProductId == a.Id);
             newsDto.listImage = Mapper.Map<List<Product_ImageDto>>(new_image_List);
             return newsDto;
@@ -186,7 +186,7 @@ namespace DotNetCore_React.Application.ProductApp
                 {"message",null  }
             };
 
-            //§ó·s¥Dªí
+            //æ›´æ–°ä¸»è¡¨
             var newsDB = _repository.Get(News.Id);
             newsDB = Mapper.Map<ProductDto, Product>(News, newsDB);
 
@@ -194,9 +194,9 @@ namespace DotNetCore_React.Application.ProductApp
             _repository.Update(newsDB);
             var news_effect = _repository.Save() > 0;
 
-            //§ó·s°Æªí
+            //æ›´æ–°å‰¯è¡¨
 
-            //§ó·s»y¨tªí
+            //æ›´æ–°èªç³»è¡¨
             foreach (var item in News.LanList)
             {
                 var getLandata = _repository_lan.FirstOrDefault(o => o.ProductId == newsDB.Id && o.LanguageId == item.LanguageId && o.Id == item.Id);
@@ -206,8 +206,8 @@ namespace DotNetCore_React.Application.ProductApp
             }
             var news_lan_effect = _repository_lan.Save() == News.LanList.Count;
 
-            //§ó·s¹Ïªí
-            //²¾°£¥ş³¡­«¼g
+            //æ›´æ–°åœ–è¡¨
+            //ç§»é™¤å…¨éƒ¨é‡å¯«
             var new_image_List = _repository_image.GetAllList(c => c.ProductId == newsDB.Id);
             _repository_image.DeleteRange(new_image_List);
             _repository_image.Save();
@@ -224,7 +224,7 @@ namespace DotNetCore_React.Application.ProductApp
 
             var success_effect = news_lan_effect && news_effect && news_image_effect;
             myJson["success"] = success_effect;
-            myJson["message"] = success_effect ? "§ó·s¦¨¥\" : "§ó·s¥¢±Ñ";
+            myJson["message"] = success_effect ? "æ›´æ–°æˆåŠŸ" : "æ›´æ–°å¤±æ•—";
 
             return myJson;
         }

@@ -21,8 +21,8 @@ $padding: 10px;
     border-radius: $borderRadius;
     box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
     max-width: calc(100% - 2em);
-    margin: 1em auto;
-    overflow: hidden;
+    margin: -1em 1em 8em 1em;
+    overflow: initial;
     // width: 800px;
 }
 

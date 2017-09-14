@@ -7,13 +7,13 @@ namespace DotNetCore_React.Application.LocationApp
 {
     public interface ILocationAppService
     {
-        //®Ú¾Ú±b¸¹Àò¨úÅv­­
+        //æ ¹æ“šå¸³è™Ÿç²å–æ¬Šé™
         List<LocationDto> GetAll();
 
         LocationDto GetSingle(string id);
 
 
-        //§ó·s¨Ï¥ÎªÌ¸ê®Æ
+        //æ›´æ–°ä½¿ç”¨è€…è³‡æ–™
         Dictionary<string, object> Update(LocationDto News);
 
 
