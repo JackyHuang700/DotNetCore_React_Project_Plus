@@ -33,3 +33,16 @@ export function GetData() {
     });
 
 }
+
+
+export function HandleInputChange_By_LanList_CKEditor(obj) {
+    const value = obj.value;
+    const name = obj.name;
+    // const index = obj.index;
+    var new_News = Object.assign(this.state.viewModel);
+
+    new_News[name] = value;
+    this.setState({
+        viewModel: new_News,
+    });
+}

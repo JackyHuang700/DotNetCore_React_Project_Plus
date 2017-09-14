@@ -70,7 +70,7 @@ export function HandleInputChange_By_AboutUs_LanList(event) {
 }
 
 
-export function HandleInputChange_By_AboutUs_LanList_CKEditor(obj) {
+export function HandleInputChange_By_LanList_CKEditor(obj) {
     const value = obj.value;
     const name = obj.name;
     const index = obj.index;
@@ -81,7 +81,6 @@ export function HandleInputChange_By_AboutUs_LanList_CKEditor(obj) {
         viewModel: new_News,
     });
 }
-
 
 export function GetData() {
     const self = this;

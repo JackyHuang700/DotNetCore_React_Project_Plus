@@ -13,6 +13,7 @@ import classnames from 'classnames';
 import {
     GetData,
     HandleInputChange,
+    HandleInputChange_By_LanList_CKEditor,
 } from './ContactUs_General';
 
 class ContactUs_Edit extends Component {
@@ -32,6 +33,8 @@ class ContactUs_Edit extends Component {
         //Import
         this.GetData = GetData.bind(this);
         this.HandleInputChange = HandleInputChange.bind(this);
+        this.HandleInputChange_By_LanList_CKEditor = HandleInputChange_By_LanList_CKEditor.bind(this);
+
         this.HandleInputChange_Status = this.HandleInputChange_Status.bind(this);
     }
 
@@ -64,14 +67,14 @@ class ContactUs_Edit extends Component {
 
 
     //特規
-    HandleInputChange_Status(event){
+    HandleInputChange_Status(event) {
         const target = event.target;
         // const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
-    
+
         var new_News = Object.assign(this.state.viewModel);
         new_News[name] = contactUs_Enum.NOTREPLY.value;
-    
+
         this.setState({
             viewModel: new_News,
         });
@@ -87,10 +90,31 @@ class ContactUs_Edit extends Component {
     }
 
 
+    //CKEditor not Rerender value and bind CKEditor
+    RenderReply = () => {
+        if (this.state.viewModel.reply) {
+            return (
+                <CKEditor name="reply"
+                    labelName="回覆內容"
+                    display={this.props.display_reply}
+                    required={this.props.required_reply}
+                    validMessage={{ required: '回覆內容 is reduired.' }}
+                    onInput={this.HandleInputChange_By_LanList_CKEditor}
+
+                    value={this.state.viewModel.reply}
+                    placeholder="回覆"
+                />
+            );
+        }
+        else {
+            return (null);
+        }
+    }
+
+
     render() {
         const { params } = this.props.params;
         const { $invalid } = this.props.easyform.$invalid;
-
 
         return (
             <div className="animated fadeIn row justify-content-center">
@@ -112,7 +136,6 @@ class ContactUs_Edit extends Component {
                                             onInput={this.HandleInputChange}
                                             value={this.state.viewModel.id}
                                             readOnly={true}
-                                            options={this.state.viewModel.id}
                                         />
 
 
@@ -125,7 +148,6 @@ class ContactUs_Edit extends Component {
                                             onInput={this.HandleInputChange}
                                             value={this.state.viewModel.title}
                                             readOnly={true}
-                                            options={this.state.viewModel.title}
                                         />
 
                                         <TextInput name="categoryId"
@@ -136,7 +158,6 @@ class ContactUs_Edit extends Component {
                                             onInput={this.HandleInputChange}
                                             value={this.state.viewModel.categoryId}
                                             readOnly={true}
-                                            options={this.state.viewModel.categoryList}
                                         />
 
                                         <TextInput name="customerName"
@@ -147,7 +168,6 @@ class ContactUs_Edit extends Component {
                                             onInput={this.HandleInputChange}
                                             value={this.state.viewModel.customerName}
                                             readOnly={true}
-                                            options={this.state.viewModel.customerName}
                                         />
 
                                         <TextInput name="customerEmail"
@@ -158,7 +178,6 @@ class ContactUs_Edit extends Component {
                                             onInput={this.HandleInputChange}
                                             value={this.state.viewModel.customerEmail}
                                             readOnly={true}
-                                            options={this.state.viewModel.customerEmail}
                                         />
 
                                         <TextInput name="content"
@@ -169,7 +188,6 @@ class ContactUs_Edit extends Component {
                                             onInput={this.HandleInputChange}
                                             value={this.state.viewModel.content}
                                             readOnly={true}
-                                            options={this.state.viewModel.content}
                                         />
 
                                         <DropDownList name="status"
@@ -204,7 +222,6 @@ class ContactUs_Edit extends Component {
                                             onInput={this.HandleInputChange}
                                             value={this.state.viewModel.createDate}
                                             readOnly={true}
-                                            options={this.state.viewModel.createDate}
                                         />
 
                                         <TextInput name="createUser"
@@ -215,18 +232,11 @@ class ContactUs_Edit extends Component {
                                             onInput={this.HandleInputChange}
                                             value={this.state.viewModel.createUser}
                                             readOnly={true}
-                                            options={this.state.viewModel.createUser}
                                         />
 
-                                        <TextInput name="reply"
-                                            labelName="回覆內容"
-                                            display={this.props.display_reply}
-                                            required={this.props.required_reply}
-                                            validMessage={{ required: '回覆內容 is reduired.' }}
-                                            onInput={this.HandleInputChange}
-                                            value={this.state.viewModel.reply}
-                                            options={this.state.viewModel.reply}
-                                        />
+
+
+                                        {this.RenderReply()}
 
                                     </tbody>
                                 </table>

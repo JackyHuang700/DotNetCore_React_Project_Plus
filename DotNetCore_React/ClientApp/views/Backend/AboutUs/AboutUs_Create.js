@@ -14,6 +14,7 @@ import {
     HandleInputChange,
     Get_AboutUs_Category,
     HandleInputChange_By_AboutUs_LanList,
+    HandleInputChange_By_LanList_CKEditor
 } from './AboutUs_General';
 
 
@@ -43,6 +44,8 @@ class AboutUs_Create extends Component {
         this.Get_Sys_Language = Get_Sys_Language.bind(this);
         this.Get_AboutUs_Category = Get_AboutUs_Category.bind(this);
         this.HandleInputChange = HandleInputChange.bind(this);
+        this.HandleInputChange_By_LanList_CKEditor = HandleInputChange_By_LanList_CKEditor.bind(this);
+        
         this.HandleInputChange_By_AboutUs_LanList = HandleInputChange_By_AboutUs_LanList.bind(this);
         this.Component_Nav = this.Component_Nav.bind(this);
     }
@@ -123,14 +126,14 @@ class AboutUs_Create extends Component {
 
 
 
-                                    <TextInput name="content"
+                                    <CKEditor name="content"
                                         labelName="內容"
                                         className=""
                                         data-index={index}
                                         display={this.props.display_content}
                                         required={this.props.required_content}
                                         validMessage={{ required: '內容 is reduired.' }}
-                                        onInput={this.HandleInputChange_By_AboutUs_LanList}
+                                        onInput={this.HandleInputChange_By_LanList_CKEditor}
                                         value={this.state.viewModel.lanList[`${index}`].content}
                                         placeholder="content" />
 

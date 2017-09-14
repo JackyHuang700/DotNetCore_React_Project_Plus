@@ -10,12 +10,13 @@ import CKEditor from '../../Components/Forms/CKEditor';
 
 import { news_Enum } from '../../../EnumScript/GeneralEnumScript';
 import classnames from 'classnames';
-import {Get_Sys_Language} from '../Sys_Language/Sys_Language_General.js'; 
+import { Get_Sys_Language } from '../Sys_Language/Sys_Language_General.js';
 import {
-    GetData,    
+    GetData,
     HandleInputChange,
     Get_AboutUs_Category,
-    HandleInputChange_By_AboutUs_LanList,
+    HandleInputChange_By_AboutUs_LanList, 
+    HandleInputChange_By_LanList_CKEditor,
 } from './AboutUs_General';
 
 class AboutUs_Edit extends Component {
@@ -41,11 +42,12 @@ class AboutUs_Edit extends Component {
         this.toggle = this.toggle.bind(this);
 
         //Import
-        this.GetData = GetData.bind(this);        
+        this.GetData = GetData.bind(this);
         this.Get_Sys_Language = Get_Sys_Language.bind(this);
         this.Get_AboutUs_Category = Get_AboutUs_Category.bind(this);
         this.HandleInputChange = HandleInputChange.bind(this);
         this.HandleInputChange_By_AboutUs_LanList = HandleInputChange_By_AboutUs_LanList.bind(this);
+        this.HandleInputChange_By_LanList_CKEditor = HandleInputChange_By_LanList_CKEditor.bind(this);
         this.Component_Nav = this.Component_Nav.bind(this);
     }
 
@@ -126,14 +128,14 @@ class AboutUs_Edit extends Component {
 
 
 
-                                    <TextInput name="content"
+                                    <CKEditor name="content"
                                         labelName="內容"
                                         className=""
                                         data-index={index}
                                         display={this.props.display_content}
                                         required={this.props.required_content}
                                         validMessage={{ required: '內容 is reduired.' }}
-                                        onInput={this.HandleInputChange_By_AboutUs_LanList}
+                                        onInput={this.HandleInputChange_By_LanList_CKEditor}
                                         value={this.state.viewModel.lanList[`${index}`].content}
                                         placeholder="content" />
 
@@ -166,7 +168,7 @@ class AboutUs_Edit extends Component {
                                 <table className="table table-striped table-bordered">
                                     <tbody>
 
-                                         <DropDownList name="categoryId"
+                                        <DropDownList name="categoryId"
                                             labelName="類別"
                                             display={this.props.display_categoryId}
                                             required={this.props.required_categoryId}
@@ -174,7 +176,7 @@ class AboutUs_Edit extends Component {
                                             onInput={this.HandleInputChange}
                                             value={this.state.viewModel.categoryId}
                                             options={this.state.viewModel.categoryList}
-                                        /> 
+                                        />
 
 
                                         <DropDownList name="status"
