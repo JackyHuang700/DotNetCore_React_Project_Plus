@@ -2,13 +2,13 @@
   "name": "DotNetCore_React",
   "version": "0.0.0",
   "scripts": {
+    "config-env":"cross-env NODE_ENV=development ASPNETCORE_ENVIRONMENT=Development",
     "compile": "webpack --config ./webpack.config.js",
     "compile:dll": "webpack --config ./webpack.dll.js",
     "compile:product": "webpack --env=product --config ./webpack.config.js",
-    "dev-watch": "webpack-dev-server --hot --open --env=dev --config ./webpack.config.js",
-    "dotnet-watch": "dotnet watch run",
-    "start": "concurrently \"npm run dotnet-watch\" \"npm run dev-watch\" ",
-    "start:dev": "npm run compile:dll & npm run dev-watch"
+    "dev-dotnet": "dotnet restore && dotnet run",
+    "start": "npm run config-env & concurrently \"npm run dev-dotnet\" \"npm run compile\" ",
+    "start:dev": "npm run config-env & concurrently \"npm run dev-dotnet\" \"npm run compile:dll\""
   },
   "devDependencies": {
     "@types/history": "4.5.1",
@@ -29,6 +29,7 @@
     "bootstrap": "3.3.7",
     "chart.js": "2.5.0",
     "concurrently": "^3.5.0",
+    "cross-env": "^5.0.5",
     "css-loader": "0.28.1",
     "event-source-polyfill": "0.0.9",
     "extract-text-webpack-plugin": "2.1.0",
